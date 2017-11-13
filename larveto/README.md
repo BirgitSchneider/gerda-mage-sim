@@ -1,0 +1,14 @@
+# larveto
+
+
+## volumes info
+
+| volume name | mc name(s) | mc mass [kg] | mc volume [cm^3] | density [kg/cm^3] | volume description | notes |
+| ----------- | ---------- | ------------ | ---------------- | ----------------- | ------------------ | ----- |
+| fibers      |            |              |                  |                   |                    |       | 
+| sipm_ring   |            |              |                  |                   |                    |       |
+| pmt_bottom  |            |              |                  |                   |                    |       |
+| pmt_top     |            |              |                  |                   |                    |       |
+
+
+
