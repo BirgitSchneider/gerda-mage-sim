@@ -5,7 +5,7 @@
 
 ### manager ###
 /MG/manager/mglog                               trace
-/MG/manager/heprandomseed			2081
+/MG/manager/heprandomseed			7818
 
 ### processes ###
 /MG/processes/realm                             BBdecay ## DarkMatter ## CosmicRay ##
@@ -52,7 +52,7 @@
 ### Output ###
 /MG/eventaction/reportingfrequency              100000
 /MG/eventaction/rootschema                      GerdaArray
-/MG/eventaction/rootfilename                    ./lar/above_array/K42/edep/root/raw-lar-above_array-K42-edep-001.root
+/MG/eventaction/rootfilename                    ./lar/above_array/K42/edep/root/raw-lar-above_array-K42-edep-004.root
 
 /MG/output/saveOnlyEventsWithEnergyDeposit	true
 
