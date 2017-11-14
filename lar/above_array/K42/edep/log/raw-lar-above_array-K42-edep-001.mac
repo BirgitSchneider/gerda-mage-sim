@@ -52,7 +52,7 @@
 ### Output ###
 /MG/eventaction/reportingfrequency              $REPORT
 /MG/eventaction/rootschema                      GerdaArray
-/MG/eventaction/rootfilename                    $FOLDER/$OUTPUT
+/MG/eventaction/rootfilename                    ./lar/above_array/K42/edep/raw-lar-above_array-K42-edep-001.root
 
 /MG/output/saveOnlyEventsWithEnergyDeposit	true
 
@@ -71,7 +71,7 @@
 /MG/generator/Sampling/volume/offsetCenterZPos         65 cm
 
 /MG/generator/select                            decay0
-/MG/generator/decay0/filename                   $SIM_BASE_DIR/decay0files/K42_1E7.dk0
+/MG/generator/decay0/filename                   ./decay0files/K42_1E7.dk0
 
 ################################################
 
