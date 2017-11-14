@@ -47,95 +47,41 @@
 /MG/geometry/detector/crystal/reverse                   true
 
 ### Muon Veto ###
-/MG/geometry/cherenkov                          -1 ## 0 is the true configuration ## 
+/MG/geometry/cherenkov                          -1 
 
 ### Output ###
-/MG/eventaction/reportingfrequency              100000
+/MG/eventaction/reportingfrequency              $REPORT
 /MG/eventaction/rootschema                      GerdaArray
-/MG/eventaction/rootfilename                    output.root
+/MG/eventaction/rootfilename                    $FOLDER/$OUTPUT
 
 /MG/output/saveOnlyEventsWithEnergyDeposit	true
-#/MG/output/saveOnlyEventsWithCoincidence	true
 
 /run/initialize
 
-################################################
-# You can confine volumes to launch primaries 
-# only from a specific location calling 
-# the name of the physical volume
-# REMEMBER: you can use all Geant4 commands available
-################################################
-
-### Confine source volume to optical fibers ###
+### Confine source volume to cryo LAr ###
 /MG/generator/confine                           volume
-/MG/generator/volume                            LArInstr_FiberOuter_Physical
-
-### SiPMs ###
-#/MG/generator/volume                           LArInstr_FiberOuter_SensitiveEnd_Physical
-
-### Germanium crystals  - numbering is starting from the central string ###
-#/MG/generator/volume                            Crystal_geometry11_1  ### active volume 1-10 Coax geometry
-#/MG/generator/volume                            CrystalDeadLayer_geometry11_1  ### dead volume 1-10 Coax geometry
-#/MG/generator/volume                            Crystal_geometry5_1  ### active volume 1-30 BEGe geometry
-#/MG/generator/volume                            CrystalDeadLayer_geometry5_1  ### dead volume 1-30 Coax geometry
+/MG/generator/volume                            CryoLiquidPhysical
 
 ### A cylinder inside the LAr ###
-#/MG/generator/volume                                   CryoLiquidPhysical
-#/MG/generator/Sampling/volume/name                     Cylinder
-#/MG/generator/Sampling/volume/innerCylinderRadius	    0 mm
-#/MG/generator/Sampling/volume/outerCylinderRadius	    1.5 m
-#/MG/generator/Sampling/volume/cylinderHeight           2.5 m
-#/MG/generator/Sampling/volume/offsetCenterXPos         0 mm
-#/MG/generator/Sampling/volume/offsetCenterZPos         0 mm
+/MG/generator/Sampling/volume/name                     Cylinder
+/MG/generator/Sampling/volume/innerCylinderRadius      0 mm
+/MG/generator/Sampling/volume/outerCylinderRadius      25 cm
+/MG/generator/Sampling/volume/cylinderHeight           100 cm
+/MG/generator/Sampling/volume/offsetCenterXPos         0 mm
+/MG/generator/Sampling/volume/offsetCenterZPos         65 cm
 
-
-################################################
-# Or you confine a list of volumes 
-# You can call a volume list with any 
-# sequence of volumes that are named: 
-#   thisvolume_x where x is a running number
-################################################
-
-### All 40 Holder plates in a volume list ###
-### Here the volumes are named Holder_Plate_x ###
-### With x running from 0 to 39 ###
-#/MG/generator/confine volumelist
-#/MG/generator/volumelist Holder_Plate
-#/MG/generator/volumelistfrom 0
-#/MG/generator/volumelistto 39
-
-################################################
-# You have several optinos to generate the primaries
-################################################
-
-### G4gun and Bi212 for a full ion decay ###
-#/MG/generator/select            G4gun
-#/MG/generator/g4gun/cone_on     true
-#/gun/particle                   ion
-#/gun/ion                        83 212
-#/gun/energy                     0 eV
-
-### G4gun and single energy of gamma here Kr85 line ###
-/MG/generator/select                    G4gun
-/MG/generator/g4gun/cone_on             true
-/gun/particle                           gamma
-/gun/energy                             513.997 keV
-
-### decay0 takes care of correlations in decay cascades (e.g. K42), generates 2nbb, 0nbb etc events ###
-### newest version of decay0 (2016) can be found at lngs /afs/lngs.infn.it/experiment/gerda/decay0 ###
-### Note that for the executable to work you have to login to: linux-old.lngs.infn.it ###
-#/MG/generator/select                            decay0
-#/MG/generator/decay0/filename                   K42.dk0
+/MG/generator/select                            decay0
+/MG/generator/decay0/filename                   $SIM_BASE_DIR/decay0files/K42_1E7.dk0
 
 ################################################
 
 
 ### set energy cut for which the photon tracking is activated ###
 ### check if needed or if photon tracking can be deactivated by default ###
-/MG/output/LArInst/ApplyLArInstGeEnergyCut	    true
+/MG/output/LArInst/ApplyLArInstGeEnergyCut      true
 /MG/output/LArInst/SetGeEnergyCutLow            6.5 MeV
 /MG/output/LArInst/SetGeEnergyCutHigh           6.6 MeV
 
 /tracking/verbose                               0
-/run/beamOn                                     10000000
+/run/beamOn                                     $PRIMARIES
 
