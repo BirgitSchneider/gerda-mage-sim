@@ -5,7 +5,7 @@
 
 ### manager ###
 /MG/manager/mglog                               trace
-/MG/manager/heprandomseed			22240
+/MG/manager/heprandomseed			15220
 
 ### processes ###
 /MG/processes/realm                             BBdecay ## DarkMatter ## CosmicRay ##
@@ -52,7 +52,7 @@
 ### Output ###
 /MG/eventaction/reportingfrequency              100000
 /MG/eventaction/rootschema                      GerdaArray
-/MG/eventaction/rootfilename                    lar/above_array/K42/coin/root/raw-lar-above_array-K42-coin-001.root
+/MG/eventaction/rootfilename                    lar/above_array/K42/coin/root/raw-lar-above_array-K42-coin-006.root
 
 /MG/output/saveOnlyEventsWithConicidence	true
 
