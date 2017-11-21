@@ -1,39 +1,54 @@
 #!/bin/bash
+#
+# --ignore-existing         : skip updating files that exist on receiver
+# --out-format="%o: %f%L"   : formatting the output
+# --recursive               : recurse into directories
+# --links                   : copy symlinks as symlinks
+# --update                  : skip files that are newer on the receiver
+# --times                   : preserve modification times
+# --omit-dir-times          : omit directories from --times
+# --compress                : compress while transferring
+# --human-readable          : human-readable sizes
+# --exclude=.git*           : exclude
+# --exclude=UTILS           :
+# --exclude=README.md       :
+# --dry-run                 : do everything except actually transferring
+
 if [ -f ./copy-to-lngs.sh ]; then
   user=`whoami`
-  rsync --out-format="%o: %f%L"\
-        --recursive \
-        --links \
-        --update \
-        --times \
-        --compress \
-        --human-readable \
-        --checksum \
-        --exclude=.git* \
-        --exclude=UTILS \
-        --exclude=README.md \
+  dest=/nfs/gerda5/var/gerda-simulations/gerda-mc2
+  opts="--ignore-existing \
+       --recursive \
+       --links \
+       --update \
+       --times \
+       --omit-dir-times \
+       --compress \
+       --human-readable \
+       --exclude=*.tmac \
+       --exclude=.git* \
+       --exclude=UTILS \
+       --exclude=README.md \
+       --exclude=*.swp"
+  rsync $opts \
+        --out-format="%o: %f%L" \
         --dry-run \
-        .. $user@gerda-login.lngs.infn.it:/nfs/gerda5/var/gerda-simulations/gerda-mc
-
-  echo "Proceed? [y/n]"
-  read ans
+        .. $user@gerda-login.lngs.infn.it:$dest
+  echo ""
+  echo "This was the list of files that will be transferred."
+  echo ""
+  echo "NOTE: this script transfers ONLY files that do not exist on the receiver"
+  echo "      yet, consider to delete the files you wish to update on the receiver."
+  echo "      Modify the rsync options only if you really know what you're doing!"
+  echo ""
+  echo "Proceed? [y/n]"; read ans
   if [ "$ans" == "y" ]; then
-  rsync --recursive \
-        --links \
-        --update \
-        --times \
-        --compress \
-        --human-readable \
-        --checksum \
-        --exclude=.git* \
-        --exclude=UTILS \
-        --exclude=README.md \
-        .. $user@gerda-login.lngs.infn.it:/nfs/gerda5/var/gerda-simulations/gerda-mc
+    rsync $opts \
+          --progress \
+          .. $user@gerda-login.lngs.infn.it:$dest
   else
     echo "Aborting..."
   fi
 else
   echo ERROR: must cd in UTILS before calling "./copy-to-lngs.sh"!
 fi
-
-
