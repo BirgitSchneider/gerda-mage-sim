@@ -1,6 +1,6 @@
-Use the following template README file if you want to create a new set of simulations and put it under <volume>/<part>
+Use the following template README file if you want to create a new set of simulations and put it under volume/part
 
-# <volume>/<part>
+# volume/part
 
 ## simulations info
 
