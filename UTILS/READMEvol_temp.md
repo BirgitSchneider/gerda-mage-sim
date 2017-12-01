@@ -1,6 +1,6 @@
-Use this template README file if you want to create a new set of simulations of the volume <volume> and put it under ./<volume>
+Use this template README file if you want to create a new set of simulations of the volume <volume> and put it under `./volume`
 
-# <volume>
+# volume
 
 ## volumes description
 
