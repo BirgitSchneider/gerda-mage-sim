@@ -1,0 +1,402 @@
+{
+    "GD02B": {
+        "detcenter_x": "110",
+        "detdim_x": "34.54",
+        "detdim_y": "34.54",
+        "detdim_z": "13.8447",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "-38.6547",
+        "pc_radius": "7.5"
+    },
+    "GD76B": {
+        "detcenter_x": "-55",
+        "detdim_x": "28",
+        "detdim_y": "28",
+        "detdim_z": "12.5747",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-241.145",
+        "pc_radius": "7.5"
+    },
+    "ANG1": {
+        "detcenter_x": "55",
+        "detdim_x": "28.43",
+        "detdim_y": "28.43",
+        "detdim_z": "33.5995",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-253.4",
+        "pc_radius": "7.5"
+    },
+    "ANG5": {
+        "detcenter_x": "55",
+        "detdim_x": "38.2",
+        "detdim_y": "38.2",
+        "detdim_z": "46.0995",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "22.6005",
+        "pc_radius": "7.5"
+    },
+    "GTF112": {
+        "detcenter_x": "0",
+        "detdim_x": "41.7",
+        "detdim_y": "41.7",
+        "detdim_z": "49.5995",
+        "detcenter_y": "4.89246e-17",
+        "pc_length": "3e-4",
+        "detcenter_z": "26.1005",
+        "pc_radius": "7.5"
+    },
+    "GD02A": {
+        "detcenter_x": "-55",
+        "detdim_x": "34.37",
+        "detdim_y": "34.37",
+        "detdim_z": "13.3447",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "67.8647",
+        "pc_radius": "7.5"
+    },
+    "GD35C": {
+        "detcenter_x": "-110",
+        "detdim_x": "36.63",
+        "detdim_y": "36.63",
+        "detdim_z": "12.7647",
+        "detcenter_y": "1.34228e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "68.2347",
+        "pc_radius": "7.5"
+    },
+    "GD61B": {
+        "detcenter_x": "-110",
+        "detdim_x": "36.98",
+        "detdim_y": "36.98",
+        "detdim_z": "14.6047",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "-299.895",
+        "pc_radius": "7.5"
+    },
+    "GD61C": {
+        "detcenter_x": "-55",
+        "detdim_x": "36.36",
+        "detdim_y": "36.36",
+        "detdim_z": "12.7647",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-179.235",
+        "pc_radius": "7.5"
+    },
+    "GD89B": {
+        "detcenter_x": "110",
+        "detdim_x": "36.89",
+        "detdim_y": "36.89",
+        "detdim_z": "11.8597",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "-211.14",
+        "pc_radius": "7.5"
+    },
+    "GD32C": {
+        "detcenter_x": "-55",
+        "detdim_x": "35.03",
+        "detdim_y": "35.03",
+        "detdim_z": "16.0947",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-68.9047",
+        "pc_radius": "7.5"
+    },
+    "ANG4": {
+        "detcenter_x": "-55",
+        "detdim_x": "38.2",
+        "detdim_y": "38.2",
+        "detdim_z": "46.0995",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-220.4",
+        "pc_radius": "7.5"
+    },
+    "GD91B": {
+        "detcenter_x": "-110",
+        "detdim_x": "34.33",
+        "detdim_y": "34.33",
+        "detdim_z": "14.6497",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "-246.35",
+        "pc_radius": "7.5"
+    },
+    "GTF45_2": {
+        "detcenter_x": "0",
+        "detdim_x": "42.7",
+        "detdim_y": "42.7",
+        "detdim_z": "37.0995",
+        "detcenter_y": "4.89246e-17",
+        "pc_length": "3e-4",
+        "detcenter_z": "-189.4",
+        "pc_radius": "7.5"
+    },
+    "GD02D": {
+        "detcenter_x": "110",
+        "detdim_x": "35.85",
+        "detdim_y": "35.85",
+        "detdim_z": "13.2297",
+        "detcenter_y": "-8.87508e-17",
+        "pc_length": "3e-4",
+        "detcenter_z": "-275.03",
+        "pc_radius": "7.5"
+    },
+    "RG1": {
+        "detcenter_x": "55",
+        "detdim_x": "37.45",
+        "detdim_y": "37.45",
+        "detdim_z": "41.5995",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-103.4",
+        "pc_radius": "7.5"
+    },
+    "GD35A": {
+        "detcenter_x": "-110",
+        "detdim_x": "35.82",
+        "detdim_y": "35.82",
+        "detdim_z": "17.1947",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "-190.305",
+        "pc_radius": "7.5"
+    },
+    "GD61A": {
+        "detcenter_x": "110",
+        "detdim_x": "35.73",
+        "detdim_y": "35.73",
+        "detdim_z": "16.2797",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "-153.22",
+        "pc_radius": "7.5"
+    },
+    "GD91A": {
+        "detcenter_x": "110",
+        "detdim_x": "34.28",
+        "detdim_y": "34.28",
+        "detdim_z": "15.0947",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "74.5953",
+        "pc_radius": "7.5"
+    },
+    "ANG3": {
+        "detcenter_x": "55",
+        "detdim_x": "38.2",
+        "detdim_y": "38.2",
+        "detdim_z": "46.0995",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-240.4",
+        "pc_radius": "7.5"
+    },
+    "ANG2": {
+        "detcenter_x": "-55",
+        "detdim_x": "38.2",
+        "detdim_y": "38.2",
+        "detdim_z": "46.0995",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "22.6005",
+        "pc_radius": "7.5"
+    },
+    "GD89D": {
+        "detcenter_x": "-110",
+        "detdim_x": "35.7",
+        "detdim_y": "35.7",
+        "detdim_z": "10.9347",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "-26.0647",
+        "pc_radius": "7.5"
+    },
+    "GD79C": {
+        "detcenter_x": "-110",
+        "detdim_x": "38.38",
+        "detdim_y": "38.38",
+        "detdim_z": "14.5597",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "-134.44",
+        "pc_radius": "7.5"
+    },
+    "RG2": {
+        "detcenter_x": "-55",
+        "detdim_x": "37.45",
+        "detdim_y": "37.45",
+        "detdim_z": "41.5995",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-103.4",
+        "pc_radius": "7.5"
+    },
+    "GD02C": {
+        "detcenter_x": "55",
+        "detdim_x": "36.41",
+        "detdim_y": "36.41",
+        "detdim_z": "15.7797",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "32.2803",
+        "pc_radius": "7.5"
+    },
+    "GD00D": {
+        "detcenter_x": "-110",
+        "detdim_x": "37.18",
+        "detdim_y": "37.18",
+        "detdim_z": "15.6297",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "-79.8697",
+        "pc_radius": "7.5"
+    },
+    "GD79B": {
+        "detcenter_x": "55",
+        "detdim_x": "37.38",
+        "detdim_y": "37.38",
+        "detdim_z": "13.9997",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-22.9997",
+        "pc_radius": "7.5"
+    },
+    "GD32B": {
+        "detcenter_x": "-55",
+        "detdim_x": "34.9",
+        "detdim_y": "34.9",
+        "detdim_z": "15.5547",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "32.0553",
+        "pc_radius": "7.5"
+    },
+    "GD89A": {
+        "detcenter_x": "55",
+        "detdim_x": "33.32",
+        "detdim_y": "33.32",
+        "detdim_z": "13.6747",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-183.825",
+        "pc_radius": "7.5"
+    },
+    "GD89C": {
+        "detcenter_x": "-55",
+        "detdim_x": "36.36",
+        "detdim_y": "36.36",
+        "detdim_z": "11.8797",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-126.62",
+        "pc_radius": "7.5"
+    },
+    "GD35B": {
+        "detcenter_x": "110",
+        "detdim_x": "37.38",
+        "detdim_y": "37.38",
+        "detdim_z": "15.6597",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "16.6603",
+        "pc_radius": "7.5"
+    },
+    "GD00C": {
+        "detcenter_x": "-55",
+        "detdim_x": "36.75",
+        "detdim_y": "36.75",
+        "detdim_z": "16.3147",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-277.185",
+        "pc_radius": "7.5"
+    },
+    "GD76C": {
+        "detcenter_x": "-110",
+        "detdim_x": "36.78",
+        "detdim_y": "36.78",
+        "detdim_z": "16.0197",
+        "detcenter_y": "1.34711e-14",
+        "pc_length": "3e-4",
+        "detcenter_z": "32.5203",
+        "pc_radius": "7.5"
+    },
+    "GD00A": {
+        "detcenter_x": "55",
+        "detdim_x": "34.25",
+        "detdim_y": "34.25",
+        "detdim_z": "12.7497",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "67.7497",
+        "pc_radius": "7.5"
+    },
+    "GD91D": {
+        "detcenter_x": "55",
+        "detdim_x": "34.66",
+        "detdim_y": "34.66",
+        "detdim_z": "15.4447",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-75.0547",
+        "pc_radius": "7.5"
+    },
+    "GD32A": {
+        "detcenter_x": "-55",
+        "detdim_x": "32.22",
+        "detdim_y": "32.22",
+        "detdim_z": "11.9947",
+        "detcenter_y": "95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-33.9453",
+        "pc_radius": "7.5"
+    },
+    "GD00B": {
+        "detcenter_x": "110",
+        "detdim_x": "35.94",
+        "detdim_y": "35.94",
+        "detdim_z": "14.2097",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "-96.7897",
+        "pc_radius": "7.5"
+    },
+    "GTF32": {
+        "detcenter_x": "0",
+        "detdim_x": "43.7",
+        "detdim_y": "43.7",
+        "detdim_z": "35.0995",
+        "detcenter_y": "4.89246e-17",
+        "pc_length": "3e-4",
+        "detcenter_z": "-89.8995",
+        "pc_radius": "7.5"
+    },
+    "GD91C": {
+        "detcenter_x": "110",
+        "detdim_x": "33.99",
+        "detdim_y": "33.99",
+        "detdim_z": "14.4147",
+        "detcenter_y": "0",
+        "pc_length": "3e-4",
+        "detcenter_z": "-310.085",
+        "pc_radius": "7.5"
+    },
+    "GD32D": {
+        "detcenter_x": "55",
+        "detdim_x": "35.38",
+        "detdim_y": "35.38",
+        "detdim_z": "15.6747",
+        "detcenter_y": "-95.2628",
+        "pc_length": "3e-4",
+        "detcenter_z": "-128.325",
+        "pc_radius": "7.5"
+    }
+}
