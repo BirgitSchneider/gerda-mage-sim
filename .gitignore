@@ -1,7 +1,6 @@
 *.root
 *.out
 *.dk0
-.tmac
 *.swp
 *.DS_Store
 UTILS/gen-spectra
