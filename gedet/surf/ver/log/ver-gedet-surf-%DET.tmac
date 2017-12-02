@@ -53,14 +53,15 @@
 /run/initialize
 
 /MG/generator/select GSS
-#/MG/generator/confine volume
 
 /MG/io/gss/addVolume CrystalDeadLayer_geometry$DET
+/MG/io/gss/addVolume CryoLiquidPhysical
+/MG/io/gss/SetOnlyBetweenSelectedVolumes true
 
 /MG/generator/gss/origin $ORIGIN
 /MG/generator/gss/boundingR $RADIUS
 
-/MG/io/gss/setMaxIntersections 4
+/MG/io/gss/setMaxIntersections 8
 
 ## Define run
 /tracking/verbose 0

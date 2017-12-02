@@ -53,14 +53,15 @@
 /run/initialize
 
 /MG/generator/select GSS
-#/MG/generator/confine volume
 
 /MG/io/gss/addVolume CrystalDeadLayer_geometry5_20
+/MG/io/gss/addVolume CryoLiquidPhysical
+/MG/io/gss/SetOnlyBetweenSelectedVolumes true
 
 /MG/generator/gss/origin -110 1.34711e-14 -79.8697 cm
 /MG/generator/gss/boundingR 54.88 mm
 
-/MG/io/gss/setMaxIntersections 4
+/MG/io/gss/setMaxIntersections 8
 
 ## Define run
 /tracking/verbose 0
