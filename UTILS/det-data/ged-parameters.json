@@ -1,5 +1,6 @@
 {
     "GD02B": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "34.54",
         "detdim_y": "34.54",
@@ -10,6 +11,7 @@
         "pc_radius": "7.5"
     },
     "GD76B": {
+        "upside_down": true,
         "detcenter_x": "-55",
         "detdim_x": "28",
         "detdim_y": "28",
@@ -20,36 +22,40 @@
         "pc_radius": "7.5"
     },
     "ANG1": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "28.43",
         "detdim_y": "28.43",
         "detdim_z": "33.5995",
         "detcenter_y": "-95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "51",
         "detcenter_z": "-253.4",
-        "pc_radius": "7.5"
+        "pc_radius": "6.75"
     },
     "ANG5": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "38.2",
         "detdim_y": "38.2",
         "detdim_z": "46.0995",
         "detcenter_y": "95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "94",
         "detcenter_z": "22.6005",
-        "pc_radius": "7.5"
+        "pc_radius": "6.25"
     },
     "GTF112": {
+        "upside_down": false,
         "detcenter_x": "0",
         "detdim_x": "41.7",
         "detdim_y": "41.7",
         "detdim_z": "49.5995",
         "detcenter_y": "4.89246e-17",
-        "pc_length": "3e-4",
+        "pc_length": "63",
         "detcenter_z": "26.1005",
-        "pc_radius": "7.5"
+        "pc_radius": "5.75"
     },
     "GD02A": {
+        "upside_down": true,
         "detcenter_x": "-55",
         "detdim_x": "34.37",
         "detdim_y": "34.37",
@@ -60,6 +66,7 @@
         "pc_radius": "7.5"
     },
     "GD35C": {
+        "upside_down": true,
         "detcenter_x": "-110",
         "detdim_x": "36.63",
         "detdim_y": "36.63",
@@ -70,6 +77,7 @@
         "pc_radius": "7.5"
     },
     "GD61B": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "36.98",
         "detdim_y": "36.98",
@@ -80,6 +88,7 @@
         "pc_radius": "7.5"
     },
     "GD61C": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "36.36",
         "detdim_y": "36.36",
@@ -90,6 +99,7 @@
         "pc_radius": "7.5"
     },
     "GD89B": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "36.89",
         "detdim_y": "36.89",
@@ -100,6 +110,7 @@
         "pc_radius": "7.5"
     },
     "GD32C": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "35.03",
         "detdim_y": "35.03",
@@ -110,16 +121,18 @@
         "pc_radius": "7.5"
     },
     "ANG4": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "38.2",
         "detdim_y": "38.2",
         "detdim_z": "46.0995",
         "detcenter_y": "-95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "89",
         "detcenter_z": "-220.4",
-        "pc_radius": "7.5"
+        "pc_radius": "7"
     },
     "GD91B": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "34.33",
         "detdim_y": "34.33",
@@ -130,16 +143,18 @@
         "pc_radius": "7.5"
     },
     "GTF45_2": {
+        "upside_down": false,
         "detcenter_x": "0",
         "detdim_x": "42.7",
         "detdim_y": "42.7",
         "detdim_z": "37.0995",
         "detcenter_y": "4.89246e-17",
-        "pc_length": "3e-4",
+        "pc_length": "43",
         "detcenter_z": "-189.4",
-        "pc_radius": "7.5"
+        "pc_radius": "5.75"
     },
     "GD02D": {
+        "upside_down": true,
         "detcenter_x": "110",
         "detdim_x": "35.85",
         "detdim_y": "35.85",
@@ -150,16 +165,18 @@
         "pc_radius": "7.5"
     },
     "RG1": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "37.45",
         "detdim_y": "37.45",
         "detdim_z": "41.5995",
         "detcenter_y": "95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "73",
         "detcenter_z": "-103.4",
-        "pc_radius": "7.5"
+        "pc_radius": "6.75"
     },
     "GD35A": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "35.82",
         "detdim_y": "35.82",
@@ -170,6 +187,7 @@
         "pc_radius": "7.5"
     },
     "GD61A": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "35.73",
         "detdim_y": "35.73",
@@ -180,6 +198,7 @@
         "pc_radius": "7.5"
     },
     "GD91A": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "34.28",
         "detdim_y": "34.28",
@@ -190,26 +209,29 @@
         "pc_radius": "7.5"
     },
     "ANG3": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "38.2",
         "detdim_y": "38.2",
         "detdim_z": "46.0995",
         "detcenter_y": "95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "83",
         "detcenter_z": "-240.4",
         "pc_radius": "7.5"
     },
     "ANG2": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "38.2",
         "detdim_y": "38.2",
         "detdim_z": "46.0995",
         "detcenter_y": "-95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "94",
         "detcenter_z": "22.6005",
-        "pc_radius": "7.5"
+        "pc_radius": "7"
     },
     "GD89D": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "35.7",
         "detdim_y": "35.7",
@@ -220,6 +242,7 @@
         "pc_radius": "7.5"
     },
     "GD79C": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "38.38",
         "detdim_y": "38.38",
@@ -230,16 +253,18 @@
         "pc_radius": "7.5"
     },
     "RG2": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "37.45",
         "detdim_y": "37.45",
         "detdim_z": "41.5995",
         "detcenter_y": "-95.2628",
-        "pc_length": "3e-4",
+        "pc_length": "70",
         "detcenter_z": "-103.4",
-        "pc_radius": "7.5"
+        "pc_radius": "6.5"
     },
     "GD02C": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "36.41",
         "detdim_y": "36.41",
@@ -250,6 +275,7 @@
         "pc_radius": "7.5"
     },
     "GD00D": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "37.18",
         "detdim_y": "37.18",
@@ -260,6 +286,7 @@
         "pc_radius": "7.5"
     },
     "GD79B": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "37.38",
         "detdim_y": "37.38",
@@ -270,6 +297,7 @@
         "pc_radius": "7.5"
     },
     "GD32B": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "34.9",
         "detdim_y": "34.9",
@@ -280,6 +308,7 @@
         "pc_radius": "7.5"
     },
     "GD89A": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "33.32",
         "detdim_y": "33.32",
@@ -290,6 +319,7 @@
         "pc_radius": "7.5"
     },
     "GD89C": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "36.36",
         "detdim_y": "36.36",
@@ -300,6 +330,7 @@
         "pc_radius": "7.5"
     },
     "GD35B": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "37.38",
         "detdim_y": "37.38",
@@ -310,6 +341,7 @@
         "pc_radius": "7.5"
     },
     "GD00C": {
+        "upside_down": false,
         "detcenter_x": "-55",
         "detdim_x": "36.75",
         "detdim_y": "36.75",
@@ -320,6 +352,7 @@
         "pc_radius": "7.5"
     },
     "GD76C": {
+        "upside_down": false,
         "detcenter_x": "-110",
         "detdim_x": "36.78",
         "detdim_y": "36.78",
@@ -330,6 +363,7 @@
         "pc_radius": "7.5"
     },
     "GD00A": {
+        "upside_down": true,
         "detcenter_x": "55",
         "detdim_x": "34.25",
         "detdim_y": "34.25",
@@ -340,6 +374,7 @@
         "pc_radius": "7.5"
     },
     "GD91D": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "34.66",
         "detdim_y": "34.66",
@@ -350,6 +385,7 @@
         "pc_radius": "7.5"
     },
     "GD32A": {
+        "upside_down": true,
         "detcenter_x": "-55",
         "detdim_x": "32.22",
         "detdim_y": "32.22",
@@ -360,6 +396,7 @@
         "pc_radius": "7.5"
     },
     "GD00B": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "35.94",
         "detdim_y": "35.94",
@@ -370,16 +407,18 @@
         "pc_radius": "7.5"
     },
     "GTF32": {
+        "upside_down": false,
         "detcenter_x": "0",
         "detdim_x": "43.7",
         "detdim_y": "43.7",
         "detdim_z": "35.0995",
         "detcenter_y": "4.89246e-17",
-        "pc_length": "3e-4",
+        "pc_length": "41.5",
         "detcenter_z": "-89.8995",
-        "pc_radius": "7.5"
+        "pc_radius": "6"
     },
     "GD91C": {
+        "upside_down": false,
         "detcenter_x": "110",
         "detdim_x": "33.99",
         "detdim_y": "33.99",
@@ -390,6 +429,7 @@
         "pc_radius": "7.5"
     },
     "GD32D": {
+        "upside_down": false,
         "detcenter_x": "55",
         "detdim_x": "35.38",
         "detdim_y": "35.38",
