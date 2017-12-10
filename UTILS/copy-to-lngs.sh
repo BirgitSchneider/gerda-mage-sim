@@ -15,7 +15,7 @@
 # --dry-run                 : do everything except actually transferring
 
 if [ -f ./copy-to-lngs.sh ]; then
-  user=`whoami`
+  echo "set username for gerda-login.lngs.infn.it:"; read user
   dest=/nfs/gerda5/var/gerda-simulations/gerda-mc2
   opts="--ignore-existing \
        --recursive \
@@ -25,11 +25,7 @@ if [ -f ./copy-to-lngs.sh ]; then
        --omit-dir-times \
        --compress \
        --human-readable \
-       --exclude=*.tmac \
-       --exclude=.git* \
-       --exclude=UTILS \
-       --exclude=README.md \
-       --exclude=*.swp"
+       --exclude-from=.rsyncignore"
   rsync $opts \
         --out-format="%o: %f%L" \
         --dry-run \

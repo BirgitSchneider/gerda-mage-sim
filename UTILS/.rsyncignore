@@ -1,0 +1,5 @@
+*.DS_Store
+*.swp
+README.md
+.git*
+UTILS/gen-spectra
