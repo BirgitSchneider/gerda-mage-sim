@@ -11,7 +11,7 @@
 ### Output ###
 /MG/eventaction/reportingfrequency 		10000
 /MG/eventaction/rootschema 			GerdaArray
-/MG/eventaction/rootfilename			./gedet/intrinsic/2nbb/${SIM}.root
+/MG/eventaction/rootfilename			./gedet/intrinsic/2nbbLV/raw-gedet-intrinsic-2nbbLV-$VOLTYPE-ch$CHANNEL.root
 /MG/output/saveOnlyEventsWithEnergyDeposit 	true
 
 ### processes ###
@@ -62,7 +62,7 @@
 ###############
 
 /MG/generator/confine 				volume
-/MG/generator/volume 				${DETECTOR}
+/MG/generator/volume 				$VOLUME
 
 /MG/generator/select 				decay0
 /MG/generator/decay0/filename 			./decay0files/2nbbLV_1E7.dk0

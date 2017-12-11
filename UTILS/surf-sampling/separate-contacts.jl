@@ -14,7 +14,7 @@ cxxinclude("TTreeReaderValue.h")
 # check if everything is ok
 isfile("./separate-contacts.jl") || error("Please run this script from where separate-contacts.jl is!")
 
-for f in [ ["../det-data/ged-mapping.json", "../det-data/ged-parameters.json"]; ["../../gedet/surf/ver/ver-gedet-surf-$i.root" for i = 0:39] ]
+for f in [ ["../det-data/ged-mapping.json", "../det-data/ged-parameters.json"]; ["../../gedet/surf/ver/ver-gedet-surf-ch$i.root" for i = 0:39] ]
     isfile(f) || error("$f not found!")
 end
 
@@ -31,9 +31,9 @@ end
 cxx"""
     void do_ROOT_job(bool upside_down, int ch, double x0, double y0, double r, double l) {
 
-        TFile inFile(Form("../../gedet/surf/ver/ver-gedet-surf-%i.root", ch));
-        TFile nFile(Form("../../gedet/nplus/ver/ver-gedet-nplus-%i.root", ch), "RECREATE");
-        TFile pFile(Form("../../gedet/pplus/ver/ver-gedet-pplus-%i.root", ch), "RECREATE");
+        TFile inFile(Form("../../gedet/surf/ver/ver-gedet-surf-ch%i.root", ch));
+        TFile nFile(Form("../../gedet/nplus/ver/ver-gedet-nplus-ch%i.root", ch), "RECREATE");
+        TFile pFile(Form("../../gedet/pplus/ver/ver-gedet-pplus-ch%i.root", ch), "RECREATE");
 
         auto tree = dynamic_cast<TTree*>(inFile.Get("GSSTree"));
         auto pTree = tree->CloneTree(0);
