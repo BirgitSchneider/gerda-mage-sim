@@ -14,7 +14,7 @@ using JSON
 
 # check if everything is ok
 
-if size(ARGS) != 0
+if size(ARGS,1) == 0
     println("USAGE: julia create-2nbb-macros.jl [ 2nbb|2nbbLV ]")
     exit()
 end
