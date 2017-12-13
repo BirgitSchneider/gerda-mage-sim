@@ -7,7 +7,7 @@ The simulations are further processed to extract p+ and n+ surfaces under `gedet
 
 | contact     | primaries | MGDO branch/commit    | MaGe branch/commmit        | notes |
 | ----------- | --------- | --------------------- | -------------------------- | ----- |
-| L. Pertoldi | O(10E6), but vary for each detector |  |  | Macros are auto-genereted by the `UTILS/create-surf-macros.jl` script |
+| L. Pertoldi | O(10E6), but vary for each detector |  |  | Macros are auto-genereted by the `UTILS/surf-sampling/create-surf-macros.jl` script |
 
 To get the actual number of events for each file you can run the following command into this folder:
 ```shell
