@@ -29,57 +29,68 @@ for (det, info) in gedMap
 end
 
 cxx"""
-    void do_ROOT_job(bool upside_down, int ch, double x0, double y0, double r, double l) {
+    void do_ROOT_job(bool upside_down, int ch, double x0, double y0, double ri, double ro, double l) {
 
         TFile inFile(Form("../../gedet/surf/ver/ver-gedet-surf-ch%i.root", ch));
-        TFile nFile(Form("../../gedet/nplus/ver/ver-gedet-nplus-ch%i.root", ch), "RECREATE");
-        TFile pFile(Form("../../gedet/pplus/ver/ver-gedet-pplus-ch%i.root", ch), "RECREATE");
-
         auto tree = dynamic_cast<TTree*>(inFile.Get("GSSTree"));
+
+        TFile pFile(Form("../../gedet/pplus/ver/ver-gedet-pplus-ch%i.root", ch), "RECREATE");
         auto pTree = tree->CloneTree(0);
+        TFile nFile(Form("../../gedet/nplus/ver/ver-gedet-nplus-ch%i.root", ch), "RECREATE");
         auto nTree = tree->CloneTree(0);
+        //auto lTree = tree->CloneTree(0);
 
         double x, y, z;
         tree->SetBranchAddress("x_cm", &x);
         tree->SetBranchAddress("y_cm", &y);
         tree->SetBranchAddress("z_cm", &z);
 
+        int n_lost = 0;
+        double sqradius;
+
         int N = tree->GetEntries();
         if (upside_down) {
             for (int i = 0; i < N; ++i) {
                 tree->GetEntry(i);
-                if ( (x0-x)*(x0-x)+(y0-y)*(y0-y) <= r*r and z > l ) pTree->Fill();
-                else                                                nTree->Fill();
+                sqradius = (x0-x)*(x0-x)+(y0-y)*(y0-y);
+                if      ( sqradius <= ri*ri and z > l ) pTree->Fill();
+                else if ( sqradius <= ro*ro or  z < l ) nTree->Fill();
+                else if ( sqradius >= ro*ro           ) nTree->Fill();
+                else { n_lost++; /*lTree->Fill();*/ }
             }
         }
 
         else {
             for (int i = 0; i < N; ++i) {
                 tree->GetEntry(i);
-                if ( (x0-x)*(x0-x)+(y0-y)*(y0-y) <= r*r and z < l ) pTree->Fill();
-                else                                                nTree->Fill();
+                sqradius = (x0-x)*(x0-x)+(y0-y)*(y0-y);
+                if      ( sqradius <= ri*ri and z < l ) pTree->Fill();
+                else if ( sqradius <= ro*ro and z > l ) nTree->Fill();
+                else if ( sqradius >= ro*ro           ) nTree->Fill();
+                else { n_lost++; /*lTree->Fill();*/ }
             }
         }
 
-        pFile.WriteTObject(pTree);
-        nFile.WriteTObject(nTree);
+        std::cout << "There were " << n_lost << " discarded vertices.\n";
+        pFile.cd(); pTree->Write();
+        nFile.cd(); nTree->Write(); //lTree->Write("lost");
     }
 """
 
 for i in 0:39
     det = chDict[i]
-    x0  = parse(Float32, gedPar[det]["detcenter_x"])
-    y0  = parse(Float32, gedPar[det]["detcenter_y"])
-    z0  = parse(Float32, gedPar[det]["detcenter_z"])
-    dz  = parse(Float32, gedPar[det]["detdim_z"])
-    pl  = parse(Float32, gedPar[det]["pc_length"])
-    # add 1mm to set less restrictive cuts for coax
-    r   = parse(Float32, gedPar[det]["pc_radius"]) + 0.1
+    x0  = gedPar[det]["detcenter_x"]
+    y0  = gedPar[det]["detcenter_y"]
+    z0  = gedPar[det]["detcenter_z"]
+    dz  = gedPar[det]["detdim_z"]
+    pl  = gedPar[det]["pplus_length_z"] + 1
+    ri  = gedPar[det]["groove_inner_radius"] - 0.01
+    ro  = gedPar[det]["groove_outer_radius"] + 0.01
 
     gedPar[det]["upside_down"] ?
         l = z0 + dz - pl :
         l = z0 - dz + pl
 
-    println("Processing detector $det..."); flush(STDOUT)
-    @cxx do_ROOT_job(gedPar[det]["upside_down"], i, x0, y0, r, l)
+    print("Processing detector $det... "); flush(STDOUT)
+    @cxx do_ROOT_job(gedPar[det]["upside_down"], i, x0, y0, ri, ro, l)
 end
