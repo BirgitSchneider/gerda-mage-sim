@@ -20,3 +20,8 @@ $ root << EOF
           }
 EOF
 ```
+
+## Comments
+These samplings were originally produced only for the n+ and p+ contacts extraction, if you want to use them directly for simulations over the complete detector's surface you must be aware of some details:
+
+While the coaxials are efficiently sampled all over their surface, groove hole included, this is not the case for BEGEs. In BEGe detectors the groove hole is sampled only in a minimal part (partly visible in the picture), to obtain the complete groove hole you must also perform an independent sampling of the surface between the active volume (`Crystal_geometry$ID`) and the LAr (`CryoLiquidPhysical`) and then merge it coherently with these simulations.
