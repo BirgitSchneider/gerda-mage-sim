@@ -29,7 +29,7 @@ for (det, info) in gedMap
              string(gedPar[det]["detcenter_z"]) * " mm"
 
     RADIUS = string(√(2gedPar[det]["radius"]^2
-                      + 0.5gedPar[det]["heigth"])^2) * " mm"
+                      + (0.5gedPar[det]["heigth"])^2)) * " mm"
 
     macLines = temLines
     macLines = replace.(macLines, "\$DET", DET)
