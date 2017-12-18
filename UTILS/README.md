@@ -8,4 +8,5 @@ Collection of scripts used to produce macros or processing ROOT files.
 * `surf-sampling/`:
     * `create-surf-macros.jl`: julia script to produce, for each detector, macro files for the surface sampling (under `gedet/surf/ver/`). It uses JSON.jl
     * `separate-contacts.jl`: julia script to separate p+ and n+ contacts simulated surface vertices into different ROOT files (under `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and JSON.jl
-* `gen-spectra.cxx`: C++ program to produce standard energy histograms that can be found in this repository (`spc-` files)
+    * `surf-calc.jl`: julia script that calculates the area for p+ and n+ contacts for each detector
+* `gen-spectra.cxx`: C++ program to produce standard energy histograms that can be found in this repository (`spc-` files) **work in progress...**

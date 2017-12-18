@@ -82,7 +82,7 @@ for i in 0:39
     x0  = gedPar[det]["detcenter_x"]
     y0  = gedPar[det]["detcenter_y"]
     z0  = gedPar[det]["detcenter_z"]
-    dz  = gedPar[det]["detdim_z"]
+    dz  = 0.5gedPar[det]["heigth"]
     pl  = gedPar[det]["pplus_length_z"] + 1
     ri  = gedPar[det]["groove_inner_radius"] - 0.01
     ro  = gedPar[det]["groove_outer_radius"] + 0.01

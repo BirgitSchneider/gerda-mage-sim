@@ -17,7 +17,7 @@
 /MG/io/gss/SetOnlyBetweenSelectedVolumes true
 
 /MG/generator/gss/origin                 110.0 0.0 16.6603 mm
-/MG/generator/gss/boundingR              2810.1885000000007 mm
+/MG/generator/gss/boundingR              2928.4211999999998 mm
 
 /MG/io/gss/setMaxIntersections           8
 
