@@ -11,5 +11,5 @@
 
 A picture of the four volumes put together:
 <p align="center">
-  <img src="cables.png"/>
+  <img src="cables.png" width="400"/>
 </p>
