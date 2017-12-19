@@ -9,5 +9,5 @@
 
 A picture of all the holder plates:
 <p align="center">
-  <img src="holder-plates.png"/>
+  <img src="holder-plates.png" width="400"/>
 </p>
