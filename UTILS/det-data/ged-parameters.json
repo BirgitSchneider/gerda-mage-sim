@@ -39,9 +39,9 @@
         "detcenter_x": 55.0,
         "radius": 29.23,
         "heigth": 68.0,
-        "detcenter_z": -253.4,
+        "detcenter_z": -253.899,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 19.5
     },
     "ANG5": {
@@ -54,7 +54,7 @@
         "detcenter_x": 55.0,
         "radius": 39.25,
         "heigth": 105.0,
-        "detcenter_z": 22.6005,
+        "detcenter_z": 27.7005,
         "corner_radius": 0,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 18.0
@@ -69,7 +69,7 @@
         "detcenter_x": 0.0,
         "radius": 42.5,
         "heigth": 100.0,
-        "detcenter_z": 26.1005,
+        "detcenter_z": 26.3005,
         "corner_radius": 0,
         "detcenter_y": 0.0,
         "groove_outer_radius": 20.0
@@ -174,9 +174,9 @@
         "detcenter_x": -55.0,
         "radius": 37.5,
         "heigth": 100.0,
-        "detcenter_z": -220.4,
+        "detcenter_z": -217.2,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 18.0
     },
     "GD91B": {
@@ -234,9 +234,9 @@
         "detcenter_x": -55.0,
         "radius": 40.0,
         "heigth": 107.0,
-        "detcenter_z": 22.6005,
+        "detcenter_z": 28.8505,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 18.0
     },
     "GD61A": {
@@ -279,7 +279,7 @@
         "detcenter_x": 55.0,
         "radius": 39.0,
         "heigth": 93.0,
-        "detcenter_z": -240.4,
+        "detcenter_z": -240.95,
         "corner_radius": 0,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 20.0
@@ -294,7 +294,7 @@
         "detcenter_x": 0.0,
         "radius": 43.5,
         "heigth": 75.0,
-        "detcenter_z": -189.4,
+        "detcenter_z": -189.2,
         "corner_radius": 0,
         "detcenter_y": 0.0,
         "groove_outer_radius": 20.0
@@ -341,7 +341,7 @@
         "heigth": 32.59,
         "detcenter_z": 32.2803,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
     "GD79B": {
@@ -356,7 +356,7 @@
         "heigth": 29.04,
         "detcenter_z": -22.9997,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
     "GD00D": {
@@ -401,7 +401,7 @@
         "heigth": 28.34,
         "detcenter_z": -183.825,
         "corner_radius": 25.25,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
     "GD89C": {
@@ -476,7 +476,7 @@
         "heigth": 26.41,
         "detcenter_z": 67.7497,
         "corner_radius": 23.25,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
     "GD91D": {
@@ -491,7 +491,7 @@
         "heigth": 31.88,
         "detcenter_z": -75.0547,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
     "GD32A": {
@@ -519,9 +519,9 @@
         "detcenter_x": -55.0,
         "radius": 38.25,
         "heigth": 84.0,
-        "detcenter_z": -103.4,
+        "detcenter_z": -104.15,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 20.0
     },
     "GD00B": {
@@ -566,7 +566,7 @@
         "heigth": 32.12,
         "detcenter_z": -128.325,
         "corner_radius": 0,
-        "detcenter_y": 0.0,
+        "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
     "GTF32": {
@@ -579,7 +579,7 @@
         "detcenter_x": 0.0,
         "radius": 44.5,
         "heigth": 71.0,
-        "detcenter_z": -89.8995,
+        "detcenter_z": -89.6995,
         "corner_radius": 0,
         "detcenter_y": 0.0,
         "groove_outer_radius": 20.0
@@ -594,7 +594,7 @@
         "detcenter_x": 55.0,
         "radius": 38.25,
         "heigth": 84.0,
-        "detcenter_z": -103.4,
+        "detcenter_z": -103.75,
         "corner_radius": 0,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 20.0

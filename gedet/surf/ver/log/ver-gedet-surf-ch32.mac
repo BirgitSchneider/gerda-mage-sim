@@ -16,8 +16,8 @@
 /MG/io/gss/addVolume                     CryoLiquidPhysical
 /MG/io/gss/SetOnlyBetweenSelectedVolumes true
 
-/MG/generator/gss/origin                 55.0 0.0 -22.9997 mm
-/MG/generator/gss/boundingR              2966.7128000000002 mm
+/MG/generator/gss/origin                 55.0 -95.2628 -22.9997 mm
+/MG/generator/gss/boundingR              56.240761019033165 mm
 
 /MG/io/gss/setMaxIntersections           8
 
