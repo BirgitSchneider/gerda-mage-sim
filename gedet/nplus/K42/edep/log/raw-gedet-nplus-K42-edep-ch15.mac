@@ -17,7 +17,6 @@
 
 /MG/generator/select                       decay0
 /MG/generator/decay0/filename              ./decay0files/K42_1E7.dk0
-/grdm/fBeta                                true
 
 ## Define run
 /tracking/verbose                          0
