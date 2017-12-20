@@ -60,4 +60,3 @@
 ### Output ###
 /MG/eventaction/reportingfrequency              10000
 /MG/eventaction/rootschema                      GerdaArray
-/MG/eventaction/rootfilename                    output.root         ### change me ###

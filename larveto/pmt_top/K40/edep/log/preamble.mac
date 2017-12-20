@@ -56,3 +56,8 @@
 
 ### Muon Veto ###
 /MG/geometry/cherenkov                          -1 ## 0 is the true configuration, -1 no u-veto ##
+
+### Output ###
+/MG/eventaction/reportingfrequency              10000
+/MG/eventaction/rootschema                      GerdaArray
+
