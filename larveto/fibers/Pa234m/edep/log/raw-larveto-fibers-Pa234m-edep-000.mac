@@ -13,7 +13,7 @@
 /run/initialize
 
 /MG/generator/confine                      volume
-/MG/generator/volume                       LArInstr_FiberOuter_Physical
+/MG/generator/volume                       LArInstr_FiberSegment_Physical
 
 /MG/generator/select				decay0
 /MG/generator/decay0/filename			./decay0files/Pa234m_1E7.dk0
