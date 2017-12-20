@@ -33,7 +33,7 @@
 ### This activates automatically the optical processes ###
 /MG/geometry/general/constructLArInstrumentation       true
 #/MG/geometry/LArInst/SelectDesign                     hybrid     ### is default ###
-#/MG/geometry/LArInst/ConstructSegmentedFiberShroud    true       ### is default ###
+/MG/geometry/LArInst/ConstructSegmentedFiberShroud     false      ### segments do not work###
 #/MG/geometry/LArInst/PhotonTracking                   false      ### is default ###
 
 ### If you want to use photon tracking you just need to switch it on below you find the default settings ###

@@ -13,7 +13,7 @@
 /run/initialize
 
 /MG/generator/confine                      volume
-/MG/generator/volume                       LArInstr_FiberSegment_Physical
+/MG/generator/volume                       LArInstr_FiberOuter_Physical
 
 /MG/generator/select			G4gun
 /MG/generator/g4gun/cone_on		true
