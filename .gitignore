@@ -2,5 +2,6 @@
 *.out
 *.dk0
 *.swp
+*.sqsh
 *.DS_Store
 UTILS/gen-spectra
