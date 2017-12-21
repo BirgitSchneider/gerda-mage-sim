@@ -29,10 +29,6 @@ if [ -f ./copy-decay0files-from-lngs.sh ]; then
   echo ""
   echo "This singularity container file will be transfered."
   echo ""
-  echo "NOTE: this script transfers ONLY files that do not exist on the receiver"
-  echo "      yet, consider to delete the files you wish to update on the receiver."
-  echo "      Modify the rsync options only if you really know what you're doing!"
-  echo ""
   echo "Proceed? [y/n]"; read ans
   if [ "$ans" == "y" ]; then
     mkdir -p ./container
