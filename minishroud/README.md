@@ -12,7 +12,7 @@
 
 Some pictures: from left to right: the tubs, the tops and the bottoms, the top and bottom glue rings
 <p align="center">
-  <img src="tubs.png" width="400"/>
-  <img src="tops_bottoms.png" width="400"/>
-  <img src="glue_rings.png" width="400"/>
+  <img src="tubs.png" width="250"/>
+  <img src="tops_bottoms.png" width="250"/>
+  <img src="glue_rings.png" width="250"/>
 </p>
