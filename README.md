@@ -11,8 +11,8 @@ Mantainers:
 * Luigi Pertoldi - [luigi.pertoldi@pd.infn.it](mailto:luigi.pertoldi@pd.infn.it)
 
 ### Useful links
-* [Documentation](https://github.com/mppmu/gerda-snippets/wiki/MaGe-simulations-stored-at-LNGS)
-* [How to add your contribution](https://github.com/mppmu/gerda-snippets/wiki/MaGe-simulations-stored-at-LNGS#add-your-contribution-to-the-official-repository-by-running-simulations-on-your-cluster)
+* [Documentation](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations)
+* [How to add your contribution](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations#add-your-contribution-to-the-official-repository-by-running-simulations-on-your-cluster)
 * [`UTILS/`](https://github.com/gipert/gerda-mage-sim/tree/master/UTILS): Command Line Tools used in the context of this repository
 * [Germanium detectors sampled surfaces](https://github.com/gipert/gerda-mage-sim/tree/master/gedet/surf/ver)
 * [MaGe source code repository](https://github.com/mppmu/MaGe)
