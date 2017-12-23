@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./minishroud/tubs/Ac228/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./minishroud/tubs/Ac228/edep/raw-minishroud-tubs-Ac228-edep-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 6
+/MG/generator/volumelist                   MiniShroudPhase2Tub
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Ac228_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000

@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./minishroud/tubs/Tl208/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./minishroud/tubs/Tl208/edep/raw-minishroud-tubs-Tl208-edep-001.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 6
+/MG/generator/volumelist                   MiniShroudPhase2Tub
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Tl208_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000

@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./minishroud/bottoms/Pa234m/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./minishroud/bottoms/Pa234m/edep/raw-minishroud-bottoms-Pa234m-edep-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 6
+/MG/generator/volumelist                   MiniShroudPhase2Bottom
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Pa234m_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                4552997
