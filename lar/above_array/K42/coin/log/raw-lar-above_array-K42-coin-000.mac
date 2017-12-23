@@ -1,12 +1,12 @@
 # load preamble
 /control/execute                           ./lar/above_array/K42/edep/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./lar/above_array/K42/edep/raw-lar-above_array-K42-edep-005.root
+/MG/eventaction/rootfilename               ./lar/above_array/K42/edep/raw-lar-above_array-K42-edep-000.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
-/MG/output/saveOnlyEventsWithEnergyDeposit true
-#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+/MG/output/saveOnlyEventsWithEnergyDeposit false
+/MG/output/saveOnlyEventsWithCoincidence   true
 
 /run/initialize
 

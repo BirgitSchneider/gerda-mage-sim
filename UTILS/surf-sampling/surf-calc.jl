@@ -30,13 +30,13 @@ for (det,info) in dict
         =#
         if dict[det]["edged"]
             pplus = π * dict[det]["pplus_radius"]^2
-            nplus = π * (2dict[det]["radius"]*(dict[det]["heigth"] - dict[det]["corner_heigth"])
+            nplus = π * (2dict[det]["radius"]*(dict[det]["height"] - dict[det]["corner_height"])
                          + dict[det]["corner_radius"]^2
                          + dict[det]["radius"]^2 - dict[det]["groove_outer_radius"]^2
                          + (dict[det]["radius"] + dict[det]["corner_radius"])
                            * √(
                                (dict[det]["radius"] - dict[det]["corner_radius"])^2
-                               + dict[det]["corner_heigth"]^2
+                               + dict[det]["corner_height"]^2
                               )
                         )
         #= not edged
@@ -49,7 +49,7 @@ for (det,info) in dict
         =#
         else
             pplus = π * dict[det]["pplus_radius"]^2
-            nplus = π * (2dict[det]["radius"]*dict[det]["heigth"]
+            nplus = π * (2dict[det]["radius"]*dict[det]["height"]
                          + 2dict[det]["radius"]^2
                          - dict[det]["groove_outer_radius"])
         end
@@ -66,7 +66,7 @@ for (det,info) in dict
     else
         pplus = π * (2dict[det]["pplus_radius"]dict[det]["pplus_length_z"]
                      + dict[det]["groove_inner_radius"]^2)
-        nplus = π * (2dict[det]["radius"]*dict[det]["heigth"]
+        nplus = π * (2dict[det]["radius"]*dict[det]["height"]
                      + 2dict[det]["radius"]^2
                      - dict[det]["groove_outer_radius"])
     end

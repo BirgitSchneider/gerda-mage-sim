@@ -1,60 +1,12 @@
-# ================================================ #
-# GERDA Phase-II lar above_array K42 macro         #
-# K.v.Sturm 14.11.2017                             #
-# ================================================ #
+# load preamble
+/control/execute                           ./lar/above_array/K42/edep/log/preamble.mac
 
-### manager ###
-/MG/manager/mglog                               trace
-/MG/manager/heprandomseed			21192
+/MG/eventaction/rootfilename               ./lar/above_array/K42/edep/raw-lar-above_array-K42-edep-008.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
-### processes ###
-/MG/processes/realm                             BBdecay ## DarkMatter ## CosmicRay ##
-/MG/processes/lowenergy                         true
-/MG/processes/useNoHadPhysics                   true
-
-### Geometry ###
-/MG/geometry/detector                           GerdaArray
-/MG/geometry/database                           false
-/MG/geometry/detector/general/depth             0 cm
-
-### Set 7 string Phase II lock ###
-/MG/geometry/lock/type                          PhaseII_DN500
-/MG/geometry/lock/dn500/n_strings               7
-/MG/geometry/lock/dn500/string_distance         11 cm
-
-### Geometry and Matrix files ###
-/MG/geometry/detector/geometryfile              geometry_PhaseII_BEGeFCCDgrowth_CoaxPhaseI.dat
-/MG/geometry/detector/matrixfile                matrix_phase_ii_StatusDec2015_pos.dat
-/MG/geometry/general/constructsupport           true
-/MG/geometry/general/constructcabling           true
-
-### Construct liquid Argon veto and electronics plate ###
-### This activates automatically the optical processes ###
-/MG/geometry/general/constructLArInstrumentation        true
-/MG/geometry/LArInst/SelectDesign                       hybrid
-/MG/geometry/LArInst/PhotonTracking                     false
-
-### Nylon Minishrouds ###
-/MG/geometry/general/constructMiniShroud                true
-/MG/geometry/general/miniShroudMaterial                 Nylon
-/MG/geometry/LArInst/MinisShroudOpticalCoating          TPB
-/MG/geometry/general/adjustMinishroudToDetctorString    true
-/MG/geometry/general/miniShroudBaseThickness            0.125 mm
-/MG/geometry/general/miniShroudSideThickness            0.125 mm
-
-### Individual z positions defined in second column of matrix file ###
-/MG/geometry/detector/individualzposofdetectors         true
-/MG/geometry/detector/crystal/reverse                   true
-
-### Muon Veto ###
-/MG/geometry/cherenkov                          -1
-
-### Output ###
-/MG/eventaction/reportingfrequency              100000
-/MG/eventaction/rootschema                      GerdaArray
-/MG/eventaction/rootfilename                    lar/above_array/K42/coin/root/raw-lar-above_array-K42-coin-008.root
-
-/MG/output/saveOnlyEventsWithConicidence	true
+/MG/output/saveOnlyEventsWithEnergyDeposit false
+/MG/output/saveOnlyEventsWithCoincidence   true
 
 /run/initialize
 
@@ -70,18 +22,8 @@
 /MG/generator/Sampling/volume/offsetCenterXPos         0 mm
 /MG/generator/Sampling/volume/offsetCenterZPos         65 cm
 
-/MG/generator/select                            decay0
-/MG/generator/decay0/filename                   ./decay0files/K42_1E7.dk0
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/K42_1E7.dk0
 
-################################################
-
-
-### set energy cut for which the photon tracking is activated ###
-### check if needed or if photon tracking can be deactivated by default ###
-/MG/output/LArInst/ApplyLArInstGeEnergyCut      true
-/MG/output/LArInst/SetGeEnergyCutLow            6.5 MeV
-/MG/output/LArInst/SetGeEnergyCutHigh           6.6 MeV
-
-/tracking/verbose                               0
-/run/beamOn                                     10000000
-
+/tracking/verbose                          0
+/run/beamOn                                10000000
