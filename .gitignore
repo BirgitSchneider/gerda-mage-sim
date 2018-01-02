@@ -5,3 +5,4 @@
 *.sqsh
 *.DS_Store
 UTILS/gen-spectra
+UTILS/check-simulation
