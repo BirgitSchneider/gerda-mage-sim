@@ -1,27 +1,25 @@
+/* check-simulation.cxx
+ *
+ * Author: Katharina von Sturm - vonsturm@pd.infn.it
+ * Created: Tue 02 Jan 2018
+ *
+ * Compile with:
+ * $ g++ $(root-config --cflags --libs) -o check-simulation check-simulation.cxx
+ *
+ */
+
 // C/c++  includes
 #include <cstdlib>
 #include <cstdio>
 #include <iostream>
 #include <vector>
-/*
-#include <cmath>
-#include <map>
-*/
+
 // root cern includes
 #include "TSystem.h"
 #include "TRegexp.h"
 #include "TChain.h"
 #include "TCanvas.h"
 #include "TFile.h"
-/*
-#include "TH2D.h"
-#include "TTreeReader.h"
-#include "TTreeReaderValue.h"
-#include "TTreeReaderArray.h"
-*/
-
-// boost filesystem lib
-// #include "boost/filesystem.hpp"
 
 using namespace std;
 
@@ -71,8 +69,10 @@ int main( int argc, char * argv[] )
 	ParseDirName( DIR, LOCATION, PART, ISOTOPE, MULTI );
 
 	// plot x-y z-x, z-y distribiutions of vertices and hits
+	cout << "Create plots..." << endl;
+
 	string title = Form("controlplots-%s-%s-%s-%s", LOCATION.c_str(), PART.c_str(), ISOTOPE.c_str(), MULTI.c_str() );
-	TCanvas * can = new TCanvas( "cplots", title.c_str(), 1500, 500 );
+	TCanvas * can = new TCanvas( "cplots", title.c_str(), 1300, 500 );
 	can -> Divide(3,1);
 	can -> cd(1);
 	c -> Draw( "vertex_xpos:vertex_ypos","","COLZ" );
@@ -84,11 +84,21 @@ int main( int argc, char * argv[] )
 	c -> Draw( "vertex_zpos:vertex_ypos","","COLZ" );
 	c -> Draw( "hits_zpos:hits_ypos","","same" );
 
-	// open output file
-	string outfilename = DIR; outfilename += title; outfilename += ".root";
-	TFile * file = new TFile( outfilename.c_str() );
+	// open output file and write canvas to file
+	string outfilename = DIR; outfilename += title;
+	string rootoutfilename = outfilename; rootoutfilename += ".root";
+	string pngoutfilename = outfilename; pngoutfilename += ".png";
+	cout << "...and write them to file: " << endl;
+	cout << "\t" << rootoutfilename << endl;
+	cout << "\t" << pngoutfilename << endl;
+
+	TFile * file = new TFile( rootoutfilename.c_str(), "RECREATE" );
 	can -> Write();
 	file -> Close();
+
+	can -> Print( pngoutfilename.c_str() );
+
+	cout << "DONE" << endl;
 
 	return 0;
 }
@@ -145,6 +155,12 @@ void ParseDirName( string DIR, string & LOCATION, string & PART, string & ISOTOP
 
 	int n = parts.size();
 
+	if( n < 4 )
+	{
+		cout << "directory structure not recognized" << endl;
+		return;
+	}
+
 	LOCATION = parts.at( n - 4 );
 	PART = parts.at( n - 3 );
 	ISOTOPE = parts.at( n - 2 );
@@ -157,10 +173,10 @@ void ParseDirName( string DIR, string & LOCATION, string & PART, string & ISOTOP
 /**********************************************************************/
 vector<string> cutString( string stringToCut, char c )
 {
-	string STC;
+	string STC = stringToCut;
 	vector<string> parts;
 
-	int index = STC.find("/");
+	int index = STC.find( c );
 
 	while( index != string::npos )
 	{
