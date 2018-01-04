@@ -14,21 +14,24 @@
 #$ -j y		### have logoutput and erroroutput in the same file
 
 ### CHANGE ME ###
-#$ -t 1-10 	### submit an array of jobs SGE_TASK_ID is the running variable (can only start at 1)
+#$ -t 1-40 	### submit an array of jobs SGE_TASK_ID is the running variable (can only start at 1)
 
-LOCATION="larveto"
-PART="fibers"
-ISOTOPE="Bi212"
+LOCATION="gedet"
+PART="pplus"
+ISOTOPE="K42"
 MULTIPLICITY="edep"
 
 ### CHANGE ME ###
 
-ID="$( printf %03d $(($SGE_TASK_ID - 1)) )"
+ID="$( printf %d $(($SGE_TASK_ID - 1)) )"
+#ID="$( printf %03d $(($SGE_TASK_ID - 1)) )"
 
 MACROPATH="./${LOCATION}/${PART}/${ISOTOPE}/${MULTIPLICITY}/log"
 MACRONAME="raw-${LOCATION}-${PART}-${ISOTOPE}-${MULTIPLICITY}"
-MACFILENAME="${MACROPATH}/${MACRONAME}-${ID}.mac"
-LOGFILENAME="${MACROPATH}/${MACRONAME}-${ID}.out"
+MACFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.mac"
+LOGFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.out"
+#MACFILENAME="${MACROPATH}/${MACRONAME}-${ID}.mac"
+#LOGFILENAME="${MACROPATH}/${MACRONAME}-${ID}.out"
 
 cd "/lfs/l2/gerda/Hades/gerda-mage-sim"
 singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v2.0.sqsh ${MACFILENAME} 1> ${LOGFILENAME} 2> ${LOGFILENAME}

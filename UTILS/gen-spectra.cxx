@@ -5,6 +5,7 @@
  *
  * Compile with:
  * $ c++ `root-config --cflags --libs` -o gen-spectra gen-spectra.cxx
+ * $ g++ $(root-config --cflags --libs) -lTreePlayer -o gen-spectra gen-spectra.cxx
  *
  */
 
@@ -37,7 +38,7 @@ int main( int argc, char** argv ) {
     TFile infile(argv[1], "READ");
     TTree* fTree = dynamic_cast<TTree*>(infile.Get("fTree"));
 
-    name.insert(name.rfind('/')+1, "spc-");
+    name.replace(name.rfind('/')+1, 4, "spc-");
     TFile outfile(name.c_str(), "RECREATE");
 
     std::vector<std::string> ch_name = { "GD91A", "GD35B", "GD02B", "GD00B", "GD61A", "GD89B",
@@ -57,18 +58,16 @@ int main( int argc, char** argv ) {
     TH1D energyNatCOAX("natCOAX", "natCOAX", max_kev, 0, max_kev);
 
     TTreeReader treereader; treereader.SetTree(fTree);
-    TTreeReaderValue<int>    multiplicity(treereader, "multiplicity");
-    TTreeReaderValue<int>    isMuVetoed  (treereader, "isMuVetoed");
-    TTreeReaderValue<int>    isPWDVetoed (treereader, "isPSDVetoed");
+//    TTreeReaderValue<int>    multiplicity(treereader, "multiplicity");
+//    TTreeReaderValue<int>    isMuVetoed  (treereader, "isMuVetoed");
+//    TTreeReaderValue<int>    isPSDVetoed (treereader, "isPSDVetoed");
     TTreeReaderArray<double> energy      (treereader, "energy");
 
     std::cout << "Processing..." << std::endl;
     while(treereader.Next()) {
-        if ( *multiplicity == 1 and *isMuVetoed == false ) {
-            for ( int i = 0; i < 40; ++i ) {
-                if ( energy[i] < 10000 and energy[i] > 0 ) {
-                    energy_ch[i].Fill(energy[i]);
-                }
+        for ( int i = 0; i < 40; ++i ) {
+            if ( energy[i] < 10000 and energy[i] > 0 ) {
+                energy_ch[i].Fill(energy[i]);
             }
         }
     }
@@ -85,7 +84,7 @@ int main( int argc, char** argv ) {
     energyEnrCOAX.Write();
     energyNatCOAX.Write();
 
-    std::cout << "Output saved in: " << name;
+    std::cout << "Output saved in: " << name << std::endl;
 
     return 0;
 }
