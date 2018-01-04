@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./larveto/fibers/Pb214/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./larveto/fibers/Pb214/edep/raw-larveto-fibers-Pb214-edep-056.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/MG/geometry/cherenkov                     -1
+
+/run/initialize
+
+/MG/generator/confine                      volume
+/MG/generator/volume                       LArInstr_FiberOuter_Physical
+
+/MG/generator/select			decay0
+/MG/generator/decay0/filename		./decay0files/Pb214_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000
