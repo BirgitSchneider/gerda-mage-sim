@@ -4,7 +4,6 @@
  * Created: Tue 12 Nov 2017, 12:03 a.m.
  *
  * Compile with:
- * $ c++ `root-config --cflags --libs` -o gen-spectra gen-spectra.cxx
  * $ g++ $(root-config --cflags --libs) -lTreePlayer -o gen-spectra gen-spectra.cxx
  *
  */
@@ -26,6 +25,7 @@
 
 int main( int argc, char** argv ) {
 
+    int M = 100;
     int max_kev = 7500;
 
     if ( argc == 1 ) {
@@ -34,8 +34,22 @@ int main( int argc, char** argv ) {
         return -1;
     }
 
-    std::string name(argv[1]);
-    TFile infile(argv[1], "READ");
+    std::vector<std::string> args;
+    for ( int i = 0; i < argc; ++i ) args.emplace_back( argv[i] );
+
+    std::vector<std::string>::iterator result = std::find( args.begin(), args.end(), "-m" );
+    std::string val;
+    if ( result != args.end() ) {
+        val = *( result + 1 );
+        M = atoi( val.c_str() );
+    }
+
+    std::string name;
+    for( int i = 1; i < argc; ++i ) {
+        if( args[i].find("t4z-") != std::string::npos ) name = args[i];
+    }
+
+    TFile infile( name.c_str(), "READ" );
     TTree* fTree = dynamic_cast<TTree*>(infile.Get("fTree"));
 
     name.replace(name.rfind('/')+1, 4, "spc-");
@@ -58,16 +72,18 @@ int main( int argc, char** argv ) {
     TH1D energyNatCOAX("natCOAX", "natCOAX", max_kev, 0, max_kev);
 
     TTreeReader treereader; treereader.SetTree(fTree);
-//    TTreeReaderValue<int>    multiplicity(treereader, "multiplicity");
+    TTreeReaderValue<int>    multiplicity(treereader, "multiplicity");
 //    TTreeReaderValue<int>    isMuVetoed  (treereader, "isMuVetoed");
 //    TTreeReaderValue<int>    isPSDVetoed (treereader, "isPSDVetoed");
     TTreeReaderArray<double> energy      (treereader, "energy");
 
     std::cout << "Processing..." << std::endl;
     while(treereader.Next()) {
-        for ( int i = 0; i < 40; ++i ) {
-            if ( energy[i] < 10000 and energy[i] > 0 ) {
-                energy_ch[i].Fill(energy[i]);
+	if( *multiplicity <= M && *multiplicity > 0 ) {
+            for ( int i = 0; i < 40; ++i ) {
+                if ( energy[i] < 10000 and energy[i] > 0 ) {
+               	    energy_ch[i].Fill(energy[i]);
+                }
             }
         }
     }

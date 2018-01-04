@@ -7,3 +7,4 @@
 UTILS/gen-spectra
 UTILS/check-simulation
 controlplots*
+UTILS/job-scheduler/mpik-qsub.sh.o*
