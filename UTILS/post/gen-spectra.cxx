@@ -79,10 +79,10 @@ int main( int argc, char** argv ) {
 
     std::cout << "Processing..." << std::endl;
     while(treereader.Next()) {
-	if( *multiplicity <= M && *multiplicity > 0 ) {
+    if( *multiplicity <= M && *multiplicity > 0 ) {
             for ( int i = 0; i < 40; ++i ) {
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
-               	    energy_ch[i].Fill(energy[i]);
+                    energy_ch[i].Fill(energy[i]);
                 }
             }
         }
