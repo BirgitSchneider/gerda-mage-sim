@@ -2,5 +2,4 @@
 *.swp
 README.md
 .git*
-UTILS/gen-spectra
-UTILS/container
+UTILS
