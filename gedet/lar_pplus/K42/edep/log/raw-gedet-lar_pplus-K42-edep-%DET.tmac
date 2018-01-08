@@ -1,7 +1,7 @@
 # load preamble
-/control/execute                           ./gedet/lar_pplus/Bi214/edep/log/preamble.mac
+/control/execute                           ./gedet/lar_pplus/K42/edep/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./gedet/lar_pplus/Bi214/edep/raw-gedet-lar_pplus-Bi214-edep-ch$CHANNEL.root
+/MG/eventaction/rootfilename               ./gedet/lar_pplus/K42/edep/raw-gedet-lar_pplus-K42-edep-ch$CHANNEL.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
@@ -23,12 +23,8 @@
 /MG/generator/Sampling/volume/offsetCenterYPos         $YPOS
 /MG/generator/Sampling/volume/offsetCenterZPos         $ZPOS
 
-### Bi214
-/MG/generator/select                       G4gun
-/MG/generator/g4gun/cone_on                true
-/gun/particle                              ion
-/gun/ion                                   83 214
-/gun/energy                                0 eV
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/K42_1E7.dk0
 
 /tracking/verbose                          0
 /run/beamOn                                1000000
