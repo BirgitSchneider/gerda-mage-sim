@@ -1,7 +1,7 @@
 # load preamble
-/control/execute                           ./cables/hv_cables/K40/edep/log/preamble.mac
+/control/execute                           ./cables/hv_cables/Tl208/edep/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./cables/hv_cables/K40/edep/raw-cables-hv_cables-K40-edep-001.root
+/MG/eventaction/rootfilename               ./cables/hv_cables/Tl208/edep/raw-cables-hv_cables-Tl208-edep-001.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
@@ -16,7 +16,7 @@
 /MG/generator/volumelist                   HVCableFromHolderToElectronicsPlate_Phase2
 
 /MG/generator/select                       decay0
-/MG/generator/decay0/filename              ./decay0files/K40_1E7.dk0
+/MG/generator/decay0/filename              ./decay0files/Tl208_1E7.dk0
 
 /tracking/verbose                          0
 /run/beamOn                                10000000

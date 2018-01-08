@@ -79,7 +79,7 @@ if ( length(ARGS) == 1 && isdir(ARGS[1]) )
     for item in templist
         absitem = abspath(joinpath(ARGS[1],item))
         if isfile(absitem)
-            if splitext(absitem)[2] != ".root"
+            if !ismatch(r"raw.*.root", basename(absitem))
                 warn("Non ROOT file discarded: $absitem")
                 continue
             end
@@ -92,7 +92,7 @@ else
     for item in ARGS
         absitem = abspath(joinpath(ARGS[1],item))
         if isfile(absitem)
-            if splitext(absitem)[2] != ".root"
+            if !ismatch(r"raw.*.root", basename(absitem))
                 warn("Non ROOT file discarded: $absitem")
                 continue
             end
@@ -108,8 +108,8 @@ for i in 1:length(filelist)-1
     if dirname(filelist[i]) != dirname(filelist[i+1])
         error("The selected files do not live in the same directory!")
     end
-    global BASE = dirname(filelist[i])
 end
+BASE = dirname(filelist[1])
 s = splitdir
 deposit = s(BASE)[2]
 isotope = s(s(BASE)[1])[2]
@@ -117,11 +117,15 @@ part    = s(s(s(BASE)[1])[1])[2]
 volume  = s(s(s(s(BASE)[1])[1])[1])[2]
 
 # finally do something
-run(ignorestatus(```
-    $(split(TIER4IZER))
-    -m $GERDA_DETDATA/mapping-default-depr.json
-    -c $(pwd())/configuration_dummy.root
-    -o $BASE/t4z-$volume-$part-$isotope-$deposit.root
-    $filelist
-    ```))
-run(`$(split(GENSPECTRA)) $BASE/t4z-$volume-$part-$isotope-$deposit.root`)
+t4zcomm = ```
+          $(split(TIER4IZER))
+          -m $GERDA_DETDATA/mapping-default-depr.json
+          -c $(pwd())/configuration_dummy.root
+          -o $BASE/t4z-$volume-$part-$isotope-$deposit.root
+          $filelist
+          ```
+print_with_color(:green, "Running $t4zcomm ...\n")
+run(ignorestatus(t4zcomm))
+spccomm = `$(split(GENSPECTRA)) $BASE/t4z-$volume-$part-$isotope-$deposit.root`
+print_with_color(:green, "Running $spccomm ...\n")
+run(spccomm)
