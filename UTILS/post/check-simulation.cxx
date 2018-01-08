@@ -236,7 +236,7 @@ vector<string> GetFileList( string dirName, string pattern )
 /**********************************************************************/
 void FormatDir( string & dir )
 {
-	if( &(dir.at( dir.size()-1 )) != "/" ) dir += "/";
+	if( dir.at( dir.size()-1 ) != '/' ) dir += '/';
 
 	return;
 }

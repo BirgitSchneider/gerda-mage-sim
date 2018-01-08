@@ -4,8 +4,8 @@
 *.swp
 *.sqsh
 *.DS_Store
-UTILS/gen-spectra
-UTILS/check-simulation
+UTILS/post/gen-spectra
+UTILS/post/check-simulation
 controlplots*
 UTILS/job-scheduler/mpik-qsub.sh.o*
 UTILS/container
