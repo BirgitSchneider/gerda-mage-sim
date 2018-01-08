@@ -4,7 +4,8 @@
  * Created: Tue 02 Jan 2018
  *
  * Compile with:
- * $ g++ $(root-config --cflags --libs) -o check-simulation check-simulation.cxx
+ * $ g++ -I/lfs/l2/gerda/Hades/Analysis/Users/sturm/BAT/progressbar -L/lfs/l2/gerda/Hades/Analysis/Users/sturm/BAT/progressbar -lProgressBar \
+ * $     $(root-config --cflags --libs) -lTreePlayer -o check-simulation check-simulation.cxx
  *
  */
 
@@ -13,6 +14,7 @@
 #include <cstdio>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 // root cern includes
 #include "TSystem.h"
@@ -20,6 +22,11 @@
 #include "TChain.h"
 #include "TCanvas.h"
 #include "TFile.h"
+#include "TVirtualTreePlayer.h"
+#include "TH2D.h"
+
+// own includes
+#include "ProgressBar.h"
 
 using namespace std;
 
@@ -33,6 +40,7 @@ int main( int argc, char * argv[] )
 {
 	string DIR;
 	string PATTERN = "raw*.root";
+	Long64_t NEVENTS = TVirtualTreePlayer::kMaxEntries;
 
 	// check number of arguments
 	if( argc < 2 )
@@ -43,7 +51,8 @@ int main( int argc, char * argv[] )
 	}
 	else if( argc == 2 ) DIR = argv[1];
 	else if( argc == 3 ) { DIR = argv[1]; PATTERN = argv[2]; }
-	else if( argc > 3 )
+	else if( argc == 4 ) { DIR = argv[1]; PATTERN = argv[2]; NEVENTS = atol( argv[3] ); }
+	else if( argc > 4 )
 	{
 		cout << "Too many arguments" << endl;
 		Usage();
@@ -64,39 +73,124 @@ int main( int argc, char * argv[] )
 		c->Add( f.c_str() );
 	}
 
+	Long64_t N = c -> GetEntries();
+	Long64_t Ntoprocess = min( N, NEVENTS );
+	cout << "Events in chain: " << N << endl;
+	cout << "Events to be processed: " << Ntoprocess << endl;
+
 	// parse dir name for location, part, isotope and multiplicity
 	string LOCATION, PART, ISOTOPE, MULTI;
 	ParseDirName( DIR, LOCATION, PART, ISOTOPE, MULTI );
 
+	// Set brnach addresses
+	int max = 10000;
+	int hits_totnum;
+	vector<float> vertex_xpos( max );
+	vector<float> vertex_ypos( max );
+	vector<float> vertex_zpos( max );
+	vector<float> hits_xpos( max );
+	vector<float> hits_ypos( max );
+	vector<float> hits_zpos( max );
+
+	c -> SetBranchAddress( "hits_totnum", &hits_totnum );
+	c -> SetBranchAddress( "vertex_xpos", &vertex_xpos[0] );
+	c -> SetBranchAddress( "vertex_ypos", &vertex_ypos[0] );
+	c -> SetBranchAddress( "vertex_zpos", &vertex_zpos[0] );
+	c -> SetBranchAddress( "hits_xpos", &hits_xpos[0] );
+	c -> SetBranchAddress( "hits_ypos", &hits_ypos[0] );
+	c -> SetBranchAddress( "hits_zpos", &hits_zpos[0] );
+
+	double xmin = -35, xmax = 35, ymin = -35, ymax = 35, zmin = -50, zmax = 60;
+	int xnbins = 70, ynbins = 70, znbins = 110;
+
+	if( LOCATION == "gedet" )
+	{
+		xmin = -20, xmax = 20, ymin = -20, ymax = 20, zmin = -45, zmax = 45;
+		xnbins = 40, ynbins = 40, znbins = 90;
+	}
+	else if( LOCATION == "larveto" )
+	{
+		if( PART == "fibers" )
+		{
+			xmin = -35, xmax = 35, ymin = -35, ymax = 35, zmin = -50, zmax = 60;
+			xnbins = 70, ynbins = 70, znbins = 110;
+		}
+		else if( PART == "pmt_bottom" )
+		{
+			xmin = -35, xmax = 35, ymin = -35, ymax = 35, zmin = -105, zmax = 45;
+			xnbins = 70, ynbins = 70, znbins = 150;
+
+		}
+		else if( PART == "pmt_top" )
+		{
+			xmin = -35, xmax = 35, ymin = -35, ymax = 35, zmin = -45, zmax = 115;
+			xnbins = 70, ynbins = 70, znbins = 160;
+		}
+	}
+
+	TH2D * v_xy = new TH2D( "v_xy", "v_xy", xnbins,xmin,xmax, ynbins,ymin,ymax );
+	TH2D * v_xz = new TH2D( "v_xz", "v_xz", xnbins,xmin,xmax, znbins,zmin,zmax );
+	TH2D * v_yz = new TH2D( "v_yz", "v_yz", ynbins,ymin,ymax, znbins,zmin,zmax );
+
+	TH2D * h_xy = new TH2D( "h_xy", "h_xy", 2*xnbins,xmin,xmax, 2*ynbins,ymin,ymax );
+	TH2D * h_xz = new TH2D( "h_xz", "h_xz", 2*xnbins,xmin,xmax, 2*znbins,zmin,zmax );
+	TH2D * h_yz = new TH2D( "h_yz", "h_yz", 2*ynbins,ymin,ymax, 2*znbins,zmin,zmax );
+
+	ProgressBar bar( Ntoprocess, '#', false );
+
+	for( int i = 0; i < Ntoprocess; i++ )
+	{
+		bar.Update();
+		c -> GetEntry( i );
+
+		v_xy -> Fill( vertex_xpos[0], vertex_ypos[0] );
+		v_xz -> Fill( vertex_xpos[0], vertex_zpos[0] );
+		v_yz -> Fill( vertex_ypos[0], vertex_zpos[0] );
+
+		for( int h = 0; h < hits_totnum; h++ )
+		{
+			h_xy -> Fill( hits_xpos[h], hits_ypos[h] );
+			h_xz -> Fill( hits_xpos[h], hits_zpos[h] );
+			h_yz -> Fill( hits_ypos[h], hits_zpos[h] );
+		}
+	}
+
+	delete c;
+
 	// plot x-y z-x, z-y distribiutions of vertices and hits
-	cout << "Create plots..." << endl;
+	cout << "\nCreate plots..." << endl;
 
 	string title = Form("controlplots-%s-%s-%s-%s", LOCATION.c_str(), PART.c_str(), ISOTOPE.c_str(), MULTI.c_str() );
 	TCanvas * can = new TCanvas( "cplots", title.c_str(), 1300, 500 );
 	can -> Divide(3,1);
 	can -> cd(1);
-	c -> Draw( "vertex_xpos:vertex_ypos","","COLZ" );
-	c -> Draw( "hits_xpos:hits_ypos","","same" );
+	v_xy -> Draw("COLZ");
+	h_xy -> Draw("same");
 	can -> cd(2);
-	c -> Draw( "vertex_zpos:vertex_xpos","","COLZ" );
-	c -> Draw( "hits_zpos:hits_xpos","","same" );
+	v_xz -> Draw("COLZ");
+	h_xz -> Draw("same");
 	can -> cd(3);
-	c -> Draw( "vertex_zpos:vertex_ypos","","COLZ" );
-	c -> Draw( "hits_zpos:hits_ypos","","same" );
+	v_yz -> Draw("COLZ");
+	h_yz -> Draw("same");
 
 	// open output file and write canvas to file
 	string outfilename = DIR; outfilename += title;
 	string rootoutfilename = outfilename; rootoutfilename += ".root";
 	string pngoutfilename = outfilename; pngoutfilename += ".png";
+
 	cout << "...and write them to file: " << endl;
 	cout << "\t" << rootoutfilename << endl;
-	cout << "\t" << pngoutfilename << endl;
 
 	TFile * file = new TFile( rootoutfilename.c_str(), "RECREATE" );
 	can -> Write();
 	file -> Close();
 
+	cout << "\t" << pngoutfilename << endl;
+
 	can -> Print( pngoutfilename.c_str() );
+
+	delete file;
+	delete can;
 
 	cout << "DONE" << endl;
 
@@ -198,7 +292,7 @@ vector<string> cutString( string stringToCut, char c )
 void Usage()
 {
 	cout << "**********************************" << endl;
-	cout << "./check-simulation DIR [PATTERN]" << endl;
+	cout << "./check-simulation DIR [PATTERN | raw*.root] [NEVENTS | kMaxEntries]" << endl;
 	cout << "**********************************" << endl;
 
 	return;

@@ -1,0 +1,29 @@
+# load preamble
+/control/execute                           ./lar/sur_array/K42/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./lar/sur_array/K42/coin/raw-lar-sur_array-K42-coin-161.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit false
+/MG/output/saveOnlyEventsWithCoincidence   true
+
+/run/initialize
+
+### Confine source volume to cryo LAr ###
+/MG/generator/confine                           volume
+/MG/generator/volume                            CryoLiquidPhysical
+
+### A cylinder inside the LAr ###
+/MG/generator/Sampling/volume/name                     Cylinder
+/MG/generator/Sampling/volume/innerCylinderRadius      0 mm
+/MG/generator/Sampling/volume/outerCylinderRadius      100 cm
+/MG/generator/Sampling/volume/cylinderHeight           250 cm
+#/MG/generator/Sampling/volume/offsetCenterXPos         0 mm
+#/MG/generator/Sampling/volume/offsetCenterZPos         0 cm
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/K42_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000

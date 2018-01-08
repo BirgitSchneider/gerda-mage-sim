@@ -1,7 +1,7 @@
 # load preamble
-/control/execute                           ./lar/above_array/K42/edep/log/preamble.mac
+/control/execute                           ./lar/above_array/K42/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./lar/above_array/K42/edep/raw-lar-above_array-K42-edep-004.root
+/MG/eventaction/rootfilename               ./lar/above_array/K42/coin/raw-lar-above_array-K42-coin-004.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 

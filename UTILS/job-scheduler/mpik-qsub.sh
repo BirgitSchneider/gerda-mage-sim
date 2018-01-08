@@ -5,6 +5,14 @@
 ###    on the mpik cluster
 ### Launch in a folder outside gerda-mage-sim using the command
 ###    'qsub mpik-qsub.sh'
+###
+### submit many different isotopes/parts using sed or change by hand:
+###
+### for p in bottoms glue_rings_bottom glue_rings_top tops tubs; do
+###     for i in Ac228  Bi212  Bi214  K40  Pa234m  Pb214 Tl208; do
+###         cat mpik-qsub.sh | sed "s/\$1/"$p"/g" | sed "s/\$2/"$i"/g" > mpik-qsub-minishroud-$p-$i.sh; qsub mpik-qsub-minishroud-$p-$i.sh;
+###     done
+### done
 ##################################################################
 
 #!/bin/bash
@@ -14,24 +22,40 @@
 #$ -j y		### have logoutput and erroroutput in the same file
 
 ### CHANGE ME ###
-#$ -t 1-40 	### submit an array of jobs SGE_TASK_ID is the running variable (can only start at 1)
+#$ -t 1-100 	### submit an array of jobs SGE_TASK_ID is the running variable (can only start at 1)
 
-LOCATION="gedet"
-PART="pplus"
+#LOCATION="minishroud"
+#PART="$1"
+#ISOTOPE="$2"
+#MULTIPLICITY="edep"
+
+LOCATION="lar"
+PART="above_array"
 ISOTOPE="K42"
-MULTIPLICITY="edep"
+MULTIPLICITY="coin"
 
 ### CHANGE ME ###
 
-ID="$( printf %d $(($SGE_TASK_ID - 1)) )"
-#ID="$( printf %03d $(($SGE_TASK_ID - 1)) )"
-
 MACROPATH="./${LOCATION}/${PART}/${ISOTOPE}/${MULTIPLICITY}/log"
 MACRONAME="raw-${LOCATION}-${PART}-${ISOTOPE}-${MULTIPLICITY}"
-MACFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.mac"
-LOGFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.out"
-#MACFILENAME="${MACROPATH}/${MACRONAME}-${ID}.mac"
-#LOGFILENAME="${MACROPATH}/${MACRONAME}-${ID}.out"
+
+if [[ $LOCATION == "gedet" || $LOCATION == "intrinsic" ]]; then
+
+	ID="$( printf %d $(($SGE_TASK_ID - 1)) )"
+
+	MACFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.mac"
+	LOGFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.out"
+
+	echo $MACFILENAME
+else
+	ID="$( printf %03d $(($SGE_TASK_ID - 1)) )"
+
+	MACFILENAME="${MACROPATH}/${MACRONAME}-${ID}.mac"
+	LOGFILENAME="${MACROPATH}/${MACRONAME}-${ID}.out"
+
+	echo $MACFILENAME
+fi
+
 
 cd "/lfs/l2/gerda/Hades/gerda-mage-sim"
 singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v2.0.sqsh ${MACFILENAME} 1> ${LOGFILENAME} 2> ${LOGFILENAME}

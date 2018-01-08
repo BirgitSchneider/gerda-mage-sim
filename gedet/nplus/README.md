@@ -4,4 +4,4 @@
 
 | isotope | contact   | primaries | edep/coin | MGDO branch/commit    | MaGe branch/commmit        | notes   |
 | ------- | --------- | --------- | --------- | --------------------- | -------------------------- | ------- |
-| K42     |           |           |           |                       |                            |         |
+| K42     | K.v.Sturm | 1e6 / ch  | edep      |                       |                            |         |
