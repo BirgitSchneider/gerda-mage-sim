@@ -7,6 +7,7 @@ Collection of scripts used to produce macros or processing ROOT files.
 * `copy-decay0files-from-lngs.sh`: `rsync`-based script to copy the decay0 files on your cluster
 * `copy-singularity-container-from-lngs.sh`: `rsync`-based script to copy the latest version of the [singularity image with the GERDA software](https://github.com/gipert/gerdasw-containers) on your cluster
 * `create-2nbb-macros.jl`: julia script to produce, for each detector (dead layer and active volume), macros for 2nbb and 2nbbLV simulations (under `gedet/intrinsic/`)
+* `create-lar-pplus-macros.jl`: julia script to produce macros for each detector for simulations inside the LAr close to the pplus contact (under `gedet/lar_pplus/`) using a template macro 
 * `surf-sampling/`: gedet surface sampling tools
     * `create-surf-macros.jl`: julia script to produce, for each detector, macro files for the surface sampling (under `gedet/surf/ver/`). It uses JSON.jl
     * `separate-contacts.jl`: julia script to separate p+ and n+ contacts simulated surface vertices into different ROOT files (under `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and JSON.jl
