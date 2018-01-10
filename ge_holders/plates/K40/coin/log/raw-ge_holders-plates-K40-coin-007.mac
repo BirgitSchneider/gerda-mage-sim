@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./ge_holders/plates/K40/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./ge_holders/plates/K40/coin/raw-ge_holders-plates-K40-coin-007.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit false
+/MG/output/saveOnlyEventsWithCoincidence   true               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 39
+/MG/generator/volumelist                   Holder_Plate
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/K40_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000

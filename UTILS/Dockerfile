@@ -5,7 +5,8 @@ COPY . /scif/UTILS/
 WORKDIR /scif/UTILS
 RUN make
 
-ENV PATH="$PATH:/scif/UTILS/:/scif/UTILS/post"
+ENV PATH="$PATH:/scif/UTILS/:/scif/UTILS/post" \
+    GERDA_DETDATA="/common/sw-other/gerda-metadata-t4z/detector-data"
 
 WORKDIR /data
 CMD /bin/zsh

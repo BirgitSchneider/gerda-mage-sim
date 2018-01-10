@@ -1,5 +1,5 @@
 # Command Line Tools
-Collection of scripts used to produce macros or processing ROOT files.
+Collection of scripts used to produce macros or processing ROOT files. Run `make` to compile C++ programs.
 
 * `det-data/`: contains (JSON) files with detectors' informations
 * `READMEsim_temp.md`, `READMEvol_temp.md`: template READMEs to be used in this repository

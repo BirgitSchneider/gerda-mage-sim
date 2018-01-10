@@ -9,3 +9,4 @@ UTILS/post/check-simulation
 controlplots*
 UTILS/job-scheduler/mpik-qsub.sh.o*
 UTILS/container
+UTILS/post/log

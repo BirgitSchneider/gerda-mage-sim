@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./cables/sig_cables/Tl208/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./cables/sig_cables/Tl208/coin/raw-cables-sig_cables-Tl208-coin-001.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit false
+/MG/output/saveOnlyEventsWithCoincidence   true               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 39
+/MG/generator/volumelist                   SignalCableFromHolderToElectronicsPlate_Phase2
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Tl208_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000

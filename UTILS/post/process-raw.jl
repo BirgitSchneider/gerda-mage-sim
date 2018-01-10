@@ -6,6 +6,8 @@
  = Created: 04/01/2018
  =#
 
+VERSION < v"0.6.2" error("Please use Julia >= v0.6.2")
+
 isfile("./process-raw.jl") || error("Please run this script from where process-raw.jl is!")
 
 function usage()
