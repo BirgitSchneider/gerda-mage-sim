@@ -6,8 +6,6 @@
  = Created: 04/01/2018
  =#
 
-VERSION < v"0.6.2" error("Please use Julia >= v0.6.2")
-
 isfile("./process-raw.jl") || error("Please run this script from where process-raw.jl is!")
 
 function usage()
@@ -36,7 +34,7 @@ catch
 end
 
 try
-    global TIER4IZER = chomp(readstring(`which tier4izer`, stderr = DevNull))
+    global TIER4IZER = readchomp(`which tier4izer`)
 catch
     try
         global TIER4IZER = ENV["TIER4IZER"]
@@ -47,7 +45,7 @@ catch
 end
 
 try
-    global GENSPECTRA = chomp(readstring(`which gen-spectra`, stderr = DevNull))
+    global GENSPECTRA = readchomp(`which gen-spectra`)
 catch
     if isfile("gen-spectra")
         global GENSPECTRA = abspath("gen-spectra")

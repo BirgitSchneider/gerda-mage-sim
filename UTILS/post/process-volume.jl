@@ -25,7 +25,7 @@ function usage()
 end
 
 try
-    global GENSPECTRA = chomp(readstring(`which gen-spectra`, stderr = DevNull))
+    global GENSPECTRA = readchomp(`which gen-spectra`)
 catch
     if isfile("gen-spectra")
         global GENSPECTRA = abspath("gen-spectra")
