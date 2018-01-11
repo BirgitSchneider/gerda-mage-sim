@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./cables/hv_cables/Bi207/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./cables/hv_cables/Bi207/edep/raw-cables-hv_cables-Bi207-edep-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 39
+/MG/generator/volumelist                   HVCableFromHolderToElectronicsPlate_Phase2
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Bi207_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000
