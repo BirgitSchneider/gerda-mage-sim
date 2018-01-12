@@ -1,0 +1,14 @@
+UPATH = /common/gerda-mage-sim/UTILS/post
+VOLUME = gedet
+PART = intrinsic
+TYPE = edep
+
+universe     = docker
+docker_image = 10.64.28.50:5000/utils:latest
+executable   = /common/sw-other/cd_first
+arguments    = $(UPATH) julia process-raw.jl $(DIR)/$(TYPE)
+log          = $(UPATH)/log/$(VOLUME)-$(PART)-$Fn(DIR).log
+output       = $(UPATH)/log/$(VOLUME)-$(PART)-$Fn(DIR).out
+error        = $(UPATH)/log/$(VOLUME)-$(PART)-$Fn(DIR).err
+
+Queue DIR matching dirs in /common/gerda-mage-sim/$(VOLUME)/$(PART)/*

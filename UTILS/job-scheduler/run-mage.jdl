@@ -1,0 +1,11 @@
+MACROPATH = /common/gerda-mage-sim/gedet/pplus/K42/edep/log
+
+universe     = docker
+docker_image = 10.64.28.50:5000/gerdasw-containers:g4.10.3_v2.0
+executable   = /common/sw-other/MaGe_cd
+arguments    = /common/gerda-mage-sim $(filename)
+#log         = $(MACROPATH)/$Fn(filename).log
+output       = $(MACROPATH)/$Fn(filename).out
+#error       = $(MACROPATH)/$Fn(filename).err
+
+Queue filename matching files $(MACROPATH)/raw*.mac

@@ -1,0 +1,11 @@
+UPATH = /common/gerda-mage-sim/UTILS/post
+
+universe     = docker
+docker_image = 10.64.28.50:5000/utils:latest
+executable   = /common/sw-other/cd_first
+arguments    = $(UPATH) rjulia process-volume.jl cables $(isotope) edep
+log          = $(UPATH)/log/cables-$(isotope).log
+output       = $(UPATH)/log/cables-$(isotope).out
+error        = $(UPATH)/log/cables-$(isotope).err
+
+Queue 1 isotope in (Bi212)
