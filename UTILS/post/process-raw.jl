@@ -34,7 +34,7 @@ catch
 end
 
 try
-    global TIER4IZER = readchomp(`which tier4izer`)
+    global TIER4IZER = readchomp(`which tier4ize`)
 catch
     try
         global TIER4IZER = ENV["TIER4IZER"]

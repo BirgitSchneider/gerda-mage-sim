@@ -30,10 +30,15 @@ int main( int argc, char** argv ) {
 
     int M = 100;
     int max_kev = 7500;
+    bool silent = true;
 
     if ( argc == 1 ) {
-        std::cout << "Create energy spectra from a tier4rized file.\n"
-                  << "USAGE: $ ./gen-spectra [T4IZED FILE]\n";
+        std::cout << "Create default energy spectra from a tier4rized file.\n"
+                  << "USAGE: $ ./gen-spectra [OPTIONS] [T4IZED FILE]\n"
+                  << "\n"
+                  << "OPTIONS: -m <max_multiplicity>   : set the upper cut value for\n"
+                  << "                                   the multiplicity of one event\n"
+                  << "         -v                      : display nice progress bar\n";
         return -1;
     }
 
@@ -41,11 +46,10 @@ int main( int argc, char** argv ) {
     for ( int i = 0; i < argc; ++i ) args.emplace_back( argv[i] );
 
     std::vector<std::string>::iterator result = std::find( args.begin(), args.end(), "-m" );
-    std::string val;
-    if ( result != args.end() ) {
-        val = *( result + 1 );
-        M = atoi( val.c_str() );
-    }
+    if ( result != args.end() ) M = std::stoi(*(result+1));
+ 
+    result = std::find( args.begin(), args.end(), "-v" );
+    if ( result != args.end() ) silent = false;
 
     std::string name;
     for( int i = 1; i < argc; ++i ) {
@@ -83,7 +87,7 @@ int main( int argc, char** argv ) {
     ProgressBar bar(fTree->GetEntries());
     std::cout << "Processing: " << std::endl;
     while(treereader.Next()) {
-    bar.Update();
+    if (!silent) bar.Update();
     if( *multiplicity <= M && *multiplicity > 0 ) {
             for ( int i = 0; i < 40; ++i ) {
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
