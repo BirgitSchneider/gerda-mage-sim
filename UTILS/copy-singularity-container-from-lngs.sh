@@ -16,7 +16,7 @@
 
 if [ -f ./copy-decay0files-from-lngs.sh ]; then
   echo "set username for gerda-login.lngs.infn.it:"; read user
-  sour=/nfs/gerda5/var/gerda-simulations/gerdasw.g4.10.3_v2.0.sqsh
+  sour=/nfs/gerda5/var/gerda-simulations/gerdasw.g4.10.3_v2.1.sqsh
   opts="--update \
        --times \
        --omit-dir-times \
