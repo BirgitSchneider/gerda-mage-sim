@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./cables/hv_cables/Pa234m/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./cables/hv_cables/Pa234m/edep/raw-cables-hv_cables-Pa234m-edep-032.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 39
+/MG/generator/volumelist                   HVCableFromHolderToElectronicsPlate_Phase2
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Pa234m_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000

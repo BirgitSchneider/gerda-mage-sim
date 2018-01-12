@@ -1,7 +1,7 @@
 # load preamble
 /control/execute                           ./cables/hv_cables/Pb214/edep/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./cables/hv_cables/Pb214/edep/raw-cables-hv_cables-Pb214-edep-000.root
+/MG/eventaction/rootfilename               ./cables/hv_cables/Pb214/edep/raw-cables-hv_cables-Pb214-edep-004.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 

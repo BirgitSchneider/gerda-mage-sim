@@ -15,7 +15,8 @@ ENV PATH="$PATH:/scif/julia/usr/bin" \
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib64:/scif/julia/usr/lib" \
     MANPATH="$MANPATH:/scif/julia/usr/share/man" \
     JULIA_HOME="/scif/julia/usr/bin" \
-    JULIA_PKGDIR="/scif/julia/pkgs"
+    JULIA_PKGDIR="/scif/julia/pkgs" \
+    JULIA_CXX_RTTI="1"
 
 RUN julia -e 'Pkg.init()' && \
     julia -e 'Pkg.add("Cxx"); Pkg.add("ROOT")' && \

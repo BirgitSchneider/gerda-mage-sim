@@ -1,0 +1,22 @@
+# load preamble
+/control/execute                           ./ge_holders/plates/Ac228/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./ge_holders/plates/Ac228/edep/raw-ge_holders-plates-Ac228-edep-072.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom               0
+/MG/generator/volumelistto                 39
+/MG/generator/volumelist                   Holder_Plate
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/Ac228_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                10000000
