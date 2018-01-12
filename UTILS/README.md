@@ -35,7 +35,7 @@ Usage examples:
 ```shell
 $ cd UTILS/post
 $ sudo docker run -it --rm -v /common:/common -w $PWD gerda-mage-sim-utils rjulia process-volume.jl cables Bi212 edep
-$ singularity exec -B /common:/common gerda-mage-sim-utils.img julia process-raw.jl ../../cables/hv_at_holders/K40/edep
+$ singularity run -B /common:/common gerda-mage-sim-utils.img julia process-raw.jl ../../cables/hv_at_holders/K40/edep
 ```
 ```shell
 $ cd gerda-mage-sim
