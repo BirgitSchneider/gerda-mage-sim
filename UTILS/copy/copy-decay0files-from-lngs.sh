@@ -14,9 +14,9 @@
 # --exclude=README.md       :
 # --dry-run                 : do everything except actually transferring
 
-if [ -f ./copy-to-lngs.sh ]; then
+if [ -f ./copy-decay0files-from-lngs.sh ]; then
   echo "set username for gerda-login.lngs.infn.it:"; read user
-  dest=/nfs/gerda5/var/gerda-simulations/gerda-mc2
+  sour=/nfs/gerda5/var/gerda-simulations/gerda-mc2/decay0files/
   opts="--ignore-existing \
        --recursive \
        --links \
@@ -29,9 +29,9 @@ if [ -f ./copy-to-lngs.sh ]; then
   rsync $opts \
         --out-format="%o: %f%L" \
         --dry-run \
-        .. $user@gerda-login.lngs.infn.it:$dest
+        $user@gerda-login.lngs.infn.it:$sour ../../decay0files
   echo ""
-  echo "This was the list of files that will be transferred."
+  echo "This was the list of decay0 files that will be transferred."
   echo ""
   echo "NOTE: this script transfers ONLY files that do not exist on the receiver"
   echo "      yet, consider to delete the files you wish to update on the receiver."
@@ -41,10 +41,10 @@ if [ -f ./copy-to-lngs.sh ]; then
   if [ "$ans" == "y" ]; then
     rsync $opts \
           --progress \
-          .. $user@gerda-login.lngs.infn.it:$dest
+          $user@gerda-login.lngs.infn.it:$sour ../../decay0files
   else
     echo "Aborting..."
   fi
 else
-  echo ERROR: must cd in UTILS before calling "./copy-to-lngs.sh"!
+  echo ERROR: must cd in UTILS/copy before calling "./copy-decay0files-from-lngs.sh"!
 fi

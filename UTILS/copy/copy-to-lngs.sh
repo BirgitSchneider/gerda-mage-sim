@@ -14,30 +14,37 @@
 # --exclude=README.md       :
 # --dry-run                 : do everything except actually transferring
 
-if [ -f ./copy-decay0files-from-lngs.sh ]; then
+if [ -f ./copy-to-lngs.sh ]; then
   echo "set username for gerda-login.lngs.infn.it:"; read user
-  sour=/nfs/gerda5/var/gerda-simulations/gerdasw.g4.10.3_v2.1.sqsh
-  opts="--update \
+  dest=/nfs/gerda5/var/gerda-simulations/gerda-mc2
+  opts="--ignore-existing \
+       --recursive \
+       --links \
+       --update \
        --times \
        --omit-dir-times \
        --compress \
-       --human-readable"
+       --human-readable \
+       --exclude-from=.rsyncignore"
   rsync $opts \
         --out-format="%o: %f%L" \
         --dry-run \
-        $user@gerda-login.lngs.infn.it:$sour ../decay0files
+        ../.. $user@gerda-login.lngs.infn.it:$dest
   echo ""
-  echo "This singularity container file will be transfered."
+  echo "This was the list of files that will be transferred."
+  echo ""
+  echo "NOTE: this script transfers ONLY files that do not exist on the receiver"
+  echo "      yet, consider to delete the files you wish to update on the receiver."
+  echo "      Modify the rsync options only if you really know what you're doing!"
   echo ""
   echo "Proceed? [y/n]"; read ans
   if [ "$ans" == "y" ]; then
-    mkdir -p ./container
     rsync $opts \
           --progress \
-          $user@gerda-login.lngs.infn.it:$sour ./container/
+          ../.. $user@gerda-login.lngs.infn.it:$dest
   else
     echo "Aborting..."
   fi
 else
-  echo ERROR: must cd in UTILS before calling "./copy-singularity-container-from-lngs.sh"!
+  echo ERROR: must cd in UTILS before calling "./copy-to-lngs.sh"!
 fi

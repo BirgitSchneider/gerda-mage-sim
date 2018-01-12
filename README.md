@@ -6,6 +6,8 @@ The aim of this repository is to provide a mirror (without actual data files) of
 
 Refer to the [Wiki page](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations) for further documentation. [Here](https://github.com/mppmu/gerda-snippets/tree/master/MaGe-macros) you find a reference macro file for MaGe.
 
+Singularity images used in the context of this repository are available at the LNGS cluster under `/nfs/gerda5/var/gerda-simulations/`.
+
 Mantainers:
 * Katharina von Sturm - [vonsturm@pd.infn.it](mailto:vonsturm@pd.infn.it)
 * Luigi Pertoldi - [luigi.pertoldi@pd.infn.it](mailto:luigi.pertoldi@pd.infn.it)
