@@ -2,7 +2,7 @@
 
 ## simulations info
 
-| isotope | contact   | primaries | edep/coin | MGDO branch/commit    | MaGe branch/commmit        | notes            |
-| ------- | --------- | --------- | --------- | --------------------- | -------------------------- | ---------------- |
-|  K42    | K.v.Sturm | 1E6 / ch  | edep      |                       |                            |                  |
-|  Bi214  | K.v.Sturm | 1E6 / ch  | edep      |                       |                            | 		      |
+| isotope \[edep\|coin\] | contact   | primaries | software tag \[branch/commmit\]  | notes            |
+| ---------------------- | --------- | --------- | :------------------------------: | ---------------- |
+|  K42 \[edep\]          | K.v.Sturm | 1E6 / ch  |                                  |                  |
+|  Bi214 \[coin\]        | K.v.Sturm | 1E6 / ch  |                                  |                  |
