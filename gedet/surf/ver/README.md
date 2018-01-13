@@ -7,7 +7,7 @@ The simulations are further processed to extract p+ and n+ surfaces under `gedet
 
 | contact     | primaries                           | software tag \[branch/commit\]                                                               | notes |
 | ----------- | ----------------------------------- | :------------------------------------------------------------------------------------------: | ----- |
-| L. Pertoldi | O(1E06), but vary for each detector | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.0` | Macros are auto-genereted by the `UTILS/surf-sampling/create-surf-macros.jl` script |
+| L.Pertoldi | O(1E06), but vary for each detector | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.0` | Macros are auto-genereted by the `UTILS/surf-sampling/create-surf-macros.jl` script |
 
 To get the actual number of events for each file you can run the following command into this folder:
 ```shell

@@ -5,9 +5,9 @@ These vertices for n+ contact surfaces are obtained by extraction from the total
 
 ## simulations info
 
-| contact     | primaries                           | notes |
-| ----------- | ----------------------------------- | ----- |
-| L. Pertoldi | O(1E06), but vary for each detector | ROOT files are auto-genereted by the `UTILS/surf-sampling/separate-contacts.jl` script |
+| contact    | primaries                           | notes |
+| ---------- | ----------------------------------- | ----- |
+| L.Pertoldi | O(1E06), but vary for each detector | ROOT files are auto-genereted by the `UTILS/surf-sampling/separate-contacts.jl` script |
 
 To get the actual number of events for each file you can run the following command into this folder:
 ```shell
