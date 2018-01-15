@@ -29,7 +29,7 @@ if [ -f ./copy-to-mpik.sh ]; then
   rsync $opts \
         --out-format="%o: %f%L" \
         --dry-run \
-        .. $user@lfs2.mpi-hd.mpg.de:$dest
+        ../.. $user@lfs2.mpi-hd.mpg.de:$dest
   echo ""
   echo "This was the list of files that will be transferred."
   echo ""
@@ -41,7 +41,7 @@ if [ -f ./copy-to-mpik.sh ]; then
   if [ "$ans" == "y" ]; then
     rsync $opts \
           --progress \
-          .. $user@lfs2.mpi-hd.mpg.de:$dest
+          ../.. $user@lfs2.mpi-hd.mpg.de:$dest
   else
     echo "Aborting..."
   fi
