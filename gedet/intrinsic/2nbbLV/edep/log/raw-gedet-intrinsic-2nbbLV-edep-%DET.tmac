@@ -1,0 +1,23 @@
+# load preamble
+/control/execute                           gedet/intrinsic/2nbbLV/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./gedet/intrinsic/2nbbLV/edep/raw-gedet-intrinsic-2nbbLV-edep-ch$CHANNEL.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/MG/geometry/cherenkov                     -1
+
+/run/initialize
+
+/MG/generator/confine                      volume
+/MG/generator/volume                       CrystalDeadLayer_geometry$ID
+/MG/generator/volume                       Crystal_geometry$ID
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/2nbbLV_1E7.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                $NEV
