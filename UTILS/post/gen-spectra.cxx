@@ -22,6 +22,7 @@
 #include "TTreeReaderValue.h"
 #include "TH1D.h"
 #include "TString.h"
+#include "TParameter.h"
 
 // other
 #include "progressbar/ProgressBar.h"
@@ -77,11 +78,10 @@ int main( int argc, char** argv ) {
     TH1D energyBEGe   ("BEGe"   , "BEGe"   , max_kev, 0, max_kev);
     TH1D energyEnrCOAX("enrCOAX", "enrCOAX", max_kev, 0, max_kev);
     TH1D energyNatCOAX("natCOAX", "natCOAX", max_kev, 0, max_kev);
+    TH1D energyEnrAll ("enrAll",  "enrAll",  max_kev, 0, max_kev);
 
     TTreeReader treereader; treereader.SetTree(fTree);
     TTreeReaderValue<int>    multiplicity(treereader, "multiplicity");
-//    TTreeReaderValue<int>    isMuVetoed  (treereader, "isMuVetoed");
-//    TTreeReaderValue<int>    isPSDVetoed (treereader, "isPSDVetoed");
     TTreeReaderArray<double> energy      (treereader, "energy");
 
     ProgressBar bar(fTree->GetEntries());
@@ -98,16 +98,28 @@ int main( int argc, char** argv ) {
     }
 
     for ( int i = 0; i < 40; ++i ) {
-        if ( ch_name[i].substr(0, 2) == "GD"  ) energyBEGe.Add(&energy_ch[i]);
+        if ( ch_name[i].substr(0, 2) == "GD"  ) {
+            energyBEGe.Add(&energy_ch[i]);
+            energyEnrAll.Add(&energy_ch[i]);
+        }
         if ( ch_name[i].substr(0, 3) == "ANG" or
-             ch_name[i].substr(0, 2) == "RG"  ) energyEnrCOAX.Add(&energy_ch[i]);
+             ch_name[i].substr(0, 2) == "RG"  ) {
+            energyEnrCOAX.Add(&energy_ch[i]);
+            energyEnrAll.Add(&energy_ch[i]);
+        }
         if ( ch_name[i].substr(0, 3) == "GTF" ) energyNatCOAX.Add(&energy_ch[i]);
     }
+
+    // set number of primaries in first bin
+    //auto nPrim = dynamic_cast<TParameter<int>>(infile.Get(""));
+    //for ( auto h : energy_ch ) h->SetBinContent(1, nPrim.GetVal());
+    //for ( auto h : { energyBEGe, energyEnrCOAX, energyNatCOAX, energyEnrAll } ) h->SetBinContent(1, nPrim.GetVal());
 
     for ( auto h : energy_ch ) h.Write();
     energyBEGe.Write();
     energyEnrCOAX.Write();
     energyNatCOAX.Write();
+    energyEnrAll.Write();
 
     std::cout << "Output saved in: " << name << std::endl;
 

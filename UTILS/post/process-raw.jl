@@ -21,6 +21,8 @@ function usage()
               - GERDA_DETDATA: path to the location of json files needed by the tier4izer
               - TIER4IZER: tier4ize executable (if not present in PATH)
               - GENSPECTRA: gen-spectra executable (if not present in PATH)
+              - DESTDIR: path to the external directory that will contain all the
+                         processed files, with the same directory structure
             """)
     exit()
 end
@@ -28,8 +30,9 @@ end
 # check if everything is set up correctly
 try
     global GERDA_DETDATA = ENV["GERDA_DETDATA"]
+    global DESTDIR = ENV["DESTDIR"]
 catch
-    println("GERDA_DETDATA not set!")
+    println("Missing environment variables!")
     usage()
 end
 
@@ -66,6 +69,7 @@ println("""
         GERDA_DETDATA : $GERDA_DETDATA
         TIER4IZER     : $TIER4IZER
         GENSPECTRA    : $GENSPECTRA
+        DESTDIR       : $DESTDIR
         """)
 
 # check for arguments
@@ -115,6 +119,8 @@ deposit = s(BASE)[2]
 isotope = s(s(BASE)[1])[2]
 part    = s(s(s(BASE)[1])[1])[2]
 volume  = s(s(s(s(BASE)[1])[1])[1])[2]
+
+BASE = "$DESTDIR/$volume/$part/$isotope/$deposit"; mkpath(BASE)
 
 # finally do something
 t4zcomm = ```
