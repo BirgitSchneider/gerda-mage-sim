@@ -4,3 +4,6 @@
 [submodule "UTILS/ranger"]
 	path = UTILS/ranger
 	url = https://github.com/ranger/ranger.git
+[submodule "UTILS/post/gerda-metadata"]
+	path = UTILS/post/gerda-metadata
+	url = git@github.com:mppmu/gerda-metadata.git
