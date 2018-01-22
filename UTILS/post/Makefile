@@ -10,8 +10,8 @@
 #        - this makefile assumes that the qsub script accepts the syntax:
 #          qsub submitfile.qsub <folder-with-raw> <dest-dir-tree>
 #
-SRCDIR  = /path/to/gerda-mage-sim
-DESTDIR = /path/to/dest/tree
+SRCDIR  = /common/gerda-mage-sim
+DESTDIR = /common/post-proc
 JOB     = qsub submitfile.qsub
 
 # function to change the position of the directory tree
@@ -34,10 +34,10 @@ T4ZFILES = $(foreach dir, $(DIRS), $(call changetree, $(dir)/$(call buildname, $
 
 all : $(T4ZFILES)
 
-# the following runs for each item in T4ZFILES
-# the dependencies are set to be the raw- files, so if they change the corresponding t4z- file
-# is re-processed
-$(T4ZFILES) : $(wildcard $(dir $(call changetree, $@, $(SRCDIR)))/*.root)
+# in the following a rule is created for each item in T4ZFILES
+# the dependencies are set to be the raw- files, so if they change the
+# corresponding t4z- file is re-processed
+$(T4ZFILES) : $(wildcard $(dir $(call changetree, $@, $(SRCDIR)))raw-*.root)
 	@$(JOB) $(dir $(call changetree, $@, $(SRCDIR))) $(DESTDIR)
 
 clean :
