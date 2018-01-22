@@ -1,3 +1,4 @@
+#!/usr/bin/env julia
 #= process-raw.jl
  =
  = Julia script to tier4ize raw files and produce default spectra files
