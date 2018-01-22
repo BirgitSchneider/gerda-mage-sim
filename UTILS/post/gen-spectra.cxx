@@ -111,9 +111,9 @@ int main( int argc, char** argv ) {
     }
 
     // set number of primaries in first bin
-    //auto nPrim = dynamic_cast<TParameter<int>>(infile.Get(""));
-    //for ( auto h : energy_ch ) h->SetBinContent(1, nPrim.GetVal());
-    //for ( auto h : { energyBEGe, energyEnrCOAX, energyNatCOAX, energyEnrAll } ) h->SetBinContent(1, nPrim.GetVal());
+    auto nPrim = dynamic_cast<TParameter<long>>(infile.Get("NumberOfPrimaries"));
+    for ( auto h : energy_ch ) h->SetBinContent(1, nPrim.GetVal());
+    for ( auto h : { energyBEGe, energyEnrCOAX, energyNatCOAX, energyEnrAll } ) h->SetBinContent(1, nPrim.GetVal());
 
     for ( auto h : energy_ch ) h.Write();
     energyBEGe.Write();

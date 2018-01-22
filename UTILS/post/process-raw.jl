@@ -95,7 +95,7 @@ if ( length(ARGS) == 1 && isdir(ARGS[1]) )
 # if you provided a file list
 else
     for item in ARGS
-        absitem = abspath(joinpath(ARGS[1],item))
+        absitem = abspath(item)
         if isfile(absitem)
             if !ismatch(r"raw.*.root", basename(absitem))
                 warn("Non ROOT file discarded: $absitem")
