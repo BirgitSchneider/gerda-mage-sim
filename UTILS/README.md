@@ -20,11 +20,7 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
 * `job-scheduler/`: batch job manager utilities
 * `ranger/`: GNU ranger file browser, very useful in the context of this repository. To use it define the following alias `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
-* `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions run:
-```
-$ sudo singularity build gerda-mage-sim-utils.sqsh docker://gerda-mage-sim-utils:latest
-```
-An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`
+* `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions you can use Oliver's [docker2singularity.py](https://github.com/oschulz/singularity-utils) Python script. An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`
 
 Usage examples:
 ```shell
