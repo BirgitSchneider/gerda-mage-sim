@@ -38,7 +38,7 @@ all : $(T4ZFILES)
 # the dependencies are set to be the raw- files, so if they change the
 # corresponding t4z- file is re-processed
 $(T4ZFILES) : $(wildcard $(dir $(call changetree, $@, $(SRCDIR)))raw-*.root)
-	@$(JOB) $(dir $(call changetree, $@, $(SRCDIR))) $(DESTDIR)
+	$(JOB) $(dir $(call changetree, $@, $(SRCDIR))) $(DESTDIR) > /dev/null
 
 clean :
 	-rm -rf $(T4ZFILES)
