@@ -32,8 +32,7 @@ RUN make && \
 RUN find /scif/julia/pkgs /scif/UTILS/bin | parallel chmod a+rwx {} && \
     ldconfig
 
-ENV PATH="$PATH:/scif/UTILS/bin" \
-    GERDA_DETDATA="/common/sw-other/gerda-metadata/detector-data"
+ENV PATH="$PATH:/scif/UTILS/bin"
 
 WORKDIR /data
 CMD /bin/zsh
