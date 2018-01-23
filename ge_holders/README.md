@@ -4,7 +4,7 @@
 
 | volume name | mc name(s)             | mc mass [kg] | mc volume [cm^3] | density [kg/cm^3] | volume description | notes |
 | ----------- | ---------------------- | ------------ | ---------------- | ----------------- | ------------------ | ----- |
-| plates      | `Holder_Plate [0..39]` |              |                  |                   | Silicon plates that sustain germanium detectors |       |
+| plates      | `Holder_Plate [0..39]` | 0.659134     |                  |                   | Silicon plates that sustain germanium detectors |       |
 
 
 A picture of all the holder plates:
