@@ -10,4 +10,5 @@ controlplots*
 UTILS/job-scheduler/mpik-qsub.sh.o*
 UTILS/container
 UTILS/post/log
+UTILS/post/*.o*
 UTILS/.nfs*
