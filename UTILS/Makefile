@@ -1,14 +1,18 @@
 CC = c++
 ROOTFLAGS = $(shell root-config --libs --cflags) -lTreePlayer
 
-all : post/gen-spectra post/check-simulation
+all : dirs bin/gen-spectra bin/check-simulation
 
-post/gen-spectra : post/gen-spectra.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
+dirs :
+	@mkdir -p bin
+
+bin/gen-spectra : post/gen-spectra.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/gen-spectra.cxx post/progressbar/ProgressBar.cc
 
-post/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
+bin/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/check-simulation.cxx post/progressbar/ProgressBar.cc
 
-.PHONY: clean
+.PHONY: clean all
 
-clean : rm -f $(all)
+clean :
+	-rm -r bin

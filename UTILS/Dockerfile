@@ -3,7 +3,7 @@ FROM baltig.infn.it:4567/gerda/gerdasw-containers/gerdasw:g4.10.3_v2.1
 USER root
 
 RUN yum install -y -q libedit-devel ncurses-devel \
-                      openssl openssl-devel symlinks && \
+                      openssl openssl-devel symlinks parallel && \
     yum -q clean all
 
 WORKDIR /scif
@@ -25,15 +25,15 @@ RUN julia -e 'Pkg.init()' && \
 
 COPY . /scif/UTILS/
 WORKDIR /scif/UTILS
-RUN make
+RUN make && \
+    find . ! -name 'bin' ! -name '.' -type d -exec rm -rf {} +
 
 # this is for HTCondor and Docker
-RUN chmod a+rwx -R /scif/julia/pkgs /scif/UTILS
+RUN find /scif/julia/pkgs /scif/UTILS/bin | parallel chmod a+rwx {} && \
+    ldconfig
 
-ENV PATH="$PATH:/scif/UTILS/:/scif/UTILS/post" \
+ENV PATH="$PATH:/scif/UTILS/bin" \
     GERDA_DETDATA="/common/sw-other/gerda-metadata/detector-data"
-
-RUN ldconfig
 
 WORKDIR /data
 CMD /bin/zsh

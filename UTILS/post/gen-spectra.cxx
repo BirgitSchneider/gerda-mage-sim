@@ -111,9 +111,12 @@ int main( int argc, char** argv ) {
     }
 
     // set number of primaries in first bin
-    auto nPrim = dynamic_cast<TParameter<long>>(infile.Get("NumberOfPrimaries"));
-    for ( auto h : energy_ch ) h->SetBinContent(1, nPrim.GetVal());
-    for ( auto h : { energyBEGe, energyEnrCOAX, energyNatCOAX, energyEnrAll } ) h->SetBinContent(1, nPrim.GetVal());
+    if (infile.GetListOfKeys()->Contains("NumberOfPrimaries")) {
+        auto nPrim = dynamic_cast<TParameter<long>*>(infile.Get("NumberOfPrimaries"));
+        for ( auto h : energy_ch ) h.SetBinContent(1, nPrim->GetVal());
+        for ( auto h : { energyBEGe, energyEnrCOAX, energyNatCOAX, energyEnrAll } ) h.SetBinContent(1, nPrim->GetVal());
+    }
+    else std::cout << "WARNING: NumberOfPrimaries not found in t4z- file! Please use a more recent version of gerda-ada." << std::endl;
 
     for ( auto h : energy_ch ) h.Write();
     energyBEGe.Write();
