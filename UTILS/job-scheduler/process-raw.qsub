@@ -1,0 +1,15 @@
+##################################################################
+### process-raw.qsub: Katharina von Sturm 23.01.2018
+##################################################################
+
+#!/bin/bash
+
+#$ -P short	### queue
+#$ -cwd		### start job in current working directory
+#$ -j y		### have logoutput and erroroutput in the same file
+
+export DESTDIR=$2
+export GERDA_DETDATA=/lfs/l3/gerda/Hades/sw/gerda-metadata/detector-data
+
+cd /lfs/l2/gerda/Hades/gerda-mage-sim/UTILS/post
+singularity exec ../container/gerda-mage-sim-utils.sqsh julia process-raw.jl $1

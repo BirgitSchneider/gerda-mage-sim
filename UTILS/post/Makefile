@@ -8,7 +8,7 @@
 # NOTES: - use the --dry-run flag to see what would be done without
 #          actually executing it (useful also in conjunction with --debug)
 #        - this makefile assumes that the qsub script accepts the syntax:
-#          qsub submitfile.qsub <folder-with-raw> <dest-dir-tree>
+#          qsub ../job-scheduler/process-raw.qsub <folder-with-raw> <dest-dir-tree>
 #
 SRCDIR  = /lfs/l2/gerda/Hades/gerda-mage-sim
 DESTDIR = /lfs/l2/gerda/Hades/post-proc
