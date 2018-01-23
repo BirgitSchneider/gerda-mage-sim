@@ -10,9 +10,9 @@
 #        - this makefile assumes that the qsub script accepts the syntax:
 #          qsub submitfile.qsub <folder-with-raw> <dest-dir-tree>
 #
-SRCDIR  = /common/gerda-mage-sim
-DESTDIR = /common/post-proc
-JOB     = qsub submitfile.qsub
+SRCDIR  = /lfs/l2/gerda/Hades/gerda-mage-sim
+DESTDIR = /lfs/l2/gerda/Hades/post-proc
+JOB     = qsub ../job-scheduler/process-raw.qsub
 
 # function to change the position of the directory tree
 changetree = $(shell echo $(2)/$(shell echo $(1) | rev | cut -d'/' -f-5 | rev))
