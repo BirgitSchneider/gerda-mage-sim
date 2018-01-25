@@ -20,43 +20,24 @@
 
 For the simulation the Dario detector and rootscheme was used
 
-/tracking/verbose                               0
+/tracking/verbose                               0</br>
+/MG/manager/mglog                               trace</br>
+/MG/manager/seedWithDevRandom</br>
+/MG/processes/realm                             BBdecay</br>
+/MG/processes/lowenergy                         true</br>
+/MG/processes/useNoHadPhysics                   true</br>
+/MG/geometry/detector                           Dario</br>
+/MG/geometry/database                           false</br>
+/MG/eventaction/reportingfrequency              10000</br>
+/MG/eventaction/rootschema                      Dario</br>
+/MG/eventaction/rootfilename               	    Out_Dario.root</br>
 
-/MG/manager/mglog                               trace
+/run/initialize</br>
 
-/MG/manager/seedWithDevRandom
-
-/MG/processes/realm                             BBdecay
-
-/MG/processes/lowenergy                         true
-
-/MG/processes/useNoHadPhysics                   true
-
-/MG/geometry/detector                           Dario
-
-/MG/geometry/database                           false
-
-/MG/eventaction/reportingfrequency              10000
-
-/MG/eventaction/rootschema                      Dario
-
-/MG/eventaction/rootfilename               	Out_Dario.root
-
-/run/initialize
-
-/MG/generator/confine                           volume
-
-/MG/generator/volume                            crystal
-
----
-
-/MG/generator/select                       	decay0
-
-/MG/generator/decay0/filename             	../../decay0files/K42_1E7.dk0
-
----
-
-/tracking/verbose                          	0
-
-/run/beamOn                                	1000000
+/MG/generator/confine                           volume</br>
+/MG/generator/volume                            crystal</br>
+/MG/generator/select                       	    decay0</br>
+/MG/generator/decay0/filename             	    decay0files/K42_1E7.dk0</br>
+/tracking/verbose                          	    0</br>
+/run/beamOn                                	    1000000</br>
 
