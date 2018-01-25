@@ -12,7 +12,8 @@
 ## K42
 
 <p align="center">
-  <img src="K42.png" width="600"/>
+  <img src="K42.png" width="400"/>
+  <img src="K42_Zoom.png" width="400"/>
 </p>
 
 
