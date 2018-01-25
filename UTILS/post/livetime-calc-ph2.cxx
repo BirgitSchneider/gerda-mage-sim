@@ -3,6 +3,9 @@
  * Author: Luigi Pertoldi: luigi.pertoldi@pd.infn.it
  * Created: 24 Jan 2018
  *
+ * g++ -std=c++11 $(root-config --cflags) -lTreePlayer $(gerda-ada-config --cflags) $(gelatio-config --cflags) $(mgdo-config --cflags)
+ * -I../jsoncpp/ ../jsoncpp/jsoncpp.cpp
+ * $(root-config --libs) $(gerda-ada-config --libs) $(gelatio-config --libs) $(mgdo-config --libs) livetime-calc-ph2.cxx -o livetime-calc-ph2
  */
 // stl
 #include <iostream>
@@ -52,7 +55,7 @@ int main(int argc, char** argv) {
     if ( result != args.end()) verbose = true;
 
     auto runList = { 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-                     63, 64, 65, 66, 67, 68, 69, 70, 71, 72,
+                     63, 64, 65, 67, 69, 70, 71, 72,
                      73, 74, 75, 76, 77, 78, 79, 80, 82, 82,
                      83, 84, 85, 86, 87, 88, 89 };
 
@@ -83,7 +86,7 @@ int main(int argc, char** argv) {
         if (verbose) std::cout << "Loading trees...\n";
         gada::DataLoader loader;
         loader.AddFileMap(&myMap);
-        loader.BuildTier2();
+        loader.BuildTier3();
         reader.SetTree(loader.GetUniqueMasterChain());
 
         reader.Next();
