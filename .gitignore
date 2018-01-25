@@ -12,3 +12,5 @@ UTILS/container
 UTILS/post/log
 UTILS/post/*.o*
 UTILS/.nfs*
+UTILS/.ycm_extra_conf.py
+UTILS/post/runconfigs.json
