@@ -48,12 +48,12 @@ int main(int argc, char** argv) {
     if (result != args.end()) verbose = true;
     auto dir = *(args.end()-1);
 
-    // remove trailing '/'
-    if (verbose) std::cout << "Paths:\n";
-    for (auto s : {gerdaMetaPath, destDirPath, dir}) {
-        s = std::string(realpath(s.c_str(), nullptr));
-        if (s.back() == '/') s.pop_back();
-        if (verbose) std::cout << s << std::endl;
+    //directories
+    if (verbose) {
+	std::cout << "Paths:\n";
+	std::cout << gerdaMetaPath << std::endl;
+	std::cout << destDirPath << std::endl;
+	std::cout << dir << std::endl;
     }
 
     // get raw-*.root files in directory
@@ -83,40 +83,51 @@ int main(int argc, char** argv) {
     Json::Value livetimes;
     flivetimes >> livetimes;
 
+    Json::Value::Members runs = livetimes.getMemberNames();
+
     // calculate total livetime
     int totLivetime = 0;
-    for ( int i = 0; i < livetimes.size(); ++i ) {
-        totLivetime += livetimes[i]["ID"].asInt();
+    for ( auto r : runs ) {
+	if (verbose) std::cout << r << ": " << livetimes[r]["livetime_in_s"].asInt() << " s" << std::endl;
+        totLivetime += livetimes[r]["livetime_in_s"].asInt();
     }
     if (verbose) std::cout << "\nTotal livetime:" << totLivetime << std::endl;
+
     int first = 0; // first event to be processed in tree
     // loop over runIDs in json file
-    for ( int i = 0; i < livetimes.size(); ++i ) {
+    for ( auto r : runs ) {
         // strip out folders in dir to build up final t4z- filename
         std::vector<std::string> items;
+	std::string dircopy = dir;
         for (int j = 0; j < 4; j++ ) {
-            dir.erase(dir.find_last_of('/'), dir.back());
-            items.push_back(dir.substr(dir.find_last_of('/')+1));
+            dircopy.erase(dircopy.find_last_of('/'), dircopy.back());
+            items.push_back(dircopy.substr(dircopy.find_last_of('/')+1));
         }
         auto& it = items;
-        auto filename = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[3] + '/' +
-                        "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-run" +
-                        livetimes[i]["ID"].asString() + ".root";
+	auto filedir = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[3];
+        auto filename = filedir + '/' + "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-run" +
+                        livetimes[r]["ID"].asString() + ".root";
+        if (verbose) std::cout << filedir << std::endl;
         if (verbose) std::cout << filename << std::endl;
+
+	// make destdir
+    	std::string cmd = "mkdir -p "; cmd += filedir;
+    	std::system( cmd.c_str() );
 
         // calculate fraction of events
         auto nentries = ch.GetEntries();
-        int fraction = (int)(nentries * livetimes[i]["ID"].asInt() *1. / totLivetime);
-        if (verbose) std::cout << nentries << " * " << livetimes[i]["ID"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
+        int fraction = (int)(nentries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
+        if (verbose) std::cout << nentries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
 
         // set up tier4izer
         gada::T4SimConfig config;
-        config.LoadMapping(gerdaMetaPath + "/detector-data/mapping-default-depr.json");
-        config.LoadGedSettings(gerdaMetaPath + "/detector-data/ged-resolution-default.json");
-        config.LoadLArSettings(gerdaMetaPath + "/detector-data/lar-settings-default.json");
-        config.LoadGedResolutions(gerdaMetaPath + "/detector-data/ged-resolution-default.json");
-        config.LoadRunConfig(gerdaMetaPath + "/config/_aux/geruncfg/" + livetimes[i]["runconfig"].asString());
-        gada::T4SimHandler handler(dynamic_cast<TChain*>(ch.CopyTree("", "", fraction,first)), &config, filename);
+        config.LoadMapping(gerdaMetaPath + "/detector-data/mapping-default-depr.json"); if(verbose) std::cout << "Mapping loaded" << std::endl;
+        config.LoadGedSettings(gerdaMetaPath + "/detector-data/ged-settings-default.json"); if(verbose) std::cout << "Ged settings loaded" << std::endl;
+//        config.LoadLArSettings(gerdaMetaPath + "/detector-data/lar-settings-default.json"); if(verbose) std::cout << "LAr settings loaded" << std::endl;
+        config.LoadGedResolutions(gerdaMetaPath + "/detector-data/ged-resolution-default.json"); if(verbose) std::cout << "Ges resolutions loaded" << std::endl;
+//        config.LoadRunConfig(gerdaMetaPath + "/config/_aux/geruncfg/configuration_20171012.root");
+	config.LoadRunConfig(gerdaMetaPath + "/config/_aux/geruncfg/" + livetimes[r]["runconfig"].asString()); if(verbose) std::cout << "RunConfig loaded" << std::endl;
+        gada::T4SimHandler handler((TChain*)(ch.CopyTree("", "", fraction,first)), &config, filename);
         if (verbose) std::cout << "Running production... first event = " << first << std::endl;
         // run
         handler.RunProduction();
