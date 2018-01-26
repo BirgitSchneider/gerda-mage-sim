@@ -3,8 +3,9 @@ ROOTFLAGS      = $(shell root-config --libs --cflags) -lTreePlayer
 GERDA-ADAFLAGS = $(shell gerda-ada-config --libs --cflags)
 GELATIOFLAGS   = $(shell gelatio-config --libs --cflags)
 MGDOFLAGS      = $(shell mgdo-config --libs --cflags)
+DATABRIXXFLAGS = $(shell databricxx-config --libs --cflags)
 JSONCPPFLAGS   = -I jsoncpp
-ALLFLAGS       = $(ROOTFLAGS) $(GERDA-ADAFLAGS) $(GELATIOFLAGS) $(MGDOFLAGS) $(JSONCPPFLAGS)
+ALLFLAGS       = $(ROOTFLAGS) $(GERDA-ADAFLAGS) $(GELATIOFLAGS) $(MGDOFLAGS) $(DATABRIXXFLAGS) $(JSONCPPFLAGS)
 
 all : dirs bin/gen-spectra bin/check-simulation bin/livetime-calc-ph2 bin/t4z-gen
 
