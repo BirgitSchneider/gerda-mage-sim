@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
         auto gtr = FindRunConfiguration(*timestamp);
 
         int nTP = 0;
-        reader.SetEntry(-1);
+        reader.SetEntry(0);
         if (verbose) std::cout << "Scanning tree...\n";
         while (reader.Next()) if (*isTP) nTP++;
 
