@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
     if ( result != args.end()) verbose = true;
 
     auto runList = { 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-                     63, 64, 65, 67, 69, 70, 71, 72,
+                     63, 64, 65, /*66,*/ 67, /*68,*/ 69, 70, 71, 72,
                      73, 74, 75, 76, 77, 78, 79, 80, 82, 82,
                      83, 84, 85, 86, 87, 88, 89 };
 
@@ -91,14 +91,9 @@ int main(int argc, char** argv) {
 
         reader.Next();
         auto gtr = FindRunConfiguration(*timestamp);
-        std::vector<int> detector_status( gtr->GetNDetectors(), 0 );
-        for ( int i = 0; i < (int)detector_status.size(); ++i ) {
-            if      (  gtr->IsTrash(i) ) detector_status[i] = 2;
-            else if ( !gtr->IsOn(i)    ) detector_status[i] = 1;
-        }
 
         int nTP = 0;
-        reader.Restart();
+        reader.SetEntry(-1);
         if (verbose) std::cout << "Scanning tree...\n";
         while (reader.Next()) if (*isTP) nTP++;
 
@@ -106,6 +101,7 @@ int main(int argc, char** argv) {
         std::cout << "Livetime: " << livetime << " s\n";
         root["run" + std::to_string(id)]["ID"] = id;
         root["run" + std::to_string(id)]["livetime_in_s"] = livetime;
+        root["run" + std::to_string(id)]["runconfig"] = std::string(gtr->GetConfigurationName());
     }
 
     std::ofstream fout("run-livetime.json");
