@@ -15,3 +15,4 @@ UTILS/.nfs*
 UTILS/.ycm_extra_conf.py
 UTILS/post/runconfigs.json
 UTILS/post/livetime-calc-ph2
+UTILS/test/*root.dat
