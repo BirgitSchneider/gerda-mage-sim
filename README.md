@@ -12,6 +12,8 @@ Mantainers:
 * Katharina von Sturm - [vonsturm@pd.infn.it](mailto:vonsturm@pd.infn.it)
 * Luigi Pertoldi - [luigi.pertoldi@pd.infn.it](mailto:luigi.pertoldi@pd.infn.it)
 
+*NOTE: clone with `git --recursive git@github.com:mppmu/gerda-mage-sim.git`*
+
 ### Useful links
 * [Documentation](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations)
 * [How to add your contribution](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations#add-your-contribution-to-the-official-repository-by-running-simulations-on-your-cluster)
