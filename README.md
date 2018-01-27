@@ -12,7 +12,7 @@ Mantainers:
 * Katharina von Sturm - [vonsturm@pd.infn.it](mailto:vonsturm@pd.infn.it)
 * Luigi Pertoldi - [luigi.pertoldi@pd.infn.it](mailto:luigi.pertoldi@pd.infn.it)
 
-*NOTE: clone with `git --recursive git@github.com:mppmu/gerda-mage-sim.git`*
+**NOTE: clone with `git --recursive git@github.com:mppmu/gerda-mage-sim.git`**
 
 ### Useful links
 * [Documentation](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations)
