@@ -1,4 +1,4 @@
-<img src="UTILS/gerda-logo.png" align="right"  height="70"/>
+<img src="UTILS/gerda-logo.png" align="left"  height="80"/>
 
 # gerda-mage-sim
 
