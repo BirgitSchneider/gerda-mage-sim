@@ -103,6 +103,20 @@
 * decay0 is missing many lines 
 
 
+## Bi207
+
+<p align="center">
+  <img src="Bi207.png" width="400"/>
+  <img src="Bi207_Zoom.png" width="400"/>
+</p>
+<p align="center">
+  <img src="Bi207_Zoom1.png" width="400"/>
+</p>
+
+* Lines of G4RadioactiveDecay in accordance with recommended data
+* Do not use decay0 to generate the primaries
+* Pb207 13/2+ 1633.368 level has a lifetime of 0.8s and is killed by a hack in MaGe
+
 
 ## Macro
 
