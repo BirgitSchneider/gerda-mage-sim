@@ -13,6 +13,8 @@
 #include <string>
 #include <memory>
 #include <fstream>
+#include <sstream>
+#include <map>
 
 // jsoncpp
 #include <json/json.h>
@@ -55,23 +57,58 @@ int main(int argc, char** argv) {
     if ( result != args.end()) verbose = true;
 
     auto runList = { 53, 54, 55, 56, 57, 58, 59, 60, 61, 62,
-                     63, 64, 65, 67, 69, 70, 71, 72,
+                     63, 64, 65, /*66,*/ 67, /*68,*/ 69, 70, 71, 72,
                      73, 74, 75, 76, 77, 78, 79, 80, 82, 82,
                      83, 84, 85, 86, 87, 88, 89 };
-
-    auto FindRunConfiguration = [&](unsigned long long timestamp) {
-        if (verbose) std::cout << "Getting RunConfiguration\n";
-        GERunConfigurationManager theRunConfManager;
-        theRunConfManager.AllowRunConfigurationSwitch(true); // This is important!
-        if (verbose) theRunConfManager.SetVerbosity(1);
-        return std::unique_ptr<GETRunConfiguration>(theRunConfManager.GetRunConfiguration(timestamp));
-    };
 
     TTreeReader reader;
     TTreeReaderValue<int>                isTP(reader, "isTP.isTP");
     TTreeReaderValue<unsigned long long> timestamp(reader, "timestamp");
 
     Json::Value root;
+
+    std::vector<std::pair<std::string,int>> fConfList;
+    // open runconfiguration.db
+    std::ifstream dbfile(gerdaMetaPath + "/config/_aux/geruncfg/runconfiguration.db");
+    std::stringstream datastream;
+    std::string datastring, name;
+    int tstamp;
+
+    getline(dbfile, datastring);
+    getline(dbfile, datastring);
+
+    // A safe way to read data using stringstream
+    // and to avoid duplication of the last line
+    while (getline(dbfile, datastring)) {
+
+        // Skip empty lines
+        if (datastring.empty()) continue;
+
+        // Read the line and stream the name and the time stamp
+        datastream.clear();
+        datastream.str(datastring);
+        datastream >> name;
+        datastream >> tstamp;
+
+        fConfList.push_back(std::make_pair(name, tstamp));
+    }
+    if (verbose) for (auto& i : fConfList) std::cout << i.first << '\t' << i.second << std::endl;
+
+    auto FindRunConfiguration = [&](unsigned long long timestamp) {
+        if (verbose) std::cout << "Getting RunConfiguration\n";
+        GERunConfigurationManager theRunConfManager;
+        theRunConfManager.AllowRunConfigurationSwitch(true); // This is important!
+        if (verbose) theRunConfManager.SetVerbosity(1);
+
+        std::string rcfilename;
+        for (int k = (int)fConfList.size()-1; k >= 0; k--) {
+            if (timestamp >= fConfList[k].second) {
+                rcfilename = fConfList[k].first;
+                break;
+            }
+        }
+        return std::make_pair(std::unique_ptr<GETRunConfiguration>(theRunConfManager.GetRunConfiguration(timestamp)), rcfilename);
+    };
 
     for ( auto& id : runList ) {
         if (verbose) std::cout << "RUN" << id << std::endl
@@ -91,21 +128,17 @@ int main(int argc, char** argv) {
 
         reader.Next();
         auto gtr = FindRunConfiguration(*timestamp);
-        std::vector<int> detector_status( gtr->GetNDetectors(), 0 );
-        for ( int i = 0; i < (int)detector_status.size(); ++i ) {
-            if      (  gtr->IsTrash(i) ) detector_status[i] = 2;
-            else if ( !gtr->IsOn(i)    ) detector_status[i] = 1;
-        }
 
         int nTP = 0;
-        reader.Restart();
+        reader.SetEntry(0);
         if (verbose) std::cout << "Scanning tree...\n";
         while (reader.Next()) if (*isTP) nTP++;
 
-        int livetime = nTP*1. / gtr->GetPulserRate();
+        int livetime = nTP*1. / gtr.first->GetPulserRate();
         std::cout << "Livetime: " << livetime << " s\n";
         root["run" + std::to_string(id)]["ID"] = id;
         root["run" + std::to_string(id)]["livetime_in_s"] = livetime;
+        root["run" + std::to_string(id)]["runconfig"] = gtr.second;
     }
 
     std::ofstream fout("run-livetime.json");

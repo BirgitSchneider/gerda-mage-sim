@@ -4,8 +4,6 @@
 *.swp
 *.sqsh
 *.DS_Store
-UTILS/post/gen-spectra
-UTILS/post/check-simulation
 controlplots*
 UTILS/job-scheduler/mpik-qsub.sh.o*
 UTILS/container
@@ -13,6 +11,5 @@ UTILS/post/log
 UTILS/post/*.o*
 UTILS/.nfs*
 UTILS/.ycm_extra_conf.py
-UTILS/post/runconfigs.json
-UTILS/post/livetime-calc-ph2
+UTILS/bin
 UTILS/test/*root.dat
