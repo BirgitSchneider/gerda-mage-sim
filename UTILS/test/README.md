@@ -11,6 +11,7 @@
 * [Bi207](#bi207)
 * [Kr85](#kr85)
 * [Pb214](#pb214)
+* [Bi214](#bi214)
 
 ## Ac228
 
@@ -89,14 +90,6 @@
 * Lines of G4RadioactiveDecay in accordance with recommended data
 * Do not use decay0 to generate the primaries
 
-## Kr85
-
-
-## Pb214
-
-
-
-
 ## Pa234m
 
 <p align="center">
@@ -124,6 +117,39 @@
 * Lines of G4RadioactiveDecay in accordance with recommended data
 * Do not use decay0 to generate the primaries
 * Pb207 13/2+ 1633.368 level has a lifetime of 0.8s and is killed by a hack in MaGe
+
+## Kr85
+
+<p align="center">
+  <img src="Kr85.png" width="400"/>
+  <img src="Kr85_Zoom.png" width="400"/>
+</p>
+
+* Branching ratio fits better in G4RadioactiveDecay (0.436%) than decay0 (0.418%) to recommended data
+* Do not use decay0
+* Problem is the MaGe hack that kills everything above 1us lifetime
+* Can simulate 514keV line or Rb(37,85; 513.998 keV) (command: /gun/ion 37 85 0 513.998)
+
+## Pb214
+
+<p align="center">
+  <img src="Pb214.png" width="400"/>
+  <img src="Pb214_Zoom.png" width="400"/>
+</p>
+<p align="center">
+  <img src="Pb214_Zoom1.png" width="400"/>
+</p>
+
+* Branching ratio and line position fits G4RadioactiveDecay to recommended data
+* Do not use decay0
+
+## Bi214
+
+<p align="center">
+  <img src="Bi214.png" width="400"/>
+</p>
+
+
 
 
 ## Macro
