@@ -1,6 +1,6 @@
-<div class="header">
-  <h1>gerda-mage-sim <img src="UTILS/gerda-logo.png" alt="logo" width="100" align="left"/> </h1>
-</div>
+<img src="UTILS/gerda-logo.png" align="left"  height="80"/>
+
+# gerda-mage-sim
 
 The aim of this repository is to provide a mirror (without actual data files) of the `/nfs/gerda5/var/gerda-simulations/gerda-mc2` folder at LNGS cluster containing official Monte Carlo simulations of background contaminations for GERDA Phase II. It can be easily browsed to check the current status of the simulations (what has been simulated and what has not) and inspect the MaGe macro files. The repository is filled with READMEs reporting all valuable informations for the sake of reproducibility.
 
@@ -11,6 +11,8 @@ Singularity images used in the context of this repository are available at the L
 Mantainers:
 * Katharina von Sturm - [vonsturm@pd.infn.it](mailto:vonsturm@pd.infn.it)
 * Luigi Pertoldi - [luigi.pertoldi@pd.infn.it](mailto:luigi.pertoldi@pd.infn.it)
+
+**NOTE: clone with `git --recursive git@github.com:mppmu/gerda-mage-sim.git`**
 
 ### Useful links
 * [Documentation](https://github.com/mppmu/gerda-snippets/wiki/gerda-mage-sim:-official-MaGe-simulations)

@@ -1,4 +1,4 @@
-CC = c++
+CC = c++ -std=c++1y
 ROOTFLAGS      = $(shell root-config --libs --cflags) -lTreePlayer
 GERDA-ADAFLAGS = $(shell gerda-ada-config --libs --cflags)
 GELATIOFLAGS   = $(shell gelatio-config --libs --cflags)
