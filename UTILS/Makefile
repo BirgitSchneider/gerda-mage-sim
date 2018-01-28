@@ -7,13 +7,16 @@ DATABRIXXFLAGS = $(shell databricxx-config --libs --cflags)
 JSONCPPFLAGS   = -I jsoncpp
 ALLFLAGS       = $(ROOTFLAGS) $(GERDA-ADAFLAGS) $(GELATIOFLAGS) $(MGDOFLAGS) $(DATABRIXXFLAGS) $(JSONCPPFLAGS)
 
-all : dirs bin/gen-spectra bin/check-simulation bin/livetime-calc-ph2 bin/t4z-gen
+all : dirs bin/gen-spectra bin/check-simulation bin/livetime-calc-ph2 bin/t4z-gen bin/pdf-gen
 
 dirs :
 	@mkdir -p bin
 
-bin/gen-spectra : post/gen-spectra.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
-	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/gen-spectra.cxx post/progressbar/ProgressBar.cc
+bin/gen-spectra : post/gen-spectra.cxx
+	$(CC) $(ROOTFLAGS) -o $@ $<
+
+bin/pdf-gen : post/pdf-gen.cxx
+	$(CC) $(ROOTFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
 bin/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/check-simulation.cxx post/progressbar/ProgressBar.cc

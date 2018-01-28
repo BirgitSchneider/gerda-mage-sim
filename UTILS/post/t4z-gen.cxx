@@ -33,7 +33,8 @@ int main(int argc, char** argv) {
                                 << "  required: --metadata <gerda-metadata-location>\n"
                                 << "            --destdir <destination-dir-post-processed>\n"
                                 << "            --livetime-file <json-file-from-livetime-calc-ph2>\n"
-                                << "  optional: -v : verbose mode\n"
+                                << "  optional: -v : verbose mode\n\n"
+                                << "NOTES: Please use absolute paths!"
                                 << std::endl;};
 
     // get & check arguments
@@ -68,7 +69,6 @@ int main(int argc, char** argv) {
     }
 
     // get raw-*.root files in directory
-    if (verbose) std::cout << "\nraw- files found:\n";
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;
         auto p = std::unique_ptr<DIR,std::function<int(DIR*)>>{opendir(foldName.c_str()), &closedir};
@@ -85,6 +85,7 @@ int main(int argc, char** argv) {
     };
 
     // join all raw- files in same tree
+    if (verbose) std::cout << "\nraw- files found:\n";
     auto filelist = GetContent(dirWithRaw);
     TChain ch("fTree");
     for ( auto& f : filelist ) ch.Add(f.c_str());
