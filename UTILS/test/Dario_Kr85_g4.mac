@@ -21,7 +21,7 @@
 /MG/eventaction/reportingfrequency              10000
 /MG/eventaction/rootschema                      Dario
 
-/MG/eventaction/rootfilename               	Dario_K42_dk0.root
+/MG/eventaction/rootfilename               	Dario_Kr85_g4.root
 
 /run/initialize
 
@@ -29,8 +29,11 @@
 /MG/generator/confine                           volume
 /MG/generator/volume                            crystal
 
-/MG/generator/select                       	decay0
-/MG/generator/decay0/filename             	../../decay0files/K42_1E7.dk0
+/MG/generator/select 		G4gun
+/MG/generator/g4gun/cone_on 	true
+/gun/particle 			ion
+/gun/ion 			36 85
+/gun/energy 			0 eV 
 
 /tracking/verbose                          	0
 /run/beamOn                                	1000000
