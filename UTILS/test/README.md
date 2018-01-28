@@ -8,7 +8,8 @@
 * [Tl208](#tl208)
 * [Co60](#co60)
 * [Bi207](#bi207)
-
+* [Kr85](#kr85)
+* [Pb214](#pb214)
 
 ## Ac228
 
@@ -86,6 +87,13 @@
 
 * Lines of G4RadioactiveDecay in accordance with recommended data
 * Do not use decay0 to generate the primaries
+
+## Kr85
+
+
+## Pb214
+
+
 
 
 ## Macro
