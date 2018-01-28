@@ -15,8 +15,11 @@
 /MG/generator/volumelistto                 39
 /MG/generator/volumelist                   HVCableFromHolderToElectronicsPlate_Phase2
 
-/MG/generator/select                       decay0
-/MG/generator/decay0/filename              ./decay0files/K40_1E7.dk0
+/MG/generator/select                       G4gun
+/MG/generator/g4gun/cone_on                true
+/gun/particle                              ion
+/gun/ion                                   19 40
+/gun/energy                                0 eV
 
 /tracking/verbose                          0
 /run/beamOn                                10000000

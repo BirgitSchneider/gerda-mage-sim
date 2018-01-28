@@ -21,7 +21,7 @@
 /MG/eventaction/reportingfrequency              10000
 /MG/eventaction/rootschema                      Dario
 
-/MG/eventaction/rootfilename               	Dario_K42_.root
+/MG/eventaction/rootfilename               	Dario_K42_dk0.root
 
 /run/initialize
 

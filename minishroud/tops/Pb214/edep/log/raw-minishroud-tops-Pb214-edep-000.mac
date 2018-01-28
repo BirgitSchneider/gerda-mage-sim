@@ -15,8 +15,11 @@
 /MG/generator/volumelistto                 6
 /MG/generator/volumelist                   MiniShroudPhase2Top
 
-/MG/generator/select                       decay0
-/MG/generator/decay0/filename              ./decay0files/Pb214_1E7.dk0
+/MG/generator/select            G4gun
+/MG/generator/g4gun/cone_on     true
+/gun/particle                   ion
+/gun/ion                        82 214
+/gun/energy                     0 eV
 
 /tracking/verbose                          0
 /run/beamOn                                4536687
