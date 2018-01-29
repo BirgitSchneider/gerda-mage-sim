@@ -16,7 +16,7 @@ bin/gen-spectra : post/gen-spectra.cxx
 	$(CC) $(ROOTFLAGS) -o $@ $<
 
 bin/pdf-gen : post/pdf-gen.cxx
-	$(CC) $(ROOTFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
+	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -I post/progressbar -o $@ $< jsoncpp/jsoncpp.cpp post/progressbar/ProgressBar.cc
 
 bin/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/check-simulation.cxx post/progressbar/ProgressBar.cc

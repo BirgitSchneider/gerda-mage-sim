@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
     // get & check arguments
     std::vector<std::string> args;
     for (int i = 0; i < argc; ++i) args.emplace_back(argv[i]);
-    if (argc < 1) {usage(); return 1;}
+    if (argc < 8) {usage(); return 1;}
     std::string gerdaMetaPath;
     auto result = std::find(args.begin(), args.end(), "--metadata");
     if (result != args.end()) gerdaMetaPath = *(result+1);

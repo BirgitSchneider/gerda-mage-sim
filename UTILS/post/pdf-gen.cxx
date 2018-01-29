@@ -31,13 +31,16 @@
 #include "TParameter.h"
 #include "TChain.h"
 
+// other
+#include "ProgressBar.h"
+
 int main( int argc, char** argv ) {
 
     // utilities
     auto c_str = [&](std::string s) {return s.c_str();};
     auto usage = []() {
         std::cout << "Create official pdfs from tier4rized files.\n"
-                  << "USAGE: ./gen-spectra [OPTIONS] [<volume>/<part>/<isotope>]\n\n"
+                  << "USAGE: ./pdf-gen [OPTIONS] [<volume>/<part>/<isotope>]\n\n"
                   << "OPTIONS:\n"
                   << "  required:  --destdir <path> : path to the top of the directory tree\n"
                   << "                                with the t4z- files\n"
@@ -49,7 +52,7 @@ int main( int argc, char** argv ) {
     // get command line arguments
     std::vector<std::string> args;
     for (int i = 0; i < argc; ++i) args.emplace_back(argv[i]);
-    if (argc < 5) {usage(); return 1;}
+    if (argc < 6) {usage(); return 1;}
     bool verbose = false;
     auto result = std::find(args.begin(), args.end(), "-v");
     if (result != args.end()) verbose = true;
@@ -70,6 +73,7 @@ int main( int argc, char** argv ) {
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;
         auto p = std::unique_ptr<DIR,std::function<int(DIR*)>>{opendir(foldName.c_str()), &closedir};
+        if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 and r; ) {
             if (entry.d_type == 8 and
@@ -83,15 +87,20 @@ int main( int argc, char** argv ) {
     };
 
     // get t4z- edep files
-    if (verbose) std::cout << "\nedep t4z- files found:\n";
-    auto edepFilelist = GetContent(pathToTop + '/' + pathToIsotope + "/edep");
+    auto fold = pathToTop + '/' + pathToIsotope + "/edep";
+    if (verbose) std::cout << "\nedep t4z- files found in " << fold << " :\n";
+    auto edepFilelist = GetContent(fold);
+    if (edepFilelist.empty()) {std::cout << "There were problems in reading the t4z-edep files. Aborting...\n"; return 1;}
     // join all t4z- files in same tree
     TChain edepCh("fTree");
     for ( auto& f : edepFilelist ) edepCh.Add(f.c_str());
 
     // get t4z- coin file
-    if (verbose) std::cout << "\ncoin t4z- files found:\n";
-    auto coinFilelist = GetContent(pathToTop + '/' + pathToIsotope + "/coin");
+    fold = pathToTop + '/' + pathToIsotope + "/coin";
+    if (verbose) std::cout << "\ncoin t4z- files found in " << fold << " :\n";
+    auto coinFilelist = GetContent(fold);
+    bool processCoin = true;
+    if (coinFilelist.empty()) {std::cout << "There were problems in reading the t4z- coin files, They won't be processed\n"; processCoin = false;}
     // join all t4z- files in same tree
     TChain coinCh("fTree");
     for ( auto& f : coinFilelist ) coinCh.Add(f.c_str());
@@ -99,22 +108,22 @@ int main( int argc, char** argv ) {
     // strip out folders in pathToIsotope to build up final pdf- filename
     std::vector<std::string> items;
     std::string tmp = pathToIsotope;
-    for (int j = 0; j < 3; j++ ) {
+    for (int j = 0; j < 2; j++ ) {
         items.push_back(tmp.substr(tmp.find_last_of('/')+1));
         tmp.erase(tmp.find_last_of('/'), tmp.back());
     }
-    std::string outName = pathToTop + '/' + pathToIsotope + '/' +
-                          "pdf-" + items[2] + '-' + items[1] + '-' + items[0] + ".root";
-    if (verbose) std::cout << "\nOutput filename: " << outName << std::endl;
-    TFile outfile(outName.c_str(), "RECREATE");
+    items.push_back(tmp);
 
     Json::Value root;
     std::ifstream fGedMap(gedMapFile);
     if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!"; return 1;}
     fGedMap >> root;
     std::map<int,std::string> det;
-    for (Json::Value::iterator itr = root.begin(); itr != root.end(); ++itr ) {
-        det.insert((*itr)["channel"], (*itr)["name"]);
+
+    Json::Value::Members detinfo = root["mapping"].getMemberNames();
+
+    for ( const auto & d : detinfo ) {
+        det[root["mapping"][d]["channel"].asInt()] = d;
     }
     if (verbose) {
         std::cout << "\nDetectors:\n";
@@ -140,13 +149,17 @@ int main( int argc, char** argv ) {
     TH1I M1_natCoax_1461("M1_natCoax_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (natCoax)",  40, 0, 40);
     TH1I M1_natCoax_full("M1_natCoax_full", "ID with edep in range = [565,5500] keV, M=1 (natCoax)", 40, 0, 40);
 
-    TTreeReader reader; reader.SetTree(&edepCh);
+    TTreeReader reader;
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
 
-    std::cout << "Processing edep... " << std::endl;
+    ProgressBar bar; bar.SetNIter(edepCh.GetEntries()); bar.ShowBar(false);
+    std::cout << "\nProcessing edep... ";
+    edepCh.LoadTree(0);
+    reader.SetTree(&edepCh);
     while(reader.Next()) {
-    if( *multiplicity <= 1 and *multiplicity > 0 ) {
+        if (verbose) bar.Update();
+        if( *multiplicity <= 1 and *multiplicity > 0 ) {
             for ( int i = 0; i < 40; ++i ) {
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
                     energy_ch[i].Fill(energy[i]);
@@ -176,7 +189,7 @@ int main( int argc, char** argv ) {
     }
 
     // set number of primaries in first bin
-    if (verbose) std::cout << "Setting number of primaries in first bin...\n";
+    if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
     long nPrim = 0;
     for (const auto& f : edepFilelist) {
         TFile froot(f.c_str());
@@ -208,80 +221,126 @@ int main( int argc, char** argv ) {
     TH1I M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1 and edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
     TH1I M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1 and edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
-    reader.SetTree(&coinCh);
-    std::map<int,double> evMap;
-    std::cout << "Processing edep... " << std::endl;
-    while(reader.Next()) {
-        if (*multiplicity == 2) {
-            for ( int i = 0; i < 40; ++i ) {
-                if ( energy[i] < 10000 and energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
-            }
-            auto& ID1 = (*evMap.begin()).first;
-            auto& ID2 = (*(evMap.begin()++)).first;
-            auto sumE = evMap[0] + evMap[1];
-            if ( det[ID1].substr(0,3) != "GTF" and
-                 det[ID2].substr(0,3) != "GTF" ) {
-                M2_enrE1vsE2.Fill(evMap[0], evMap[1]);
-                M2_enrE1plusE2.Fill(sumE);
-                M2_enrE1andE2.Fill(evMap[0]); M2_enrE1andE2.Fill(evMap[1]);
+    if (processCoin) {
+         std::map<int,double> evMap;
+         bar.Reset(); bar.SetNIter(coinCh.GetEntries()); bar.ShowBar(false);
+         std::cout << "\nProcessing edep... ";
+         coinCh.LoadTree(0);
+         reader.SetTree(&coinCh);
+         while(reader.Next()) {
+             reader.Next();
+             if (verbose) bar.Update();
+             if (*multiplicity == 2) {
+                 for ( int i = 0; i < 40; ++i ) {
+                     if ( energy[i] < 10000 and energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
+                 }
+                 if (evMap.size() != 2) {
+                     std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
+                     continue;
+                 }
+                 auto& ID1 = (*evMap.begin())    .first;
+                 auto& ID2 = (*(++evMap.begin())).first;
+                 auto& E1  = (*evMap.begin())    .second;
+                 auto& E2  = (*(++evMap.begin())).second;
+/*                 std::cout << "Multiplicity: " << *multiplicity << std::endl;
+                 std::cout << ID1 << '\t' << E1 << std::endl;
+                 std::cout << ID2 << '\t' << E2 << std::endl;
+                 std::cout << "-------------\n";
+*/                 auto sumE = E1 + E2;
+                 if ( det[ID1].substr(0,3) != "GTF" and
+                      det[ID2].substr(0,3) != "GTF" ) {
+                     M2_enrE1vsE2.Fill(E1, E2);
+                     M2_enrE1plusE2.Fill(sumE);
+                     M2_enrE1andE2.Fill(E1); M2_enrE1andE2.Fill(E2);
 
-                if ( sumE >= 1519 and sumE < 1531 ) M2_ID1vsID2_1525.Fill(ID1, ID2);
-                if ( sumE >= 1455 and sumE < 1467 ) M2_ID1vsID2_1461.Fill(ID1, ID2);
-                if ( sumE >= 250  and sumE < 3000 ) M2_ID1vsID2_full.Fill(ID1, ID2);
-                if ( sumE >= 1405 and sumE < 1450 ) M2_ID1vsID2_S1  .Fill(ID1, ID2);
-                if ( sumE >= 1470 and sumE < 1515 ) M2_ID1vsID2_S2  .Fill(ID1, ID2);
-                if ( sumE >= 1535 and sumE < 1580 ) M2_ID1vsID2_S3  .Fill(ID1, ID2);
+                     if ( sumE >= 1519 and sumE < 1531 ) M2_ID1vsID2_1525.Fill(ID1, ID2);
+                     if ( sumE >= 1455 and sumE < 1467 ) M2_ID1vsID2_1461.Fill(ID1, ID2);
+                     if ( sumE >= 250  and sumE < 3000 ) M2_ID1vsID2_full.Fill(ID1, ID2);
+                     if ( sumE >= 1405 and sumE < 1450 ) M2_ID1vsID2_S1  .Fill(ID1, ID2);
+                     if ( sumE >= 1470 and sumE < 1515 ) M2_ID1vsID2_S2  .Fill(ID1, ID2);
+                     if ( sumE >= 1535 and sumE < 1580 ) M2_ID1vsID2_S3  .Fill(ID1, ID2);
 
-                if ( evMap[0] >= 1519 and evMap[0] < 1531 and
-                     evMap[1] >= 1519 and evMap[1] < 1531 ) {M2_ID1andID2_1525.Fill(ID1); M2_ID1andID2_1525.Fill(ID2);}
-                if ( evMap[0] >= 1455 and evMap[0] < 1467 and
-                     evMap[1] >= 1455 and evMap[1] < 1467 ) {M2_ID1andID2_1461.Fill(ID1); M2_ID1andID2_1461.Fill(ID2);}
-                if ( evMap[0] >= 250  and evMap[0] < 3000 and
-                     evMap[1] >= 250  and evMap[1] < 3000 ) {M2_ID1andID2_full.Fill(ID1); M2_ID1andID2_full.Fill(ID2);}
-                if ( evMap[0] >= 1405 and evMap[0] < 1450 and
-                     evMap[1] >= 1405 and evMap[1] < 1450 ) {M2_ID1andID2_S1  .Fill(ID1); M2_ID1andID2_S1  .Fill(ID2);}
-                if ( evMap[0] >= 1470 and evMap[0] < 1515 and
-                     evMap[1] >= 1470 and evMap[1] < 1515 ) {M2_ID1andID2_S2  .Fill(ID1); M2_ID1andID2_S2  .Fill(ID2);}
-                if ( evMap[0] >= 1535 and evMap[0] < 1580 and
-                     evMap[1] >= 1535 and evMap[1] < 1580 ) {M2_ID1andID2_S3  .Fill(ID1); M2_ID1andID2_S3  .Fill(ID2);}
-            }
-        }
+                     if ( E1 >= 1519 and E1 < 1531 and
+                          E2 >= 1519 and E2 < 1531 ) {M2_ID1andID2_1525.Fill(ID1); M2_ID1andID2_1525.Fill(ID2);}
+                     if ( E1 >= 1455 and E1 < 1467 and
+                          E2 >= 1455 and E2 < 1467 ) {M2_ID1andID2_1461.Fill(ID1); M2_ID1andID2_1461.Fill(ID2);}
+                     if ( E1 >= 250  and E1 < 3000 and
+                          E2 >= 250  and E2 < 3000 ) {M2_ID1andID2_full.Fill(ID1); M2_ID1andID2_full.Fill(ID2);}
+                     if ( E1 >= 1405 and E1 < 1450 and
+                          E2 >= 1405 and E2 < 1450 ) {M2_ID1andID2_S1  .Fill(ID1); M2_ID1andID2_S1  .Fill(ID2);}
+                     if ( E1 >= 1470 and E1 < 1515 and
+                          E2 >= 1470 and E2 < 1515 ) {M2_ID1andID2_S2  .Fill(ID1); M2_ID1andID2_S2  .Fill(ID2);}
+                     if ( E1 >= 1535 and E1 < 1580 and
+                          E2 >= 1535 and E2 < 1580 ) {M2_ID1andID2_S3  .Fill(ID1); M2_ID1andID2_S3  .Fill(ID2);}
+                      }
+                  }
+              evMap.clear();
+              }
+
+              // set number of primaries in first bin
+              if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
+         nPrim = 0;
+         for (const auto& f : coinFilelist) {
+             TFile froot(f.c_str());
+             if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
+                 auto n = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"));
+                 nPrim += n->GetVal();
+             }
+             else std::cout << "WARNING: NumberOfPrimaries not found in t4z- file! Please use a more recent version of gerda-ada." << std::endl;
+         }
+         energyBEGe.SetBinContent(1, nPrim);
+         energyEnrCoax.SetBinContent(1, nPrim);
+         energyNatCoax.SetBinContent(1, nPrim);
+
+         M2_enrE1vsE2.SetBinContent(1, nPrim);
+         M2_enrE1plusE2.SetBinContent(1, nPrim);
+         M2_enrE1andE2.SetBinContent(1, nPrim);
+         M2_ID1vsID2_1525.SetBinContent(1, nPrim);
+         M2_ID1vsID2_1461.SetBinContent(1, nPrim);
+         M2_ID1vsID2_full.SetBinContent(1, nPrim);
+         M2_ID1vsID2_S1.SetBinContent(1, nPrim);
+         M2_ID1vsID2_S2.SetBinContent(1, nPrim);
+         M2_ID1vsID2_S3.SetBinContent(1, nPrim);
+
+         M2_ID1andID2_1525.SetBinContent(1, nPrim);
+         M2_ID1andID2_1461.SetBinContent(1, nPrim);
+         M2_ID1andID2_full.SetBinContent(1, nPrim);
+        M2_ID1andID2_S1.SetBinContent(1, nPrim);
+        M2_ID1andID2_S2.SetBinContent(1, nPrim);
+        M2_ID1andID2_S3.SetBinContent(1, nPrim);
     }
-
     // Save!
+
+    std::string outName = pathToTop + '/' + pathToIsotope + '/' +
+                          "pdf-" + items[2] + '-' + items[1] + '-' + items[0] + ".root";
+    TFile outfile(outName.c_str(), "RECREATE");
+
     if (verbose) std::cout << "Saving to disk...\n";
     for ( auto h : energy_ch ) h.Write();
     energyBEGe.Write();
     energyEnrCoax.Write();
     energyNatCoax.Write();
 
-    M2_enrE1vsE2.Write();
-    M2_enrE1plusE2.Write();
-    M2_enrE1andE2.Write();
-    M2_ID1vsID2_1525.Write();
-    M2_ID1vsID2_1461.Write();
-    M2_ID1vsID2_full.Write();
-    M2_ID1vsID2_S1.Write();
-    M2_ID1vsID2_S2.Write();
-    M2_ID1vsID2_S3.Write();
+    if (processCoin) {
+        M2_enrE1vsE2.Write();
+        M2_enrE1plusE2.Write();
+        M2_enrE1andE2.Write();
+        M2_ID1vsID2_1525.Write();
+        M2_ID1vsID2_1461.Write();
+        M2_ID1vsID2_full.Write();
+        M2_ID1vsID2_S1.Write();
+        M2_ID1vsID2_S2.Write();
+        M2_ID1vsID2_S3.Write();
 
-    M2_ID1andID2_1525.Write();
-    M2_ID1andID2_1461.Write();
-    M2_ID1andID2_full.Write();
-    M2_ID1andID2_S1.Write();
-    M2_ID1andID2_S2.Write();
-    M2_ID1andID2_S3.Write();
+        M2_ID1andID2_1525.Write();
+        M2_ID1andID2_1461.Write();
+        M2_ID1andID2_full.Write();
+        M2_ID1andID2_S1.Write();
+        M2_ID1andID2_S2.Write();
+        M2_ID1andID2_S3.Write();
+    }
 
     std::cout << "Output saved in: " << outName << std::endl;
 
     return 0;
 }
-/*
-    std::vector<std::string> ch_name = { "GD91A", "GD35B", "GD02B", "GD00B", "GD61A", "GD89B",
-                                         "GD02D", "GD91C", "ANG5" , "RG1"  , "ANG3" , "GD02A",
-                                         "GD32B", "GD32A", "GD32C", "GD89C", "GD61C", "GD76B",
-                                         "GD00C", "GD35C", "GD76C", "GD89D", "GD00D", "GD79C",
-                                         "GD35A", "GD91B", "GD61B", "ANG2" , "RG2"  , "ANG4",
-                                         "GD00A", "GD02C", "GD79B", "GD91D", "GD32D", "GD89A",
-                                         "ANG1" , "GTF112", "GTF32", "GTF45" };
-*/
