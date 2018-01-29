@@ -12,6 +12,7 @@
 #include <memory>
 #include <dirent.h>
 #include <fstream>
+#include <algorithm>
 
 // jsoncpp
 #include "json/json.h"
@@ -62,11 +63,9 @@ int main(int argc, char** argv) {
 
     // strip off trailing '/' character
     if (verbose) std::cout << "Paths:\n";
-    std::vector<std::string> l = {gerdaMetaPath, destDirPath, dirWithRaw};
-    for (auto&& s : l) {
-        if (s.back() == '/') s.pop_back();
-        if (verbose) std::cout << s << std::endl;
-    }
+    if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back(); if (verbose) std::cout << gerdaMetaPath << std::endl;
+    if (destDirPath.back()   == '/') destDirPath.pop_back();   if (verbose) std::cout << destDirPath   << std::endl;
+    if (dirWithRaw.back()    == '/') dirWithRaw.pop_back();    if (verbose) std::cout << dirWithRaw    << std::endl;
 
     // get raw-*.root files in directory
     auto GetContent = [&](std::string foldName) {
@@ -81,6 +80,9 @@ int main(int argc, char** argv) {
                 if (verbose) std::cout << '\t' << std::string(entry.d_name) << std::endl;
             }
         }
+        std::sort (filelist.begin(), filelist.end());
+        if (verbose) { std::cout << "\nraw- files sorted:\n"; for ( const auto & f : filelist ) std::cout << '\t' << f << std::endl; }
+
         return filelist;
     };
 
@@ -99,7 +101,7 @@ int main(int argc, char** argv) {
     // calculate total livetime
     int totLivetime = 0;
     for ( auto r : runs ) {
-        if (verbose) std::cout << "\nRun" << r << ": " << livetimes[r]["livetime_in_s"].asInt() << " s" << std::endl;
+        if (verbose) std::cout << '\n' << r << ": " << livetimes[r]["livetime_in_s"].asInt() << " s";
         totLivetime += livetimes[r]["livetime_in_s"].asInt();
     }
     if (verbose) std::cout << "\nTotal livetime:" << totLivetime << std::endl;
@@ -112,18 +114,19 @@ int main(int argc, char** argv) {
         std::vector<std::string> items;
         std::string dircopy = dirWithRaw;
         for (int j = 0; j < 4; j++ ) {
-            dircopy.erase(dircopy.find_last_of('/'), dircopy.back());
             items.push_back(dircopy.substr(dircopy.find_last_of('/')+1));
+            dircopy.erase(dircopy.find_last_of('/'), dircopy.back());
         }
         auto& it = items;
-        auto filedir = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[3];
+        auto filedir = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[0];
         auto filename = filedir + '/' + "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-run" +
                         livetimes[r]["ID"].asString() + ".root";
+        if (verbose) std::cout << destDirPath << std::endl;
         if (verbose) std::cout << "Path to t4z- file: " << filedir << std::endl;
         if (verbose) std::cout << "tz4- file name: " << filename << std::endl;
 
         // make destdir
-        std::system(c_str("mkdir -p" + filedir));
+        std::system(c_str("mkdir -p " + filedir));
 
         // calculate fraction of events
         auto nentries = ch.GetEntries();
@@ -140,13 +143,13 @@ int main(int argc, char** argv) {
 //            if(verbose) std::cout << "LAr settings loaded" << std::endl;
         config.LoadGedResolutions(gerdaMetaPath + "/detector-data/ged-resolution-default.json");
             if(verbose) std::cout << "Ged resolutions loaded" << std::endl;
-//        config.LoadRunConfig(gerdaMetaPath + "/config/_aux/geruncfg/configuration_20171012.root");
         config.LoadRunConfig(gerdaMetaPath + "/config/_aux/geruncfg/" + livetimes[r]["runconfig"].asString());
             if(verbose) std::cout << "RunConfig loaded" << std::endl;
-        gada::T4SimHandler handler((TChain*)(ch.CopyTree("", "", fraction,first)), &config, filename);
+
+        gada::T4SimHandler handler(&ch, &config, filename);
             if (verbose) std::cout << "Running production... first event = " << first << std::endl;
         // run
-        handler.RunProduction();
+        handler.RunProduction( first, first + fraction );
 
         // update first event
         first += fraction;
