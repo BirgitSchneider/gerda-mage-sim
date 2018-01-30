@@ -15,8 +15,11 @@
 
 /MG/generator/gsspositionsfile             gedet/pplus/ver/ver-gedet-pplus-ch4.root
 
-/MG/generator/select                       decay0
-/MG/generator/decay0/filename              ./decay0files/K42_1E7.dk0
+/MG/generator/select G4gun
+/MG/generator/g4gun/cone_on true
+/gun/particle ion
+/gun/ion 19 42
+/gun/energy 0 eV
 
 ## Define run
 /tracking/verbose                          0

@@ -25,8 +25,11 @@
 /MG/generator/Sampling/volume/offsetCenterYPos         0.0 mm
 /MG/generator/Sampling/volume/offsetCenterZPos         -40.009699999999995 mm
 
-/MG/generator/select                       decay0
-/MG/generator/decay0/filename              ./decay0files/K42_1E7.dk0
+/MG/generator/select G4gun
+/MG/generator/g4gun/cone_on true
+/gun/particle ion
+/gun/ion 19 42
+/gun/energy 0 eV
 
 /tracking/verbose                          0
 /run/beamOn                                1000000

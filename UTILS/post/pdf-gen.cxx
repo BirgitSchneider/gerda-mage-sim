@@ -214,12 +214,12 @@ int main( int argc, char** argv ) {
     TH2I M2_ID1vsID2_S2  ("M2_ID1vsID2_S2",   "ID1 with edep1+edep2 in range = [1470,1515] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
     TH2I M2_ID1vsID2_S3  ("M2_ID1vsID2_S3",   "ID1 with edep1+edep2 in range = [1535,1580] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
 
-    TH1I M2_ID1andID2_1525("M2_ID1andID2_1525", "ID1 and ID2 with edep1 and edep2 in range = 1525 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
-    TH1I M2_ID1andID2_1461("M2_ID1andID2_1461", "ID1 and ID2 with edep1 and edep2 in range = 1461 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
-    TH1I M2_ID1andID2_full("M2_ID1andID2_full", "ID1 and ID2 with edep1 and edep2 in range = [250,3000] keV, M=2 (enrAll)",  40, 0, 40);
-    TH1I M2_ID1andID2_S1  ("M2_ID1andID2_S1",   "ID1 and ID2 with edep1 and edep2 in range = [1405,1450] keV, M=2 (enrAll)", 40, 0, 40);
-    TH1I M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1 and edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
-    TH1I M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1 and edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1I M2_ID1andID2_1525("M2_ID1andID2_1525", "ID1 and ID2 with edep1+edep2 in range = 1525 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
+    TH1I M2_ID1andID2_1461("M2_ID1andID2_1461", "ID1 and ID2 with edep1+edep2 in range = 1461 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
+    TH1I M2_ID1andID2_full("M2_ID1andID2_full", "ID1 and ID2 with edep1+edep2 in range = [250,3000] keV, M=2 (enrAll)",  40, 0, 40);
+    TH1I M2_ID1andID2_S1  ("M2_ID1andID2_S1",   "ID1 and ID2 with edep1+edep2 in range = [1405,1450] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1I M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1I M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
     if (processCoin) {
          std::map<int,double> evMap;
@@ -228,6 +228,7 @@ int main( int argc, char** argv ) {
          coinCh.LoadTree(0);
          reader.SetTree(&coinCh);
          while(reader.Next()) {
+             evMap.clear();
              reader.Next();
              if (verbose) bar.Update();
              if (*multiplicity == 2) {
@@ -253,28 +254,38 @@ int main( int argc, char** argv ) {
                      M2_enrE1plusE2.Fill(sumE);
                      M2_enrE1andE2.Fill(E1); M2_enrE1andE2.Fill(E2);
 
-                     if ( sumE >= 1519 and sumE < 1531 ) M2_ID1vsID2_1525.Fill(ID1, ID2);
-                     if ( sumE >= 1455 and sumE < 1467 ) M2_ID1vsID2_1461.Fill(ID1, ID2);
-                     if ( sumE >= 250  and sumE < 3000 ) M2_ID1vsID2_full.Fill(ID1, ID2);
-                     if ( sumE >= 1405 and sumE < 1450 ) M2_ID1vsID2_S1  .Fill(ID1, ID2);
-                     if ( sumE >= 1470 and sumE < 1515 ) M2_ID1vsID2_S2  .Fill(ID1, ID2);
-                     if ( sumE >= 1535 and sumE < 1580 ) M2_ID1vsID2_S3  .Fill(ID1, ID2);
-
-                     if ( E1 >= 1519 and E1 < 1531 and
-                          E2 >= 1519 and E2 < 1531 ) {M2_ID1andID2_1525.Fill(ID1); M2_ID1andID2_1525.Fill(ID2);}
-                     if ( E1 >= 1455 and E1 < 1467 and
-                          E2 >= 1455 and E2 < 1467 ) {M2_ID1andID2_1461.Fill(ID1); M2_ID1andID2_1461.Fill(ID2);}
-                     if ( E1 >= 250  and E1 < 3000 and
-                          E2 >= 250  and E2 < 3000 ) {M2_ID1andID2_full.Fill(ID1); M2_ID1andID2_full.Fill(ID2);}
-                     if ( E1 >= 1405 and E1 < 1450 and
-                          E2 >= 1405 and E2 < 1450 ) {M2_ID1andID2_S1  .Fill(ID1); M2_ID1andID2_S1  .Fill(ID2);}
-                     if ( E1 >= 1470 and E1 < 1515 and
-                          E2 >= 1470 and E2 < 1515 ) {M2_ID1andID2_S2  .Fill(ID1); M2_ID1andID2_S2  .Fill(ID2);}
-                     if ( E1 >= 1535 and E1 < 1580 and
-                          E2 >= 1535 and E2 < 1580 ) {M2_ID1andID2_S3  .Fill(ID1); M2_ID1andID2_S3  .Fill(ID2);}
-                      }
+                     if ( sumE >= 1519 and sumE < 1531 ) {
+                         M2_ID1vsID2_1525.Fill(ID1, ID2);
+                         M2_ID1andID2_1525.Fill(ID1);
+                         M2_ID1andID2_1525.Fill(ID2);
+                     }
+                     if ( sumE >= 1455 and sumE < 1467 ) {
+                         M2_ID1vsID2_1461.Fill(ID1, ID2);
+                         M2_ID1andID2_1461.Fill(ID1);
+                         M2_ID1andID2_1461.Fill(ID2);
+                     }
+                     if ( sumE >= 250  and sumE < 3000 ) {
+                         M2_ID1vsID2_full.Fill(ID1, ID2);
+                         M2_ID1andID2_full.Fill(ID1);
+                         M2_ID1andID2_full.Fill(ID2);
+                     }
+                     if ( sumE >= 1405 and sumE < 1450 ) {
+                         M2_ID1vsID2_S1.Fill(ID1, ID2);
+                         M2_ID1andID2_S1.Fill(ID1);
+                         M2_ID1andID2_S1.Fill(ID2);
+                     }
+                     if ( sumE >= 1470 and sumE < 1515 ) {
+                         M2_ID1vsID2_S2.Fill(ID1, ID2);
+                         M2_ID1andID2_S2.Fill(ID1);
+                         M2_ID1andID2_S2.Fill(ID2);
+                     }
+                     if ( sumE >= 1535 and sumE < 1580 ) {
+                         M2_ID1vsID2_S3.Fill(ID1, ID2);
+                         M2_ID1andID2_S3.Fill(ID1);
+                         M2_ID1andID2_S3.Fill(ID2);
+                     }
+                     }
                   }
-              evMap.clear();
               }
 
               // set number of primaries in first bin
@@ -305,9 +316,9 @@ int main( int argc, char** argv ) {
          M2_ID1andID2_1525.SetBinContent(1, nPrim);
          M2_ID1andID2_1461.SetBinContent(1, nPrim);
          M2_ID1andID2_full.SetBinContent(1, nPrim);
-        M2_ID1andID2_S1.SetBinContent(1, nPrim);
-        M2_ID1andID2_S2.SetBinContent(1, nPrim);
-        M2_ID1andID2_S3.SetBinContent(1, nPrim);
+         M2_ID1andID2_S1.SetBinContent(1, nPrim);
+         M2_ID1andID2_S2.SetBinContent(1, nPrim);
+         M2_ID1andID2_S3.SetBinContent(1, nPrim);
     }
     // Save!
 

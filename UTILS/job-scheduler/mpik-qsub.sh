@@ -26,8 +26,8 @@ if [[ $LOCATION == "gedet" ]]; then
 
 	ID="$( printf %d $(($SGE_TASK_ID - 1)) )"
 
-	MACFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}-000.mac"
-	LOGFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}-000.out"
+	MACFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.mac"
+	LOGFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.out"
 
 	echo $MACFILENAME
 else

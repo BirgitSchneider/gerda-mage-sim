@@ -32,3 +32,20 @@ $ singularity exec -B /common:/common gerda-mage-sim-utils.sqsh julia process-ra
 $ cd gerda-mage-sim
 $ singularity run --cleanenv --app MaGe gerdasw.g4.10.3_v2.1 cables/hv_at_holders/K40/edep/log/raw-cables-hv_at_holders-K40-edep-000.mac
 ```
+
+# Useful sed commands to quickly change macros
+
+Change file directly with the -i flag
+```shell
+$ sed -i ... file
+```
+
+Delete all lines containing a 'word' in 'file'
+```shell
+$ sed -i '/word/d' file
+```
+
+Insert 'stuff' in line number 10 in 'file'
+```shell
+$ sed -i '10i stuff' file
+```
