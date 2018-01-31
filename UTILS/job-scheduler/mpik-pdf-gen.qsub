@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#$ -P short	### queue
+#$ -j y		### have logoutput and erroroutput in the same file
+
+SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
+
+cd /lfs/l2/gerda/Hades/gerda-mage-sim/UTILS/post
+singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
+  --destdir $2 \
+  --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
+  $1

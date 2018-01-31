@@ -9,60 +9,83 @@
 #  - make post : lauch post-processing in the cluster
 #
 # NOTES:
+#  - unfortunately the GNU make functionalities are not fully available.
+#    This is due to the fact that the qsub submit commands exit after the
+#    job has been successfully spawned and don't keep track of the real
+#    execution time.
+#    So when you run 'make post' you reprocess everything, and not only new
+#    or modified files. 'make sim' is instead fully capable!
 #  - use the --dry-run flag to see what would be done without
 #    actually executing it (useful also in conjunction with --debug)
 #
-SRCDIR  = /lfs/l2/gerda/Hades/gerda-mage-sim
-DESTDIR = /lfs/l2/gerda/Hades/post-proc
+SRCDIR  = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
+DESTDIR = /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.1
+QSUB = qsub
 # qsub script must accept the syntax:
-# qsub job-scheduler/t4z-gen.qsub <folder-with-raw> <dest-dir-tree>
-JOBT4Z  = qsub job-scheduler/t4z-gen.qsub
+# qsub job-scheduler/mpik-t4z-gen.qsub <folder-with-raw> <dest-dir-tree>
+# qsub job-scheduler/mpik-pdf-gen.qsub <volume>/<part>/<isotope> <dest-dir-tree>
+JOBT4Z  = job-scheduler/mpik-t4z-gen.qsub
+JOBPDF  = job-scheduler/mpik-pdf-gen.qsub
+
+all :
+	@echo "Please pick up one of the following options:"
+	@echo " - make sim : launch the simulations in the cluster"
+	@echo " - make bin : compile the command line tools"
+	@echo " - make post : lauch post-processing in the cluster"
 
 # function to change the position of the directory tree
 changetree = $(shell echo $(2)/$(shell echo $(1) | rev | cut -d'/' -f-4 | rev))
+rm1 = $(shell echo $(1) | cut -d'/' -f2-)
+
+# info extraction
+volume  = $(shell echo $(1) | cut -d'/' -f3)
+part    = $(shell echo $(1) | cut -d'/' -f4)
+isotope = $(shell echo $(1) | cut -d'/' -f5)
 
 # get all directories to be processed with raw- files
-#DIRS = $(wildcard ../../*/*/*/edep ../../*/*/*/coin)
-DIRS = ../../minishroud/glue_rings_bottom/Bi212/edep ../../minishroud/glue_rings_bottom/Pb214/edep
+DIRSWITHRAW = ,$(foreach d,$(wildcard ../*/*/*/edep ../*/*/*/coin),$(shell dirname $(d)))
 
-# extract infos from path
-volume  = $(shell echo $(1) | cut -d "/" -f3)
-part    = $(shell echo $(1) | cut -d "/" -f4)
-isotope = $(shell echo $(1) | cut -d "/" -f5)
-deptype = $(shell echo $(1) | cut -d "/" -f6)
+TARGETS = $(sort $(foreach dir,$(DIRSWITHRAW),$(dir)/post-proc))
 
-# *CHANGE ME*: array with runIDs
-RUNS = $(shell seq 53 65) 67 $(shell seq 69 89)
+post : mkdir $(TARGETS)
 
-# function to build the t4ized file name
-# ARG1: directory with raw files
-# ARG2: runID
-t4zfile = t4z-$(call volume,$(1))-$(call part,$(1))-$(call isotope,$(1))-$(call deptype,$(1))-run$(2).root
+mkdir :
+	@mkdir -p $(DESTDIR)
 
-# function to get the list of t4z- files that will be created
-# ARG1: directory with raw files
-out4zfiles = $(foreach id,$(RUNS),$(call changetree,$(1)/$(call t4zfile,$(1),$(id)),$(DESTDIR)))
+getjob = $(shell if [[ `qstat -r | grep $(1)` ]]; then echo 1; else echo 0; fi)
 
-ALLT4Z = $(foreach dir,$(DIRS),$(call out4zfiles,$(dir)))
+$(TARGETS) :
+ifeq '$(call getjob,$(subst /,-,$(call rm1,$(dir $@))edep.t4z))' '0'
+	$(QSUB) -N $(subst /,-,$(call rm1,$(dir $@))edep.t4z) $(JOBT4Z) \
+                   $(call changetree,$(dir $@),$(SRCDIR))edep \
+                   $(DESTDIR) >/dev/null
+else
+	@echo "There's already a job for $@-edep in queue"
+endif
+ifeq '$(call getjob,$(subst /,-,$(call rm1,$(dir $@))coin.t4z))' '0'
+	$(QSUB) -N $(subst /,-,$(call rm1,$(dir $@))coin.t4z) $(JOBT4Z) \
+                   $(call changetree,$(dir $@),$(SRCDIR))coin \
+                   $(DESTDIR) >/dev/null
+else
+	@echo "There's already a job for $@-coin in queue"
+endif
+ifeq '$(call getjob,$(subst /,-,$(call rm1,$(dir $@))all.pdf))' '0'
+	$(QSUB) -hold_jid $(subst /,-,$(call rm1,$(dir $@))edep),$(subst /,-,$(call rm1,$(dir $@))coin) \
+                   -N $(subst /,-,$(call rm1,$(dir $@))all.pdf) \
+                   $(JOBPDF) $(call volume,$@)/$(call part,$@)/$(call isotope,$@) \
+                   $(DESTDIR) >/dev/null
+else
+	@echo "There's already a job for $@-c in queue"
+endif
 
-post : $(ALLT4Z)
+clean-t4z :
+	-rm -rf $(DESTDIR)
 
-# the dependencies are set to be the raw- files, so if they change the
-# corresponding t4z- files are re-processed
-define t4z-recipe-template
-  $(call out4zfiles,$(1)) : $$(wildcard $$(call changetree,$(1),$(SRCDIR))/raw-*.root); $$(JOBT4Z) $$(call changetree,$(1),$$(SRCDIR)) $$(DESTDIR) > /dev/null
-endef
-
-$(foreach dir,$(DIRS),$(eval $(call t4z-recipe-template,$(dir))))
-
-clean_t4z :
-	-rm -rf $(T4ZFILES)
-
-.PHONY : clean_t4z post
+.PHONY : clean-t4z post mkdir
 
 ### Run simulations ###########################################################################
 
-QSUB_RUNSIM = qsub job-scheduler/mpik-run-mage.qsub
+JOBSIM = job-scheduler/mpik-run-mage.qsub
 
 SIMDIRS   = $(wildcard ../*/*/*/edep ../*/*/*/coin)
 MACROS    = $(foreach dir,$(SIMDIRS),$(realpath $(wildcard $(dir)/log/raw-*.mac)))
@@ -71,10 +94,22 @@ ROOTFILES = $(foreach mac,$(MACROS),$(subst .mac,.root,$(subst log/,,$(mac))))
 sim : $(ROOTFILES)
 
 define run-sim-template
-  $(1) : $$(dir $(1))log/$$(subst .root,.mac,$$(notdir $(1))); $$(QSUB_RUNSIM) $$^
+  $(1) : $$(dir $(1))log/$$(subst .root,.mac,$$(notdir $(1)))
+  ifeq '$$(shell if [[ `qstat -r | grep "$$(notdir $(1))"` ]]; then echo 1; else echo 0; fi)' '0'
+	$$(QSUB) -N $$(notdir $(1)) $$(JOBSIM) $$^
+  else
+	@echo "There's already a job for $(1) in queue"
+  endif
 endef
 
 $(foreach f,$(ROOTFILES),$(eval $(call run-sim-template,$(f))))
+
+#$(ROOTFILES) : % : $(call volume,%)
+#ifeq '$$(shell if [[ `qstat -r | grep "$(notdir $@)"` ]]; then echo 1; else echo 0; fi)' '0'
+#	$(QSUB) -N $(notdir $@) $(JOBSIM) $^
+#else
+#	@echo "There's already a job for $@ in queue"
+#endif
 
 .PHONY : sim
 
@@ -110,3 +145,21 @@ bin/t4z-gen : post/t4z-gen.cxx
 
 clean_bin :
 	-rm -r bin
+
+### Utilities ##########################################################################################
+# extract infos from path
+#volume  = $(shell echo $(1) | cut -d "/" -f3)
+#part    = $(shell echo $(1) | cut -d "/" -f4)
+#isotope = $(shell echo $(1) | cut -d "/" -f5)
+#deptype = $(shell echo $(1) | cut -d "/" -f6)
+# *CHANGE ME*: array with runIDs
+#RUNS = $(shell seq 53 65) 67 $(shell seq 69 89)
+# function to build the t4ized file name
+# ARG1: directory with raw files
+# ARG2: runID
+# #t4zfile = t4z-$(call volume,$(1))-$(call part,$(1))-$(call isotope,$(1))-$(call deptype,$(1))-run$(2).root
+# function to get the list of t4z- files that will be created
+# ARG1: directory with raw files
+#out4zfiles = $(foreach id,$(RUNS),$(call changetree,$(1)/$(call t4zfile,$(1),$(id)),$(DESTDIR)))
+#ALLT4Z = $(foreach dir,$(DIRS),$(call out4zfiles,$(dir)))
+#$(foreach dir,$(DIRS),$(eval $(call t4z-recipe-template,$(dir))))
