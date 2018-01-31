@@ -1,4 +1,4 @@
-FROM baltig.infn.it:4567/gerda/gerdasw-containers/gerdasw:g4.10.3_v2.1
+FROM baltig.infn.it:4567/gerda/gerdasw-containers/gerdasw:g4.10.3_v2.2
 
 USER root
 
@@ -19,13 +19,13 @@ ENV PATH="$PATH:/scif/julia/usr/bin" \
     JULIA_CXX_RTTI="1"
 
 RUN julia -e 'Pkg.init()' && \
-    julia -e 'Pkg.add("Cxx"); Pkg.add("ROOT")' && \
+    julia -e 'Pkg.add("Cxx"); Pkg.add("ROOT"); Pkg.add("JSON")' && \
     julia -e 'using Cxx' && \
     mv /scif/julia/pkgs/v0.6/ROOT/deps/usr/bin/julia /scif/julia/usr/bin/rjulia
 
 COPY . /scif/UTILS/
 WORKDIR /scif/UTILS
-RUN make && \
+RUN make bin && \
     find . ! -name 'bin' ! -name '.' -type d -exec rm -rf {} +
 
 # this is for HTCondor and Docker
