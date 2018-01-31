@@ -33,7 +33,7 @@ $ cd gerda-mage-sim
 $ singularity run --cleanenv --app MaGe gerdasw.g4.10.3_v2.1 cables/hv_at_holders/K40/edep/log/raw-cables-hv_at_holders-K40-edep-000.mac
 ```
 
-# Useful sed commands to quickly change macros
+### Useful sed commands to quickly change macros
 
 Change file directly with the -i flag
 ```shell
