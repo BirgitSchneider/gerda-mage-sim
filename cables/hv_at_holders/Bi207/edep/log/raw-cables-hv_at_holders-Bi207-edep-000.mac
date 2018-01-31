@@ -15,8 +15,11 @@
 /MG/generator/volumelistto                 39
 /MG/generator/volumelist                   HVCableAtHolder_Phase2
 
-/MG/generator/select                       decay0
-/MG/generator/decay0/filename              ./decay0files/Bi207_1E7.dk0
+/MG/generator/select                       G4gun
+/MG/generator/g4gun/cone_on                true
+/gun/particle                              ion
+/gun/ion                                   83 207
+/gun/energy                                0 eV
 
 /tracking/verbose                          0
 /run/beamOn                                5872589

@@ -3,7 +3,7 @@
 # load preamble
 /control/execute                           gedet/intrinsic/2nbb/edep/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./gedet/intrinsic/2nbb/edep/raw-gedet-intrinsic-2nbb-edep-ch8.root
+/MG/eventaction/rootfilename               ./gedet/intrinsic/2nbb/edep/raw-gedet-intrinsic-2nbb-edep-ch8-000.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
