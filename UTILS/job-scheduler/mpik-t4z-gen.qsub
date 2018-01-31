@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#$ -P short	### queue
+#$ -j y		### have logoutput and erroroutput in the same file
+
+SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
+
+cd /lfs/l2/gerda/Hades/gerda-mage-sim/UTILS/post
+singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh t4z-gen \
+  --metadata $SRCDIR/UTILS/post/gerda-metadata \
+  --destdir $2 \
+  --livetime-file $SRCDIR/UTILS/post/run-livetime.json \
+  $1
