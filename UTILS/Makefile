@@ -133,7 +133,10 @@ dirs :
 	@mkdir -p bin
 
 bin/pdf-gen : post/pdf-gen.cxx
-	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -I post/progressbar -o $@ $< jsoncpp/jsoncpp.cpp post/progressbar/ProgressBar.cc
+	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
+
+bin/pdf-gen-volume : post/pdf-gen-volume.cxx
+	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
 bin/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/check-simulation.cxx post/progressbar/ProgressBar.cc

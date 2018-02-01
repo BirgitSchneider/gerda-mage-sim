@@ -12,7 +12,6 @@
 #include <fstream>
 #include <dirent.h>
 #include <map>
-#include <set>
 
 // jsoncpp
 #include "json/json.h"
@@ -30,9 +29,6 @@
 #include "TString.h"
 #include "TParameter.h"
 #include "TChain.h"
-
-// other
-#include "ProgressBar.h"
 
 int main( int argc, char** argv ) {
 
@@ -76,7 +72,7 @@ int main( int argc, char** argv ) {
         if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 and r; ) {
-            if (entry.d_type == 8 and
+            if (entry.d_type == DT_REG and
                 std::string(entry.d_name).find("t4z-") != std::string::npos and
                 std::string(entry.d_name).find(".root") != std::string::npos) {
                 filelist.push_back(foldName + "/" + std::string(entry.d_name));
@@ -153,12 +149,10 @@ int main( int argc, char** argv ) {
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
 
-    ProgressBar bar; bar.SetNIter(edepCh.GetEntries()); bar.ShowBar(false);
     std::cout << "\nProcessing edep... ";
     edepCh.LoadTree(0);
     reader.SetTree(&edepCh);
     while(reader.Next()) {
-        if (verbose) bar.Update();
         if( *multiplicity <= 1 and *multiplicity > 0 ) {
             for ( int i = 0; i < 40; ++i ) {
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
@@ -223,14 +217,12 @@ int main( int argc, char** argv ) {
 
     if (processCoin) {
          std::map<int,double> evMap;
-         bar.Reset(); bar.SetNIter(coinCh.GetEntries()); bar.ShowBar(false);
          std::cout << "\nProcessing edep... ";
          coinCh.LoadTree(0);
          reader.SetTree(&coinCh);
          while(reader.Next()) {
              evMap.clear();
              reader.Next();
-             if (verbose) bar.Update();
              if (*multiplicity == 2) {
                  for ( int i = 0; i < 40; ++i ) {
                      if ( energy[i] < 10000 and energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
