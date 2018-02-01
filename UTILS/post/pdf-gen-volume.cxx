@@ -58,7 +58,6 @@ int main( int argc, char** argv ) {
     if (pathToDestTop.back() == '/') pathToDestTop.pop_back();
     if (pathToDestTop.back() == '/') pathToDestTop.pop_back();
     if (verbose) std::cout << "Top dest directory tree: " << pathToDestTop << std::endl;
-    if (verbose) std::cout << "Top gerda-mage-sim directory tree: " << pathToDestTop << std::endl;
     auto volume = *(args.end()-1);
 
     auto GetDirContent = [&](std::string foldName) {
@@ -67,8 +66,12 @@ int main( int argc, char** argv ) {
         if (!p) { std::cout << "Invalid or empty directory path!\n"; return dirlist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 and r; ) {
-            if (entry.d_type == DT_DIR ) dirlist.push_back(foldName + "/" + std::string(entry.d_name));
-            if (verbose) std::cout << '\t' << std::string(entry.d_name) << std::endl;
+            if (entry.d_type == 4 and
+                std::string(entry.d_name) != "." and
+                std::string(entry.d_name) != "..") {
+                dirlist.push_back(foldName + "/" + std::string(entry.d_name));
+                if (verbose) std::cout << '\t' << std::string(entry.d_name) << std::endl;
+            }
         }
         return dirlist;
     };
@@ -82,22 +85,26 @@ int main( int argc, char** argv ) {
     std::map<std::string,std::vector<std::string>> isoMap;
     std::set<std::string> allIso;
     for (const auto& p : partlist ) {
-        if (verbose) std::cout << "\nfolders found in " << pathToDestTop + '/' + p << " :\n";
-        auto c = GetDirContent(pathToDestTop + '/' + p);
+        if (verbose) std::cout << "\nfolders found in " << p << " :\n";
+        auto c = GetDirContent(p);
         isoMap.insert(std::make_pair(p, c));
-        for (const auto& i : c ) allIso.insert(i);
+        for (const auto& i : c ) allIso.insert(i.substr(i.find_last_of('/')+1));
     }
-
+    if (verbose) for (const auto& i : allIso) std::cout << i << ' '; std::cout << std::endl;
+/*
     // check if we have the isotope in each part
+    if (verbose) std::cout << "Check if we have the isotope in each part...\n";
     for (const auto& i : allIso ) {
-        for (auto p = isoMap.begin(); p != isoMap.end(); ) {
+        for (auto p = isoMap.begin(); p != isoMap.end(); p++) {
             if (std::find(p->second.begin(), p->second.end(), i) == p->second.end()) {
-                isoMap.erase(p);
+                allIso.erase(i);
+                if (verbose) std::cout << "Erased " << i << "!\n";
                 break;
             }
         }
     }
-
+ */
+    if (verbose) std::cout << "Retrieving detector data...\n";
     Json::Value root;
     std::ifstream fGedMap(gedMapFile);
     if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!"; return 1;}
@@ -115,6 +122,7 @@ int main( int argc, char** argv ) {
     }
 
     // loop over isotopes
+    if (verbose) std::cout << "Loop over valid isotopes...\n";
     for (const auto& iso : allIso ) {
 
         // build final M1 spectra
@@ -161,47 +169,47 @@ int main( int argc, char** argv ) {
         for (const auto& prt : partlist) {
 
             // open input pdf- file
-            auto file = pathToDestTop + '/' + volume + '/' + prt + '/' + iso + '/' +
-                        "pdf-" + volume + '-' + prt + '-' + iso + ".root";
+            auto file = prt + '/' + iso + '/' + "pdf-" + volume + '-' + prt.substr(prt.find_last_of('/')+1) + '-' + iso + ".root";
+            if (verbose) std::cout << "Opening " << file << "...\n";
             TFile inFile(file.c_str());
             if (!inFile.IsOpen()) {std::cout << file << " seems not to be there. Aborting...\n"; missingpdf = true; break;}
 
             std::vector<TH1D*> tmp_energy_ch;
             for ( int i = 0; i < 40; ++i ) {
                 tmp_energy_ch.push_back(dynamic_cast<TH1D*>(inFile.Get(Form("M1_ch%i", i))));
+                if (!tmp_energy_ch[i]) std::cout << "Problems retrieving M1_ch" << i << "!\n";
             }
 
-            TH1D* tmp_energyBEGe        = dynamic_cast<TH1D*>(inFile.Get("energyBEGe"));
-            TH1D* tmp_energyEnrCoax     = dynamic_cast<TH1D*>(inFile.Get("energyEnrCoax"));
-            TH1D* tmp_energyNatCoax     = dynamic_cast<TH1D*>(inFile.Get("energyNatCoax"));
- 
-            TH1I* tmp_M1_enrBEGe_1525   = dynamic_cast<TH1I*>(inFile.Get("M1_enrBEGe_1525"));
-            TH1I* tmp_M1_enrBEGe_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_enrBEGe_1461"));
-            TH1I* tmp_M1_enrBEGe_full   = dynamic_cast<TH1I*>(inFile.Get("M1_enrBEGe_full"));
-            TH1I* tmp_M1_enrCoax_1525   = dynamic_cast<TH1I*>(inFile.Get("M1_enrCoax_1525"));
-            TH1I* tmp_M1_enrCoax_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_enrCoax_1461"));
-            TH1I* tmp_M1_enrCoax_full   = dynamic_cast<TH1I*>(inFile.Get("M1_enrCoax_full"));
-            TH1I* tmp_M1_natCoax_1525   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_1525"));
-            TH1I* tmp_M1_natCoax_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_1461"));
-            TH1I* tmp_M1_natCoax_full   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_full"));
- 
-            TH2D* tmp_M2_enrE1vsE2      = dynamic_cast<TH2D*>(inFile.Get("M2_enrE1vsE2"));
-            TH1D* tmp_M2_enrE1plusE2    = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1plusE2"));
-            TH1D* tmp_M2_enrE1andE2     = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1andE2"));
- 
-            TH2I* tmp_M2_ID1vsID2_1525  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1525"));
-            TH2I* tmp_M2_ID1vsID2_1461  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1461"));
-            TH2I* tmp_M2_ID1vsID2_full  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_full"));
-            TH2I* tmp_M2_ID1vsID2_S1    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S1"));
-            TH2I* tmp_M2_ID1vsID2_S2    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S2"));
-            TH2I* tmp_M2_ID1vsID2_S3    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S3"));
- 
-            TH1I* tmp_M2_ID1andID2_1525 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1525"));
-            TH1I* tmp_M2_ID1andID2_1461 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1461"));
-            TH1I* tmp_M2_ID1andID2_full = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_full"));
-            TH1I* tmp_M2_ID1andID2_S1   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S1"));
-            TH1I* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S2"));
-            TH1I* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S3"));
+            TH1D* tmp_energyBEGe        = dynamic_cast<TH1D*>(inFile.Get("M1_enrBEGe"));        if (!tmp_energyBEGe)        std::cout << "Problems retrieving M1_energyBEGe       !\n";
+            TH1D* tmp_energyEnrCoax     = dynamic_cast<TH1D*>(inFile.Get("M1_enrCoax"));     if (!tmp_energyEnrCoax)     std::cout << "Problems retrieving M1_energyEnrCoax    !\n";
+            TH1D* tmp_energyNatCoax     = dynamic_cast<TH1D*>(inFile.Get("M1_natCoax"));     if (!tmp_energyNatCoax)     std::cout << "Problems retrieving M1_energyNatCoax    !\n";
+
+            TH1I* tmp_M1_enrBEGe_1525   = dynamic_cast<TH1I*>(inFile.Get("M1_enrBEGe_1525"));   if (!tmp_M1_enrBEGe_1525)   std::cout << "Problems retrieving M1_enrBEGe_1525  !\n";
+            TH1I* tmp_M1_enrBEGe_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_enrBEGe_1461"));   if (!tmp_M1_enrBEGe_1461)   std::cout << "Problems retrieving M1_enrBEGe_1461  !\n";
+            TH1I* tmp_M1_enrBEGe_full   = dynamic_cast<TH1I*>(inFile.Get("M1_enrBEGe_full"));   if (!tmp_M1_enrBEGe_full)   std::cout << "Problems retrieving M1_enrBEGe_full  !\n";
+            TH1I* tmp_M1_enrCoax_1525   = dynamic_cast<TH1I*>(inFile.Get("M1_enrCoax_1525"));   if (!tmp_M1_enrCoax_1525)   std::cout << "Problems retrieving M1_enrCoax_1525  !\n";
+            TH1I* tmp_M1_enrCoax_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_enrCoax_1461"));   if (!tmp_M1_enrCoax_1461)   std::cout << "Problems retrieving M1_enrCoax_1461  !\n";
+            TH1I* tmp_M1_enrCoax_full   = dynamic_cast<TH1I*>(inFile.Get("M1_enrCoax_full"));   if (!tmp_M1_enrCoax_full)   std::cout << "Problems retrieving M1_enrCoax_full  !\n";
+            TH1I* tmp_M1_natCoax_1525   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_1525"));   if (!tmp_M1_natCoax_1525)   std::cout << "Problems retrieving M1_natCoax_1525  !\n";
+            TH1I* tmp_M1_natCoax_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_1461"));   if (!tmp_M1_natCoax_1461)   std::cout << "Problems retrieving M1_natCoax_1461  !\n";
+            TH1I* tmp_M1_natCoax_full   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_full"));   if (!tmp_M1_natCoax_full)   std::cout << "Problems retrieving M1_natCoax_full  !\n";
+
+            TH2D* tmp_M2_enrE1vsE2      = dynamic_cast<TH2D*>(inFile.Get("M2_enrE1vsE2"));      if (!tmp_M2_enrE1vsE2)      std::cout << "Problems retrieving M2_enrE1vsE2     !\n";
+            TH1D* tmp_M2_enrE1plusE2    = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1plusE2"));    if (!tmp_M2_enrE1plusE2)    std::cout << "Problems retrieving M2_enrE1plusE2   !\n";
+            TH1D* tmp_M2_enrE1andE2     = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1andE2"));     if (!tmp_M2_enrE1andE2)     std::cout << "Problems retrieving M2_enrE1andE2    !\n";
+            TH2I* tmp_M2_ID1vsID2_1525  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1525"));  if (!tmp_M2_ID1vsID2_1525)  std::cout << "Problems retrieving M2_ID1vsID2_1525 !\n";
+            TH2I* tmp_M2_ID1vsID2_1461  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1461"));  if (!tmp_M2_ID1vsID2_1461)  std::cout << "Problems retrieving M2_ID1vsID2_1461 !\n";
+            TH2I* tmp_M2_ID1vsID2_full  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_full"));  if (!tmp_M2_ID1vsID2_full)  std::cout << "Problems retrieving M2_ID1vsID2_full !\n";
+            TH2I* tmp_M2_ID1vsID2_S1    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S1"));    if (!tmp_M2_ID1vsID2_S1)    std::cout << "Problems retrieving M2_ID1vsID2_S1   !\n";
+            TH2I* tmp_M2_ID1vsID2_S2    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S2"));    if (!tmp_M2_ID1vsID2_S2)    std::cout << "Problems retrieving M2_ID1vsID2_S2   !\n";
+            TH2I* tmp_M2_ID1vsID2_S3    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S3"));    if (!tmp_M2_ID1vsID2_S3)    std::cout << "Problems retrieving M2_ID1vsID2_S3   !\n";
+
+            TH1I* tmp_M2_ID1andID2_1525 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1525")); if (!tmp_M2_ID1andID2_1525) std::cout << "Problems retrieving M2_ID1andID2_1525!\n";
+            TH1I* tmp_M2_ID1andID2_1461 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1461")); if (!tmp_M2_ID1andID2_1461) std::cout << "Problems retrieving M2_ID1andID2_1461!\n";
+            TH1I* tmp_M2_ID1andID2_full = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_full")); if (!tmp_M2_ID1andID2_full) std::cout << "Problems retrieving M2_ID1andID2_full!\n";
+            TH1I* tmp_M2_ID1andID2_S1   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S1"));   if (!tmp_M2_ID1andID2_S1)   std::cout << "Problems retrieving M2_ID1andID2_S1  !\n";
+            TH1I* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S2"));   if (!tmp_M2_ID1andID2_S2)   std::cout << "Problems retrieving M2_ID1andID2_S2  !\n";
+            TH1I* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S3"));   if (!tmp_M2_ID1andID2_S3)   std::cout << "Problems retrieving M2_ID1andID2_S3  !\n";
 
             if(!tmp_M2_ID1vsID2_1525) processCoin = false;
 

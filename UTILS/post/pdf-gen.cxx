@@ -72,7 +72,7 @@ int main( int argc, char** argv ) {
         if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 and r; ) {
-            if (entry.d_type == DT_REG and
+            if (entry.d_type == 8 and
                 std::string(entry.d_name).find("t4z-") != std::string::npos and
                 std::string(entry.d_name).find(".root") != std::string::npos) {
                 filelist.push_back(foldName + "/" + std::string(entry.d_name));
@@ -324,10 +324,21 @@ int main( int argc, char** argv ) {
     energyEnrCoax.Write();
     energyNatCoax.Write();
 
+    M1_enrBEGe_1525.Write();
+    M1_enrBEGe_1461.Write();
+    M1_enrBEGe_full.Write();
+    M1_enrCoax_1525.Write();
+    M1_enrCoax_1461.Write();
+    M1_enrCoax_full.Write();
+    M1_natCoax_1525.Write();
+    M1_natCoax_1461.Write();
+    M1_natCoax_full.Write();
+
     if (processCoin) {
         M2_enrE1vsE2.Write();
         M2_enrE1plusE2.Write();
         M2_enrE1andE2.Write();
+
         M2_ID1vsID2_1525.Write();
         M2_ID1vsID2_1461.Write();
         M2_ID1vsID2_full.Write();

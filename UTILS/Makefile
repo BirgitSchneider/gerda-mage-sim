@@ -96,16 +96,16 @@ ROOTFILES = $(foreach mac,$(MACROS),$(subst .mac,.root,$(subst log/,,$(mac))))
 
 sim : $(ROOTFILES)
 
-define run-sim-template
-  $(1) : $$(dir $(1))log/$$(subst .root,.mac,$$(notdir $(1)))
-  ifeq '$$(shell if [[ `qstat -r | grep "$$(notdir $(1))"` ]]; then echo 1; else echo 0; fi)' '0'
-	$$(QSUB) -N $$(notdir $(1)) $$(JOBSIM) $$^
-  else
-	@echo "There's already a job for $(1) in queue"
-  endif
-endef
-
-$(foreach f,$(ROOTFILES),$(eval $(call run-sim-template,$(f))))
+#define run-sim-template
+#  $(1) : $$(dir $(1))log/$$(subst .root,.mac,$$(notdir $(1)))
+#  ifeq '$$(shell if [[ `qstat -r | grep "$$(notdir $(1))"` ]]; then echo 1; else echo 0; fi)' '0'
+#	$$(QSUB) -N $$(notdir $(1)) $$(JOBSIM) $$^
+#  else
+#	@echo "There's already a job for $(1) in queue"
+#  endif
+#endef
+#
+#$(foreach f,$(ROOTFILES),$(eval $(call run-sim-template,$(f))))
 
 #$(ROOTFILES) : % : $(call volume,%)
 #ifeq '$$(shell if [[ `qstat -r | grep "$(notdir $@)"` ]]; then echo 1; else echo 0; fi)' '0'
@@ -119,6 +119,7 @@ $(foreach f,$(ROOTFILES),$(eval $(call run-sim-template,$(f))))
 ### Compile ####################################################################################
 
 CC = c++ -std=c++1y
+INSTALLDIR     = bin
 ROOTFLAGS      = $(shell root-config --libs --cflags) -lTreePlayer
 GERDA-ADAFLAGS = $(shell gerda-ada-config --libs --cflags)
 GELATIOFLAGS   = $(shell gelatio-config --libs --cflags)
@@ -127,30 +128,30 @@ DATABRIXXFLAGS = $(shell databricxx-config --libs --cflags)
 JSONCPPFLAGS   = -I jsoncpp
 ALLFLAGS       = $(ROOTFLAGS) $(GERDA-ADAFLAGS) $(GELATIOFLAGS) $(MGDOFLAGS) $(DATABRIXXFLAGS) $(JSONCPPFLAGS)
 
-bin : dirs $(foreach b,$(wildcard post/*.cxx),$(addprefix bin/,$(notdir $(basename $(b)))))
+bin : dirs $(foreach b,$(wildcard post/*.cxx),$(addprefix $(INSTALLDIR)/,$(notdir $(basename $(b)))))
 
 dirs :
-	@mkdir -p bin
+	@mkdir -p $(INSTALLDIR)
 
-bin/pdf-gen : post/pdf-gen.cxx
+$(INSTALLDIR)/pdf-gen : post/pdf-gen.cxx
 	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-bin/pdf-gen-volume : post/pdf-gen-volume.cxx
+$(INSTALLDIR)/pdf-gen-volume : post/pdf-gen-volume.cxx
 	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-bin/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
+$(INSTALLDIR)/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/check-simulation.cxx post/progressbar/ProgressBar.cc
 
-bin/livetime-calc-ph2 : post/livetime-calc-ph2.cxx
+$(INSTALLDIR)/livetime-calc-ph2 : post/livetime-calc-ph2.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-bin/t4z-gen : post/t4z-gen.cxx
+$(INSTALLDIR)/t4z-gen : post/t4z-gen.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-.PHONY: clean_bin bin
+.PHONY: clean_$(INSTALLDIR) $(INSTALLDIR)
 
-clean_bin :
-	-rm -r bin
+clean_$(INSTALLDIR) :
+	-rm -r $(INSTALLDIR)
 
 ### Utilities ##########################################################################################
 # extract infos from path

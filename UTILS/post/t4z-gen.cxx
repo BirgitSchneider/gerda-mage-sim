@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
         if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 && r; ) {
-            if (entry.d_type == DT_REG &&
+            if (entry.d_type == 8 &&
                 std::string(entry.d_name).find("raw-") != std::string::npos &&
                 std::string(entry.d_name).find(".root") != std::string::npos) {
                 filelist.push_back(foldName + "/" + std::string(entry.d_name));
