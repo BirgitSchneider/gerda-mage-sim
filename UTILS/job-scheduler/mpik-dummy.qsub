@@ -1,3 +1,0 @@
-#PBS -q short
-
-sleep 60

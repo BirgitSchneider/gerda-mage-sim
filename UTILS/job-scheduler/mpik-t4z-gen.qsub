@@ -5,7 +5,7 @@
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 
-cd /lfs/l2/gerda/Hades/gerda-mage-sim/UTILS/post
+cd /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh t4z-gen \
   --metadata $SRCDIR/UTILS/post/gerda-metadata \
   --destdir $2 \

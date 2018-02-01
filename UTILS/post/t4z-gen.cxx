@@ -71,6 +71,7 @@ int main(int argc, char** argv) {
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;
         auto p = std::unique_ptr<DIR,std::function<int(DIR*)>>{opendir(foldName.c_str()), &closedir};
+        if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 && r; ) {
             if (entry.d_type == 8 &&
@@ -89,6 +90,7 @@ int main(int argc, char** argv) {
     // join all raw- files in same tree
     if (verbose) std::cout << "\nraw- files found:\n";
     auto filelist = GetContent(dirWithRaw);
+    if (edepFilelist.empty()) {std::cout << "There were problems in reading the raw- files. Aborting...\n"; return 1;}
     TChain ch("fTree");
     for ( auto& f : filelist ) ch.Add(f.c_str());
 

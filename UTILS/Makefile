@@ -38,12 +38,12 @@ changetree = $(shell echo $(2)/$(shell echo $(1) | rev | cut -d'/' -f-4 | rev))
 rm1 = $(shell echo $(1) | cut -d'/' -f2-)
 
 # info extraction
-volume  = $(shell echo $(1) | cut -d'/' -f3)
-part    = $(shell echo $(1) | cut -d'/' -f4)
-isotope = $(shell echo $(1) | cut -d'/' -f5)
+volume  = $(shell echo $(1) | cut -d'/' -f2)
+part    = $(shell echo $(1) | cut -d'/' -f3)
+isotope = $(shell echo $(1) | cut -d'/' -f4)
 
 # get all directories to be processed with raw- files
-DIRSWITHRAW = ,$(foreach d,$(wildcard ../*/*/*/edep ../*/*/*/coin),$(shell dirname $(d)))
+DIRSWITHRAW = $(foreach d,$(wildcard ../*/*/*/edep ../*/*/*/coin),$(shell dirname $(d)))
 
 TARGETS = $(sort $(foreach dir,$(DIRSWITHRAW),$(dir)/post-proc))
 
@@ -52,31 +52,34 @@ post : mkdir $(TARGETS)
 mkdir :
 	@mkdir -p $(DESTDIR)
 
-getjob = $(shell if [[ `qstat -r | grep $(1)` ]]; then echo 1; else echo 0; fi)
+getjob = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 $(TARGETS) :
-ifeq '$(call getjob,$(subst /,-,$(call rm1,$(dir $@))edep.t4z))' '0'
+	@if [[ $(call getjob,$(subst /,-,$(call rm1,$(dir $@))edep.t4z)) == 0 ]]; then \
 	$(QSUB) -N $(subst /,-,$(call rm1,$(dir $@))edep.t4z) $(JOBT4Z) \
                    $(call changetree,$(dir $@),$(SRCDIR))edep \
-                   $(DESTDIR) >/dev/null
-else
-	@echo "There's already a job for $@-edep in queue"
-endif
-ifeq '$(call getjob,$(subst /,-,$(call rm1,$(dir $@))coin.t4z))' '0'
+                   $(DESTDIR) >/dev/null; \
+	echo "$(subst /,-,$(call rm1,$(dir $@))edep.t4z) job sent"; \
+	else \
+	echo "There's already a $(subst /,-,$(call rm1,$(dir $@))edep.t4z) job in queue"; \
+	fi
+	@if [[ $(call getjob,$(subst /,-,$(call rm1,$(dir $@))coin.t4z)) == 0 ]]; then \
 	$(QSUB) -N $(subst /,-,$(call rm1,$(dir $@))coin.t4z) $(JOBT4Z) \
                    $(call changetree,$(dir $@),$(SRCDIR))coin \
-                   $(DESTDIR) >/dev/null
-else
-	@echo "There's already a job for $@-coin in queue"
-endif
-ifeq '$(call getjob,$(subst /,-,$(call rm1,$(dir $@))all.pdf))' '0'
-	$(QSUB) -hold_jid $(subst /,-,$(call rm1,$(dir $@))edep),$(subst /,-,$(call rm1,$(dir $@))coin) \
+                   $(DESTDIR) >/dev/null; \
+	echo "$(subst /,-,$(call rm1,$(dir $@))coin.t4z) job sent"; \
+	else \
+	echo "There's already a $(subst /,-,$(call rm1,$(dir $@))coin.t4z) job for in queue"; \
+	fi
+	@if [[ $(call getjob,$(subst /,-,$(call rm1,$(dir $@))all.pdf)) == 0 ]]; then \
+	$(QSUB) -hold_jid $(subst /,-,$(call rm1,$(dir $@))edep.t4z),$(subst /,-,$(call rm1,$(dir $@))coin.t4z) \
                    -N $(subst /,-,$(call rm1,$(dir $@))all.pdf) \
                    $(JOBPDF) $(call volume,$@)/$(call part,$@)/$(call isotope,$@) \
-                   $(DESTDIR) >/dev/null
-else
-	@echo "There's already a job for $@-c in queue"
-endif
+                   $(DESTDIR) >/dev/null; \
+	echo "$(subst /,-,$(call rm1,$(dir $@))all.pdf) job sent"; \
+	else \
+	echo "There's already a job for $@-all.pdf in queue"; \
+	fi
 
 clean-t4z :
 	-rm -rf $(DESTDIR)
