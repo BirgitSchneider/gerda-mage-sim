@@ -1,7 +1,7 @@
 # load preamble
 /control/execute                           ./ge_holders/plates/K40/coin/log/preamble.mac
 
-MG/eventaction/rootfilename               ./ge_holders/plates/K40/coin/raw-ge_holders-plates-K40-coin-003.root
+/MG/eventaction/rootfilename               ./ge_holders/plates/K40/coin/raw-ge_holders-plates-K40-coin-003.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
