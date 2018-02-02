@@ -9,18 +9,13 @@
 #  - make post : lauch post-processing in the cluster
 #
 # NOTES:
-#  - unfortunately the GNU make functionalities are not fully available.
-#    This is due to the fact that the qsub submit commands exit after the
-#    job has been successfully spawned and don't keep track of the real
-#    execution time.
-#    So when you run 'make post' you reprocess everything, and not only new
-#    or modified files. 'make sim' is instead fully capable!
 #  - use the --dry-run flag to see what would be done without
 #    actually executing it (useful also in conjunction with --debug)
 #
+# *CHANGE ME* important variables
 SRCDIR  = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
-DESTDIR = /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.1
-QSUB = qsub
+DESTDIR = /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2
+QSUB    = $(shell which qsub)
 # qsub script must accept the syntax:
 # qsub job-scheduler/mpik-t4z-gen.qsub <folder-with-raw> <dest-dir-tree>
 # qsub job-scheduler/mpik-pdf-gen.qsub <volume>/<part>/<isotope> <dest-dir-tree>
@@ -52,22 +47,21 @@ post : mkdir $(TARGETS)
 mkdir :
 	@mkdir -p $(DESTDIR)
 
+# function to check if a job is already in the qsub queue
 getjob = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 $(TARGETS) :
 	@if [[ $(call getjob,$(subst /,-,$(call rm1,$(dir $@))edep.t4z)) == 0 ]]; then \
 	$(QSUB) -N $(subst /,-,$(call rm1,$(dir $@))edep.t4z) $(JOBT4Z) \
                    $(call changetree,$(dir $@),$(SRCDIR))edep \
-                   $(DESTDIR) >/dev/null; \
-	echo "$(subst /,-,$(call rm1,$(dir $@))edep.t4z) job sent"; \
+                   $(DESTDIR); \
 	else \
 	echo "There's already a $(subst /,-,$(call rm1,$(dir $@))edep.t4z) job in queue"; \
 	fi
 	@if [[ $(call getjob,$(subst /,-,$(call rm1,$(dir $@))coin.t4z)) == 0 ]]; then \
 	$(QSUB) -N $(subst /,-,$(call rm1,$(dir $@))coin.t4z) $(JOBT4Z) \
                    $(call changetree,$(dir $@),$(SRCDIR))coin \
-                   $(DESTDIR) >/dev/null; \
-	echo "$(subst /,-,$(call rm1,$(dir $@))coin.t4z) job sent"; \
+                   $(DESTDIR); \
 	else \
 	echo "There's already a $(subst /,-,$(call rm1,$(dir $@))coin.t4z) job for in queue"; \
 	fi
@@ -75,27 +69,38 @@ $(TARGETS) :
 	$(QSUB) -hold_jid $(subst /,-,$(call rm1,$(dir $@))edep.t4z),$(subst /,-,$(call rm1,$(dir $@))coin.t4z) \
                    -N $(subst /,-,$(call rm1,$(dir $@))all.pdf) \
                    $(JOBPDF) $(call volume,$@)/$(call part,$@)/$(call isotope,$@) \
-                   $(DESTDIR) >/dev/null; \
-	echo "$(subst /,-,$(call rm1,$(dir $@))all.pdf) job sent"; \
+                   $(DESTDIR); \
 	else \
 	echo "There's already a job for $@-all.pdf in queue"; \
 	fi
 
-clean-t4z :
-	-rm -rf $(DESTDIR)
-
-.PHONY : clean-t4z post mkdir
+.PHONY : post mkdir
 
 ### Run simulations ###########################################################################
 
+# qsub script must accept the syntax:
+# qsub job-scheduler/mpik-run-mage.qsub <macro-file>
 JOBSIM = job-scheduler/mpik-run-mage.qsub
 
+# find coin and edep directories
 SIMDIRS   = $(wildcard ../*/*/*/edep ../*/*/*/coin)
+# find macros
 MACROS    = $(foreach dir,$(SIMDIRS),$(realpath $(wildcard $(dir)/log/raw-*.mac)))
+# build up root file names
 ROOTFILES = $(foreach mac,$(MACROS),$(subst .mac,.root,$(subst log/,,$(mac))))
 
 sim : $(ROOTFILES)
 
+# second expansion is needed here to build up macro file name from target
+.SECONDEXPANSION:
+$(ROOTFILES) : %.root : $$(dir $$*)log/$$(notdir $$*).mac
+	@if [[ $(call getjob,$(notdir $@)) == 0 ]]; then \
+	$(QSUB) -N $(notdir $@) $(JOBSIM) $^; \
+	else \
+	echo "There's already a $(notdir $@) job in queue"; \
+	fi
+
+# another (very slow) way to do it
 #define run-sim-template
 #  $(1) : $$(dir $(1))log/$$(subst .root,.mac,$$(notdir $(1)))
 #  ifeq '$$(shell if [[ `qstat -r | grep "$$(notdir $(1))"` ]]; then echo 1; else echo 0; fi)' '0'
@@ -106,13 +111,6 @@ sim : $(ROOTFILES)
 #endef
 #
 #$(foreach f,$(ROOTFILES),$(eval $(call run-sim-template,$(f))))
-
-#$(ROOTFILES) : % : $(call volume,%)
-#ifeq '$$(shell if [[ `qstat -r | grep "$(notdir $@)"` ]]; then echo 1; else echo 0; fi)' '0'
-#	$(QSUB) -N $(notdir $@) $(JOBSIM) $^
-#else
-#	@echo "There's already a job for $@ in queue"
-#endif
 
 .PHONY : sim
 
@@ -148,7 +146,7 @@ $(INSTALLDIR)/livetime-calc-ph2 : post/livetime-calc-ph2.cxx
 $(INSTALLDIR)/t4z-gen : post/t4z-gen.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-.PHONY: clean_$(INSTALLDIR) $(INSTALLDIR)
+.PHONY: clean-bin bin
 
 clean_$(INSTALLDIR) :
 	-rm -r $(INSTALLDIR)

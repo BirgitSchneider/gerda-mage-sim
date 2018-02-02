@@ -90,7 +90,7 @@ int main( int argc, char** argv ) {
         isoMap.insert(std::make_pair(p, c));
         for (const auto& i : c ) allIso.insert(i.substr(i.find_last_of('/')+1));
     }
-    if (verbose) for (const auto& i : allIso) std::cout << i << ' '; std::cout << std::endl;
+    if (verbose) {for (const auto& i : allIso) std::cout << i << ' '; std::cout << std::endl;}
 /*
     // check if we have the isotope in each part
     if (verbose) std::cout << "Check if we have the isotope in each part...\n";
@@ -180,7 +180,7 @@ int main( int argc, char** argv ) {
                 if (!tmp_energy_ch[i]) std::cout << "Problems retrieving M1_ch" << i << "!\n";
             }
 
-            TH1D* tmp_energyBEGe        = dynamic_cast<TH1D*>(inFile.Get("M1_enrBEGe"));        if (!tmp_energyBEGe)        std::cout << "Problems retrieving M1_energyBEGe       !\n";
+            TH1D* tmp_energyBEGe        = dynamic_cast<TH1D*>(inFile.Get("M1_enrBEGe"));     if (!tmp_energyBEGe)        std::cout << "Problems retrieving M1_energyBEGe       !\n";
             TH1D* tmp_energyEnrCoax     = dynamic_cast<TH1D*>(inFile.Get("M1_enrCoax"));     if (!tmp_energyEnrCoax)     std::cout << "Problems retrieving M1_energyEnrCoax    !\n";
             TH1D* tmp_energyNatCoax     = dynamic_cast<TH1D*>(inFile.Get("M1_natCoax"));     if (!tmp_energyNatCoax)     std::cout << "Problems retrieving M1_energyNatCoax    !\n";
 
@@ -194,24 +194,27 @@ int main( int argc, char** argv ) {
             TH1I* tmp_M1_natCoax_1461   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_1461"));   if (!tmp_M1_natCoax_1461)   std::cout << "Problems retrieving M1_natCoax_1461  !\n";
             TH1I* tmp_M1_natCoax_full   = dynamic_cast<TH1I*>(inFile.Get("M1_natCoax_full"));   if (!tmp_M1_natCoax_full)   std::cout << "Problems retrieving M1_natCoax_full  !\n";
 
-            TH2D* tmp_M2_enrE1vsE2      = dynamic_cast<TH2D*>(inFile.Get("M2_enrE1vsE2"));      if (!tmp_M2_enrE1vsE2)      std::cout << "Problems retrieving M2_enrE1vsE2     !\n";
-            TH1D* tmp_M2_enrE1plusE2    = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1plusE2"));    if (!tmp_M2_enrE1plusE2)    std::cout << "Problems retrieving M2_enrE1plusE2   !\n";
-            TH1D* tmp_M2_enrE1andE2     = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1andE2"));     if (!tmp_M2_enrE1andE2)     std::cout << "Problems retrieving M2_enrE1andE2    !\n";
-            TH2I* tmp_M2_ID1vsID2_1525  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1525"));  if (!tmp_M2_ID1vsID2_1525)  std::cout << "Problems retrieving M2_ID1vsID2_1525 !\n";
-            TH2I* tmp_M2_ID1vsID2_1461  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1461"));  if (!tmp_M2_ID1vsID2_1461)  std::cout << "Problems retrieving M2_ID1vsID2_1461 !\n";
-            TH2I* tmp_M2_ID1vsID2_full  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_full"));  if (!tmp_M2_ID1vsID2_full)  std::cout << "Problems retrieving M2_ID1vsID2_full !\n";
-            TH2I* tmp_M2_ID1vsID2_S1    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S1"));    if (!tmp_M2_ID1vsID2_S1)    std::cout << "Problems retrieving M2_ID1vsID2_S1   !\n";
-            TH2I* tmp_M2_ID1vsID2_S2    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S2"));    if (!tmp_M2_ID1vsID2_S2)    std::cout << "Problems retrieving M2_ID1vsID2_S2   !\n";
-            TH2I* tmp_M2_ID1vsID2_S3    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S3"));    if (!tmp_M2_ID1vsID2_S3)    std::cout << "Problems retrieving M2_ID1vsID2_S3   !\n";
+            TH2D* tmp_M2_enrE1vsE2      = dynamic_cast<TH2D*>(inFile.Get("M2_enrE1vsE2"));      if (verbose and !tmp_M2_enrE1vsE2)      std::cout << "Problems retrieving M2_enrE1vsE2     !\n";
+            TH1D* tmp_M2_enrE1plusE2    = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1plusE2"));    if (verbose and !tmp_M2_enrE1plusE2)    std::cout << "Problems retrieving M2_enrE1plusE2   !\n";
+            TH1D* tmp_M2_enrE1andE2     = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1andE2"));     if (verbose and !tmp_M2_enrE1andE2)     std::cout << "Problems retrieving M2_enrE1andE2    !\n";
+            TH2I* tmp_M2_ID1vsID2_1525  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1525"));  if (verbose and !tmp_M2_ID1vsID2_1525)  std::cout << "Problems retrieving M2_ID1vsID2_1525 !\n";
+            TH2I* tmp_M2_ID1vsID2_1461  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_1461"));  if (verbose and !tmp_M2_ID1vsID2_1461)  std::cout << "Problems retrieving M2_ID1vsID2_1461 !\n";
+            TH2I* tmp_M2_ID1vsID2_full  = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_full"));  if (verbose and !tmp_M2_ID1vsID2_full)  std::cout << "Problems retrieving M2_ID1vsID2_full !\n";
+            TH2I* tmp_M2_ID1vsID2_S1    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S1"));    if (verbose and !tmp_M2_ID1vsID2_S1)    std::cout << "Problems retrieving M2_ID1vsID2_S1   !\n";
+            TH2I* tmp_M2_ID1vsID2_S2    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S2"));    if (verbose and !tmp_M2_ID1vsID2_S2)    std::cout << "Problems retrieving M2_ID1vsID2_S2   !\n";
+            TH2I* tmp_M2_ID1vsID2_S3    = dynamic_cast<TH2I*>(inFile.Get("M2_ID1vsID2_S3"));    if (verbose and !tmp_M2_ID1vsID2_S3)    std::cout << "Problems retrieving M2_ID1vsID2_S3   !\n";
 
-            TH1I* tmp_M2_ID1andID2_1525 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1525")); if (!tmp_M2_ID1andID2_1525) std::cout << "Problems retrieving M2_ID1andID2_1525!\n";
-            TH1I* tmp_M2_ID1andID2_1461 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1461")); if (!tmp_M2_ID1andID2_1461) std::cout << "Problems retrieving M2_ID1andID2_1461!\n";
-            TH1I* tmp_M2_ID1andID2_full = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_full")); if (!tmp_M2_ID1andID2_full) std::cout << "Problems retrieving M2_ID1andID2_full!\n";
-            TH1I* tmp_M2_ID1andID2_S1   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S1"));   if (!tmp_M2_ID1andID2_S1)   std::cout << "Problems retrieving M2_ID1andID2_S1  !\n";
-            TH1I* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S2"));   if (!tmp_M2_ID1andID2_S2)   std::cout << "Problems retrieving M2_ID1andID2_S2  !\n";
-            TH1I* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S3"));   if (!tmp_M2_ID1andID2_S3)   std::cout << "Problems retrieving M2_ID1andID2_S3  !\n";
+            TH1I* tmp_M2_ID1andID2_1525 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1525")); if (verbose and !tmp_M2_ID1andID2_1525) std::cout << "Problems retrieving M2_ID1andID2_1525!\n";
+            TH1I* tmp_M2_ID1andID2_1461 = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_1461")); if (verbose and !tmp_M2_ID1andID2_1461) std::cout << "Problems retrieving M2_ID1andID2_1461!\n";
+            TH1I* tmp_M2_ID1andID2_full = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_full")); if (verbose and !tmp_M2_ID1andID2_full) std::cout << "Problems retrieving M2_ID1andID2_full!\n";
+            TH1I* tmp_M2_ID1andID2_S1   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S1"));   if (verbose and !tmp_M2_ID1andID2_S1)   std::cout << "Problems retrieving M2_ID1andID2_S1  !\n";
+            TH1I* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S2"));   if (verbose and !tmp_M2_ID1andID2_S2)   std::cout << "Problems retrieving M2_ID1andID2_S2  !\n";
+            TH1I* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S3"));   if (verbose and !tmp_M2_ID1andID2_S3)   std::cout << "Problems retrieving M2_ID1andID2_S3  !\n";
 
             if(!tmp_M2_ID1vsID2_1525) processCoin = false;
+
+            // Add!
+            for ( int i = 0; i < 40; ++i ) energy_ch[i].Add(tmp_energy_ch[i]);
 
             energyBEGe     .Add(tmp_energyBEGe);
             energyEnrCoax  .Add(tmp_energyEnrCoax);
@@ -260,6 +263,16 @@ int main( int argc, char** argv ) {
         energyBEGe.Write();
         energyEnrCoax.Write();
         energyNatCoax.Write();
+
+        M1_enrBEGe_1525.Write();
+        M1_enrBEGe_1461.Write();
+        M1_enrBEGe_full.Write();
+        M1_enrCoax_1525.Write();
+        M1_enrCoax_1461.Write();
+        M1_enrCoax_full.Write();
+        M1_natCoax_1525.Write();
+        M1_natCoax_1461.Write();
+        M1_natCoax_full.Write();
 
         if (processCoin) {
              M2_enrE1vsE2.Write();
