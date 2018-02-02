@@ -16,7 +16,7 @@
 
 if [ -f ./copy-decay0files-from-lngs.sh ]; then
   echo "set username for gerda-login.lngs.infn.it:"; read user
-  sour=/nfs/gerda5/var/gerda-simulations/gerdasw.g4.10.3_v2.1.sqsh
+  sour=/nfs/gerda5/var/gerda-simulations/gerdasw.g4.10.3_v2.2.sqsh
   opts="--update \
        --times \
        --omit-dir-times \
@@ -25,7 +25,7 @@ if [ -f ./copy-decay0files-from-lngs.sh ]; then
   rsync $opts \
         --out-format="%o: %f%L" \
         --dry-run \
-        $user@gerda-login.lngs.infn.it:$sour ../../decay0files
+        $user@gerda-login.lngs.infn.it:$sour ../container/
   echo ""
   echo "This singularity container file will be transfered."
   echo ""

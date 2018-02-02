@@ -16,7 +16,7 @@
 
 if [ -f ./copy-to-mpik.sh ]; then
   echo "set username for lfs2.mpi-hd.mpg.de:"; read user
-  dest=/lfs/l2/gerda/Hades/gerda-mage-sim
+  dest=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
   opts="--ignore-existing \
        --recursive \
        --links \
