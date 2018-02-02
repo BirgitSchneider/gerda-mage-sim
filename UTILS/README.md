@@ -49,3 +49,23 @@ Insert 'stuff' in line number 10 in 'file'
 ```shell
 $ sed -i '10i stuff' file
 ```
+
+# Set permission for gerda-simulations directory
+
+To remove all extra permissions
+```shell
+$ setfacl -Rb gerda-simulations
+```
+
+The permissions	set at the moment are the following 
+```shell
+$ setfacl -Rm user:pertoldi:rwX gerda-simulations/
+$ setfacl -Rdm user:pertoldi:rwX gerda-simulations/
+$ setfacl -Rm user:schuetz:rwX gerda-simulations/
+$ setfacl -Rdm user:schuetz:rwX gerda-simulations/
+$ setfacl -Rm user:sturm:rwX gerda-simulations/
+$ setfacl -Rdm user:sturm:rwX gerda-simulations/
+```
+
+
+
