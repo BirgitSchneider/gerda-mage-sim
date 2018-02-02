@@ -135,15 +135,9 @@ int main( int argc, char** argv ) {
     TH1D energyEnrCoax("M1_enrCoax", "edep, M=1 (enrCOAX)", 8000, 0, 8000);
     TH1D energyNatCoax("M1_natCoax", "edep, M=1 (natCOAX)", 8000, 0, 8000);
 
-    TH1I M1_enrBEGe_1525("M1_enrBEGe_1525", "ID with edep in range = 1525 +- 4 keV, M=1 (enrBEGe)",  40, 0, 40);
-    TH1I M1_enrBEGe_1461("M1_enrBEGe_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (enrBEGe)",  40, 0, 40);
-    TH1I M1_enrBEGe_full("M1_enrBEGe_full", "ID with edep in range = [565,5500] keV, M=1 (enrBEGe)", 40, 0, 40);
-    TH1I M1_enrCoax_1525("M1_enrCoax_1525", "ID with edep in range = 1525 +- 4 keV, M=1 (enrCoax)",  40, 0, 40);
-    TH1I M1_enrCoax_1461("M1_enrCoax_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (enrCoax)",  40, 0, 40);
-    TH1I M1_enrCoax_full("M1_enrCoax_full", "ID with edep in range = [565,5500] keV, M=1 (enrCoax)", 40, 0, 40);
-    TH1I M1_natCoax_1525("M1_natCoax_1525", "ID with edep in range = 1525 +- 4 keV, M=1 (natCoax)",  40, 0, 40);
-    TH1I M1_natCoax_1461("M1_natCoax_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (natCoax)",  40, 0, 40);
-    TH1I M1_natCoax_full("M1_natCoax_full", "ID with edep in range = [565,5500] keV, M=1 (natCoax)", 40, 0, 40);
+    TH1I M1_all_1525("M1_all_1525", "ID with edep in range = 1525 +- 4 keV, M=1 (all)",  40, 0, 40);
+    TH1I M1_all_1461("M1_all_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (all)",  40, 0, 40);
+    TH1I M1_all_full("M1_all_full", "ID with edep in range = [565,5500] keV, M=1 (all)", 40, 0, 40);
 
     TTreeReader reader;
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
@@ -157,26 +151,13 @@ int main( int argc, char** argv ) {
             for ( int i = 0; i < 40; ++i ) {
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
                     energy_ch[i].Fill(energy[i]);
-
-                    if (det[i].substr(0,2) == "GD") {
-                        if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_enrBEGe_1525.Fill(i);
-                        if ( energy[i] >= 1457 and energy[i] < 1465 ) M1_enrBEGe_1461.Fill(i);
-                        if ( energy[i] >= 565  and energy[i] < 5500 ) M1_enrBEGe_full.Fill(i);
-                        energyBEGe.Fill(energy[i]);
-                    }
-                    if ( det[i].substr(0, 3) == "ANG" or
-                         det[i].substr(0, 2) == "RG"  ) {
-                        if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_enrCoax_1525.Fill(i);
-                        if ( energy[i] >= 1457 and energy[i] < 1465 ) M1_enrCoax_1461.Fill(i);
-                        if ( energy[i] >= 565  and energy[i] < 5500 ) M1_enrCoax_full.Fill(i);
-                        energyEnrCoax.Fill(energy[i]);
-                    }
-                    if ( det[i].substr(0, 3) == "GTF" ) {
-                        if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_natCoax_1525.Fill(i);
-                        if ( energy[i] >= 1457 and energy[i] < 1465 ) M1_natCoax_1461.Fill(i);
-                        if ( energy[i] >= 565  and energy[i] < 5500 ) M1_natCoax_full.Fill(i);
-                        energyNatCoax.Fill(energy[i]);
-                    }
+                    if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_all_1525.Fill(i);
+                    if ( energy[i] >= 1457 and energy[i] < 1465 ) M1_all_1461.Fill(i);
+                    if ( energy[i] >= 565  and energy[i] < 5500 ) M1_all_full.Fill(i);
+                    if ( det[i].substr(0,2) == "GD"  ) energyBEGe.Fill(energy[i]);
+                    if ( det[i].substr(0,3) == "ANG" or
+                         det[i].substr(0,2) == "RG"  ) energyEnrCoax.Fill(energy[i]);
+                    if ( det[i].substr(0,3) == "GTF" ) energyNatCoax.Fill(energy[i]);
                 }
             }
         }
@@ -324,15 +305,9 @@ int main( int argc, char** argv ) {
     energyEnrCoax.Write();
     energyNatCoax.Write();
 
-    M1_enrBEGe_1525.Write();
-    M1_enrBEGe_1461.Write();
-    M1_enrBEGe_full.Write();
-    M1_enrCoax_1525.Write();
-    M1_enrCoax_1461.Write();
-    M1_enrCoax_full.Write();
-    M1_natCoax_1525.Write();
-    M1_natCoax_1461.Write();
-    M1_natCoax_full.Write();
+    M1_all_1525.Write();
+    M1_all_1461.Write();
+    M1_all_full.Write();
 
     if (processCoin) {
         M2_enrE1vsE2.Write();
