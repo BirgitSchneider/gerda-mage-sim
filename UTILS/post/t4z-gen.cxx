@@ -13,6 +13,7 @@
 #include <dirent.h>
 #include <fstream>
 #include <algorithm>
+#include <math.h>
 
 // jsoncpp
 #include "json/json.h"
@@ -30,14 +31,15 @@ int main(int argc, char** argv) {
 
     // utilities
     auto c_str = [&](std::string s){return s.c_str();};
-    auto usage = [](){ std::cout << "USAGE: ./t4z-gen [OPTIONS] [DIR-WITH-RAW]\n\n"
-                                << "OPTIONS:\n"
-                                << "  required: --metadata <gerda-metadata-location>\n"
-                                << "            --destdir <destination-dir-post-processed>\n"
-                                << "            --livetime-file <json-file-from-livetime-calc-ph2>\n"
-                                << "  optional: -v : verbose mode\n\n"
-                                << "NOTES: Please use absolute paths!"
-                                << std::endl;};
+    auto usage = [](){ std::cout << "Split simulations in a tier4ized file for each run.\n"
+                                 << "USAGE: ./t4z-gen [OPTIONS] [DIR-WITH-RAW]\n\n"
+                                 << "OPTIONS:\n"
+                                 << "  required: --metadata <gerda-metadata-location>\n"
+                                 << "            --destdir <destination-dir-post-processed>\n"
+                                 << "            --livetime-file <json-file-from-livetime-calc-ph2>\n"
+                                 << "  optional: -v : verbose mode\n\n"
+                                 << "NOTES: Please use absolute paths!"
+                                 << std::endl;};
 
     // get & check arguments
     std::vector<std::string> args;
@@ -62,7 +64,7 @@ int main(int argc, char** argv) {
     if (result != args.end()) verbose = true;
     auto dirWithRaw = *(args.end()-1);
 
-    // strip off trailing '/' character
+    // strip off trailing '/' character, if present
     if (verbose) std::cout << "Paths:\n";
     if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back(); if (verbose) std::cout << gerdaMetaPath << std::endl;
     if (destDirPath.back()   == '/') destDirPath.pop_back();   if (verbose) std::cout << destDirPath   << std::endl;
@@ -75,28 +77,28 @@ int main(int argc, char** argv) {
         if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 && r; ) {
+            // this means "is a regular file", DT_REG = 8
             if (entry.d_type == 8 &&
                 std::string(entry.d_name).find("raw-") != std::string::npos &&
                 std::string(entry.d_name).find(".root") != std::string::npos) {
                 filelist.push_back(foldName + "/" + std::string(entry.d_name));
-                if (verbose) std::cout << '\t' << std::string(entry.d_name) << std::endl;
             }
         }
-        std::sort (filelist.begin(), filelist.end());
-        if (verbose) { std::cout << "\nraw- files sorted:\n"; for ( const auto & f : filelist ) std::cout << '\t' << f << std::endl; }
+        std::sort(filelist.begin(), filelist.end());
+        if (verbose) { std::cout << "\nsorted raw- files:\n"; for ( const auto & f : filelist ) std::cout << '\t' << f << std::endl; }
 
         return filelist;
     };
 
     // join all raw- files in same tree and get number of primaries
-    if (verbose) std::cout << "\nraw- files found:\n";
     auto filelist = GetContent(dirWithRaw);
-    if (filelist.empty()) {std::cout << "There were problems in reading the raw- files. Aborting...\n"; return 1;}
+    if (filelist.empty()) {std::cout << "There were problems reading in the raw- files. Aborting...\n"; return 1;}
     TChain ch("fTree");
     bool notfound = false;
     long totPrimaries = 0;
     for ( auto& f : filelist ) {
         TFile file(f.c_str());
+        // check first if the object exists
         if (file.GetListOfKeys()->Contains("NumberOfPrimaries")) {
             totPrimaries += dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimaries"))->GetVal();
         }
@@ -107,12 +109,12 @@ int main(int argc, char** argv) {
         file.Close();
         ch.Add(f.c_str());
     }
+    // if at least one object does not exist set primaries to zero to indicate a failure
     if (notfound) totPrimaries = 0;
 
     // read json file with livetimes
     Json::Value livetimes;
     flivetimes >> livetimes;
-
     Json::Value::Members runs = livetimes.getMemberNames();
 
     // calculate total livetime
@@ -121,12 +123,12 @@ int main(int argc, char** argv) {
         if (verbose) std::cout << '\n' << r << ": " << livetimes[r]["livetime_in_s"].asInt() << " s";
         totLivetime += livetimes[r]["livetime_in_s"].asInt();
     }
-    if (verbose) std::cout << "\nTotal livetime:" << totLivetime << std::endl;
+    if (verbose) std::cout << "\nTotal livetime: " << totLivetime << std::endl;
 
     int first = 0; // first event to be processed in tree
     // loop over runIDs in json file
     for ( auto r : runs ) {
-        if (verbose) std::cout << "\nRun" << r << std::endl;
+        if (verbose) std::cout << "\n==> " << r << std::endl;
         // strip out folders in dir to build up final t4z- filename
         std::vector<std::string> items;
         std::string dircopy = dirWithRaw;
@@ -138,8 +140,7 @@ int main(int argc, char** argv) {
         auto filedir = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[0];
         auto filename = filedir + '/' + "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-run" +
                         livetimes[r]["ID"].asString() + ".root";
-        if (verbose) std::cout << destDirPath << std::endl;
-        if (verbose) std::cout << "Path to t4z- file: " << filedir << std::endl;
+        if (verbose) std::cout << "Post-production folder: " << destDirPath << std::endl;
         if (verbose) std::cout << "tz4- file name: " << filename << std::endl;
 
         // make destdir
@@ -147,10 +148,10 @@ int main(int argc, char** argv) {
 
         // calculate fraction of events
         auto nentries = ch.GetEntries();
-        int fraction = (int)(nentries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
-        int primFraction = (int)(totPrimaries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
+        int fraction = std::round(nentries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
+        int primFraction = std::round(totPrimaries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
         if (verbose) std::cout << "Events fraction: " << nentries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
-        if (verbose) std::cout << "Primaries fraction:" << totPrimaries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
+        if (verbose) std::cout << "Primaries fraction: " << totPrimaries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
 
         // set up tier4izer
         gada::T4SimConfig config;
@@ -167,7 +168,8 @@ int main(int argc, char** argv) {
 
         gada::T4SimHandler handler(&ch, &config, filename);
             if (verbose) std::cout << "Running production... first event = " << first << std::endl;
-        // run
+        // run!
+        if ( first + fraction > nentries ) fraction = nentries - first;
         handler.RunProduction( first, first + fraction );
 
         // save number of primaries

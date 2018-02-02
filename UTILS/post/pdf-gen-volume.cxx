@@ -23,14 +23,15 @@
 #include "TH2D.h"
 #include "TH1I.h"
 #include "TH2I.h"
+#include "TParameter.h"
 
 int main( int argc, char** argv ) {
 
     // utilities
     auto c_str = [&](std::string s) {return s.c_str();};
     auto usage = []() {
-        std::cout << "Create official pdfs from tier4rized files.\n"
-                  << "USAGE: ./pdf-gen [OPTIONS] <volume>\n\n"
+        std::cout << "Create official pdfs for an entire volume.\n"
+                  << "USAGE: ./pdf-gen [OPTIONS] <volume-name>\n\n"
                   << "OPTIONS:\n"
                   << "  required:  --destdir <path> : path to the top of the directory tree\n"
                   << "                                with the post-processed files\n"
@@ -104,13 +105,13 @@ int main( int argc, char** argv ) {
         }
     }
  */
+    // get detector data
     if (verbose) std::cout << "Retrieving detector data...\n";
     Json::Value root;
     std::ifstream fGedMap(gedMapFile);
     if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!"; return 1;}
     fGedMap >> root;
     std::map<int,std::string> det;
-
     Json::Value::Members detinfo = root["mapping"].getMemberNames();
 
     for ( const auto & d : detinfo ) {
@@ -160,6 +161,8 @@ int main( int argc, char** argv ) {
         // now loop over parts
         bool missingpdf = false;
         bool processCoin = true;
+        int nPrimCoin = 0;
+        int nPrimEdep = 0;
         for (const auto& prt : partlist) {
 
             // open input pdf- file
@@ -168,6 +171,7 @@ int main( int argc, char** argv ) {
             TFile inFile(file.c_str());
             if (!inFile.IsOpen()) {std::cout << file << " seems not to be there. Aborting...\n"; missingpdf = true; break;}
 
+            // retrieve histograms
             std::vector<TH1D*> tmp_energy_ch;
             for ( int i = 0; i < 40; ++i ) {
                 tmp_energy_ch.push_back(dynamic_cast<TH1D*>(inFile.Get(Form("M1_ch%i", i))));
@@ -198,6 +202,9 @@ int main( int argc, char** argv ) {
             TH1I* tmp_M2_ID1andID2_S1   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S1"));   if (verbose and !tmp_M2_ID1andID2_S1)   std::cout << "Problems retrieving M2_ID1andID2_S1!\n";
             TH1I* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S2"));   if (verbose and !tmp_M2_ID1andID2_S2)   std::cout << "Problems retrieving M2_ID1andID2_S2!\n";
             TH1I* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S3"));   if (verbose and !tmp_M2_ID1andID2_S3)   std::cout << "Problems retrieving M2_ID1andID2_S3!\n";
+
+            nPrimCoin += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
+            nPrimEdep += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
 
             if(!tmp_M2_ID1vsID2_1525) processCoin = false;
 
@@ -240,6 +247,9 @@ int main( int argc, char** argv ) {
                               "pdf-" + volume + '-' + iso + ".root";
         TFile outfile(outName.c_str(), "RECREATE");
 
+        TParameter<long> nPrimCoinT("NumberOfPrimariesCoin",nPrimCoin);
+        TParameter<long> nPrimEdepT("NumberOfPrimariesEdep",nPrimEdep);
+
         if (verbose) std::cout << "Saving to disk...\n";
         for ( auto h : energy_ch ) h.Write();
         energyBEGe.Write();
@@ -267,7 +277,9 @@ int main( int argc, char** argv ) {
              M2_ID1andID2_S1.Write();
              M2_ID1andID2_S2.Write();
              M2_ID1andID2_S3.Write();
+             nPrimCoinT.Write();
         }
+        nPrimEdepT.Write();
         std::cout << "Output saved in: " << outName << std::endl;
     }
     return 0;

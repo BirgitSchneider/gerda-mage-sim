@@ -38,8 +38,8 @@ int main( int argc, char** argv ) {
         std::cout << "Create official pdfs from tier4rized files.\n"
                   << "USAGE: ./pdf-gen [OPTIONS] [<volume>/<part>/<isotope>]\n\n"
                   << "OPTIONS:\n"
-                  << "  required:  --destdir <path> : path to the top of the directory tree\n"
-                  << "                                with the t4z- files\n"
+                  << "  required:  --destdir <path>     : path to the top of the directory tree\n"
+                  << "                                    with the t4z- files\n"
                   << "             --ged-mapping <file> : ged-mapping.json file included\n"
                   << "                                    in gerda-mage-sim\n\n"
                   << "NOTES: Please use absolute paths!\n";
@@ -110,14 +110,13 @@ int main( int argc, char** argv ) {
     }
     items.push_back(tmp);
 
+    // read in detector mapping
     Json::Value root;
     std::ifstream fGedMap(gedMapFile);
     if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!"; return 1;}
     fGedMap >> root;
     std::map<int,std::string> det;
-
     Json::Value::Members detinfo = root["mapping"].getMemberNames();
-
     for ( const auto & d : detinfo ) {
         det[root["mapping"][d]["channel"].asInt()] = d;
     }
@@ -127,6 +126,7 @@ int main( int argc, char** argv ) {
     }
 
     // build M1 spectra
+    if (verbose) std::cout << "\nBuilding M1 spectra...\n";
     std::vector<TH1D> energy_ch;
     for ( int i = 0; i < 40; ++i ) {
         energy_ch.emplace_back(Form("M1_ch%i", i), c_str("edep, M=1 (" + det[i] + ")"), 8000, 0, 8000);
@@ -139,16 +139,21 @@ int main( int argc, char** argv ) {
     TH1I M1_all_1461("M1_all_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (all)",  40, 0, 40);
     TH1I M1_all_full("M1_all_full", "ID with edep in range = [565,5500] keV, M=1 (all)", 40, 0, 40);
 
+    // set up the TTree reader object
     TTreeReader reader;
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
 
-    std::cout << "\nProcessing edep... ";
+    // loop
+    std::cout << "Processing edep...\n" << std::flush;
     edepCh.LoadTree(0);
     reader.SetTree(&edepCh);
     while(reader.Next()) {
+        // select correct multiplicity
         if( *multiplicity <= 1 and *multiplicity > 0 ) {
+            // loop over detector ids
             for ( int i = 0; i < 40; ++i ) {
+                // keep only valid energies
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
                     energy_ch[i].Fill(energy[i]);
                     if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_all_1525.Fill(i);
@@ -163,8 +168,8 @@ int main( int argc, char** argv ) {
         }
     }
 
-    // set number of primaries in first bin
-    if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
+    // getting number of primaries
+    if (verbose) std::cout << "Getting number of primaries...\n";
     bool notfound = false;
     long nPrimEdep = 0;
     for (const auto& f : edepFilelist) {
@@ -177,10 +182,12 @@ int main( int argc, char** argv ) {
             notfound = true;
         }
     }
+    // set number of primaries to zero in case of failures
     if (notfound) nPrimEdep = 0;
     if (verbose) std::cout << "Number of edep primaries: " << nPrimEdep << std::endl;
 
     // build M2 spectra
+    if (verbose) std::cout << "\nBuilding M2 spectra...\n";
     TH2D M2_enrE1vsE2  ("M2_enrE1vsE2",   "edep with smaller detID, other edep, M=2 (enrAll)", 8000, 0, 8000, 8000, 0, 8000);
     TH1D M2_enrE1plusE2("M2_enrE1plusE2", "edep1 + edep2, M=2 (enrAll)",                       8000, 0, 8000);
     TH1D M2_enrE1andE2 ("M2_enrE1andE2",  "edep1 and edep2, M=2 (enrAll)",                     8000, 0, 8000);
@@ -199,90 +206,100 @@ int main( int argc, char** argv ) {
     TH1I M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
     TH1I M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
-    long nPrimCoin = 0;
+    long nPrimCoin = 0;  // number of primaries for coincidences
+    int badevents = 0;   // counter for events with multiplicity 2 but only 0 or 1 energy deposition
     if (processCoin) {
-         std::map<int,double> evMap;
-         std::cout << "\nProcessing edep... ";
-         coinCh.LoadTree(0);
-         reader.SetTree(&coinCh);
-         while(reader.Next()) {
-             evMap.clear();
-             reader.Next();
-             if (*multiplicity == 2) {
-                 for ( int i = 0; i < 40; ++i ) {
-                     if ( energy[i] < 10000 and energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
-                 }
-                 if (evMap.size() != 2) {
-                     std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
-                     continue;
-                 }
-                 auto& ID1 = (*evMap.begin())    .first;
-                 auto& ID2 = (*(++evMap.begin())).first;
-                 auto& E1  = (*evMap.begin())    .second;
-                 auto& E2  = (*(++evMap.begin())).second;
-/*                 std::cout << "Multiplicity: " << *multiplicity << std::endl;
-                 std::cout << ID1 << '\t' << E1 << std::endl;
-                 std::cout << ID2 << '\t' << E2 << std::endl;
-                 std::cout << "-------------\n";
-*/                 auto sumE = E1 + E2;
-                 if ( det[ID1].substr(0,3) != "GTF" and
-                      det[ID2].substr(0,3) != "GTF" ) {
-                     M2_enrE1vsE2.Fill(E1, E2);
-                     M2_enrE1plusE2.Fill(sumE);
-                     M2_enrE1andE2.Fill(E1); M2_enrE1andE2.Fill(E2);
+        // object to store events as a (det_id,energy) pair
+        std::map<int,double> evMap;
+        std::cout << "Processing coin...\n" << std::flush;
+        coinCh.LoadTree(0);
+        reader.SetTree(&coinCh);
+        while(reader.Next()) {
+            // clear object from previous loop iteration
+            evMap.clear();
+            reader.Next();
+            // select multiplicity
+            if (*multiplicity == 2) {
+                // loop over detector ids
+                for ( int i = 0; i < 40; ++i ) {
+                    // select event if it has a valid energy
+                    if ( energy[i] < 10000 and energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
+                }
+                if (evMap.size() != 2) {
+                    //std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
+                    badevents++;
+                    continue;
+                }
+                // comfortable referencies
+                auto& ID1 = (*evMap.begin())    .first;
+                auto& ID2 = (*(++evMap.begin())).first;
+                auto& E1  = (*evMap.begin())    .second;
+                auto& E2  = (*(++evMap.begin())).second;
+/*                std::cout << "Multiplicity: " << *multiplicity << std::endl;
+                std::cout << ID1 << '\t' << E1 << std::endl;
+                std::cout << ID2 << '\t' << E2 << std::endl;
+                std::cout << "-------------\n";
+*/                auto sumE = E1 + E2;
+                if ( det[ID1].substr(0,3) != "GTF" and
+                     det[ID2].substr(0,3) != "GTF" ) {
+                    M2_enrE1vsE2.Fill(E1, E2);
+                    M2_enrE1plusE2.Fill(sumE);
+                    M2_enrE1andE2.Fill(E1); M2_enrE1andE2.Fill(E2);
 
-                     if ( sumE >= 1519 and sumE < 1531 ) {
-                         M2_ID1vsID2_1525.Fill(ID1, ID2);
-                         M2_ID1andID2_1525.Fill(ID1);
-                         M2_ID1andID2_1525.Fill(ID2);
-                     }
-                     if ( sumE >= 1455 and sumE < 1467 ) {
-                         M2_ID1vsID2_1461.Fill(ID1, ID2);
-                         M2_ID1andID2_1461.Fill(ID1);
-                         M2_ID1andID2_1461.Fill(ID2);
-                     }
-                     if ( sumE >= 250  and sumE < 3000 ) {
-                         M2_ID1vsID2_full.Fill(ID1, ID2);
-                         M2_ID1andID2_full.Fill(ID1);
-                         M2_ID1andID2_full.Fill(ID2);
-                     }
-                     if ( sumE >= 1405 and sumE < 1450 ) {
-                         M2_ID1vsID2_S1.Fill(ID1, ID2);
-                         M2_ID1andID2_S1.Fill(ID1);
-                         M2_ID1andID2_S1.Fill(ID2);
-                     }
-                     if ( sumE >= 1470 and sumE < 1515 ) {
-                         M2_ID1vsID2_S2.Fill(ID1, ID2);
-                         M2_ID1andID2_S2.Fill(ID1);
-                         M2_ID1andID2_S2.Fill(ID2);
-                     }
-                     if ( sumE >= 1535 and sumE < 1580 ) {
-                         M2_ID1vsID2_S3.Fill(ID1, ID2);
-                         M2_ID1andID2_S3.Fill(ID1);
-                         M2_ID1andID2_S3.Fill(ID2);
-                     }
-                 }
-             }
-         }
-
-         // set number of primaries in first bin
-         if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
-         notfound = false;
-         for (const auto& f : coinFilelist) {
-             TFile froot(f.c_str());
-             if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-                 nPrimCoin += dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
-             }
-            else {
-                std::cout << "WARNING: NumberOfPrimaries not found in t4z- file!" << std::endl;
-                notfound = true;
+                    if ( sumE >= 1519 and sumE < 1531 ) {
+                        M2_ID1vsID2_1525.Fill(ID1, ID2);
+                        M2_ID1andID2_1525.Fill(ID1);
+                        M2_ID1andID2_1525.Fill(ID2);
+                    }
+                    if ( sumE >= 1455 and sumE < 1467 ) {
+                        M2_ID1vsID2_1461.Fill(ID1, ID2);
+                        M2_ID1andID2_1461.Fill(ID1);
+                        M2_ID1andID2_1461.Fill(ID2);
+                    }
+                    if ( sumE >= 250  and sumE < 3000 ) {
+                        M2_ID1vsID2_full.Fill(ID1, ID2);
+                        M2_ID1andID2_full.Fill(ID1);
+                        M2_ID1andID2_full.Fill(ID2);
+                    }
+                    if ( sumE >= 1405 and sumE < 1450 ) {
+                        M2_ID1vsID2_S1.Fill(ID1, ID2);
+                        M2_ID1andID2_S1.Fill(ID1);
+                        M2_ID1andID2_S1.Fill(ID2);
+                    }
+                    if ( sumE >= 1470 and sumE < 1515 ) {
+                        M2_ID1vsID2_S2.Fill(ID1, ID2);
+                        M2_ID1andID2_S2.Fill(ID1);
+                        M2_ID1andID2_S2.Fill(ID2);
+                    }
+                    if ( sumE >= 1535 and sumE < 1580 ) {
+                        M2_ID1vsID2_S3.Fill(ID1, ID2);
+                        M2_ID1andID2_S3.Fill(ID1);
+                        M2_ID1andID2_S3.Fill(ID2);
+                    }
+                }
             }
-         }
-         if (notfound) nPrimCoin = 0;
-         if (verbose) std::cout << "Number of coin primaries: " << nPrimCoin << std::endl;
+        }
+        if (verbose) std::cout << "There were " << badevents << " events with multiplicity = 2 but only 0 or 1 found in the tree\n";
+
+        // set number of primaries in first bin
+        if (verbose) std::cout << "Getting number of primaries...\n";
+        notfound = false;
+        for (const auto& f : coinFilelist) {
+            TFile froot(f.c_str());
+            if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
+                nPrimCoin += dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+            }
+           else {
+               std::cout << "WARNING: NumberOfPrimaries not found in t4z- file!" << std::endl;
+               notfound = true;
+           }
+        }
+        if (notfound) nPrimCoin = 0;
+        if (verbose) std::cout << "Number of coin primaries: " << nPrimCoin << std::endl;
     }
 
     // Save!
+    // build output filename
     std::string outName = pathToTop + '/' + pathToIsotope + '/' +
                           "pdf-" + items[2] + '-' + items[1] + '-' + items[0] + ".root";
     TFile outfile(outName.c_str(), "RECREATE");
