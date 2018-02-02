@@ -165,17 +165,20 @@ int main( int argc, char** argv ) {
 
     // set number of primaries in first bin
     if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
-    long nPrim = 0;
+    bool notfound = false;
+    long nPrimEdep = 0;
     for (const auto& f : edepFilelist) {
         TFile froot(f.c_str());
         if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-            auto n = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"));
-            nPrim += n->GetVal();
+             nPrimEdep += dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
         }
-        else std::cout << "WARNING: NumberOfPrimaries not found in t4z- file! Please use a more recent version of gerda-ada." << std::endl;
+        else {
+            std::cout << "WARNING: NumberOfPrimaries not found in t4z- file!" << std::endl;
+            notfound = true;
+        }
     }
-    for ( auto h : energy_ch ) h.SetBinContent(1, nPrim);
-    for ( auto h : { energyBEGe, energyEnrCoax, energyNatCoax } ) h.SetBinContent(1, nPrim);
+    if (notfound) nPrimEdep = 0;
+    if (verbose) std::cout << "Number of edep primaries: " << nPrimEdep << std::endl;
 
     // build M2 spectra
     TH2D M2_enrE1vsE2  ("M2_enrE1vsE2",   "edep with smaller detID, other edep, M=2 (enrAll)", 8000, 0, 8000, 8000, 0, 8000);
@@ -196,6 +199,7 @@ int main( int argc, char** argv ) {
     TH1I M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
     TH1I M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
+    long nPrimCoin = 0;
     if (processCoin) {
          std::map<int,double> evMap;
          std::cout << "\nProcessing edep... ";
@@ -257,49 +261,35 @@ int main( int argc, char** argv ) {
                          M2_ID1andID2_S3.Fill(ID1);
                          M2_ID1andID2_S3.Fill(ID2);
                      }
-                     }
-                  }
-              }
+                 }
+             }
+         }
 
-              // set number of primaries in first bin
-              if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
-         nPrim = 0;
+         // set number of primaries in first bin
+         if (verbose) std::cout << "\nSetting number of primaries in first bin...\n";
+         notfound = false;
          for (const auto& f : coinFilelist) {
              TFile froot(f.c_str());
              if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-                 auto n = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"));
-                 nPrim += n->GetVal();
+                 nPrimCoin += dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
              }
-             else std::cout << "WARNING: NumberOfPrimaries not found in t4z- file! Please use a more recent version of gerda-ada." << std::endl;
+            else {
+                std::cout << "WARNING: NumberOfPrimaries not found in t4z- file!" << std::endl;
+                notfound = true;
+            }
          }
-         energyBEGe.SetBinContent(1, nPrim);
-         energyEnrCoax.SetBinContent(1, nPrim);
-         energyNatCoax.SetBinContent(1, nPrim);
-
-         M2_enrE1vsE2.SetBinContent(1, nPrim);
-         M2_enrE1plusE2.SetBinContent(1, nPrim);
-         M2_enrE1andE2.SetBinContent(1, nPrim);
-         M2_ID1vsID2_1525.SetBinContent(1, nPrim);
-         M2_ID1vsID2_1461.SetBinContent(1, nPrim);
-         M2_ID1vsID2_full.SetBinContent(1, nPrim);
-         M2_ID1vsID2_S1.SetBinContent(1, nPrim);
-         M2_ID1vsID2_S2.SetBinContent(1, nPrim);
-         M2_ID1vsID2_S3.SetBinContent(1, nPrim);
-
-         M2_ID1andID2_1525.SetBinContent(1, nPrim);
-         M2_ID1andID2_1461.SetBinContent(1, nPrim);
-         M2_ID1andID2_full.SetBinContent(1, nPrim);
-         M2_ID1andID2_S1.SetBinContent(1, nPrim);
-         M2_ID1andID2_S2.SetBinContent(1, nPrim);
-         M2_ID1andID2_S3.SetBinContent(1, nPrim);
+         if (notfound) nPrimCoin = 0;
+         if (verbose) std::cout << "Number of coin primaries: " << nPrimCoin << std::endl;
     }
-    // Save!
 
+    // Save!
     std::string outName = pathToTop + '/' + pathToIsotope + '/' +
                           "pdf-" + items[2] + '-' + items[1] + '-' + items[0] + ".root";
     TFile outfile(outName.c_str(), "RECREATE");
 
     if (verbose) std::cout << "Saving to disk...\n";
+    TParameter<long> nPrimCoinPar("NumberOfPrimariesCoin", nPrimCoin);
+    TParameter<long> nPrimEdepPar("NumberOfPrimariesEdep", nPrimEdep);
     for ( auto h : energy_ch ) h.Write();
     energyBEGe.Write();
     energyEnrCoax.Write();
@@ -327,8 +317,11 @@ int main( int argc, char** argv ) {
         M2_ID1andID2_S1.Write();
         M2_ID1andID2_S2.Write();
         M2_ID1andID2_S3.Write();
+
+        nPrimCoinPar.Write();
     }
 
+    nPrimEdepPar.Write();
     std::cout << "Output saved in: " << outName << std::endl;
 
     return 0;

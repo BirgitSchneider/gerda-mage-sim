@@ -20,6 +20,7 @@
 // cern-root
 #include "TFile.h"
 #include "TChain.h"
+#include "TParameter.h"
 
 // gerda-ada
 #include "gerda-ada/T4SimHandler.h"
@@ -87,12 +88,26 @@ int main(int argc, char** argv) {
         return filelist;
     };
 
-    // join all raw- files in same tree
+    // join all raw- files in same tree and get number of primaries
     if (verbose) std::cout << "\nraw- files found:\n";
     auto filelist = GetContent(dirWithRaw);
     if (filelist.empty()) {std::cout << "There were problems in reading the raw- files. Aborting...\n"; return 1;}
     TChain ch("fTree");
-    for ( auto& f : filelist ) ch.Add(f.c_str());
+    bool notfound = false;
+    long totPrimaries = 0;
+    for ( auto& f : filelist ) {
+        TFile file(f.c_str());
+        if (file.GetListOfKeys()->Contains("NumberOfPrimaries")) {
+            totPrimaries += dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimaries"))->GetVal();
+        }
+        else {
+            std::cout << "WARNING: NumberOfPrimaries not found in " << f << "! It will be set to zero!\n";
+            notfound = true;
+        }
+        file.Close();
+        ch.Add(f.c_str());
+    }
+    if (notfound) totPrimaries = 0;
 
     // read json file with livetimes
     Json::Value livetimes;
@@ -133,7 +148,9 @@ int main(int argc, char** argv) {
         // calculate fraction of events
         auto nentries = ch.GetEntries();
         int fraction = (int)(nentries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
-        if (verbose) std::cout << nentries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
+        int primFraction = (int)(totPrimaries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
+        if (verbose) std::cout << "Events fraction: " << nentries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
+        if (verbose) std::cout << "Primaries fraction:" << totPrimaries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
 
         // set up tier4izer
         gada::T4SimConfig config;
@@ -152,6 +169,12 @@ int main(int argc, char** argv) {
             if (verbose) std::cout << "Running production... first event = " << first << std::endl;
         // run
         handler.RunProduction( first, first + fraction );
+
+        // save number of primaries
+        TFile f(filename.c_str(),"UPDATE");
+        TParameter<long> numberOfPrimaries("NumberOfPrimaries",primFraction);
+        numberOfPrimaries.Write();
+        f.Close();
 
         // update first event
         first += fraction;
