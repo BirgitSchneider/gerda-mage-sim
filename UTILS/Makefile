@@ -16,17 +16,20 @@
 SRCDIR  = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 DESTDIR = /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2
 QSUB    = $(shell which qsub)
-# qsub script must accept the syntax:
-# qsub job-scheduler/mpik-t4z-gen.qsub <folder-with-raw> <dest-dir-tree>
-# qsub job-scheduler/mpik-pdf-gen.qsub <volume>/<part>/<isotope> <dest-dir-tree>
-JOBT4Z  = job-scheduler/mpik-t4z-gen.qsub
-JOBPDF  = job-scheduler/mpik-pdf-gen.qsub
 
 all :
 	@echo "Please pick up one of the following options:"
 	@echo " - make sim : launch the simulations in the cluster"
 	@echo " - make bin : compile the command line tools"
 	@echo " - make post : lauch post-processing in the cluster"
+
+### Post-processing #####################################################################
+
+# qsub script must accept the syntax:
+# qsub job-scheduler/mpik-t4z-gen.qsub <folder-with-raw> <dest-dir-tree>
+# qsub job-scheduler/mpik-pdf-gen.qsub <volume>/<part>/<isotope> <dest-dir-tree>
+JOBT4Z  = job-scheduler/mpik-t4z-gen.qsub
+JOBPDF  = job-scheduler/mpik-pdf-gen.qsub
 
 # function to change the position of the directory tree
 changetree = $(shell echo $(2)/$(shell echo $(1) | rev | cut -d'/' -f-4 | rev))
@@ -38,9 +41,11 @@ part    = $(shell echo $(1) | cut -d'/' -f3)
 isotope = $(shell echo $(1) | cut -d'/' -f4)
 
 # get all directories to be processed with raw- files
-DIRSWITHRAW = $(foreach d,$(wildcard ../*/*/*/edep ../*/*/*/coin),$(shell dirname $(d)))
+PATH_TO_ISOTOPES = $(sort $(foreach d,$(wildcard ../*/*/*/edep ../*/*/*/coin),$(shell dirname $(d))))
+PDF_FILES = $(foreach i,$(PATH_TO_ISOTOPES),$(call changetree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DESTDIR)))
 
-TARGETS = $(sort $(foreach dir,$(DIRSWITHRAW),$(dir)/post-proc))
+debug :
+	@echo $(PDF_FILES)
 
 post : mkdir $(TARGETS)
 
