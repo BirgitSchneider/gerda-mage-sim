@@ -67,5 +67,22 @@ $ setfacl -Rm user:sturm:rwX gerda-simulations/
 $ setfacl -Rdm user:sturm:rwX gerda-simulations/
 ```
 
+# Load preinstalled software
 
+Add the following lines to your ~/.bashrc
+```shell
+export PATH=$PATH:"/lfs/l3/gerda/sturm/sw/gerda-sw-all/util/swmod/bin/"
+. swmod.sh init
 
+export SWMOD_MODPATH="/lfs/l3/gerda/sturm/sw/.install"
+export SWMOD_HOSTSPEC="linux-scientific-7.3-x86_64"
+```
+call the following command to see what is installed
+```shell
+$ swmod avail
+```
+
+and load what you need e.g.
+```shell
+$ swmod load gerda@master
+```
