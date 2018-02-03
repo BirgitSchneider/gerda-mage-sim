@@ -5,7 +5,7 @@
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 
-singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
+singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen-volume \
   --destdir $2 \
   --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
   $1
