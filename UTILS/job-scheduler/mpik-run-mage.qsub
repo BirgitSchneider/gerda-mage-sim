@@ -7,7 +7,6 @@ LOGFILE=$(echo $1 | cut -f 1 -d '.').out
 
 #PBS -P short ### queue
 #PBS -j y     ### have logoutput and erroroutput in the same file
-#PBS -o /lfs/l2/gerda/Hades/gerda-mage-sim/UTILS/job-scheduler/log.qsub
 
 cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim"
 singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v2.1.sqsh $1 &> $LOGFILE

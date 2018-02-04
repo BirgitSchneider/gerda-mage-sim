@@ -80,10 +80,12 @@ post : mkdir $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_
 mkdir :
 	@mkdir -p $(DESTDIR)
 
+space := $(null) #
+comma := ,
 define rule_for_volume_pdf
   $(1) : $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev))
 	@if [[ $$(call getjob,$$(notdir $$@)) == 0 ]]; then \
-	$$(QSUB) -hold_jid $$(shell echo "$$(foreach f,$$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev)),$$(notdir $$(f)),)" | rev | cut -c 2- | rev) \
+	$$(QSUB) -hold_jid $$(subst $$(space),$$(comma),$$(notdir $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev)))) \
                    -N $$(notdir $$@) \
                    $$(JOBPDFVOL) $$(shell echo $$@ | rev | cut -d'-' -f3 | rev) \
                    $$(DESTDIR); \
@@ -124,7 +126,7 @@ define rule_for_single_t4z
   $(1) : $$(wildcard $$(dir $$(call changetree,$(1),$$(SRCDIR)))/raw-*.root)
 	@if [[ $$(call getjob,$$(shell echo $$(notdir $$@) | cut -d'-' -f-5)) == 0 ]]; then \
 	$$(QSUB) -N $$(shell echo $$(notdir $$@) | cut -d'-' -f-5) \
-                    $$(JOBT4Z) $$(call changetree,$$(dir $$@),$$(SRCDIR)) $$(DESTDIR); \
+                    $$(JOBT4Z) $$(call changetree2,$$(dir $$@),$$(SRCDIR)) $$(DESTDIR); \
 	else \
 	echo "There's already a $$(shell echo $$(notdir $$@) | cut -d'-' -f-5) job in queue"; \
 	fi
