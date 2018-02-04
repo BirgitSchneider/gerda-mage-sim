@@ -15,13 +15,13 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `surf-calc.jl`: julia script that calculates the area for p+ and n+ contacts for each detector
 *  `post/`: utilities for raw files post-processing. See the Wiki page for details on the simulations post-processing flow
     * `livetime-calc-ph2.cxx`: C++ program to extract each run's livetime and RunConfig. Results are stored in a JSON file that will be used by `t4z-gen.cxx`
-    * `t4z-gen.cxx`: C++ program to generate a `t4z-`file for each run starting from a collection of `raw-`files
+    * `t4z-gen.cxx`: C++ program to generate a `t4z-`file for each run starting from a collection of `raw-`files
     * `pdf-gen.cxx`: C++ program to generate a `pdf-`file from a collection of `t4z-`files
     * `pdf-gen-volume.cxx`: C++ program to join PDFs of each single part to produce a `pdf-`file for a volume 
     * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
     * `gerda-metadata/`: (git submodule) version of [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for post-processing
     * `old/`: old post-processing scripts
-* `job-scheduler/`: batch job manager utilities. `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
+* `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
 * `ranger/`: GNU ranger file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
 * `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions you can use Oliver's [docker2singularity.py](https://github.com/oschulz/singularity-utils) Python script. An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`
 * `Makefile`: GNU Makefile to compile C++ programs in this directory
