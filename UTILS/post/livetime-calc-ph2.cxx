@@ -136,7 +136,7 @@ int main(int argc, char** argv) {
         if (verbose) std::cout << "Loading trees...\n";
         gada::DataLoader loader;
         loader.AddFileMap(&myMap);
-        loader.BuildTier4();
+        loader.BuildTier3();
         reader.SetTree(loader.GetSharedMasterChain());
 //        bool hasPsdIsEval = true;
 //        if (...) hasPsdEval = false;
