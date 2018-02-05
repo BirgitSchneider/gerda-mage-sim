@@ -60,7 +60,7 @@ $ bin/pdf-gen \
     ge_holders/plates/K40
 $ bin/pdf-gen-volume \
     -v
-    --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.1 \
+    --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
     --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
     cables
 ```
