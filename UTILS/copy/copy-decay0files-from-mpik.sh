@@ -14,9 +14,9 @@
 # --exclude=README.md       :
 # --dry-run                 : do everything except actually transferring
 
-if [ -f ./copy-decay0files-from-lngs.sh ]; then
-  echo "set username for gerda-login.lngs.infn.it:"; read user
-  sour=/nfs/gerda5/var/gerda-simulations/gerda-mc2/decay0files/
+if [ -f ./copy-decay0files-from-mpik.sh ]; then
+  echo "set username for lfs2.mpi-hd.mpg.de:"; read user
+  sour=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/decay0files/
   opts="--ignore-existing \
        --recursive \
        --links \
@@ -29,7 +29,7 @@ if [ -f ./copy-decay0files-from-lngs.sh ]; then
   rsync $opts \
         --out-format="%o: %f%L" \
         --dry-run \
-        $user@gerda-login.lngs.infn.it:$sour ../../decay0files
+        $user@lfs2.mpi-hd.mpg.de:$sour ../../decay0files
   echo ""
   echo "This was the list of decay0 files that will be transferred."
   echo ""
@@ -41,10 +41,10 @@ if [ -f ./copy-decay0files-from-lngs.sh ]; then
   if [ "$ans" == "y" ]; then
     rsync $opts \
           --progress \
-          $user@gerda-login.lngs.infn.it:$sour ../../decay0files
+          $user@lfs2.mpi-hd.mpg.de:$sour ../../decay0files
   else
     echo "Aborting..."
   fi
 else
-  echo ERROR: must cd in UTILS/copy before calling "./copy-decay0files-from-lngs.sh"!
+  echo ERROR: must cd in UTILS/copy before calling "./copy-decay0files-from-mpik.sh"!
 fi
