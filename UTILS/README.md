@@ -8,7 +8,8 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `create-2nbb-macros.jl`: Julia script to produce, for each detector (dead layer and active volume), macros for 2nbb and 2nbbLV simulations (under `gedet/intrinsic/`)
     * `create-lar-pplus-macros.jl`: Julia script to produce macros for each detector for simulations inside the LAr close to the pplus contact (under `gedet/lar_pplus/`) using a template macro
     * `create-oncontacts-macros.jl`: Julia script to produce macros for each detector for simulations on the pplus and npluscontact (under `gedet/nplus/` and `gedet/pplus`) using a template macro
-    * `multiply-statistics.sh`: brute bash script to help you generate new macro files if you need more statistics
+    * `create-macros-from-template.sh`: shell script to help you generate more statistics
+    * `multiply-statistics.sh`: brute bash script to help you generate new sets of macro files with different number of primaries in them if you need more statistics
 * `surf-sampling/`: gedet surface sampling tools
     * `create-surf-macros.jl`: Julia script to produce, for each detector, macro files for the surface sampling (under `gedet/surf/ver/`). It uses JSON.jl
     * `separate-contacts.jl`: Julia script to separate p+ and n+ contacts simulated surface vertices into different ROOT files (under `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and JSON.jl (so use `rjulia` inside the `gerda-mage-sim-utils` container!)
