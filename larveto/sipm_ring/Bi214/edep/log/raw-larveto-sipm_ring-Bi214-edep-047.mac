@@ -1,0 +1,28 @@
+
+# load preamble
+/control/execute                           ./larveto/sipm_ring/Bi214/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./larveto/sipm_ring/Bi214/edep/raw-larveto-sipm_ring-Bi214-edep-047.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/MG/geometry/cherenkov                     -1
+
+/run/initialize
+
+/MG/generator/confine                      volumelist
+/MG/generator/volumelistfrom		   0
+/MG/generator/volumelistto		   14
+/MG/generator/volumelist                   LArInstr_FiberOuter_SensitiveEnd_Physical
+
+/MG/generator/select            G4gun
+/MG/generator/g4gun/cone_on     true
+/gun/particle                   ion
+/gun/ion                        83 214
+/gun/energy                     0 eV
+
+/tracking/verbose                          0
+/run/beamOn                                10000000
