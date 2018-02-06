@@ -128,7 +128,8 @@ int main(int argc, char** argv) {
     int first = 0; // first event to be processed in tree
     // loop over runIDs in json file
     for ( auto r : runs ) {
-        if (verbose) std::cout << "\n==> " << r << std::endl;
+        if (verbose) std::cout << std::endl;
+        std::cout << "==> " << r << std::endl;
         // strip out folders in dir to build up final t4z- filename
         std::vector<std::string> items;
         std::string dircopy = dirWithRaw;
