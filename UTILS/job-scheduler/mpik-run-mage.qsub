@@ -2,11 +2,9 @@
 #
 # USAGE: qsub mpik-run-mage.qsub <mage-macro-file>
 #
+#$ -P short ### queue
+#$ -j y     ### have logoutput and erroroutput in the same file
 
 LOGFILE=$(echo $1 | cut -f 1 -d '.').out
-
-#PBS -P short ### queue
-#PBS -j y     ### have logoutput and erroroutput in the same file
-
 cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim"
 singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v2.1.sqsh $1 &> $LOGFILE
