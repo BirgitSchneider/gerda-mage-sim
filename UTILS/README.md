@@ -13,7 +13,7 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `create-surf-macros.jl`: Julia script to produce, for each detector, macro files for the surface sampling (under `gedet/surf/ver/`). It uses JSON.jl
     * `separate-contacts.jl`: Julia script to separate p+ and n+ contacts simulated surface vertices into different ROOT files (under `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and JSON.jl (so use `rjulia` inside the `gerda-mage-sim-utils` container!)
     * `surf-calc.jl`: Julia script that calculates the area for p+ and n+ contacts for each detector
-*  `post/`: utilities for raw files post-processing. See the Wiki page for details on the simulations post-processing flow
+*  `post/`: utilities for raw files post-processing. Learn on how we manage the post-processing flow at MPIK in [the Wiki page](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling)
     * `livetime-calc-ph2.cxx`: C++ program to extract each run's livetime and RunConfig. Results are stored in a JSON file that will be used by `t4z-gen.cxx` (see examples below)
     * `t4z-gen.cxx`: C++ program to generate a `t4z-`file for each run starting from a collection of `raw-`files (see examples below)
     * `pdf-gen.cxx`: C++ program to generate a `pdf-`file from a collection of `t4z-`files (see examples below)
@@ -21,9 +21,9 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
     * `gerda-metadata/`: (git submodule) version of [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for post-processing
     * `old/`: old post-processing scripts
-    * `Makefile`: GNU Makefile to launch the post-processing execution queue (See the Wiki for details)
+    * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
 * `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
-* `ranger/`: GNU ranger file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
+* `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
 * `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions you can use Oliver's [docker2singularity.py](https://github.com/oschulz/singularity-utils) Python script. An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`
 * `Makefile`: GNU Makefile to compile C++ programs in this directory
 
@@ -64,8 +64,9 @@ $ bin/pdf-gen-volume \
     --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
     cables
 ```
+But wait, [there's a Makefile that does all this for you](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make)!
 
-### Load preinstalled software (at MPIK)
+### Load preinstalled software (at MPIK) with [swmod](https://github.com/oschulz/swmod)
 Add the following lines to your `~/.bashrc`
 ```shell
 export PATH=$PATH:"/lfs/l3/gerda/sturm/sw/gerda-sw-all/util/swmod/bin/"
@@ -82,7 +83,7 @@ and load what you need e.g.
 $ swmod load gerda@master
 ```
 
-### Useful `sed` commands to quickly modify macros
+### Useful [`sed`](https://www.gnu.org/software/sed/) commands to quickly modify macros
 Change file directly with the `-i` flag
 ```shell
 $ sed -i ... file
