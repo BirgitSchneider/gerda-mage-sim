@@ -36,7 +36,7 @@ getjob = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then ec
 
 # second expansion is needed here to build up macro file name from target
 .SECONDEXPANSION:
-$(ROOTFILES) : %.root : $$(dir $$*)log/$$(notdir $$*).mac
+$(ROOTFILES) : %.root : $$(dir $$*)log/$$(notdir $$*).mac $$(dir $$*)log/preamble.mac
 	@if [[ $(call getjob,$(notdir $@)) == 0 ]]; then \
 	$(QSUB) -N $(notdir $@) $(JOBSIM) $^; \
 	else \
