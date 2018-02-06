@@ -13,9 +13,6 @@
 /MG/processes/lowenergy                         true
 /MG/processes/useNoHadPhysics                   true
 
-### nuclear de-excitation module (test)
-/process/deex/correlatedGamma			1
-
 ### Geometry ###
 /MG/geometry/detector                           GerdaArray
 /MG/geometry/database                           false

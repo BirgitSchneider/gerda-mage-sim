@@ -8,6 +8,9 @@
 /MG/output/saveOnlyEventsWithEnergyDeposit true
 #/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
 
+### nuclear de-excitation module
+/process/deex/correlatedGamma                   1
+
 /run/initialize
 
 /MG/generator/confine                      volumelist
