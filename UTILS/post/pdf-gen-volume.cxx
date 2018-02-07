@@ -203,8 +203,14 @@ int main( int argc, char** argv ) {
             TH1I* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S2"));   if (verbose and !tmp_M2_ID1andID2_S2)   std::cout << "Problems retrieving M2_ID1andID2_S2!\n";
             TH1I* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1I*>(inFile.Get("M2_ID1andID2_S3"));   if (verbose and !tmp_M2_ID1andID2_S3)   std::cout << "Problems retrieving M2_ID1andID2_S3!\n";
 
-            nPrimCoin += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
-            nPrimEdep += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
+            if (inFile.GetListOfKeys()->Contains("NumberOfPrimariesCoin")) {
+                nPrimCoin += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
+            }
+            else { if (verbose) std::cout << "WARNING: NumberOfPrimariesCoin not found in file!\n"; }
+            if (inFile.GetListOfKeys()->Contains("NumberOfPrimariesEdep")) {
+                nPrimEdep += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
+            }
+            else { if (verbose) std::cout << "WARNING: NumberOfPrimariesEdep not found in file!\n"; }
 
             if(!tmp_M2_ID1vsID2_1525) processCoin = false;
 

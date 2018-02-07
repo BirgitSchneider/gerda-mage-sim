@@ -13,8 +13,8 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v0.3
-RUNS           = $(shell seq 53 65) 67 $(shell seq 69 89 90)
+CYCLE          = v0.4
+RUNS           = $(shell seq 53 65) 67 $(shell seq 69 89)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
 DEST_DIR       = $(GERDA_PDFS)/$(CYCLE)
