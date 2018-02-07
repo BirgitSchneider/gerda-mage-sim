@@ -217,7 +217,6 @@ int main( int argc, char** argv ) {
         while(reader.Next()) {
             // clear object from previous loop iteration
             evMap.clear();
-            reader.Next();
             // select multiplicity
             if (*multiplicity == 2) {
                 // loop over detector ids
