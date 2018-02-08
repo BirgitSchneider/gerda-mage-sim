@@ -13,8 +13,8 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v0.4
-RUNS           = $(shell seq 53 65) 67 $(shell seq 69 89)
+CYCLE          = v0.3
+RUNS           = $(shell seq 53 65) 67 $(shell seq 69 79) $(shell seq 83 89)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
 DEST_DIR       = $(GERDA_PDFS)/$(CYCLE)
@@ -85,13 +85,13 @@ comma := ,
 # rule template for global pdf- files, they depend on pdf- files for each part
 define rule_for_volume_pdf
   $(1) : $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev))
-	@if [[ $$(call check_if_job_exists,$$(notdir $$@)-$$(CYCLE)) == 0 ]]; then \
+	@if [[ $$(call check_if_job_exists,$$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE)) == 0 ]]; then \
 	$$(QSUB) -hold_jid $$(subst $$(space),$$(comma),$$(foreach f,$$(notdir $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev))),$$(f)-$$(CYCLE))) \
-                   -N $$(notdir $$@)-$$(CYCLE) \
+                   -N $$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE) \
                    $$(JOBPDFVOL) $$(shell echo $$@ | rev | cut -d'-' -f2 | rev) \
                    $$(DEST_DIR); \
 	else \
-	echo "There's already a job for $$(notdir $$@) in queue"; \
+	echo "There's already a job for $$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE) in queue"; \
 	fi
 endef
 # loop over cables and minishroud global pdf- files
@@ -115,7 +115,7 @@ define rule_for_single_pdf
                    $$(JOBPDF) $$(shell echo $$@ | rev | cut -d'-' -f3 | rev)/$$(shell echo $$@ | rev | cut -d'-' -f2 | rev)/$$(shell echo $$(basename $$@) | rev | cut -d'-' -f1 | rev) \
                    $$(DEST_DIR); \
 	else \
-	echo "There's already a job for $$(notdir $$@) in queue"; \
+	echo "There's already a job for $$(notdir $$@)-$$(CYCLE) in queue"; \
 	fi
 endef
 # loop over all pdf- files
@@ -130,7 +130,7 @@ define rule_for_single_t4z
 	$$(QSUB) -N $$(shell echo $$(notdir $$@) | cut -d'-' -f-5)-$$(CYCLE) \
                     $$(JOBT4Z) $$(call change_tree2,$$(dir $$@),$$(GERDA_MAGE_SIM)) $$(DEST_DIR); \
 	else \
-	echo "There's already a $$(shell echo $$(notdir $$@) | cut -d'-' -f-5) job in queue"; \
+	echo "There's already a $$(shell echo $$(notdir $$@) | cut -d'-' -f-5)-$$(CYCLE) job in queue"; \
 	fi
 endef
 # loop over all t4z- files

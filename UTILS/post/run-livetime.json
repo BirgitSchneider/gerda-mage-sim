@@ -149,18 +149,6 @@
 		"livetime_in_s" : 825520,
 		"runconfig" : "configuration_20170313.root"
 	},
-	"run80" : 
-	{
-		"ID" : 80,
-		"livetime_in_s" : 2094920,
-		"runconfig" : "configuration_20170313.root"
-	},
-	"run82" : 
-	{
-		"ID" : 82,
-		"livetime_in_s" : 1372920,
-		"runconfig" : "configuration_20170512.root"
-	},
 	"run83" : 
 	{
 		"ID" : 83,
