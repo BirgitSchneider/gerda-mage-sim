@@ -38,14 +38,14 @@ temLines = readlines(open("../../gedet/intrinsic/$(ARGS[1])/edep/log/raw-gedet-i
 # calculate total mass
 tot_mass = 0.
 for (det, info) in gedPar
-    tot_mass += info["mc_mass"]
+    tot_mass += info["mc_mass"] * info["enrichment"]
 end
 
 # loop over detectors in ged-mapping file with a (key,value) pair
 for (det, info) in gedMap
    CHANNEL = info["channel"]
    VOLID = info["volume"]
-   NEV = convert(Int64,round(1E08 * gedPar[det]["mc_mass"] / tot_mass))
+   NEV = convert(Int64,round(1E08 * gedPar[det]["mc_mass"] * gedPar[det]["enrichment"] / tot_mass))
 
    # substitute $ variables in template file
    macLines = temLines

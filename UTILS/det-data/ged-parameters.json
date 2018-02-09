@@ -12,6 +12,7 @@
         "detcenter_z": -38.6547,
         "corner_radius": 0,
         "mc_mass": 0.629662,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -28,6 +29,7 @@
         "detcenter_z": -241.145,
         "corner_radius": 0,
         "mc_mass": 0.388294,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -44,6 +46,7 @@
         "detcenter_z": -253.899,
         "corner_radius": 0,
         "mc_mass": 0.958604,
+        "enrichment": 0.859,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 19.5
     },
@@ -60,6 +63,7 @@
         "detcenter_z": 27.7005,
         "corner_radius": 0,
         "mc_mass": 2.75631,
+        "enrichment": 0.856,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 18.0
     },
@@ -76,6 +80,7 @@
         "detcenter_z": 26.3005,
         "corner_radius": 0,
         "mc_mass": 2.99016,
+        "enrichment": 0.078,
         "detcenter_y": 0.0,
         "groove_outer_radius": 20.0
     },
@@ -92,6 +97,7 @@
         "detcenter_z": 67.8647,
         "corner_radius": 28.75,
         "mc_mass": 0.548874,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -108,6 +114,7 @@
         "detcenter_z": 68.2347,
         "corner_radius": 0,
         "mc_mass": 0.641803,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -124,6 +131,7 @@
         "detcenter_z": -299.895,
         "corner_radius": 0,
         "mc_mass": 0.759084,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -140,6 +148,7 @@
         "detcenter_z": -179.235,
         "corner_radius": 0,
         "mc_mass": 0.640125,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -156,6 +165,7 @@
         "detcenter_z": -211.14,
         "corner_radius": 0,
         "mc_mass": 0.625851,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -172,6 +182,7 @@
         "detcenter_z": -68.9047,
         "corner_radius": 0,
         "mc_mass": 0.747612,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -188,6 +199,7 @@
         "detcenter_z": -217.2,
         "corner_radius": 0,
         "mc_mass": 2.37762,
+        "enrichment": 0.863,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 18.0
     },
@@ -204,6 +216,7 @@
         "detcenter_z": -246.35,
         "corner_radius": 0,
         "mc_mass": 0.656713,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -220,6 +233,7 @@
         "detcenter_z": -275.03,
         "corner_radius": 34.25,
         "mc_mass": 0.66318,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -236,6 +250,7 @@
         "detcenter_z": -190.305,
         "corner_radius": 29.12,
         "mc_mass": 0.775118,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -252,6 +267,7 @@
         "detcenter_z": 28.8505,
         "corner_radius": 0,
         "mc_mass": 2.90762,
+        "enrichment": 0.866,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 18.0
     },
@@ -268,6 +284,7 @@
         "detcenter_z": -153.22,
         "corner_radius": 31.75,
         "mc_mass": 0.740456,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -284,6 +301,7 @@
         "detcenter_z": 74.5953,
         "corner_radius": 28.0,
         "mc_mass": 0.627833,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -300,6 +318,7 @@
         "detcenter_z": -240.95,
         "corner_radius": 0,
         "mc_mass": 2.38482,
+        "enrichment": 0.883,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 20.0
     },
@@ -316,6 +335,7 @@
         "detcenter_z": -189.2,
         "corner_radius": 0,
         "mc_mass": 2.34831,
+        "enrichment": 0.078,
         "detcenter_y": 0.0,
         "groove_outer_radius": 20.0
     },
@@ -332,6 +352,7 @@
         "detcenter_z": -26.0647,
         "corner_radius": 0,
         "mc_mass": 0.537718,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -348,6 +369,7 @@
         "detcenter_z": -134.44,
         "corner_radius": 0,
         "mc_mass": 0.821504,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -364,6 +386,7 @@
         "detcenter_z": 32.2803,
         "corner_radius": 0,
         "mc_mass": 0.796777,
+        "enrichment": 0.877,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
@@ -380,6 +403,7 @@
         "detcenter_z": -22.9997,
         "corner_radius": 0,
         "mc_mass": 0.74672,
+        "enrichment": 0.877,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
@@ -396,6 +420,7 @@
         "detcenter_z": -79.8697,
         "corner_radius": 0,
         "mc_mass": 0.820739,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -412,6 +437,7 @@
         "detcenter_z": 32.0553,
         "corner_radius": 0,
         "mc_mass": 0.724218,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -428,6 +454,7 @@
         "detcenter_z": -183.825,
         "corner_radius": 25.25,
         "mc_mass": 0.521012,
+        "enrichment": 0.877,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
@@ -444,6 +471,7 @@
         "detcenter_z": -126.62,
         "corner_radius": 0,
         "mc_mass": 0.601413,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -460,6 +488,7 @@
         "detcenter_z": 16.6603,
         "corner_radius": 0,
         "mc_mass": 0.815384,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -476,6 +505,7 @@
         "detcenter_z": -277.185,
         "corner_radius": 0,
         "mc_mass": 0.836252,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -492,6 +522,7 @@
         "detcenter_z": 32.5203,
         "corner_radius": 0,
         "mc_mass": 0.831385,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -508,6 +539,7 @@
         "detcenter_z": 67.7497,
         "corner_radius": 23.25,
         "mc_mass": 0.475965,
+        "enrichment": 0.877,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
@@ -524,6 +556,7 @@
         "detcenter_z": -75.0547,
         "corner_radius": 0,
         "mc_mass": 0.705367,
+        "enrichment": 0.877,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
@@ -540,6 +573,7 @@
         "detcenter_z": -33.9453,
         "corner_radius": 30.0,
         "mc_mass": 0.466145,
+        "enrichment": 0.877,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 10.5
     },
@@ -556,6 +590,7 @@
         "detcenter_z": -104.15,
         "corner_radius": 0,
         "mc_mass": 2.09237,
+        "enrichment": 0.855,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 20.0
     },
@@ -572,6 +607,7 @@
         "detcenter_z": -96.7897,
         "corner_radius": 0,
         "mc_mass": 0.702394,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -588,6 +624,7 @@
         "detcenter_z": -310.085,
         "corner_radius": 0,
         "mc_mass": 0.633677,
+        "enrichment": 0.877,
         "detcenter_y": 0.0,
         "groove_outer_radius": 10.5
     },
@@ -604,6 +641,7 @@
         "detcenter_z": -128.325,
         "corner_radius": 0,
         "mc_mass": 0.731723,
+        "enrichment": 0.877,
         "detcenter_y": -95.2628,
         "groove_outer_radius": 10.5
     },
@@ -620,6 +658,7 @@
         "detcenter_z": -89.6995,
         "corner_radius": 0,
         "mc_mass": 2.32798,
+        "enrichment": 0.078,
         "detcenter_y": 0.0,
         "groove_outer_radius": 20.0
     },
@@ -636,6 +675,7 @@
         "detcenter_z": -103.75,
         "corner_radius": 0,
         "mc_mass": 2.08671,
+        "enrichment": 0.855,
         "detcenter_y": 95.2628,
         "groove_outer_radius": 20.0
     }
