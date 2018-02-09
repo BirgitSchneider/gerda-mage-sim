@@ -1,7 +1,7 @@
 # load preamble
 /control/execute				./cables/hv_at_holders/K40/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename			./cables/hv_at_holders/K40/coin/raw-cables-hv_at_holders-K40-coin-000.root
+/MG/eventaction/rootfilename			./cables/hv_at_holders/K40/coin/raw-cables-hv_at_holders-K40-coin-005.root
 #/MG/output/WriteMacroToOutput			true		### is default ###
 #/MG/output/WriteNumberOfEventsToFile		true		### is default ###
 
@@ -22,4 +22,4 @@
 /gun/energy					0 eV
 
 /tracking/verbose				0
-/run/beamOn					10000000
+/run/beamOn					8725890

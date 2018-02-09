@@ -1,7 +1,7 @@
 # load preamble
-/control/execute				./cables/hv_at_holders/K40/coin/log/preamble.mac
+/control/execute				./cables/hv_at_holders/Ac228/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename			./cables/hv_at_holders/K40/coin/raw-cables-hv_at_holders-K40-coin-000.root
+/MG/eventaction/rootfilename			./cables/hv_at_holders/Ac228/coin/raw-cables-hv_at_holders-Ac228-coin-000.root
 #/MG/output/WriteMacroToOutput			true		### is default ###
 #/MG/output/WriteNumberOfEventsToFile		true		### is default ###
 
@@ -18,7 +18,7 @@
 /MG/generator/select				G4gun
 /MG/generator/g4gun/cone_on			true
 /gun/particle					ion
-/gun/ion					19 40 #K40#
+/gun/ion					89 228 #Ac228#
 /gun/energy					0 eV
 
 /tracking/verbose				0
