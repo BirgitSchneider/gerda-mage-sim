@@ -222,10 +222,10 @@ int main( int argc, char** argv ) {
                 // loop over detector ids
                 for ( int i = 0; i < 40; ++i ) {
                     // select event if it has a valid energy
-                    if ( energy[i] < 10000 and energy[i] > 40 ) evMap.insert(std::make_pair(i, energy[i]));
+                    if ( energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
                 }
                 if (evMap.size() != 2) {
-                    //std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
+                    if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
                     badevents++;
                     continue;
                 }
@@ -278,7 +278,7 @@ int main( int argc, char** argv ) {
                 }
             }
         }
-        if (verbose) std::cout << "There were " << badevents << " events with multiplicity = 2 but only 0 or 1 found in the tree over 40keV\n";
+        if (verbose) std::cout << "There were " << badevents << " events with multiplicity = 2 but a different number of edeps > 0 found in the tree\n";
 
         // set number of primaries in first bin
         if (verbose) std::cout << "Getting number of primaries...\n";

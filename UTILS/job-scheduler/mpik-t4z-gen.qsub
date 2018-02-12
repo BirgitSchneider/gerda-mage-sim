@@ -7,6 +7,7 @@ SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh t4z-gen \
   --metadata $SRCDIR/UTILS/post/gerda-metadata \
+  --srcdir $SRCDIR \
   --destdir $2 \
   --livetime-file $SRCDIR/UTILS/post/run-livetime.json \
   $1

@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
                                  << "USAGE: ./t4z-gen [OPTIONS] [DIR-WITH-RAW]\n\n"
                                  << "OPTIONS:\n"
                                  << "  required: --metadata <gerda-metadata-location>\n"
+                                 << "            --srcdir <gerda-mage-sim-dir>\n"
                                  << "            --destdir <destination-dir-post-processed>\n"
                                  << "            --livetime-file <json-file-from-livetime-calc-ph2>\n"
                                  << "  optional: -v : verbose mode\n\n"
@@ -44,7 +45,7 @@ int main(int argc, char** argv) {
     // get & check arguments
     std::vector<std::string> args;
     for (int i = 0; i < argc; ++i) args.emplace_back(argv[i]);
-    if (argc < 8) {usage(); return 1;}
+    if (argc < 10) {usage(); return 1;}
     std::string gerdaMetaPath;
     auto result = std::find(args.begin(), args.end(), "--metadata");
     if (result != args.end()) gerdaMetaPath = *(result+1);
@@ -52,6 +53,10 @@ int main(int argc, char** argv) {
     std::string destDirPath;
     result = std::find(args.begin(), args.end(), "--destdir");
     if (result != args.end()) destDirPath = *(result+1);
+    else {usage(); return 1;}
+    std::string srcDirPath;
+    result = std::find(args.begin(), args.end(), "--srcdir");
+    if (result != args.end()) srcDirPath = *(result+1);
     else {usage(); return 1;}
     std::string livetimeFile;
     result = std::find(args.begin(), args.end(), "--livetime-file");
@@ -68,6 +73,7 @@ int main(int argc, char** argv) {
     if (verbose) std::cout << "Paths:\n";
     if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back(); if (verbose) std::cout << gerdaMetaPath << std::endl;
     if (destDirPath.back()   == '/') destDirPath.pop_back();   if (verbose) std::cout << destDirPath   << std::endl;
+    if (srcDirPath.back()   == '/')  srcDirPath.pop_back();    if (verbose) std::cout << srcDirPath   << std::endl;
     if (dirWithRaw.back()    == '/') dirWithRaw.pop_back();    if (verbose) std::cout << dirWithRaw    << std::endl;
 
     // get raw-*.root files in directory
@@ -158,7 +164,7 @@ int main(int argc, char** argv) {
         gada::T4SimConfig config;
         config.LoadMapping(gerdaMetaPath + "/detector-data/mapping-default-depr.json");
             if(verbose) std::cout << "Mapping loaded" << std::endl;
-        config.LoadGedSettings(gerdaMetaPath + "/detector-data/ged-settings-default.json");
+        config.LoadGedSettings(srcDirPath + "/UTILS/post/ged-settings-custom.json");
             if(verbose) std::cout << "Ged settings loaded" << std::endl;
 //        config.LoadLArSettings(gerdaMetaPath + "/detector-data/lar-settings-default.json");
 //            if(verbose) std::cout << "LAr settings loaded" << std::endl;
