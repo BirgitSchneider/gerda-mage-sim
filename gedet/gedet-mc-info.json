@@ -1,0 +1,282 @@
+{
+    "GD02B": {
+        "channel": 2,
+        "dead-layer-mass-kg": 0.0722685,
+        "nplus-surface-cm2": 1.4284361238389773,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.556694
+    },
+    "GD76B": {
+        "channel": 17,
+        "dead-layer-mass-kg": 0.0590725,
+        "nplus-surface-cm2": 1.011580393749005,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.329243
+    },
+    "ANG1": {
+        "channel": 36,
+        "dead-layer-mass-kg": 0.156392,
+        "nplus-surface-cm2": 1.779575830305599,
+        "pplus-surface-cm2": 0.26939157004532477,
+        "active-volume-mass-kg": 0.802456
+    },
+    "ANG5": {
+        "channel": 8,
+        "dead-layer-mass-kg": 0.469738,
+        "nplus-surface-cm2": 3.5517668444241104,
+        "pplus-surface-cm2": 0.439822971502571,
+        "active-volume-mass-kg": 2.28692
+    },
+    "GTF112": {
+        "channel": 37,
+        "dead-layer-mass-kg": 0.077482,
+        "nplus-surface-cm2": 3.7989709163534573,
+        "pplus-surface-cm2": 0.3184004154413255,
+        "active-volume-mass-kg": 2.91187
+    },
+    "GD02A": {
+        "channel": 11,
+        "dead-layer-mass-kg": 0.0565841,
+        "nplus-surface-cm2": 1.2317037812976162,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.491953
+    },
+    "GD35C": {
+        "channel": 19,
+        "dead-layer-mass-kg": 0.0634542,
+        "nplus-surface-cm2": 1.4953357739104947,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.578948
+    },
+    "GD61B": {
+        "channel": 26,
+        "dead-layer-mass-kg": 0.0855659,
+        "nplus-surface-cm2": 1.6239559700685262,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.673905
+    },
+    "GD61C": {
+        "channel": 16,
+        "dead-layer-mass-kg": 0.0726806,
+        "nplus-surface-cm2": 1.489494673521528,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.567876
+    },
+    "GD89B": {
+        "channel": 5,
+        "dead-layer-mass-kg": 0.0883903,
+        "nplus-surface-cm2": 1.498582044431302,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.537077
+    },
+    "GD32C": {
+        "channel": 14,
+        "dead-layer-mass-kg": 0.0779667,
+        "nplus-surface-cm2": 1.5601768639798201,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.669628
+    },
+    "ANG4": {
+        "channel": 29,
+        "dead-layer-mass-kg": 0.237236,
+        "nplus-surface-cm2": 3.2341125572380127,
+        "pplus-surface-cm2": 0.4621282793430586,
+        "active-volume-mass-kg": 2.13991
+    },
+    "GD91B": {
+        "channel": 25,
+        "dead-layer-mass-kg": 0.0728945,
+        "nplus-surface-cm2": 1.4501651379230904,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.582856
+    },
+    "GD02D": {
+        "channel": 6,
+        "dead-layer-mass-kg": 0.109938,
+        "nplus-surface-cm2": 1.43315350252698,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.553812
+    },
+    "GTF45": {
+        "channel": 39,
+        "dead-layer-mass-kg": 0.0664049,
+        "nplus-surface-cm2": 3.232541760911218,
+        "pplus-surface-cm2": 0.2260375914257856,
+        "active-volume-mass-kg": 2.28482
+    },
+    "GD35A": {
+        "channel": 24,
+        "dead-layer-mass-kg": 0.0761838,
+        "nplus-surface-cm2": 1.4862056528035241,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.697998
+    },
+    "ANG2": {
+        "channel": 27,
+        "dead-layer-mass-kg": 0.435991,
+        "nplus-surface-cm2": 3.688858093845135,
+        "pplus-surface-cm2": 0.48411942791818713,
+        "active-volume-mass-kg": 2.4716
+    },
+    "GD61A": {
+        "channel": 4,
+        "dead-layer-mass-kg": 0.0796998,
+        "nplus-surface-cm2": 1.4720032158609835,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.660286
+    },
+    "GD91A": {
+        "channel": 0,
+        "dead-layer-mass-kg": 0.0695507,
+        "nplus-surface-cm2": 1.30902451252368,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.558278
+    },
+    "ANG3": {
+        "channel": 10,
+        "dead-layer-mass-kg": 0.312876,
+        "nplus-surface-cm2": 3.2283006108288714,
+        "pplus-surface-cm2": 0.4819203130606743,
+        "active-volume-mass-kg": 2.07287
+    },
+    "GD89D": {
+        "channel": 21,
+        "dead-layer-mass-kg": 0.073113,
+        "nplus-surface-cm2": 1.3720146905768313,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.463946
+    },
+    "GD79C": {
+        "channel": 23,
+        "dead-layer-mass-kg": 0.0997517,
+        "nplus-surface-cm2": 1.7256806145280574,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.721253
+    },
+    "GD02C": {
+        "channel": 31,
+        "dead-layer-mass-kg": 0.0891885,
+        "nplus-surface-cm2": 1.644104260393059,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.706655
+    },
+    "GD79B": {
+        "channel": 32,
+        "dead-layer-mass-kg": 0.0891606,
+        "nplus-surface-cm2": 1.6251855894331415,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.657925
+    },
+    "GD00D": {
+        "channel": 22,
+        "dead-layer-mass-kg": 0.0904854,
+        "nplus-surface-cm2": 1.6883459274327968,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.730853
+    },
+    "GD32B": {
+        "channel": 12,
+        "dead-layer-mass-kg": 0.0839694,
+        "nplus-surface-cm2": 1.5351734935365766,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.639849
+    },
+    "GD89A": {
+        "channel": 35,
+        "dead-layer-mass-kg": 0.0617257,
+        "nplus-surface-cm2": 1.169077142987606,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.459485
+    },
+    "GD89C": {
+        "channel": 15,
+        "dead-layer-mass-kg": 0.0744343,
+        "nplus-surface-cm2": 1.454045319009539,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.526743
+    },
+    "GD35B": {
+        "channel": 1,
+        "dead-layer-mass-kg": 0.0699668,
+        "nplus-surface-cm2": 1.6812997121019129,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.744159
+    },
+    "GD00C": {
+        "channel": 18,
+        "dead-layer-mass-kg": 0.090774,
+        "nplus-surface-cm2": 1.6906882989153131,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.745593
+    },
+    "GD76C": {
+        "channel": 20,
+        "dead-layer-mass-kg": 0.100938,
+        "nplus-surface-cm2": 1.6907184582047878,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.730695
+    },
+    "GD00A": {
+        "channel": 30,
+        "dead-layer-mass-kg": 0.055093,
+        "nplus-surface-cm2": 1.1321868030173945,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.420159
+    },
+    "GD91D": {
+        "channel": 33,
+        "dead-layer-mass-kg": 0.0788082,
+        "nplus-surface-cm2": 1.509343318738761,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.626683
+    },
+    "GD32A": {
+        "channel": 13,
+        "dead-layer-mass-kg": 0.0542651,
+        "nplus-surface-cm2": 1.1222692839308916,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.411089
+    },
+    "RG2": {
+        "channel": 28,
+        "dead-layer-mass-kg": 0.338836,
+        "nplus-surface-cm2": 2.931773534238165,
+        "pplus-surface-cm2": 0.3766769591654162,
+        "active-volume-mass-kg": 1.75211
+    },
+    "GD00B": {
+        "channel": 3,
+        "dead-layer-mass-kg": 0.0831613,
+        "nplus-surface-cm2": 1.5404492957434557,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.617949
+    },
+    "GD91C": {
+        "channel": 7,
+        "dead-layer-mass-kg": 0.0713986,
+        "nplus-surface-cm2": 1.4183744193836194,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.562222
+    },
+    "GD32D": {
+        "channel": 34,
+        "dead-layer-mass-kg": 0.0622322,
+        "nplus-surface-cm2": 1.5473666429436892,
+        "pplus-surface-cm2": 0.017671458676442587,
+        "active-volume-mass-kg": 0.668159
+    },
+    "GTF32": {
+        "channel": 38,
+        "dead-layer-mass-kg": 0.0660271,
+        "nplus-surface-cm2": 3.2231169829504482,
+        "pplus-surface-cm2": 0.22713714885454206,
+        "active-volume-mass-kg": 2.26281
+    },
+    "RG1": {
+        "channel": 9,
+        "dead-layer-mass-kg": 0.227132,
+        "nplus-surface-cm2": 2.931773534238165,
+        "pplus-surface-cm2": 0.4003959837000191,
+        "active-volume-mass-kg": 1.85816
+    }
+}

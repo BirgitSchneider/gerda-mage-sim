@@ -15,6 +15,8 @@ else
     error("../det-data/ged-mapping.json not found!")
 end
 
+outDict = Dict()
+
 println("det\tp+ [cm^2]  n+ [cm^2]")
 println("----------------------------")
 for (det,info) in dict
@@ -73,4 +75,13 @@ for (det,info) in dict
     pplus /= 1E04
     nplus /= 1E04
     print("$det\t"); @printf("%f   %f\n", pplus, nplus)
+
+    outDict[det] = Dict("pplus_surface_cm2" => pplus,
+                        "nplus_surface_cm2" => nplus)
+end
+
+if (ARGS[1] == "--json")
+    open("contacts-surf.json", "w") do f
+        JSON.print(f, outDict, 4)
+    end
 end
