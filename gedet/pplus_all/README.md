@@ -1,4 +1,4 @@
-# gedet/pplus
+# gedet/pplus_all
 
 ## simulations info
 
