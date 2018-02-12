@@ -50,6 +50,7 @@ $ bin/livetime-calc-ph2 \
     --output /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/run-livetime.json
 $ bin/t4z-gen \
     -v \
+    --destdir /lfs/l2/gerda/gerda-simulations/gerda-mage-sim \
     --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
     --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
     --livetime-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/run-livetime.json \
