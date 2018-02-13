@@ -16,3 +16,7 @@ Some pictures: from left to right: the tubs, the tops and the bottoms, the top a
   <img src="tops_bottoms.png" width="250"/>
   <img src="glue_rings.png" width="250"/>
 </p>
+
+<p align="center">
+  <img src="ms.png" width="250"/>
+</p>
