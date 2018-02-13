@@ -14,23 +14,13 @@ RUN mkdir -p /scif/julia/pkgs && \
 ENV PATH="$PATH:/scif/julia/usr/bin" \
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib64:/scif/julia/usr/lib" \
     MANPATH="$MANPATH:/scif/julia/usr/share/man" \
-    JULIA_HOME="/scif/julia/usr/bin" \
-    JULIA_PKGDIR="/scif/julia/pkgs" \
-    JULIA_CXX_RTTI="1"
-
-RUN julia -e 'Pkg.init()' && \
-    julia -e 'Pkg.add("Cxx"); Pkg.add("ROOT"); Pkg.add("JSON")' && \
-    julia -e 'using Cxx' && \
-    mv /scif/julia/pkgs/v0.6/ROOT/deps/usr/bin/julia /scif/julia/usr/bin/rjulia
+    JULIA_HOME="/scif/julia/usr/bin"
 
 COPY . /scif/UTILS/
 WORKDIR /scif/UTILS
 RUN make bin && \
-    find . ! -name 'bin' ! -name '.' -type d -exec rm -rf {} +
-
-# this is for HTCondor and Docker
-RUN find /scif/julia/pkgs /scif/UTILS/bin | parallel chmod a+rwx {} && \
-    ldconfig
+    find . ! -name 'bin' ! -name '.' -type d -exec rm -rf {} + && \
+    chmod -R a+x /scif/UTILS/bin
 
 ENV PATH="$PATH:/scif/UTILS/bin"
 
