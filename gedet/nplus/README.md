@@ -1,4 +1,4 @@
-# gedet/nplus_all
+# gedet/nplus
 
 ## simulations info
 

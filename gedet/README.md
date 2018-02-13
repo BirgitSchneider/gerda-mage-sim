@@ -6,12 +6,8 @@
 | ----------- | ---------- | ------------ | ---------------- | ----------------- | ------------------ | ----- |
 | intrinsic   | `Crystal_geometry$ID`, `CristalDeadLayer_geometry$ID` | see below | N.A. | | Volume of all detectors deployed in GERDA PhaseII, split in dead and active parts | Detectors and active/dead volumes are simulated separately, files are marked with the `AV\|DV` keyword and with the channel number for a total amount of 40 files. `$ID` refers to the MaGe volume naming convention, a dictionary can be found under `UTILS/det-data/ged-mapping.json` | 
 | surf        | Custom primary vertices placed under `surf/ver/` | N.A. | N.A. | N.A. | Complete detector surface in contact with LAr | Detectors are simulated separately, further info in `surf/ver/README.md` |
-| nplus_all   | Custom primary vertices placed under `nplus/ver/` | N.A. | N.A. | N.A. | n+ contact surface in contact with LAr | Detectors are simulated separately, further info in `nplus/ver/README.md` |
-| nplus_bege  | | | | | n+ contact surface in contact with LAr (only BEGEs) | |
-| nplus_coax  | | | | | n+ contact surface in contact with LAr (only Coaxials) | |
-| pplus_all   | Custom primary vertices placed under `pplus/ver/` | N.A. | N.A. | N.A. | p+ contact surface in contact with LAr | Detectors are simulated separately, further info in `pplus/ver/README.md` |
-| pplus_bege  | | | | | p+ contact surface in contact with LAr (only BEGEs) | |
-| pplus_coax  | | | | | p+ contact surface in contact with LAr (only Coaxial) | |
+| nplus       | Custom primary vertices placed under `nplus/ver/` | N.A. | N.A. | N.A. | n+ contact surface in contact with LAr | Detectors are simulated separately, further info in `nplus/ver/README.md` |
+| pplus       | Custom primary vertices placed under `pplus/ver/` | N.A. | N.A. | N.A. | p+ contact surface in contact with LAr | Detectors are simulated separately, further info in `pplus/ver/README.md` |
 
 ## DL and AV masses in MaGe
 
