@@ -20,5 +20,5 @@
 
 FOLDER=$1
 
-cd "/lfs/l2/gerda/Hades/gerda-mage-sim/UTILS/post"
+cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post"
 singularity exec --cleanenv ../container/gerda-mage-sim-utils.img julia process-raw.jl ${FOLDER}

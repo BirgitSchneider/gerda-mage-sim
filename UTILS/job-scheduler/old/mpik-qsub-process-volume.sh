@@ -57,5 +57,5 @@ else
 fi
 
 
-cd "/lfs/l2/gerda/Hades/gerda-mage-sim"
+cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim"
 singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v2.1.sqsh ${MACFILENAME} 1> ${LOGFILENAME} 2> ${LOGFILENAME}
