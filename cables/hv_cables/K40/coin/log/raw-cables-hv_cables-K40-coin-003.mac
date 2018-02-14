@@ -1,25 +1,25 @@
 # load preamble
-/control/execute                           ./cables/hv_cables/K40/coin/log/preamble.mac
+/control/execute				./cables/hv_cables/K40/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./cables/hv_cables/K40/coin/raw-cables-hv_cables-K40-coin-003.root
-#/MG/output/WriteMacroToOutput             true                ### is default ###
-#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+/MG/eventaction/rootfilename			./cables/hv_cables/K40/coin/raw-cables-hv_cables-K40-coin-003.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
 
-/MG/output/saveOnlyEventsWithEnergyDeposit false
-/MG/output/saveOnlyEventsWithCoincidence   true               ### is default ###
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
 
 /run/initialize
 
-/MG/generator/confine                      volumelist
-/MG/generator/volumelistfrom               0
-/MG/generator/volumelistto                 39
-/MG/generator/volumelist                   HVCableFromHolderToElectronicsPlate_Phase2
+/MG/generator/confine				volumelist
+/MG/generator/volumelistfrom			0
+/MG/generator/volumelistto			39
+/MG/generator/volumelist			HVCableFromHolderToElectronicsPlate_Phase2
 
-/MG/generator/select                       G4gun
-/MG/generator/g4gun/cone_on                true
-/gun/particle                              ion
-/gun/ion                                   19 40
-/gun/energy                                0 eV
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					19 40 #K40#
+/gun/energy					0 eV
 
-/tracking/verbose                          0
-/run/beamOn                                10000000
+/tracking/verbose				0
+/run/beamOn					10000000

@@ -1,0 +1,25 @@
+# load preamble
+/control/execute				./cables/sig_cables/Pb214/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./cables/sig_cables/Pb214/coin/raw-cables-sig_cables-Pb214-coin-032.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/run/initialize
+
+/MG/generator/confine				volumelist
+/MG/generator/volumelistfrom			0
+/MG/generator/volumelistto			39
+/MG/generator/volumelist			SignalCableFromHolderToElectronicsPlate_Phase2
+
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					82 214 #Pb214#
+/gun/energy					0 eV
+
+/tracking/verbose				0
+/run/beamOn					10000000
