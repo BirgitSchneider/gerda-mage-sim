@@ -137,6 +137,10 @@ int main( int argc, char** argv ) {
     TH1D M1_all_1461("M1_all_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (all)",  40, 0, 40);
     TH1D M1_all_full("M1_all_full", "ID with edep in range = [565,5500] keV, M=1 (all)", 40, 0, 40);
 
+    TH1D M1_all_S1  ("M1_all_S1",   "ID with edep in range = [1405,1450] keV, M=1 (all)", 40, 0, 40);
+    TH1D M1_all_S2  ("M1_all_S2",   "ID with edep in range = [1470,1515] keV, M=1 (all)", 40, 0, 40);
+    TH1D M1_all_S3  ("M1_all_S3",   "ID with edep in range = [1535,1580] keV, M=1 (all)", 40, 0, 40);
+
     // set up the TTree reader object
     TTreeReader reader;
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
@@ -157,6 +161,9 @@ int main( int argc, char** argv ) {
                     if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_all_1525.Fill(i);
                     if ( energy[i] >= 1457 and energy[i] < 1465 ) M1_all_1461.Fill(i);
                     if ( energy[i] >= 565  and energy[i] < 5500 ) M1_all_full.Fill(i);
+                    if ( energy[i] >= 1405 and energy[i] < 1450 ) M1_all_S1.Fill(i);
+                    if ( energy[i] >= 1470 and energy[i] < 1515 ) M1_all_S2.Fill(i);
+                    if ( energy[i] >= 1535 and energy[i] < 1580 ) M1_all_S3.Fill(i);
                     if ( det[i].substr(0,2) == "GD"  ) energyBEGe.Fill(energy[i]);
                     if ( det[i].substr(0,3) == "ANG" or
                          det[i].substr(0,2) == "RG"  ) energyEnrCoax.Fill(energy[i]);
@@ -312,6 +319,10 @@ int main( int argc, char** argv ) {
     M1_all_1525.Write();
     M1_all_1461.Write();
     M1_all_full.Write();
+
+    M1_all_S1.Write();
+    M1_all_S2.Write();
+    M1_all_S3.Write();
 
     if (processCoin) {
         M2_enrE1vsE2.Write();

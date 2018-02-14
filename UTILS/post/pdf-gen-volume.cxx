@@ -137,6 +137,10 @@ int main( int argc, char** argv ) {
         TH1D M1_all_1461("M1_all_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (all)",  40, 0, 40);
         TH1D M1_all_full("M1_all_full", "ID with edep in range = [565,5500] keV, M=1 (all)", 40, 0, 40);
 
+        TH1D M1_all_S1  ("M1_all_S1",   "ID with edep in range = [1405,1450] keV, M=1 (all)", 40, 0, 40);
+        TH1D M1_all_S2  ("M1_all_S2",   "ID with edep in range = [1470,1515] keV, M=1 (all)", 40, 0, 40);
+        TH1D M1_all_S3  ("M1_all_S3",   "ID with edep in range = [1535,1580] keV, M=1 (all)", 40, 0, 40);
+
         // build final M2 spectra
         TH2D M2_enrE1vsE2  ("M2_enrE1vsE2",   "edep with smaller detID, other edep, M=2 (enrAll)", 8000, 0, 8000, 8000, 0, 8000);
         TH1D M2_enrE1plusE2("M2_enrE1plusE2", "edep1 + edep2, M=2 (enrAll)",                       8000, 0, 8000);
@@ -184,6 +188,10 @@ int main( int argc, char** argv ) {
             TH1D* tmp_M1_all_1461       = dynamic_cast<TH1D*>(inFile.Get("M1_all_1461"));       if (!tmp_M1_all_1461)                   std::cout << "Problems retrieving M1_all_1461!\n";
             TH1D* tmp_M1_all_full       = dynamic_cast<TH1D*>(inFile.Get("M1_all_full"));       if (!tmp_M1_all_full)                   std::cout << "Problems retrieving M1_all_full!\n";
 
+            TH1D* tmp_M1_all_S1         = dynamic_cast<TH1D*>(inFile.Get("M1_all_S1"));         if (!tmp_M1_all_S1)                     std::cout << "Problems retrieving M1_all_S1!\n";
+            TH1D* tmp_M1_all_S2         = dynamic_cast<TH1D*>(inFile.Get("M1_all_S2"));         if (!tmp_M1_all_S2)                     std::cout << "Problems retrieving M1_all_S2!\n";
+            TH1D* tmp_M1_all_S3         = dynamic_cast<TH1D*>(inFile.Get("M1_all_S3"));         if (!tmp_M1_all_S3)                     std::cout << "Problems retrieving M1_all_S3!\n";
+
             TH2D* tmp_M2_enrE1vsE2      = dynamic_cast<TH2D*>(inFile.Get("M2_enrE1vsE2"));      if (verbose and !tmp_M2_enrE1vsE2)      std::cout << "Problems retrieving M2_enrE1vsE2!\n";
             TH1D* tmp_M2_enrE1plusE2    = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1plusE2"));    if (verbose and !tmp_M2_enrE1plusE2)    std::cout << "Problems retrieving M2_enrE1plusE2!\n";
             TH1D* tmp_M2_enrE1andE2     = dynamic_cast<TH1D*>(inFile.Get("M2_enrE1andE2"));     if (verbose and !tmp_M2_enrE1andE2)     std::cout << "Problems retrieving M2_enrE1andE2!\n";
@@ -222,6 +230,10 @@ int main( int argc, char** argv ) {
             M1_all_1525    .Add(tmp_M1_all_1525);
             M1_all_1461    .Add(tmp_M1_all_1461);
             M1_all_full    .Add(tmp_M1_all_full);
+
+            M1_all_S1      .Add(tmp_M1_all_S1);
+            M1_all_S2      .Add(tmp_M1_all_S2);
+            M1_all_S3      .Add(tmp_M1_all_S3);
 
             if (processCoin) {
                  M2_enrE1vsE2     .Add(tmp_M2_enrE1vsE2);
@@ -263,6 +275,10 @@ int main( int argc, char** argv ) {
         M1_all_1525.Write();
         M1_all_1461.Write();
         M1_all_full.Write();
+
+        M1_all_S1.Write();
+        M1_all_S2.Write();
+        M1_all_S3.Write();
 
         if (processCoin) {
              M2_enrE1vsE2.Write();
