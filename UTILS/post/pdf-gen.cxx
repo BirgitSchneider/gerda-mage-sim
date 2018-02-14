@@ -243,7 +243,11 @@ int main( int argc, char** argv ) {
                 std::cout << ID1 << '\t' << E1 << std::endl;
                 std::cout << ID2 << '\t' << E2 << std::endl;
                 std::cout << "-------------\n";
-*/                auto sumE = E1 + E2;
+*/
+                //do not include events that contain a trigger in an AC channel
+                if(E1==10000||E2==10000) continue;
+
+                auto sumE = E1 + E2;
                 if ( det[ID1].substr(0,3) != "GTF" and
                      det[ID2].substr(0,3) != "GTF" ) {
                     M2_enrE1vsE2.Fill(E1, E2);
