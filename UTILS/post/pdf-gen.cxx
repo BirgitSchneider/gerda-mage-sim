@@ -24,8 +24,6 @@
 #include "TTreeReaderValue.h"
 #include "TH1D.h"
 #include "TH2D.h"
-#include "TH1I.h"
-#include "TH2I.h"
 #include "TString.h"
 #include "TParameter.h"
 #include "TChain.h"
@@ -135,9 +133,13 @@ int main( int argc, char** argv ) {
     TH1D energyEnrCoax("M1_enrCoax", "edep, M=1 (enrCOAX)", 8000, 0, 8000);
     TH1D energyNatCoax("M1_natCoax", "edep, M=1 (natCOAX)", 8000, 0, 8000);
 
-    TH1I M1_all_1525("M1_all_1525", "ID with edep in range = 1525 +- 4 keV, M=1 (all)",  40, 0, 40);
-    TH1I M1_all_1461("M1_all_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (all)",  40, 0, 40);
-    TH1I M1_all_full("M1_all_full", "ID with edep in range = [565,5500] keV, M=1 (all)", 40, 0, 40);
+    TH1D M1_all_1525("M1_all_1525", "ID with edep in range = 1525 +- 4 keV, M=1 (all)",  40, 0, 40);
+    TH1D M1_all_1461("M1_all_1461", "ID with edep in range = 1461 +- 4 keV, M=1 (all)",  40, 0, 40);
+    TH1D M1_all_full("M1_all_full", "ID with edep in range = [565,5500] keV, M=1 (all)", 40, 0, 40);
+
+    TH1D M1_all_S1  ("M1_all_S1",   "ID with edep in range = [1405,1450] keV, M=1 (all)", 40, 0, 40);
+    TH1D M1_all_S2  ("M1_all_S2",   "ID with edep in range = [1470,1515] keV, M=1 (all)", 40, 0, 40);
+    TH1D M1_all_S3  ("M1_all_S3",   "ID with edep in range = [1535,1580] keV, M=1 (all)", 40, 0, 40);
 
     // set up the TTree reader object
     TTreeReader reader;
@@ -159,6 +161,9 @@ int main( int argc, char** argv ) {
                     if ( energy[i] >= 1521 and energy[i] < 1529 ) M1_all_1525.Fill(i);
                     if ( energy[i] >= 1457 and energy[i] < 1465 ) M1_all_1461.Fill(i);
                     if ( energy[i] >= 565  and energy[i] < 5500 ) M1_all_full.Fill(i);
+                    if ( energy[i] >= 1405 and energy[i] < 1450 ) M1_all_S1.Fill(i);
+                    if ( energy[i] >= 1470 and energy[i] < 1515 ) M1_all_S2.Fill(i);
+                    if ( energy[i] >= 1535 and energy[i] < 1580 ) M1_all_S3.Fill(i);
                     if ( det[i].substr(0,2) == "GD"  ) energyBEGe.Fill(energy[i]);
                     if ( det[i].substr(0,3) == "ANG" or
                          det[i].substr(0,2) == "RG"  ) energyEnrCoax.Fill(energy[i]);
@@ -192,19 +197,19 @@ int main( int argc, char** argv ) {
     TH1D M2_enrE1plusE2("M2_enrE1plusE2", "edep1 + edep2, M=2 (enrAll)",                       8000, 0, 8000);
     TH1D M2_enrE1andE2 ("M2_enrE1andE2",  "edep1 and edep2, M=2 (enrAll)",                     8000, 0, 8000);
 
-    TH2I M2_ID1vsID2_1525("M2_ID1vsID2_1525", "ID1 with edep1+edep2 in range = 1525 +- 6 keV, ID2, M=2 (enrAll)",   40, 0, 40, 40, 0, 40);
-    TH2I M2_ID1vsID2_1461("M2_ID1vsID2_1461", "ID1 with edep1+edep2 in range = 1461 +- 6 keV, ID2, M=2 (enrAll)",   40, 0, 40, 40, 0, 40);
-    TH2I M2_ID1vsID2_full("M2_ID1vsID2_full", "ID1 with edep1+edep2 in range = [250,3000] keV, ID2, M=2 (enrAll)",  40, 0, 40, 40, 0, 40);
-    TH2I M2_ID1vsID2_S1  ("M2_ID1vsID2_S1",   "ID1 with edep1+edep2 in range = [1405,1450] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
-    TH2I M2_ID1vsID2_S2  ("M2_ID1vsID2_S2",   "ID1 with edep1+edep2 in range = [1470,1515] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
-    TH2I M2_ID1vsID2_S3  ("M2_ID1vsID2_S3",   "ID1 with edep1+edep2 in range = [1535,1580] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_1525("M2_ID1vsID2_1525", "ID1 with edep1+edep2 in range = 1525 +- 6 keV, ID2, M=2 (enrAll)",   40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_1461("M2_ID1vsID2_1461", "ID1 with edep1+edep2 in range = 1461 +- 6 keV, ID2, M=2 (enrAll)",   40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_full("M2_ID1vsID2_full", "ID1 with edep1+edep2 in range = [250,3000] keV, ID2, M=2 (enrAll)",  40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_S1  ("M2_ID1vsID2_S1",   "ID1 with edep1+edep2 in range = [1405,1450] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_S2  ("M2_ID1vsID2_S2",   "ID1 with edep1+edep2 in range = [1470,1515] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_S3  ("M2_ID1vsID2_S3",   "ID1 with edep1+edep2 in range = [1535,1580] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
 
-    TH1I M2_ID1andID2_1525("M2_ID1andID2_1525", "ID1 and ID2 with edep1+edep2 in range = 1525 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
-    TH1I M2_ID1andID2_1461("M2_ID1andID2_1461", "ID1 and ID2 with edep1+edep2 in range = 1461 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
-    TH1I M2_ID1andID2_full("M2_ID1andID2_full", "ID1 and ID2 with edep1+edep2 in range = [250,3000] keV, M=2 (enrAll)",  40, 0, 40);
-    TH1I M2_ID1andID2_S1  ("M2_ID1andID2_S1",   "ID1 and ID2 with edep1+edep2 in range = [1405,1450] keV, M=2 (enrAll)", 40, 0, 40);
-    TH1I M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
-    TH1I M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1D M2_ID1andID2_1525("M2_ID1andID2_1525", "ID1 and ID2 with edep1+edep2 in range = 1525 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
+    TH1D M2_ID1andID2_1461("M2_ID1andID2_1461", "ID1 and ID2 with edep1+edep2 in range = 1461 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
+    TH1D M2_ID1andID2_full("M2_ID1andID2_full", "ID1 and ID2 with edep1+edep2 in range = [250,3000] keV, M=2 (enrAll)",  40, 0, 40);
+    TH1D M2_ID1andID2_S1  ("M2_ID1andID2_S1",   "ID1 and ID2 with edep1+edep2 in range = [1405,1450] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1D M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1D M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
     long nPrimCoin = 0;  // number of primaries for coincidences
     int badevents = 0;   // counter for events with multiplicity 2 but only 0 or 1 energy deposition
@@ -238,7 +243,11 @@ int main( int argc, char** argv ) {
                 std::cout << ID1 << '\t' << E1 << std::endl;
                 std::cout << ID2 << '\t' << E2 << std::endl;
                 std::cout << "-------------\n";
-*/                auto sumE = E1 + E2;
+*/
+                //do not include events that contain a trigger in an AC channel
+                if(E1==10000||E2==10000) continue;
+
+                auto sumE = E1 + E2;
                 if ( det[ID1].substr(0,3) != "GTF" and
                      det[ID2].substr(0,3) != "GTF" ) {
                     M2_enrE1vsE2.Fill(E1, E2);
@@ -314,6 +323,10 @@ int main( int argc, char** argv ) {
     M1_all_1525.Write();
     M1_all_1461.Write();
     M1_all_full.Write();
+
+    M1_all_S1.Write();
+    M1_all_S2.Write();
+    M1_all_S3.Write();
 
     if (processCoin) {
         M2_enrE1vsE2.Write();
