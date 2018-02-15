@@ -146,6 +146,9 @@ int main( int argc, char** argv ) {
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
 
+    unsigned int M1_GD02D_badevents = 0; // M1: count events thrown away due to energy deposition in GD02D
+    unsigned int M2_GD02D_badevents = 0; // M2: -"-
+
     // loop
     std::cout << "Processing edep...\n" << std::flush;
     edepCh.LoadTree(0);
@@ -155,6 +158,11 @@ int main( int argc, char** argv ) {
         if( *multiplicity <= 1 and *multiplicity > 0 ) {
             // loop over detector ids
             for ( int i = 0; i < 40; ++i ) {
+
+                // exclude GD02D which is in dataset -1 by hand
+                // FIXME : temporary workaround (alias who are you kidding)
+                if ( det[i] == "GD02D" ) { M1_GD02D_badevents++; continue; }
+
                 // keep only valid energies
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
                     energy_ch[i].Fill(energy[i]);
@@ -222,15 +230,22 @@ int main( int argc, char** argv ) {
         while(reader.Next()) {
             // clear object from previous loop iteration
             evMap.clear();
+
             // select multiplicity
             if (*multiplicity == 2) {
                 // loop over detector ids
                 for ( int i = 0; i < 40; ++i ) {
+
+                    // exclude GD02D which is in dataset -1 by hand
+                    // FIXME : temporary workaround (alias who are you kidding)
+                    if ( det[i] == "GD02D" ) { M2_GD02D_badevents++; continue; }
+
                     // select event if it has a valid energy
                     if ( energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
                 }
                 if (evMap.size() != 2) {
                     if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
+                    if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
                     badevents++;
                     continue;
                 }
@@ -288,6 +303,8 @@ int main( int argc, char** argv ) {
             }
         }
         if (verbose) std::cout << "There were " << badevents << " events with multiplicity = 2 but a different number of edeps > 0 found in the tree\n";
+        if (verbose) std::cout << "There were " << M1_GD02D_badevents << " multiplicity 1 events in GD02D; datasetID = -1 \n";
+        if (verbose) std::cout << "There were " << M2_GD02D_badevents << " multiplicity 2 events in GD02D; datasetID = -1 \n";
 
         // set number of primaries in first bin
         if (verbose) std::cout << "Getting number of primaries...\n";
