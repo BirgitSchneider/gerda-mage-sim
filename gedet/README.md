@@ -2,12 +2,18 @@
 
 ## volumes description
 
-| volume name | mc name(s) | mc mass [kg] | mc volume [cm^3] | density [kg/cm^3] | volume description | notes |
-| ----------- | ---------- | ------------ | ---------------- | ----------------- | ------------------ | ----- |
-| intrinsic   | `Crystal_geometry$ID`, `CristalDeadLayer_geometry$ID` | see below | N.A. | | Volume of all detectors deployed in GERDA PhaseII, split in dead and active parts | Detectors and active/dead volumes are simulated separately, files are marked with the `AV\|DV` keyword and with the channel number for a total amount of 40 files. `$ID` refers to the MaGe volume naming convention, a dictionary can be found under `UTILS/det-data/ged-mapping.json` | 
-| surf        | Custom primary vertices placed under `surf/ver/` | N.A. | N.A. | N.A. | Complete detector surface in contact with LAr | Detectors are simulated separately, further info in `surf/ver/README.md` |
-| nplus       | Custom primary vertices placed under `nplus/ver/` | N.A. | N.A. | N.A. | n+ contact surface in contact with LAr | Detectors are simulated separately, further info in `nplus/ver/README.md` |
-| pplus       | Custom primary vertices placed under `pplus/ver/` | N.A. | N.A. | N.A. | p+ contact surface in contact with LAr | Detectors are simulated separately, further info in `pplus/ver/README.md` |
+| volume name        | mc name(s) | mc mass [kg] | mc volume [cm^3] | density [kg/cm^3] | volume description | notes |
+| ------------------ | ---------- | ------------ | ---------------- | ----------------- | ------------------ | ----- |
+| intrinsic_chanwise | `Crystal_geometry$ID` and `CristalDeadLayer_geometry$ID`   | see below | N.A. | | Volume of detectors deployed in GERDA PhaseII, split in dead and active parts | Detectors and active/dead volumes are simulated **separately**, files are marked with the channel number for a total amount of 40 files. `$ID` refers to the MaGe volume naming convention, a dictionary can be found under `UTILS/det-data/ged-mapping.json` | 
+| intrinsic          | `Crystal_geometry$ID` and `CristalDeadLayer_geometry$ID`   | see below | N.A. | | Volume of detectors deployed in GERDA PhaseII, split in dead and active parts | Detectors and active/dead volumes are simulated **all together**. |
+| surf_chanwise      | Custom primary vertices placed under `surf_chanwise/ver/`  | N.A. | N.A. | N.A. | Complete detector surface in contact with LAr | Detectors are simulated separately, further info in `surf_chanwise/ver/README.md` |
+| nplus_chanwise     | Custom primary vertices placed under `nplus_chanwise/ver/` | N.A. | N.A. | N.A. | n+ contact surface in contact with LAr | Detectors are simulated separately, further info in `nplus_chanwise/ver/README.md` |
+| nplus_bege         | Custom primary vertices placed under `nplus_bege/ver/`     | N.A. | N.A. | N.A. | n+ contact surface in contact with LAr | BEGe detectors are simulated all together |
+| nplus_coax         | Custom primary vertices placed under `nplus_coax/ver/`     | N.A. | N.A. | N.A. | n+ contact surface in contact with LAr | Coax detectors are simulated all together |
+| pplus_chanwise     | Custom primary vertices placed under `pplus_chanwise/ver/` | N.A. | N.A. | N.A. | p+ contact surface in contact with LAr | Detectors are simulated separately, further info in `pplus_chanwise/ver/README.md` |
+| pplus_bege         | Custom primary vertices placed under `pplus_bege/ver/`     | N.A. | N.A. | N.A. | p+ contact surface in contact with LAr | BEGe detectors are simulated all together |
+| pplus_coax         | Custom primary vertices placed under `pplus_coax/ver/`     | N.A. | N.A. | N.A. | p+ contact surface in contact with LAr | Coax detectors are simulated all together |
+| lar_pplus_chanwise |                                                            |      |      |      | FILL ME                                |                                           |
 
 ## DL and AV masses in MaGe
 
@@ -44,9 +50,9 @@
 | 28     | RG2       | 0.338836     | 1.75211     |
 | 29     | ANG4      | 0.237236     | 2.13991     |
 | 30     | 00A       | 0.055093     | 0.420159    |
-| 31     | 02C       | 0.0891885    | 0.706655    | 
+| 31     | 02C       | 0.0891885    | 0.706655    |
 | 32     | 79B       | 0.0891606    | 0.657925    |
-| 33     | 91D       | 0.0788082    | 0.626683    | 
+| 33     | 91D       | 0.0788082    | 0.626683    |
 | 34     | 32D       | 0.0622322    | 0.668159    |
 | 35     | 89A       | 0.0617257    | 0.459485    |
 | 36     | ANG1      | 0.156392     | 0.802456    |
