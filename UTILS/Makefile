@@ -27,7 +27,7 @@ DATABRIXXFLAGS = $(shell databricxx-config --libs --cflags)
 JSONCPPFLAGS   = -I jsoncpp
 ALLFLAGS       = $(ROOTFLAGS) $(GERDA-ADAFLAGS) $(GELATIOFLAGS) $(MGDOFLAGS) $(DATABRIXXFLAGS) $(JSONCPPFLAGS)
 
-bin : dirs $(foreach b,$(wildcard post/*.cxx),$(addprefix $(INSTALLDIR)/,$(notdir $(basename $(b)))))
+bin : dirs $(foreach b,$(wildcard post/*.cxx surf-sampling/*.cxx),$(addprefix $(INSTALLDIR)/,$(notdir $(basename $(b)))))
 
 dirs :
 	@mkdir -p $(INSTALLDIR)
@@ -46,6 +46,9 @@ $(INSTALLDIR)/livetime-calc-ph2 : post/livetime-calc-ph2.cxx
 
 $(INSTALLDIR)/t4z-gen : post/t4z-gen.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
+
+$(INSTALLDIR)/shuffle-tree : surf-sampling/shuffle-tree.cxx
+	$(CC) $(ALLFLAGS) -o $@ $<
 
 .PHONY: clean-bin bin
 
