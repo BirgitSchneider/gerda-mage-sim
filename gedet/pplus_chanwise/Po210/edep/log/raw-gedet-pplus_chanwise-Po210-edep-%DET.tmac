@@ -1,0 +1,23 @@
+## load preamble
+/control/execute                           gedet/pplus_chanwise/Po210/edep/log/preamble.mac
+
+### Output ###
+/MG/eventaction/rootfilename               gedet/pplus_chanwise/Po210/edep/raw-gedet-pplus_chanwise-Po210-edep-ch$CHANNEL.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/gsspositionsfile             gedet/pplus_chanwise/ver/ver-gedet-pplus_chanwise-ch$CHANNEL.root
+
+/MG/generator/select                       SPS
+/gps/ion                                   84 210 0 0
+/gps/energy                                0 keV
+/grdm/nucleusLimits                        209 210 83 84
+
+## Define run
+/tracking/verbose                          0
+/run/beamOn                                $NEV

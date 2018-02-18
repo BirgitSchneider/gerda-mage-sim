@@ -85,7 +85,7 @@ and load what you need e.g.
 $ swmod load gerda@master
 ```
 
-### Useful [`sed`](https://www.gnu.org/software/sed/) commands to quickly modify macros
+### Useful commands to quickly modify macros
 Change file directly with the `-i` flag
 ```shell
 $ sed -i ... file
@@ -97,6 +97,10 @@ $ sed -i '/word/d' file
 Insert 'stuff' in line number 10 in 'file'
 ```shell
 $ sed -i '10i stuff' file
+```
+Find 'a' and replace it with 'b' in all `.root` filenames:
+```shell
+$ rename a b *.root
 ```
 
 ### Set permission for gerda-simulations directory

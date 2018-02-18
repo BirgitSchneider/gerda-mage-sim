@@ -63,6 +63,9 @@ int main( int argc, char** argv ) {
     if (verbose) std::cout << "Top directory tree: " << pathToTop << std::endl;
     auto pathToIsotope = *(args.end()-1);
 
+    if (pathToIsotope.find("chanwise") != std::string::npos) {
+        std::cout << "These t4z files won't be processed because the original simulations are separated in channels. This will create problems in PDFs building. Aborting..."; return 1;
+    }
     // lambda function to get t4z-*.root files in directory
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;

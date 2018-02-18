@@ -12,10 +12,10 @@ These vertices for p+ contact surfaces are obtained by extraction from the total
 To get the actual number of events for each file you can run the following command into this folder:
 ```shell
 $ root << EOF
-          TFile * file;
           cout << "channel\tentries\n";
-          for ( int i = 0; i < 39; ++i ) {
-              file = TFile::Open(Form("ver-gedet-pplus_chanwise-ch%i.root", i));
+          for ( int i = 0; i < 40; ++i ) {
+              auto file = TFile::Open(Form("ver-gedet-pplus_chanwise-ch%i.root", i));
+              auto GSSTree = dynamic_cast<TTree*>(file->Get("GSSTree"));
               cout << i << '\t' << GSSTree->GetEntries() << '\n';
           }
 EOF

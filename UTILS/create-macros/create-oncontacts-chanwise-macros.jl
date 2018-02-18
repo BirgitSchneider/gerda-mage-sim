@@ -26,6 +26,15 @@ for f in [
     isfile(f) || error("$f not found!")
 end
 
+pplus_entries = [38776, 33081, 38778, 35554, 35237, 34652, 35265, 39442, 412445, 509146,
+                 511514, 39297, 37252, 44626, 36788, 35605, 35354, 55891, 33663, 35628,
+                 33313, 37262, 32928, 31477, 34744, 38683, 33790, 431371, 401773, 487503,
+                 39767, 34209, 33216, 37598, 36485, 40917, 520459, 267732, 226337, 225298]
+nplus_entries = [2860829, 3105966, 3056926, 3048089, 2944514, 2870800, 2889773, 3106659, 3547402, 3580697,
+                 3567461, 2762628, 3157533, 2866477, 3184654, 2885262, 2946378, 3149863, 3158832, 2947692,
+                 3145194, 2828355, 3110914, 3022305, 2937970, 3112722, 3053433, 3550707, 3594823, 3522830,
+                 2567914, 3137209, 3003590, 3153977, 3150370, 2730112, 3471847, 3593565, 3546794, 3580640]
+
 # get dictionaries for gedet
 gedMap = JSON.parsefile("../det-data/ged-mapping.json")["mapping"]
 # get template macro file
@@ -37,7 +46,8 @@ for (det, info) in gedMap
 
    # substitute $ variables in template file
    macLines = temLines
-   macLines = replace.(macLines, "\$CHANNEL", CHANNEL) 
+   macLines = replace.(macLines, "\$CHANNEL", CHANNEL)
+   macLines = replace.(macLines, "\$NEV", ARGS[1] == "nplus" ? nplus_entries[CHANNEL+1] : pplus_entries[CHANNEL+1])
 
    # add message
    unshift!(macLines, "")
