@@ -1,0 +1,33 @@
+# load preamble
+/control/execute				./gedet/lar_pplus_chanwise/K42/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./gedet/lar_pplus_chanwise/K42/coin/raw-gedet-lar_pplus_chanwise-K42-coin-ch27.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/run/initialize
+
+### Confine source volume to cryo LAr ###
+/MG/generator/confine				volume
+/MG/generator/volume				CryoLiquidPhysical
+
+### A cylinder inside the LAr ###
+/MG/generator/Sampling/volume/name			Cylinder
+/MG/generator/Sampling/volume/innerCylinderRadius	0 mm
+/MG/generator/Sampling/volume/outerCylinderRadius	15.0 mm
+/MG/generator/Sampling/volume/cylinderHeight		99.0 mm
+/MG/generator/Sampling/volume/offsetCenterXPos		-55.0 mm
+/MG/generator/Sampling/volume/offsetCenterYPos		-95.2628 mm
+/MG/generator/Sampling/volume/offsetCenterZPos		19.8505 mm
+
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					19 42 #K42#
+/gun/energy					0 eV
+
+/tracking/verbose				0
+/run/beamOn					1000000

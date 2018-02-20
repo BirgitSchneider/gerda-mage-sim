@@ -1,0 +1,24 @@
+## load preamble
+/control/execute                           gedet/nplus_coax/K42/coin/log/preamble.mac
+
+### Output ###
+/MG/eventaction/rootfilename               gedet/nplus_coax/K42/coin/raw-gedet-nplus_coax-K42-coin-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+/MG/output/saveOnlyEventsWithCoincidence   true
+
+/run/initialize
+
+/MG/generator/gsspositionsfile             gedet/nplus_coax/ver/ver-gedet-nplus_coax.root
+
+/MG/generator/select G4gun
+/MG/generator/g4gun/cone_on true
+/gun/particle ion
+/gun/ion 19 42
+/gun/energy 0 eV
+
+## Define run
+/tracking/verbose                          0
+/run/beamOn                                35556766
