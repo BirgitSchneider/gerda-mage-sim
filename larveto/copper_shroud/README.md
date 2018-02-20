@@ -10,3 +10,5 @@
 | Tl208   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
 | Bi214   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
 | Pb214   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
+| Bi214   | B.Schneider| 100x10^7 | coin      |                       |                            | G4gun |
+| Tl208   | B.Schneider| 100x10^7 | coin      |                       |                            | G4gun |
