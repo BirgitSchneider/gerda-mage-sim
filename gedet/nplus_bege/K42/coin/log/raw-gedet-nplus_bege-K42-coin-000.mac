@@ -21,4 +21,4 @@
 
 ## Define run
 /tracking/verbose                          0
-/run/beamOn                                89896940
+/run/beamOn                                8989694 # 1/10 of the statistics available
