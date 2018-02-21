@@ -27,7 +27,7 @@ DATABRIXXFLAGS = $(shell databricxx-config --libs --cflags)
 JSONCPPFLAGS   = -I jsoncpp
 ALLFLAGS       = $(ROOTFLAGS) $(GERDA-ADAFLAGS) $(GELATIOFLAGS) $(MGDOFLAGS) $(DATABRIXXFLAGS) $(JSONCPPFLAGS)
 
-bin : dirs $(foreach b,$(wildcard post/*.cxx surf-sampling/*.cxx),$(addprefix $(INSTALLDIR)/,$(notdir $(basename $(b)))))
+bin : dirs $(foreach b,$(wildcard post/*.cxx surf-sampling/*.cxx health-dep/*.cxx),$(addprefix $(INSTALLDIR)/,$(notdir $(basename $(b)))))
 
 dirs :
 	@mkdir -p $(INSTALLDIR)
@@ -38,8 +38,8 @@ $(INSTALLDIR)/pdf-gen : post/pdf-gen.cxx
 $(INSTALLDIR)/pdf-gen-volume : post/pdf-gen-volume.cxx
 	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-$(INSTALLDIR)/check-simulation : post/check-simulation.cxx post/progressbar/ProgressBar.cc post/progressbar/ProgressBar.h
-	$(CC) $(ROOTFLAGS) -Ipost/progressbar -o $@ post/check-simulation.cxx post/progressbar/ProgressBar.cc
+$(INSTALLDIR)/check-simulation : post/check-simulation.cxx progressbar/ProgressBar.cc progressbar/ProgressBar.h
+	$(CC) $(ROOTFLAGS) -Iprogressbar -o $@ post/check-simulation.cxx progressbar/ProgressBar.cc
 
 $(INSTALLDIR)/livetime-calc-ph2 : post/livetime-calc-ph2.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
@@ -49,6 +49,9 @@ $(INSTALLDIR)/t4z-gen : post/t4z-gen.cxx
 
 $(INSTALLDIR)/shuffle-tree : surf-sampling/shuffle-tree.cxx
 	$(CC) $(ALLFLAGS) -o $@ $<
+
+$(INSTALLDIR)/sim-doctor : health-dep/sim-doctor.cxx read-dir-cxx/ReadDir.cxx progressbar/ProgressBar.cc
+	$(CC) $(ROOTFLAGS) -Iprogressbar -Iread-dir-cxx -o $@ $^
 
 .PHONY: clean-bin bin
 
