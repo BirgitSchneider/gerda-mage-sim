@@ -25,6 +25,8 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
 * `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
 * `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
+* `helth-dep/`: Health department!
+    * `sim-doctor.cxx`: tool to check for problems in `.root` files
 * `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions you can use Oliver's [docker2singularity.py](https://github.com/oschulz/singularity-utils) Python script. An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`. First get all the Julia packages you need with `Pkg.add`, they will be installed under your home directory on the host (which is mounted by default by singularity), and so you won't need to do it again the next time you'll use Julia inside the container.
 * `Makefile`: GNU Makefile to compile C++ programs in this directory
 
