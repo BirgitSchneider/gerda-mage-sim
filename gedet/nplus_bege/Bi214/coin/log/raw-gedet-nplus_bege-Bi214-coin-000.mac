@@ -1,0 +1,25 @@
+## load preamble
+/control/execute                           gedet/nplus_bege/Bi214/coin/log/preamble.mac
+
+### Output ###
+/MG/eventaction/rootfilename               gedet/nplus_bege/Bi214/coin/raw-gedet-nplus_bege-Bi214-coin-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+/MG/output/saveOnlyEventsWithCoincidence   true
+
+/run/initialize
+
+/MG/generator/gsspositionsfile             gedet/nplus_bege/ver/ver-gedet-nplus_bege.root
+
+### Bi214
+/MG/generator/select                       G4gun
+/MG/generator/g4gun/cone_on                true
+/gun/particle                              ion
+/gun/ion                                   83 214
+/gun/energy                                0 eV
+
+## Define run
+/tracking/verbose                          0
+/run/beamOn                                8989694 # 1/10 of statistics available

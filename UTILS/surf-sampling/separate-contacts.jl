@@ -14,7 +14,7 @@ cxxinclude("TTreeReaderValue.h")
 # check if everything is ok
 isfile("./separate-contacts.jl") || error("Please run this script from where separate-contacts.jl is!")
 
-for f in [ ["../det-data/ged-mapping.json", "../det-data/ged-parameters.json"]; ["../../gedet/surf/ver/ver-gedet-surf-ch$i.root" for i = 0:39] ]
+for f in [ ["../det-data/ged-mapping.json", "../det-data/ged-parameters.json"]; ["../../gedet/surf_chanwise/ver/ver-gedet-surf_chanwise-ch$i.root" for i = 0:39] ]
     isfile(f) || error("$f not found!")
 end
 
@@ -31,12 +31,12 @@ end
 cxx"""
     void do_ROOT_job(bool upside_down, int ch, double x0, double y0, double ri, double ro, double l) {
 
-        TFile inFile(Form("../../gedet/surf/ver/ver-gedet-surf-ch%i.root", ch));
+        TFile inFile(Form("../../gedet/surf_chanwise/ver/ver-gedet-surf_chanwise-ch%i.root", ch));
         auto tree = dynamic_cast<TTree*>(inFile.Get("GSSTree"));
 
-        TFile pFile(Form("../../gedet/pplus/ver/ver-gedet-pplus-ch%i.root", ch), "RECREATE");
+        TFile pFile(Form("../../gedet/pplus_chanwise/ver/ver-gedet-pplus_chanwise-ch%i.root", ch), "RECREATE");
         auto pTree = tree->CloneTree(0);
-        TFile nFile(Form("../../gedet/nplus/ver/ver-gedet-nplus-ch%i.root", ch), "RECREATE");
+        TFile nFile(Form("../../gedet/nplus_chanwise/ver/ver-gedet-nplus_chanwise-ch%i.root", ch), "RECREATE");
         auto nTree = tree->CloneTree(0);
         //auto lTree = tree->CloneTree(0);
 

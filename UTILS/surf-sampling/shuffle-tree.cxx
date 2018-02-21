@@ -85,7 +85,7 @@ int main(int argc, char** argv) {
         auto& t = ttreelist[i];
         if (verbose) std::cout << i+1 << '/' << ttreelist.size() << ' ' << std::flush;
         // link cloned trees to the current tree, so clonedTrees[]->Fill works
-        for (auto&& t : clonedTrees) t->CopyAddresses(t);
+        for (auto&& ct : clonedTrees) t->CopyAddresses(ct);
         std::mt19937 mt(std::random_device{}());
         std::uniform_int_distribution<size_t> dist(0, ttreelist.size()-1);
         auto localEntries = t->GetEntries();
@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
             clonedTrees[dist(mt)]->Fill();
         }
         // unlink
-        for (auto&& t : clonedTrees) ttreelist[i]->CopyAddresses(t, true);
+        for (auto&& ct : clonedTrees) ttreelist[i]->CopyAddresses(ct, true);
         // input trees are no more needed
         tfilelist[i]->Close();
     }

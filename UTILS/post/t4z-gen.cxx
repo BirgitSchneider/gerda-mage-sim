@@ -69,6 +69,10 @@ int main(int argc, char** argv) {
     if (result != args.end()) verbose = true;
     auto dirWithRaw = *(args.end()-1);
 
+    if (dirWithRaw.find("chanwise") != std::string::npos) {
+        std::cout << "These simulations won't be processed because they are separated in channels. This will create problems in PDFs building. Aborting..."; return 1;
+    }
+
     // strip off trailing '/' character, if present
     if (verbose) std::cout << "Paths:\n";
     if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back(); if (verbose) std::cout << gerdaMetaPath << std::endl;

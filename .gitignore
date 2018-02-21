@@ -4,6 +4,7 @@
 *.swp
 *.sqsh
 *.DS_Store
+*.raw*
 controlplots*
 UTILS/job-scheduler/*.o*
 UTILS/job-scheduler/mpik-qsub-minishroud*
