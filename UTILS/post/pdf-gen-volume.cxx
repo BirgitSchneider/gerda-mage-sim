@@ -163,8 +163,8 @@ int main( int argc, char** argv ) {
         // now loop over parts
         bool missingpdf = false;
         bool processCoin = true;
-        int nPrimCoin = 0;
-        int nPrimEdep = 0;
+        long nPrimCoin = 0;
+        long nPrimEdep = 0;
         for (const auto& prt : partlist) {
 
             // open input pdf- file
