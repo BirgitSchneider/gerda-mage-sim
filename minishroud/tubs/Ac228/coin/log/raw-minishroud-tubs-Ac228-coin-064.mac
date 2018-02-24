@@ -1,0 +1,25 @@
+# load preamble
+/control/execute				./minishroud/tubs/Ac228/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./minishroud/tubs/Ac228/coin/raw-minishroud-tubs-Ac228-coin-064.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/run/initialize
+
+/MG/generator/confine				volumelist
+/MG/generator/volumelistfrom			0
+/MG/generator/volumelistto			6
+/MG/generator/volumelist			MiniShroudPhase2Tub
+
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					89 228 #Ac228#
+/gun/energy					0 eV
+
+/tracking/verbose				0
+/run/beamOn					10000000
