@@ -1,0 +1,32 @@
+# load preamble
+/control/execute                           ./lar/sur_array/K42/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./lar/sur_array/K42/edep/raw-lar-sur_array-K42-edep-373.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+### Confine source volume to cryo LAr ###
+/MG/generator/confine                           volume
+/MG/generator/volume                            CryoLiquidPhysical
+
+### A cylinder inside the LAr ###
+/MG/generator/Sampling/volume/name                     Cylinder
+/MG/generator/Sampling/volume/innerCylinderRadius      0 mm
+/MG/generator/Sampling/volume/outerCylinderRadius      100 cm
+/MG/generator/Sampling/volume/cylinderHeight           250 cm
+#/MG/generator/Sampling/volume/offsetCenterXPos         0 mm
+#/MG/generator/Sampling/volume/offsetCenterZPos         0 cm
+
+/MG/generator/select G4gun
+/MG/generator/g4gun/cone_on true
+/gun/particle ion
+/gun/ion 19 42
+/gun/energy 0 eV
+
+/tracking/verbose                          0
+/run/beamOn                                200000000
