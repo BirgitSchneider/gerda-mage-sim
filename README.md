@@ -8,7 +8,7 @@ Refer to the [Wiki page](https://github.com/mppmu/gerda-snippets/wiki/MaGe-simul
 
 Singularity images used in the context of this repository are available at the LNGS cluster under `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/container/`.
 
-Mantainers:
+Maintainers:
 * Katharina von Sturm - [vonsturm@pd.infn.it](mailto:vonsturm@pd.infn.it)
 * Luigi Pertoldi - [luigi.pertoldi@pd.infn.it](mailto:luigi.pertoldi@pd.infn.it)
 
