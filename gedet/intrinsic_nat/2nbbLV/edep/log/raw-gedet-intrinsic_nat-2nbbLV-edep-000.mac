@@ -1,0 +1,27 @@
+# load preamble
+/control/execute                           gedet/intrinsic_nat/2nbbLV/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./gedet/intrinsic_nat/2nbbLV/edep/raw-gedet-intrinsic_nat-2nbbLV-edep-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/MG/geometry/cherenkov                     -1
+
+/run/initialize
+
+/MG/generator/confine                      volumearray
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry11_1
+/MG/generator/volumearrayadd               Crystal_geometry11_1
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry11_2
+/MG/generator/volumearrayadd               Crystal_geometry11_2
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry11_3
+/MG/generator/volumearrayadd               Crystal_geometry11_3
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/2nbbLV_1E8.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                100000000 # 1E08
