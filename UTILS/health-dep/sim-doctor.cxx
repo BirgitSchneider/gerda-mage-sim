@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
         // check properties
         TFile file(f.c_str(), "READ");
         if (file.TestBit(TFile::kRecovered)) {
-            std::cout << std::endl << f << " needs recovery, probably truncated or simulation still ongoing.\n";
+            std::cout << f << " needs recovery, probably truncated or simulation still ongoing.\n";
             nHasToBeRecovered++;
             continue;
         }

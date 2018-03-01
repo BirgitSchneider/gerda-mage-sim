@@ -186,20 +186,28 @@ int main( int argc, char** argv ) {
 
     // getting number of primaries
     if (verbose) std::cout << "Getting number of primaries...\n";
-    bool notfound = false;
+    bool problems = false;
     long nPrimEdep = 0;
     for (const auto& f : edepFilelist) {
         TFile froot(f.c_str());
         if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-             nPrimEdep += dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+            auto nPrimEdep_loc = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+            if (nPrimEdep_loc == 0) {
+                std::cout << "WARNING: number of primaries in " << f << " is zero!\n";
+                problems = true;
+            }
+            nPrimEdep += nPrimEdep_loc;
         }
         else {
-            std::cout << "WARNING: NumberOfPrimaries not found in t4z- file!" << std::endl;
-            notfound = true;
+            std::cout << "WARNING: NumberOfPrimaries not found in " << f << "!\n";
+            problems = true;
         }
     }
     // set number of primaries to zero in case of failures
-    if (notfound) nPrimEdep = 0;
+    if (problems) {
+        std::cout << "WARNING: there where some problems, setting number of primaries to zero...\n";
+        nPrimEdep = 0;
+    }
     if (verbose) std::cout << "Number of edep primaries: " << nPrimEdep << std::endl;
 
     // build M2 spectra
@@ -246,12 +254,12 @@ int main( int argc, char** argv ) {
                     // select event if it has a valid energy
                     if ( energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
                 }
-                if (evMap.size() != 2) {
+/*                if (evMap.size() != 2) {
                     if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
                     if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
                     badevents++;
                     continue;
-                }
+                }*/
                 // comfortable referencies
                 auto& ID1 = (*evMap.begin())    .first;
                 auto& ID2 = (*(++evMap.begin())).first;
@@ -309,20 +317,27 @@ int main( int argc, char** argv ) {
         if (verbose) std::cout << "There were " << M1_GD02D_badevents << " multiplicity 1 events in GD02D; datasetID = -1 \n";
         if (verbose) std::cout << "There were " << M2_GD02D_badevents << " multiplicity 2 events in GD02D; datasetID = -1 \n";
 
-        // set number of primaries in first bin
         if (verbose) std::cout << "Getting number of primaries...\n";
-        notfound = false;
+        problems = false;
         for (const auto& f : coinFilelist) {
             TFile froot(f.c_str());
             if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-                nPrimCoin += dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+                auto nPrimCoin_loc = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+                if (nPrimCoin_loc == 0) {
+                    std::cout << "WARNING: number of primaries in " << f << " is zero!\n";
+                    problems = true;
+                }
+                nPrimCoin += nPrimCoin_loc;
             }
            else {
-               std::cout << "WARNING: NumberOfPrimaries not found in t4z- file!" << std::endl;
-               notfound = true;
+               std::cout << "WARNING: NumberOfPrimaries not found in " << f << "!\n";
+               problems = true;
            }
         }
-        if (notfound) nPrimCoin = 0;
+        if (problems) {
+            std::cout << "WARNING: there where some problems, setting number of primaries to zero...\n";
+            nPrimCoin = 0;
+        }
         if (verbose) std::cout << "Number of coin primaries: " << nPrimCoin << std::endl;
     }
 

@@ -209,14 +209,41 @@ int main( int argc, char** argv ) {
             TH1D* tmp_M2_ID1andID2_S2   = dynamic_cast<TH1D*>(inFile.Get("M2_ID1andID2_S2"));   if (verbose and !tmp_M2_ID1andID2_S2)   std::cout << "Problems retrieving M2_ID1andID2_S2!\n";
             TH1D* tmp_M2_ID1andID2_S3   = dynamic_cast<TH1D*>(inFile.Get("M2_ID1andID2_S3"));   if (verbose and !tmp_M2_ID1andID2_S3)   std::cout << "Problems retrieving M2_ID1andID2_S3!\n";
 
+            // get number of primaries
+            bool problemsEdep = false;
+            bool problemsCoin = false;
             if (inFile.GetListOfKeys()->Contains("NumberOfPrimariesCoin")) {
-                nPrimCoin += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
+                auto primaries = dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
+                if (primaries == 0) {
+                    std::cout << "WARNING: zero NumberOfPrimariesCoin!\n";
+                    problemsCoin = true;
+                }
+                nPrimCoin += primaries;
             }
-            else { if (verbose) std::cout << "WARNING: NumberOfPrimariesCoin not found in file!\n"; }
+            else {
+                std::cout << "WARNING: NumberOfPrimariesCoin not found in file!\n";
+                problemsCoin = true;
+            }
             if (inFile.GetListOfKeys()->Contains("NumberOfPrimariesEdep")) {
-                nPrimEdep += dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
+                auto primaries = dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
+                nPrimEdep += primaries;
+                if (primaries == 0) {
+                    std::cout << "WARNING: zero NumberOfPrimariesEdep!\n";
+                    problemsEdep = true;
+                }
             }
-            else { if (verbose) std::cout << "WARNING: NumberOfPrimariesEdep not found in file!\n"; }
+            else {
+                std::cout << "WARNING: NumberOfPrimariesEdep not found in file!\n";
+                problemsEdep = true;
+            }
+            if (problemsCoin) {
+                std::cout << "There were problems with NumberOfPrimariesCoin, setting to zero...\n";
+                nPrimCoin = 0;
+            }
+            if (problemsEdep) {
+                std::cout << "There were problems with NumberOfPrimariesEdep, setting to zero...\n";
+                nPrimEdep = 0;
+            }
 
             if(!tmp_M2_ID1vsID2_1525) processCoin = false;
 
