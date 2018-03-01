@@ -1,7 +1,7 @@
 # load preamble
 /control/execute				./minishroud/tubs/Pa234m/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename			./minishroud/tubs/Pa234m/coin/raw-minishroud-tubs-Pa234m-coin-007.root
+/MG/eventaction/rootfilename			./minishroud/tubs/Pa234m/coin/raw-minishroud-tubs-Pa234m-coin-030.root
 #/MG/output/WriteMacroToOutput			true		### is default ###
 #/MG/output/WriteNumberOfEventsToFile		true		### is default ###
 

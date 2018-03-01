@@ -1,7 +1,7 @@
 # load preamble
-/control/execute				./minishroud/tubs/Pa234m/coin/log/preamble.mac
+/control/execute				./minishroud/tubs/Tl208/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename			./minishroud/tubs/Pa234m/coin/raw-minishroud-tubs-Pa234m-coin-007.root
+/MG/eventaction/rootfilename			./minishroud/tubs/Tl208/coin/raw-minishroud-tubs-Tl208-coin-007.root
 #/MG/output/WriteMacroToOutput			true		### is default ###
 #/MG/output/WriteNumberOfEventsToFile		true		### is default ###
 
@@ -18,8 +18,8 @@
 /MG/generator/select				G4gun
 /MG/generator/g4gun/cone_on			true
 /gun/particle					ion
-/gun/ion					91 234 #Pa234m#
+/gun/ion					81 208 #Tl208#
 /gun/energy					0 eV
 
 /tracking/verbose				0
-/run/beamOn					10000000
+/run/beamOn					    6924104
