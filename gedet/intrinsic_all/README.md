@@ -1,4 +1,4 @@
-# gedet/intrinsic
+# gedet/intrinsic_all
 
 ## simulations info
 
