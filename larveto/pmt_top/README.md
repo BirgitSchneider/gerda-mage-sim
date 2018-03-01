@@ -2,10 +2,10 @@
 
 ## simulations info
 
-| isotope | contact   | primaries | edep/coin | MGDO branch/commit    | MaGe branch/commmit        | notes           |
-| ------- | --------- | --------- | --------- | --------------------- | -------------------------- | --------------- |
-| K40     | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun / decay0  |
-| Bi212   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun           |
-| Bi214   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun           |
-| Pb214   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun           |
-| Tl208   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun           |
+| isotope \[edep|coin\] | contact   | primaries | software tag: \[branch/commmit\]                                                             | notes |
+| --------------------- | --------- | --------- | -------------------------------------------------------------------------------------------- | ----- |
+| K40    \[edep\]       | K.v.Sturm | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` | You can find also the simulations using Decay0 in `dk0/` |
+| Bi212  \[edep\]       | K.v.Sturm | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Bi214  \[edep\]       | K.v.Sturm | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Pb214  \[edep\]       | K.v.Sturm | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Tl208  \[edep\]       | K.v.Sturm | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |

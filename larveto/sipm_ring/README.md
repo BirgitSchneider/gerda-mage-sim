@@ -2,15 +2,15 @@
 
 ## simulations info
 
-| isotope | contact   | primaries | edep/coin | MGDO branch/commit    | MaGe branch/commmit        | notes |
-| ------- | --------- | --------- | --------- | --------------------- | -------------------------- | ----- |
-| K40     | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
-| Bi212   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
-| Bi214   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
-| Pb214   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
-| Tl208   | K.v.Sturm | 10x10^7   | edep      |                       |                            | G4gun |
-| Bi212   | B.Schneider | 10x10^7 | coin      |                       |                            | G4gun |
-| Bi214   | B.Schneider | 10x10^7 | coin      |                       |                            | G4gun |
-| K40     | B.Schneider | 10x10^7 | coin      |                       |                            | G4gun |
-| Bb214   | B.Schneider | 10x10^7 | coin      |                       |                            | G4gun |
-| Tl208   | B.Schneider | 10^7    | coin      |                       |                            | G4gun |
+| isotope \[edep|coin\] | contact     | primaries | software tag: \[branch/commmit\]                                                             | notes |
+| --------------------- | ----------- | --------- | -------------------------------------------------------------------------------------------- | ----- |
+| K40    \[edep\]       | K.v.Sturm   | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Bi212  \[edep\]       | K.v.Sturm   | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Bi214  \[edep\]       | K.v.Sturm   | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Pb214  \[edep\]       | K.v.Sturm   | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Tl208  \[edep\]       | K.v.Sturm   | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Bi212  \[coin\]       | B.Schneider | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Bi214  \[coin\]       | B.Schneider | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| K40    \[coin\]       | B.Schneider | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Bb214  \[coin\]       | B.Schneider | 10x1E07   | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| Tl208  \[coin\]       | B.Schneider | 1E07      | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
