@@ -4,8 +4,9 @@
 #$ -j y		### have logoutput and erroroutput in the same file
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
+LOGFILE=$2/$1/pdf-$1.out
 
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen-volume \
   --destdir $2 \
   --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
-  $1
+  $1 &> $LOGFILE

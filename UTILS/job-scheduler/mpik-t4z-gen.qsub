@@ -4,10 +4,15 @@
 #$ -j y		### have logoutput and erroroutput in the same file
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
+VOLUME=$(echo $1 | rev | cut -d'/' -f4 | rev)
+PART=$(echo $1 | rev | cut -d'/' -f3 | rev)
+ISOTOPE=$(echo $1 | rev | cut -d'/' -f2 | rev)
+TYPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
+LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/$TYPE/t4z-$VOLUME-$PART-$ISOTOPE-$TYPE.out
 
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh t4z-gen \
   --metadata $SRCDIR/UTILS/post/gerda-metadata \
   --srcdir $SRCDIR \
   --destdir $2 \
   --livetime-file $SRCDIR/UTILS/post/run-livetime.json \
-  $1
+  $1 &> $LOGFILE
