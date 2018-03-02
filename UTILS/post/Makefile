@@ -64,6 +64,9 @@ LAR_ALL_PDF_FILES = $(foreach i,$(LAR_ISOTOPES),$(call change_tree,$(i)/pdf-$(ca
 LARVETO_ISOTOPES = $(sort $(foreach d,$(wildcard ../../larveto/*/*/edep ../../larveto/*/*/coin),$(shell dirname $(d))))
 LARVETO_ALL_PDF_FILES = $(foreach i,$(LARVETO_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
 
+ELECTRONICS_ISOTOPES = $(sort $(foreach d,$(wildcard ../../electronics/*/*/edep ../../electronics/*/*/coin),$(shell dirname $(d))))
+ELECTRONICS_ALL_PDF_FILES = $(foreach i,$(ELECTRONICS_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
+
 # function to retrieve the dependencies of the global pdf- files for cables and minishroud
 # ARG1 : volume
 # ARG2: isotope
@@ -74,7 +77,7 @@ get_pdf_files_for_iso = $(foreach d,$(wildcard ../../$(1)/*/$(2)),$(call change_
 check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 # final target list
-post : mkdir $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES)
+post : mkdir $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
 
 mkdir :
 	@mkdir -p $(DEST_DIR)
