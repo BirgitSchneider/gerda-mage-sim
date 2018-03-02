@@ -53,6 +53,9 @@ $(INSTALLDIR)/shuffle-tree : surf-sampling/shuffle-tree.cxx
 $(INSTALLDIR)/sim-doctor : health-dep/sim-doctor.cxx read-dir-cxx/ReadDir.cxx progressbar/ProgressBar.cc
 	$(CC) $(ROOTFLAGS) -Iprogressbar -Iread-dir-cxx -o $@ $^
 
+$(INSTALLDIR)/pdf-doctor : health-dep/pdf-doctor.cxx read-dir-cxx/ReadDir.cxx progressbar/ProgressBar.cc
+	$(CC) $(ROOTFLAGS) -Iprogressbar -Iread-dir-cxx -o $@ $^
+
 .PHONY: clean-bin bin
 
 clean_$(INSTALLDIR) :

@@ -4,8 +4,12 @@
 #$ -j y		### have logoutput and erroroutput in the same file
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
+VOLUME=$(echo $1 | rev | cut -d'/' -f3 | rev)
+PART=$(echo $1 | rev | cut -d'/' -f2 | rev)
+ISOTOPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
+LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/pdf-$VOLUME-$PART-$ISOTOPE.out
 
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
   --destdir $2 \
   --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
-  $1
+  $1 &> $LOGFILE

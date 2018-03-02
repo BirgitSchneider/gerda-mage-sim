@@ -104,23 +104,31 @@ int main(int argc, char** argv) {
     auto filelist = GetContent(dirWithRaw);
     if (filelist.empty()) {std::cout << "There were problems reading in the raw- files. Aborting...\n"; return 1;}
     TChain ch("fTree");
-    bool notfound = false;
+    bool problems = false;
     long totPrimaries = 0;
     for ( auto& f : filelist ) {
         TFile file(f.c_str());
         // check first if the object exists
         if (file.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-            totPrimaries += dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimaries"))->GetVal();
+            auto primaries = dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimaries"))->GetVal();
+            if (primaries == 0) {
+                std::cout << "WARNING: NumberOfPrimaries is zero in " << f << "!\n";
+                problems = true;
+            }
+            totPrimaries += primaries;
         }
         else {
             std::cout << "WARNING: NumberOfPrimaries not found in " << f << "! It will be set to zero!\n";
-            notfound = true;
+            problems = true;
         }
         file.Close();
         ch.Add(f.c_str());
     }
     // if at least one object does not exist set primaries to zero to indicate a failure
-    if (notfound) totPrimaries = 0;
+    if (problems) {
+        std::cout << "WARNING: there were some problems, setting totPrimaries = 0...\n";
+        totPrimaries = 0;
+    }
 
     // read json file with livetimes
     Json::Value livetimes;
