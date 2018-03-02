@@ -174,10 +174,9 @@ int main( int argc, char** argv ) {
                     if ( energy[i] >= 1405 and energy[i] < 1450 ) M1_all_S1.Fill(i);
                     if ( energy[i] >= 1470 and energy[i] < 1515 ) M1_all_S2.Fill(i);
                     if ( energy[i] >= 1535 and energy[i] < 1580 ) M1_all_S3.Fill(i);
-                    if ( det[i].substr(0,2) == "GD"  ) energyBEGe.Fill(energy[i]);
-                    if ( det[i].substr(0,3) == "ANG" or
-                         det[i].substr(0,2) == "RG"  ) energyEnrCoax.Fill(energy[i]);
-                    if ( det[i].substr(0,3) == "GTF" ) energyNatCoax.Fill(energy[i]);
+                    if ( datasetID[i] == 0 or datasetID[i] == 4 ) energyBEGe.Fill(energy[i]);
+                    if ( datasetID[i] == 1 ) energyEnrCoax.Fill(energy[i]);
+                    if ( datasetID[i] == 3 ) energyNatCoax.Fill(energy[i]);
                 }
             }
         }
@@ -252,12 +251,13 @@ int main( int argc, char** argv ) {
                     // select event if it has a valid energy
                     if ( energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
                 }
-/*                if (evMap.size() != 2) {
-                    if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
-                    if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
-                    badevents++;
+                // in case one detector has dataset -1, evMap has less than 2 entires
+                if (evMap.size() != 2) {
+                    //if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
+                    //if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
+                    //badevents++;
                     continue;
-                }*/
+                }
                 // comfortable referencies
                 auto& ID1 = (*evMap.begin())    .first;
                 auto& ID2 = (*(++evMap.begin())).first;
@@ -272,8 +272,10 @@ int main( int argc, char** argv ) {
                 if ( E1 == 10000 or E2 == 10000 ) continue;
 
                 auto sumE = E1 + E2;
-                if ( det[ID1].substr(0,3) != "GTF" and
-                     det[ID2].substr(0,3) != "GTF" ) {
+                // only add datasets 0 (BEGe), 4 (BEGe noPSD) and 1 (enrCoax)
+                if ( (datasetID[ID1] == 0 or datasetID[ID1] == 4 or datasetID[ID1] == 1) and
+                     (datasetID[ID2] == 0 or datasetID[ID2] == 4 or datasetID[ID2] == 1) ) {
+
                     M2_enrE1vsE2.Fill(E1, E2);
                     M2_enrE1plusE2.Fill(sumE);
                     M2_enrE1andE2.Fill(E1); M2_enrE1andE2.Fill(E2);
