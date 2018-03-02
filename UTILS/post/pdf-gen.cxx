@@ -148,12 +148,13 @@ int main( int argc, char** argv ) {
     TTreeReader reader;
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
+    TTreeReaderArray<int>    datasetID   (reader, "datasetID");
 
-    unsigned int M1_GD02D_badevents = 0; // M1: count events thrown away due to energy deposition in GD02D
-    unsigned int M2_GD02D_badevents = 0; // M2: -"-
+    unsigned int M1_datasetMinusOne = 0; // M1: count events thrown away due to dataset -1
+    unsigned int M2_datasetMinusOne = 0; // M2: -"-
 
     // loop
-    std::cout << "Processing edep...\n" << std::flush;
+    std::cout << "Processing edep... " << edepCh.GetEntries() << " entries\n" << std::flush;
     edepCh.LoadTree(0);
     reader.SetTree(&edepCh);
     while(reader.Next()) {
@@ -161,10 +162,8 @@ int main( int argc, char** argv ) {
         if( *multiplicity <= 1 and *multiplicity > 0 ) {
             // loop over detector ids
             for ( int i = 0; i < 40; ++i ) {
-
-                // exclude GD02D which is in dataset -1 by hand
-                // FIXME : temporary workaround (alias who are you kidding)
-                if ( det[i] == "GD02D" ) { M1_GD02D_badevents++; continue; }
+                // skip if detector is in dataset -1
+                if ( datasetID[i] == -1 ) { M1_datasetMinusOne++; continue; }
 
                 // keep only valid energies
                 if ( energy[i] < 10000 and energy[i] > 0 ) {
@@ -183,6 +182,7 @@ int main( int argc, char** argv ) {
             }
         }
     }
+    if (verbose) std::cout << "There were " << M1_datasetMinusOne << " multiplicity 1 events in datasetID = -1 \n";
 
     // getting number of primaries
     if (verbose) std::cout << "Getting number of primaries...\n";
@@ -231,11 +231,11 @@ int main( int argc, char** argv ) {
     TH1D M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
     long nPrimCoin = 0;  // number of primaries for coincidences
-    int badevents = 0;   // counter for events with multiplicity 2 but only 0 or 1 energy deposition
+    int  badevents = 0;  // counter for events with multiplicity 2 but only 0 or 1 energy deposition
     if (processCoin) {
         // object to store events as a (det_id,energy) pair
         std::map<int,double> evMap;
-        std::cout << "Processing coin...\n" << std::flush;
+        std::cout << "Processing coin... " << coinCh.GetEntries() << "entries\n" << std::flush;
         coinCh.LoadTree(0);
         reader.SetTree(&coinCh);
         while(reader.Next()) {
@@ -246,10 +246,8 @@ int main( int argc, char** argv ) {
             if (*multiplicity == 2) {
                 // loop over detector ids
                 for ( int i = 0; i < 40; ++i ) {
-
-                    // exclude GD02D which is in dataset -1 by hand
-                    // FIXME : temporary workaround (alias who are you kidding)
-                    if ( det[i] == "GD02D" ) { M2_GD02D_badevents++; continue; }
+                    // skip if detector is in dataset -1
+                    if ( datasetID[i] == -1 ) { M2_datasetMinusOne++; continue; }
 
                     // select event if it has a valid energy
                     if ( energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
@@ -271,7 +269,7 @@ int main( int argc, char** argv ) {
                 std::cout << "-------------\n";
 */
                 //do not include events that contain a trigger in an AC channel
-                if(E1==10000||E2==10000) continue;
+                if ( E1 == 10000 or E2 == 10000 ) continue;
 
                 auto sumE = E1 + E2;
                 if ( det[ID1].substr(0,3) != "GTF" and
@@ -314,8 +312,7 @@ int main( int argc, char** argv ) {
             }
         }
         if (verbose) std::cout << "There were " << badevents << " events with multiplicity = 2 but a different number of edeps > 0 found in the tree\n";
-        if (verbose) std::cout << "There were " << M1_GD02D_badevents << " multiplicity 1 events in GD02D; datasetID = -1 \n";
-        if (verbose) std::cout << "There were " << M2_GD02D_badevents << " multiplicity 2 events in GD02D; datasetID = -1 \n";
+        if (verbose) std::cout << "There were " << M2_datasetMinusOne << " multiplicity 2 events in datasetID = -1 \n";
 
         if (verbose) std::cout << "Getting number of primaries...\n";
         problems = false;
