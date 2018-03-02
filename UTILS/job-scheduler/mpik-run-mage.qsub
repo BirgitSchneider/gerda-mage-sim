@@ -4,6 +4,8 @@
 #
 #$ -P short ### queue
 #$ -j y     ### have logoutput and erroroutput in the same file
+#$ -o /dev/null
+#$ -e /dev/null
 
 LOGFILE=$(echo $1 | cut -f 1 -d '.').out
 cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim"

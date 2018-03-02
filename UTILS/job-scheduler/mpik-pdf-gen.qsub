@@ -2,6 +2,8 @@
 
 #$ -P short	### queue
 #$ -j y		### have logoutput and erroroutput in the same file
+#$ -o /dev/null
+#$ -e /dev/null
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 VOLUME=$(echo $1 | rev | cut -d'/' -f3 | rev)
