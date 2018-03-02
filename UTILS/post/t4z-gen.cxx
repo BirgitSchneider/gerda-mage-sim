@@ -73,6 +73,8 @@ int main(int argc, char** argv) {
         std::cout << "These simulations won't be processed because they are separated in channels. This will create problems in PDFs building. Aborting..."; return 1;
     }
 
+    setenv("MU_CAL", (gerdaMetaPath + "/config/_aux/geruncfg").c_str(), 1);
+
     // strip off trailing '/' character, if present
     if (verbose) std::cout << "Paths:\n";
     if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back(); if (verbose) std::cout << gerdaMetaPath << std::endl;
@@ -182,7 +184,7 @@ int main(int argc, char** argv) {
 //            if(verbose) std::cout << "LAr settings loaded" << std::endl;
         config.LoadGedResolutions(gerdaMetaPath + "/detector-data/ged-resolution-default.json");
             if(verbose) std::cout << "Ged resolutions loaded" << std::endl;
-        config.LoadRunConfig(gerdaMetaPath + "/config/_aux/geruncfg/" + livetimes[r]["runconfig"].asString());
+        config.LoadRunConfig((ULong64_t)livetimes[r]["timestamp"].asUInt64());
             if(verbose) std::cout << "RunConfig loaded" << std::endl;
 
         gada::T4SimHandler handler(&ch, &config, filename);

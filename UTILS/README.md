@@ -49,7 +49,7 @@ $ make bin
 $ bin/livetime-calc-ph2 \
     -v \
     --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
-    --data /lfs/l3/gerda/Daq/data-phaseII/blind/v03.01/gen \
+    --data /lfs/l3/gerda/Daq/data-phaseII/blind/active/gen \
     --output /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/run-livetime.json
 $ bin/t4z-gen \
     -v \

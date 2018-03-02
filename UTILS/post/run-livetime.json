@@ -3,192 +3,224 @@
 	{
 		"ID" : 53,
 		"livetime_in_s" : 1615860,
-		"runconfig" : "configuration_20151221.root"
+		"runconfig" : "configuration_20151221.root",
+		"timestamp" : 1451004309
 	},
 	"run54" : 
 	{
 		"ID" : 54,
 		"livetime_in_s" : 300460,
-		"runconfig" : "configuration_20160125.root"
+		"runconfig" : "configuration_20160125.root",
+		"timestamp" : 1453761100
 	},
 	"run55" : 
 	{
 		"ID" : 55,
 		"livetime_in_s" : 388320,
-		"runconfig" : "configuration_20160129.root"
+		"runconfig" : "configuration_20160129.root",
+		"timestamp" : 1454102800
 	},
 	"run56" : 
 	{
 		"ID" : 56,
 		"livetime_in_s" : 1256500,
-		"runconfig" : "configuration_20160129.root"
+		"runconfig" : "configuration_20160129.root",
+		"timestamp" : 1454511134
 	},
 	"run57" : 
 	{
 		"ID" : 57,
 		"livetime_in_s" : 395020,
-		"runconfig" : "configuration_20160219.root"
+		"runconfig" : "configuration_20160219.root",
+		"timestamp" : 1455902001
 	},
 	"run58" : 
 	{
 		"ID" : 58,
 		"livetime_in_s" : 1031280,
-		"runconfig" : "configuration_20160224.root"
+		"runconfig" : "configuration_20160224.root",
+		"timestamp" : 1456428415
 	},
 	"run59" : 
 	{
 		"ID" : 59,
 		"livetime_in_s" : 403340,
-		"runconfig" : "configuration_20160312.root"
+		"runconfig" : "configuration_20160312.root",
+		"timestamp" : 1457781385
 	},
 	"run60" : 
 	{
 		"ID" : 60,
 		"livetime_in_s" : 1599100,
-		"runconfig" : "configuration_20160317.root"
+		"runconfig" : "configuration_20160317.root",
+		"timestamp" : 1458226872
 	},
 	"run61" : 
 	{
 		"ID" : 61,
 		"livetime_in_s" : 256960,
-		"runconfig" : "configuration_20160406.root"
+		"runconfig" : "configuration_20160406.root",
+		"timestamp" : 1459933846
 	},
 	"run62" : 
 	{
 		"ID" : 62,
 		"livetime_in_s" : 1374640,
-		"runconfig" : "configuration_20160412.root"
+		"runconfig" : "configuration_20160412.root",
+		"timestamp" : 1460480278
 	},
 	"run63" : 
 	{
 		"ID" : 63,
 		"livetime_in_s" : 1931960,
-		"runconfig" : "configuration_20160429.root"
+		"runconfig" : "configuration_20160429.root",
+		"timestamp" : 1462004953
 	},
 	"run64" : 
 	{
 		"ID" : 64,
 		"livetime_in_s" : 736280,
-		"runconfig" : "configuration_20160429.root"
+		"runconfig" : "configuration_20160429.root",
+		"timestamp" : 1464008851
 	},
 	"run65" : 
 	{
 		"ID" : 65,
 		"livetime_in_s" : 1115580,
-		"runconfig" : "configuration_20160601.root"
+		"runconfig" : "configuration_20160601.root",
+		"timestamp" : 1464778812
 	},
 	"run67" : 
 	{
 		"ID" : 67,
 		"livetime_in_s" : 726320,
-		"runconfig" : "configuration_20160622.root"
+		"runconfig" : "configuration_20160622.root",
+		"timestamp" : 1466619711
 	},
 	"run69" : 
 	{
 		"ID" : 69,
 		"livetime_in_s" : 479160,
-		"runconfig" : "configuration_20160721.root"
+		"runconfig" : "configuration_20160721.root",
+		"timestamp" : 1469119366
 	},
 	"run70" : 
 	{
 		"ID" : 70,
 		"livetime_in_s" : 2204360,
-		"runconfig" : "configuration_20160727.root"
+		"runconfig" : "configuration_20160727.root",
+		"timestamp" : 1469648483
 	},
 	"run71" : 
 	{
 		"ID" : 71,
 		"livetime_in_s" : 2431100,
-		"runconfig" : "configuration_20160727.root"
+		"runconfig" : "configuration_20160727.root",
+		"timestamp" : 1472016813
 	},
 	"run72" : 
 	{
 		"ID" : 72,
 		"livetime_in_s" : 448120,
-		"runconfig" : "configuration_20160923.root"
+		"runconfig" : "configuration_20160923.root",
+		"timestamp" : 1474629540
 	},
 	"run73" : 
 	{
 		"ID" : 73,
 		"livetime_in_s" : 2592280,
-		"runconfig" : "configuration_20160929.root"
+		"runconfig" : "configuration_20160929.root",
+		"timestamp" : 1475170897
 	},
 	"run74" : 
 	{
 		"ID" : 74,
 		"livetime_in_s" : 2677160,
-		"runconfig" : "configuration_20161030.root"
+		"runconfig" : "configuration_20161030.root",
+		"timestamp" : 1477818265
 	},
 	"run75" : 
 	{
 		"ID" : 75,
 		"livetime_in_s" : 3329040,
-		"runconfig" : "configuration_20161201.root"
+		"runconfig" : "configuration_20161201.root",
+		"timestamp" : 1480595922
 	},
 	"run76" : 
 	{
 		"ID" : 76,
 		"livetime_in_s" : 2247640,
-		"runconfig" : "configuration_20161201.root"
+		"runconfig" : "configuration_20161201.root",
+		"timestamp" : 1483973777
 	},
 	"run77" : 
 	{
 		"ID" : 77,
 		"livetime_in_s" : 2709420,
-		"runconfig" : "configuration_20170209.root"
+		"runconfig" : "configuration_20170209.root",
+		"timestamp" : 1486660629
 	},
 	"run78" : 
 	{
 		"ID" : 78,
 		"livetime_in_s" : 1889800,
-		"runconfig" : "configuration_20170313.root"
+		"runconfig" : "configuration_20170313.root",
+		"timestamp" : 1489431446
 	},
 	"run79" : 
 	{
 		"ID" : 79,
 		"livetime_in_s" : 825520,
-		"runconfig" : "configuration_20170313.root"
+		"runconfig" : "configuration_20170313.root",
+		"timestamp" : 1491392278
 	},
 	"run83" : 
 	{
 		"ID" : 83,
 		"livetime_in_s" : 1485820,
-		"runconfig" : "configuration_20170512.root"
+		"runconfig" : "configuration_20170512.root",
+		"timestamp" : 1496409860
 	},
 	"run84" : 
 	{
 		"ID" : 84,
 		"livetime_in_s" : 2449420,
-		"runconfig" : "configuration_20170701.root"
+		"runconfig" : "configuration_20170701.root",
+		"timestamp" : 1499087258
 	},
 	"run85" : 
 	{
 		"ID" : 85,
 		"livetime_in_s" : 2930040,
-		"runconfig" : "configuration_20170801.root"
+		"runconfig" : "configuration_20170801.root",
+		"timestamp" : 1501608684
 	},
 	"run86" : 
 	{
 		"ID" : 86,
 		"livetime_in_s" : 3145020,
-		"runconfig" : "configuration_20170801.root"
+		"runconfig" : "configuration_20170801.root",
+		"timestamp" : 1504596852
 	},
 	"run87" : 
 	{
 		"ID" : 87,
 		"livetime_in_s" : 2867480,
-		"runconfig" : "configuration_20171012.root"
+		"runconfig" : "configuration_20171012.root",
+		"timestamp" : 1507800332
 	},
 	"run88" : 
 	{
 		"ID" : 88,
 		"livetime_in_s" : 2297940,
-		"runconfig" : "configuration_20171115.root"
+		"runconfig" : "configuration_20171115.root",
+		"timestamp" : 1510758898
 	},
 	"run89" : 
 	{
 		"ID" : 89,
 		"livetime_in_s" : 507160,
-		"runconfig" : "configuration_20171212.root"
+		"runconfig" : "configuration_20171212.root",
+		"timestamp" : 1513093858
 	}
 }
