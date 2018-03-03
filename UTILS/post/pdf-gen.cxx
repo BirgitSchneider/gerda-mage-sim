@@ -255,7 +255,7 @@ int main( int argc, char** argv ) {
                 if (evMap.size() != 2) {
                     //if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
                     //if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
-                    //badevents++;
+                    badevents++;
                     continue;
                 }
                 // comfortable referencies
