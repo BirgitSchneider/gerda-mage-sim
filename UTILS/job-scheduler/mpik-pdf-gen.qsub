@@ -11,6 +11,7 @@ PART=$(echo $1 | rev | cut -d'/' -f2 | rev)
 ISOTOPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
 LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/pdf-$VOLUME-$PART-$ISOTOPE.out
 
+mkdir -p $2/$VOLUME/$PART/$ISOTOPE
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
   --destdir $2 \
   --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
