@@ -1,4 +1,4 @@
-FROM baltig.infn.it:4567/gerda/gerdasw-containers/gerdasw:g4.10.3_v2.2
+FROM baltig.infn.it:4567/gerda/gerdasw-containers/gerdasw:g4.10.3_v2.3
 
 USER root
 
