@@ -6,12 +6,13 @@
 #$ -e /dev/null
 
 SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
-VOLUME=$(echo $1 | rev | cut -d'/' -f4 | rev)
-PART=$(echo $1 | rev | cut -d'/' -f3 | rev)
-ISOTOPE=$(echo $1 | rev | cut -d'/' -f2 | rev)
-TYPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
+VOLUME=$(echo $1 | rev | cut -d'/' -f5 | rev)
+PART=$(echo $1 | rev | cut -d'/' -f4 | rev)
+ISOTOPE=$(echo $1 | rev | cut -d'/' -f3 | rev)
+TYPE=$(echo $1 | rev | cut -d'/' -f2 | rev)
 LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/$TYPE/t4z-$VOLUME-$PART-$ISOTOPE-$TYPE.out
 
+mkdir -p $2/$VOLUME/$PART/$ISOTOPE/$TYPE
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh t4z-gen \
   --metadata $SRCDIR/UTILS/post/gerda-metadata \
   --srcdir $SRCDIR \

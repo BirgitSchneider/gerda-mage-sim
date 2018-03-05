@@ -137,13 +137,18 @@ int main(int argc, char** argv) {
         gada::DataLoader loader;
         loader.AddFileMap(&myMap);
         loader.BuildTier3();
-        reader.SetTree(loader.GetSharedMasterChain());
+        auto tree = loader.GetSharedMasterChain();
+        tree->SetBranchStatus("*", false);
+        tree->SetBranchStatus("isTP", true);
+        tree->SetBranchStatus("timestamp", true);
+        reader.SetTree(tree);
 //        bool hasPsdIsEval = true;
 //        if (...) hasPsdEval = false;
 
         // we need the timestamp to get the RunConfiguration
         // NOTE: this assumes that we don't have RunConfiguration changes during a run
         reader.Next();
+        long start_time = *timestamp;
         auto gtr = FindRunConfiguration(*timestamp);
 
         // count test pulses to get the correct livetime
@@ -169,6 +174,7 @@ int main(int argc, char** argv) {
         std::cout << "Livetime: " << livetime << " s\n";
         root["run" + std::to_string(id)]["ID"] = id;
         root["run" + std::to_string(id)]["livetime_in_s"] = livetime;
+        root["run" + std::to_string(id)]["timestamp"] = start_time;
         root["run" + std::to_string(id)]["runconfig"] = gtr.second;
     }
 
