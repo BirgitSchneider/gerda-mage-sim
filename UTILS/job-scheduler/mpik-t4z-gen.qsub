@@ -17,5 +17,5 @@ singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh t4z-gen \
   --metadata $SRCDIR/UTILS/post/gerda-metadata \
   --srcdir $SRCDIR \
   --destdir $2 \
-  --livetime-file $SRCDIR/UTILS/post/run-livetime.json \
+  --livetime-file $SRCDIR/UTILS/post/json-files/run-livetime.json \
   $1 &> $LOGFILE
