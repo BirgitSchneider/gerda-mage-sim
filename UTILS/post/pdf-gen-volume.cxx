@@ -163,8 +163,8 @@ int main( int argc, char** argv ) {
         // now loop over parts
         bool missingpdf = false;
         bool processCoin = true;
-        long nPrimCoin = 0;
-        long nPrimEdep = 0;
+        long long nPrimCoin = 0;
+        long long nPrimEdep = 0;
         for (const auto& prt : partlist) {
 
             // open input pdf- file
@@ -213,7 +213,7 @@ int main( int argc, char** argv ) {
             bool problemsEdep = false;
             bool problemsCoin = false;
             if (inFile.GetListOfKeys()->Contains("NumberOfPrimariesCoin")) {
-                auto primaries = dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
+                auto primaries = dynamic_cast<TParameter<long long>*>(inFile.Get("NumberOfPrimariesCoin"))->GetVal();
                 if (primaries == 0) {
                     std::cout << "WARNING: zero NumberOfPrimariesCoin!\n";
                     problemsCoin = true;
@@ -225,7 +225,7 @@ int main( int argc, char** argv ) {
                 problemsCoin = true;
             }
             if (inFile.GetListOfKeys()->Contains("NumberOfPrimariesEdep")) {
-                auto primaries = dynamic_cast<TParameter<long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
+                auto primaries = dynamic_cast<TParameter<long long>*>(inFile.Get("NumberOfPrimariesEdep"))->GetVal();
                 nPrimEdep += primaries;
                 if (primaries == 0) {
                     std::cout << "WARNING: zero NumberOfPrimariesEdep!\n";
@@ -290,8 +290,8 @@ int main( int argc, char** argv ) {
                               "pdf-" + volume + '-' + iso + ".root";
         TFile outfile(outName.c_str(), "RECREATE");
 
-        TParameter<long> nPrimCoinT("NumberOfPrimariesCoin",nPrimCoin);
-        TParameter<long> nPrimEdepT("NumberOfPrimariesEdep",nPrimEdep);
+        TParameter<long long> nPrimCoinT("NumberOfPrimariesCoin",nPrimCoin);
+        TParameter<long long> nPrimEdepT("NumberOfPrimariesEdep",nPrimEdep);
 
         if (verbose) std::cout << "Saving to disk...\n";
         for ( auto h : energy_ch ) h.Write();
