@@ -18,7 +18,7 @@
 /MG/generator/select                       G4gun
 /MG/generator/g4gun/cone_on                true
 /gun/particle                              ion
-/gun/ion                                   91 234 0 78
+/gun/ion                        91 234 0 73.92
 /gun/energy                                0 eV
 
 /tracking/verbose                          0
