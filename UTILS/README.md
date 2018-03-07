@@ -20,6 +20,8 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `pdf-gen.cxx`: C++ program to generate a `pdf-`file from a collection of `t4z-`files (see examples below)
     * `pdf-gen-volume.cxx`: C++ program to join PDFs of each single part to produce a `pdf-`file for a volume (see examples below)
     * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
+    * `res-curves-jsonizer.cxx`: C++ script to convert standard resolution curves into (Tier4izer-friendly) JSON format
+    * `json-files/`: JSON files for the post-processing
     * `gerda-metadata/`: (git submodule) version of [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for post-processing
     * `old/`: old post-processing scripts
     * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
@@ -56,7 +58,7 @@ $ bin/t4z-gen \
     --srcdir /lfs/l2/gerda/gerda-simulations/gerda-mage-sim \
     --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
     --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
-    --livetime-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/run-livetime.json \
+    --livetime-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/json-files/run-livetime.json \
     /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/ge_holders/plates/K40/edep
 $ bin/pdf-gen \
     -v \

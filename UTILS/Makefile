@@ -44,6 +44,9 @@ $(INSTALLDIR)/check-simulation : post/check-simulation.cxx progressbar/ProgressB
 $(INSTALLDIR)/livetime-calc-ph2 : post/livetime-calc-ph2.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
+$(INSTALLDIR)/res-curves-jsonizer : post/res-curves-jsonizer.cxx
+	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
+
 $(INSTALLDIR)/t4z-gen : post/t4z-gen.cxx
 	$(CC) $(ALLFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
