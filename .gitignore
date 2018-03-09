@@ -8,7 +8,8 @@
 controlplots*
 UTILS/job-scheduler/*.o*
 UTILS/job-scheduler/mpik-qsub-minishroud*
-UTILS/container
+UTILS/container/*.sqsh
+UTILS/container/*.img
 UTILS/post/log
 UTILS/post/*.o*
 UTILS/.nfs*
