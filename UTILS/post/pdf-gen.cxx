@@ -186,11 +186,11 @@ int main( int argc, char** argv ) {
     // getting number of primaries
     if (verbose) std::cout << "Getting number of primaries...\n";
     bool problems = false;
-    long long nPrimEdep = 0;
+    Long64_t nPrimEdep = 0;
     for (const auto& f : edepFilelist) {
         TFile froot(f.c_str());
         if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-            auto nPrimEdep_loc = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+            auto nPrimEdep_loc = dynamic_cast<TParameter<Long64_t>*>(froot.Get("NumberOfPrimaries"))->GetVal();
             if (nPrimEdep_loc == 0) {
                 std::cout << "WARNING: number of primaries in " << f << " is zero!\n";
                 problems = true;
@@ -229,7 +229,7 @@ int main( int argc, char** argv ) {
     TH1D M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
     TH1D M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
 
-    long long nPrimCoin = 0;  // number of primaries for coincidences
+    Long64_t nPrimCoin = 0;  // number of primaries for coincidences
     int  badevents = 0;  // counter for events with multiplicity 2 but only 0 or 1 energy deposition
     if (processCoin) {
         // object to store events as a (det_id,energy) pair
@@ -321,7 +321,7 @@ int main( int argc, char** argv ) {
         for (const auto& f : coinFilelist) {
             TFile froot(f.c_str());
             if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
-                auto nPrimCoin_loc = dynamic_cast<TParameter<long>*>(froot.Get("NumberOfPrimaries"))->GetVal();
+                auto nPrimCoin_loc = dynamic_cast<TParameter<Long64_t>*>(froot.Get("NumberOfPrimaries"))->GetVal();
                 if (nPrimCoin_loc == 0) {
                     std::cout << "WARNING: number of primaries in " << f << " is zero!\n";
                     problems = true;
@@ -347,8 +347,8 @@ int main( int argc, char** argv ) {
     TFile outfile(outName.c_str(), "RECREATE");
 
     if (verbose) std::cout << "Saving to disk...\n";
-    TParameter<long long> nPrimCoinPar("NumberOfPrimariesCoin", nPrimCoin);
-    TParameter<long long> nPrimEdepPar("NumberOfPrimariesEdep", nPrimEdep);
+    TParameter<Long64_t> nPrimCoinPar("NumberOfPrimariesCoin", nPrimCoin);
+    TParameter<Long64_t> nPrimEdepPar("NumberOfPrimariesEdep", nPrimEdep);
     for ( auto h : energy_ch ) h.Write();
     energyBEGe.Write();
     energyEnrCoax.Write();

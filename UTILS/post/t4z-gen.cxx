@@ -170,7 +170,7 @@ int main(int argc, char** argv) {
         // calculate fraction of events
         auto nentries = ch.GetEntries();
         int fraction = std::round(nentries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
-        int primFraction = std::round(totPrimaries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
+        Long64_t primFraction = std::round(totPrimaries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
         if (verbose) std::cout << "Events fraction: " << nentries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
         if (verbose) std::cout << "Primaries fraction: " << totPrimaries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
 
@@ -195,7 +195,7 @@ int main(int argc, char** argv) {
 
         // save number of primaries
         TFile f(filename.c_str(),"UPDATE");
-        TParameter<long> numberOfPrimaries("NumberOfPrimaries",primFraction);
+        TParameter<Long64_t> numberOfPrimaries("NumberOfPrimaries",primFraction);
         numberOfPrimaries.Write();
         f.Close();
 
