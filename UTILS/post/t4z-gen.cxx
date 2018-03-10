@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
                                  << "            --srcdir <gerda-mage-sim-dir>\n"
                                  << "            --destdir <destination-dir-post-processed>\n"
                                  << "            --livetime-file <json-file-from-livetime-calc-ph2>\n"
+                                 << "            --runlist-file <json-file-with-runlist>\n"
                                  << "  optional: -v : verbose mode\n\n"
                                  << "NOTES: Please use absolute paths!"
                                  << std::endl;};
@@ -45,7 +46,7 @@ int main(int argc, char** argv) {
     // get & check arguments
     std::vector<std::string> args;
     for (int i = 0; i < argc; ++i) args.emplace_back(argv[i]);
-    if (argc < 10) {usage(); return 1;}
+    if (argc < 12) {usage(); return 1;}
     std::string gerdaMetaPath;
     auto result = std::find(args.begin(), args.end(), "--metadata");
     if (result != args.end()) gerdaMetaPath = *(result+1);
@@ -64,6 +65,12 @@ int main(int argc, char** argv) {
     else {usage(); return 1;}
     std::ifstream flivetimes(livetimeFile);
     if (!flivetimes.is_open()) {std::cout << "Invalid livetime file! Aborting..."; return 1;}
+    std::string runlistFile;
+    result = std::find(args.begin(), args.end(), "--runlist-file");
+    if (result != args.end()) runlistFile = *(result+1);
+    else {usage(); return 1;}
+    std::ifstream frunlist(runlistFile);
+    if (!frunlist.is_open()) {std::cout << "Invalid run-list file! Aborting..."; return 1;}
     bool verbose = false;
     result = std::find(args.begin(), args.end(), "-v");
     if (result != args.end()) verbose = true;
@@ -132,24 +139,33 @@ int main(int argc, char** argv) {
         totPrimaries = 0;
     }
 
+    // read json file with run list
+    Json::Value runlist;
+    frunlist >> runlist;
+
     // read json file with livetimes
     Json::Value livetimes;
     flivetimes >> livetimes;
-    Json::Value::Members runs = livetimes.getMemberNames();
 
     // calculate total livetime
     int totLivetime = 0;
-    for ( auto r : runs ) {
-        if (verbose) std::cout << '\n' << r << ": " << livetimes[r]["livetime_in_s"].asInt() << " s";
-        totLivetime += livetimes[r]["livetime_in_s"].asInt();
+    for (auto r : runlist["run-list"]) {
+        auto runID = "run" + r.asString();
+        if (!livetimes[runID]["livetime_in_s"]) {
+            std::cout << "\nERROR: " + runID + " not found in livetime file! rerun livetime-calc-ph2! Aborting...";
+            return 1;
+        }
+        if (verbose) std::cout << "\n" + runID + ": " << livetimes[runID]["livetime_in_s"].asInt() << " s";
+        totLivetime += livetimes[runID]["livetime_in_s"].asInt();
     }
     if (verbose) std::cout << "\nTotal livetime: " << totLivetime << std::endl;
 
     int first = 0; // first event to be processed in tree
     // loop over runIDs in json file
-    for ( auto r : runs ) {
+    for ( auto r : runlist["run-list"] ) {
+        auto runID = "run" + r.asString();
         if (verbose) std::cout << std::endl;
-        std::cout << "==> " << r << std::endl;
+        std::cout << "==> " << runID << std::endl;
         // strip out folders in dir to build up final t4z- filename
         std::vector<std::string> items;
         std::string dircopy = dirWithRaw;
@@ -159,8 +175,8 @@ int main(int argc, char** argv) {
         }
         auto& it = items;
         auto filedir = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[0];
-        auto filename = filedir + '/' + "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-run" +
-                        livetimes[r]["ID"].asString() + ".root";
+        auto filename = filedir + '/' + "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-" +
+                        runID + ".root";
         if (verbose) std::cout << "Post-production folder: " << destDirPath << std::endl;
         if (verbose) std::cout << "tz4- file name: " << filename << std::endl;
 
@@ -169,10 +185,10 @@ int main(int argc, char** argv) {
 
         // calculate fraction of events
         auto nentries = ch.GetEntries();
-        int fraction = std::round(nentries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
-        Long64_t primFraction = std::round(totPrimaries * livetimes[r]["livetime_in_s"].asInt() *1. / totLivetime);
-        if (verbose) std::cout << "Events fraction: " << nentries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
-        if (verbose) std::cout << "Primaries fraction: " << totPrimaries << " * " << livetimes[r]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
+        int fraction = std::round(nentries * livetimes[runID]["livetime_in_s"].asInt() *1. / totLivetime);
+        Long64_t primFraction = std::round(totPrimaries * livetimes[runID]["livetime_in_s"].asInt() *1. / totLivetime);
+        if (verbose) std::cout << "Events fraction: " << nentries << " * " << livetimes[runID]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
+        if (verbose) std::cout << "Primaries fraction: " << totPrimaries << " * " << livetimes[runID]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
 
         // set up tier4izer
         gada::T4SimConfig config;
@@ -184,7 +200,7 @@ int main(int argc, char** argv) {
 //            if(verbose) std::cout << "LAr settings loaded" << std::endl;
         config.LoadGedResolutions(srcDirPath + "/UTILS/post/json-files/ged-resolution-custom.json", "Zac");
             if(verbose) std::cout << "Ged resolutions loaded" << std::endl;
-        config.LoadRunConfig((ULong64_t)livetimes[r]["timestamp"].asUInt64());
+        config.LoadRunConfig((ULong64_t)livetimes[runID]["timestamp"].asUInt64());
             if(verbose) std::cout << "RunConfig loaded" << std::endl;
 
         gada::T4SimHandler handler(&ch, &config, filename);
