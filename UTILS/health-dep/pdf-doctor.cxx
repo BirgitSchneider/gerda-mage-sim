@@ -1,10 +1,9 @@
-/* sim-doctor.cxx
+/* pdf-doctor.cxx
  *
  * Author  : K.v.Sturm and L.Pertoldi
  * Date    : 14.2.2018
  *
  */
-
 
 // C/C++
 #include <iostream>
@@ -24,13 +23,13 @@
 
 int main(int argc, char** argv) {
 
-    if (argc > 1) {
-        if (std::string(argv[1]) == "-h" or std::string(argv[1]) == "--help") {
-            std::cout << "USAGE: " << std::string(argv[0]) << " [-h] [--help] <dir>\n";
-            return 1;
-        }
+    if (argc > 2 or
+        argc > 1 and (std::string(argv[1]) == "-h" or std::string(argv[1]) == "--help")) {
+        std::cout << "USAGE: " << std::string(argv[0]) << " [-h] [--help] <dir>\n";
+        return 1;
     }
     std::string dir = argc > 1 ? argv[1] : ".";
+    std::cout << "Patient: " << dir << std::endl;
     ReadDir::GetContent_R(dir, "*.root");
     ReadDir::SetVerbose(true);
     auto filelist = ReadDir::GetFiles();
@@ -44,7 +43,7 @@ int main(int argc, char** argv) {
     int nHasZeroPrimaries = 0;
 
     //gEnv->SetValue("TFile.Recover", 0);
-    gErrorIgnoreLevel = kError;
+    //gErrorIgnoreLevel = kError;
 
     std::cout << "Checking... ";
     for (const auto& f : filelist) {
@@ -68,8 +67,8 @@ int main(int argc, char** argv) {
                     nHasPrimaries++;
                 }
                 else {
-                    if (dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimaries"))->GetVal() == 0) {
-                        std::cout << std::endl << f << " has NumberOfPrimaries = 0!\n";
+                    if (dynamic_cast<TParameter<Long64_t>*>(file.Get("NumberOfPrimaries"))->GetVal() <= 0) {
+                        std::cout << std::endl << f << " has NumberOfPrimaries <= 0!\n";
                         nHasZeroPrimaries++;
                     }
                 }
@@ -81,8 +80,8 @@ int main(int argc, char** argv) {
                     nHasPrimaries++;
                 }
                 else {
-                    if (dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimariesEdep"))->GetVal() == 0) {
-                        std::cout << std::endl << f << " has NumberOfPrimariesEdep = 0!\n";
+                    if (dynamic_cast<TParameter<Long64_t>*>(file.Get("NumberOfPrimariesEdep"))->GetVal() <= 0) {
+                        std::cout << std::endl << f << " has NumberOfPrimariesEdep <= 0!\n";
                         nHasZeroPrimaries++;
                     }
                 }
@@ -91,8 +90,8 @@ int main(int argc, char** argv) {
                     //nHasPrimaries++;
                 }
                 else {
-                    if (dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimariesCoin"))->GetVal() == 0) {
-                        std::cout << std::endl << f << " has NumberOfPrimariesCoin = 0!\n";
+                    if (dynamic_cast<TParameter<Long64_t>*>(file.Get("NumberOfPrimariesCoin"))->GetVal() <= 0) {
+                        std::cout << std::endl << f << " has NumberOfPrimariesCoin <= 0!\n";
                         nHasZeroPrimaries++;
                     }
                 }
@@ -101,12 +100,12 @@ int main(int argc, char** argv) {
     }
 
     std::cout << "\n\n"
-              << "========= SUMMARY =========" << std::endl
-              << nIsZombie         << '/' << filelist.size() << " zombie ROOT files" << std::endl
-              << nHasToBeRecovered << '/' << filelist.size() << " ROOT files that need recovery" << std::endl
-              << nHasPrimaries     << '/' << filelist.size() << " ROOT files without a NumberOfPrimaries object" << std::endl
-              << nHasZeroPrimaries << '/' << filelist.size() << " ROOT files with a zero number of primaries" << std::endl
-              << "===========================" << std::endl;
+              << "================= SUMMARY =================" << std::endl
+              << nIsZombie         << '/' << filelist.size()       << "\tzombie ROOT files" << std::endl
+              << nHasToBeRecovered << '/' << filelist.size()       << "\tROOT files that need recovery" << std::endl
+              << nHasPrimaries     << '/' << nT4zFiles + nPdfFiles << "\tROOT files without a NumberOfPrimaries object" << std::endl
+              << nHasZeroPrimaries << '/' << nT4zFiles + nPdfFiles << "\tROOT files with a zero number of primaries" << std::endl
+              << "===========================================" << std::endl;
 
     return 0;
 }
