@@ -194,11 +194,11 @@ int main(int argc, char** argv) {
         gada::T4SimConfig config;
         config.LoadMapping(gerdaMetaPath + "/detector-data/mapping-default-depr.json");
             if(verbose) std::cout << "Mapping loaded" << std::endl;
-        config.LoadGedSettings(srcDirPath + "/UTILS/post/json-files/ged-settings-custom.json");
+        config.LoadGedSettings(srcDirPath + "/UTILS/post/settings/ged-settings-custom.json");
             if(verbose) std::cout << "Ged settings loaded" << std::endl;
 //        config.LoadLArSettings(gerdaMetaPath + "/detector-data/lar-settings-default.json");
 //            if(verbose) std::cout << "LAr settings loaded" << std::endl;
-        config.LoadGedResolutions(srcDirPath + "/UTILS/post/json-files/ged-resolution-custom.json", "Zac");
+        config.LoadGedResolutions(srcDirPath + "/UTILS/post/settings/ged-resolution-custom.json", "Zac");
             if(verbose) std::cout << "Ged resolutions loaded" << std::endl;
         config.LoadRunConfig((ULong64_t)livetimes[runID]["timestamp"].asUInt64());
             if(verbose) std::cout << "RunConfig loaded" << std::endl;
