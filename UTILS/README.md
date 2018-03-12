@@ -21,13 +21,13 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `pdf-gen-volume.cxx`: C++ program to join PDFs of each single part to produce a `pdf-`file for a volume (see examples below)
     * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
     * `res-curves-jsonizer.cxx`: C++ script to convert standard resolution curves into (Tier4izer-friendly) JSON format
-    * `json-files/`: JSON files for the post-processing
+    * `settings/`: JSON files for the post-processing
     * `gerda-metadata/`: (git submodule) version of [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for post-processing
     * `old/`: old post-processing scripts
     * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
 * `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
 * `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
-* `helth-dep/`: Health department!
+* `health-dep/`: Health department!
     * `sim-doctor.cxx`: tool to check for problems in `.root` MaGe files
     * `pdf-doctor.cxx`: tool to check for problems in `t4z-*.root` and `pdf-*.root` files
 * `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions you can use Oliver's [docker2singularity.py](https://github.com/oschulz/singularity-utils) Python script. An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`. First get all the Julia packages you need with `Pkg.add`, they will be installed under your home directory on the host (which is mounted by default by singularity), and so you won't need to do it again the next time you'll use Julia inside the container.
@@ -52,13 +52,14 @@ $ bin/livetime-calc-ph2 \
     -v \
     --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
     --data /lfs/l3/gerda/Daq/data-phaseII/blind/active/gen \
-    --output /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/run-livetime.json
+    --output /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/run-livetime.json
 $ bin/t4z-gen \
     -v \
     --srcdir /lfs/l2/gerda/gerda-simulations/gerda-mage-sim \
     --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
     --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
-    --livetime-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/json-files/run-livetime.json \
+    --livetime-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/run-livetime.json \
+    --runlist-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/run-list.json \
     /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/ge_holders/plates/K40/edep
 $ bin/pdf-gen \
     -v \
