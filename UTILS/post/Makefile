@@ -14,7 +14,7 @@
 #
 # *CHANGE ME* important variables
 CYCLE          = v0.5
-RUNS           = $(shell sed '3!d;s/,//g' json-files/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
+RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
 DEST_DIR       = $(GERDA_PDFS)/$(CYCLE)
