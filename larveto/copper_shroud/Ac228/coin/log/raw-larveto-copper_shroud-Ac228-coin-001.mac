@@ -1,0 +1,26 @@
+# load preamble
+/control/execute                           ./larveto/copper_shroud/Ac228/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./larveto/copper_shroud/Ac228/coin/raw-larveto-copper_shroud-Ac228-coin-001.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+/MG/output/saveOnlyEventsWithCoincidence   true
+
+/MG/geometry/cherenkov                     -1
+
+/run/initialize
+
+/MG/generator/confine                      volumearray
+/MG/generator/volumearrayadd               LArInstr_VM2000CylinderPhysical_top
+/MG/generator/volumearrayadd               LArInstr_VM2000CylinderPhysical_bottom
+
+/MG/generator/select                       G4gun
+/MG/generator/g4gun/cone_on                true
+/gun/particle                              ion
+/gun/ion                                   89 228
+/gun/energy                                0 eV
+
+/tracking/verbose                          0
+/run/beamOn                                100000000
