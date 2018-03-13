@@ -77,10 +77,11 @@ get_pdf_files_for_iso = $(foreach d,$(wildcard ../../$(1)/*/$(2)),$(call change_
 check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 # final target list
-post : mkdir $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
+post : preliminary $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
 
-mkdir :
+preliminary :
 	@mkdir -p $(DEST_DIR)
+	cp $(GERDA_MAGE_SIM)/UTILS/sim-parameters-all.json $(DEST_DIR)/sim-parameters-all.json
 
 # this is needed to create a comma separated list for -jold_jid
 space := $(null) #
