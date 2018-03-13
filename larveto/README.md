@@ -10,7 +10,8 @@
 | pmt_bottom             | `LArInstr_PMTGlassPhysical [9..15]`                                             | 0.238781            | 108.537          | 2.2              | Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings |       |
 | copper_shroud          | `LArInstr_VM2000CylinderPhysical_top`, `LArInstr_VM2000CylinderPhysical_bottom` | 2 x 0.792 = 1.58443 | 1760.477         | 0.9              | Copper shroud at top and bottom of the fiber shroud                                   |       |
 
-A picture of the volumes put together: fibers (non-segmented), sipm_ring (segmented), pmt_bottom and pmt_top:
+A picture of the volumes put together: fibers (non-segmented), sipm_ring (segmented), pmt_bottom and pmt_top on the left. With also the copper_shroud on the right:
 <p align="center">
-  <img src="larveto.png" width="400"/>
+  <img src="fibers_pmts.png" width="400"/>
+  <img src="fibers_pmts_coppersh.png" width="400"/>
 </p>
