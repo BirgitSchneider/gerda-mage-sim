@@ -90,7 +90,7 @@ comma := ,
 define rule_for_volume_pdf
   $(1) : $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev))
 	@if [[ $$(call check_if_job_exists,$$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE)) == 0 ]]; then \
-	$$(QSUB) -hold_jid $$(subst $$(space),$$(comma),$$(foreach f,$$(notdir $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev))),$$(f)-$$(CYCLE))) \
+	$$(QSUB) -hold_jid "pdf-$(2)-*-$$(CYCLE)" \
                    -N $$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE) \
                    $$(JOBPDFVOL) $$(shell echo $$@ | rev | cut -d'-' -f2 | rev) \
                    $$(DEST_DIR); \
