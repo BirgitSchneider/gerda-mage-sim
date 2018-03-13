@@ -1,4 +1,5 @@
 # lar/above_ms6
+**Remember to update also `UTILS/sim-parameters-all.json`**
 
 ## simulations info
 

@@ -1,4 +1,5 @@
 # larveto/copper_shroud
+**Remember to update also `UTILS/sim-parameters-all.json`**
 
 ## simulations info
 

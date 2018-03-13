@@ -1,4 +1,5 @@
 # minishroud/tops
+**Remember to update also `UTILS/sim-parameters-all.json`**
 
 ## simulations info
 

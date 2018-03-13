@@ -1,4 +1,5 @@
 # ge_holder/plates
+**Remember to update also `UTILS/sim-parameters-all.json`**
 
 ## simulations info
 

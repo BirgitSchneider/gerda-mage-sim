@@ -1,4 +1,5 @@
 # gedet/nplus_chanwise/ver
+**Remember to update also `UTILS/sim-parameters-all.json`**
 Vertices for `nplus_chanwise` simulations are placed here. As Geant4 does not efficiently sample complex surfaces (especially boolean solids) the Generic Surface Sampler (GSS) is used. The resulting vertices are stored as (x,y,z) coordinates in a ROOT file. For further informations see [the MaGe user-guide](https://github.com/mppmu/gerda-snippets/blob/master/MaGe-macros/MaGe-userguide.pdf) at §6.11.2.
 
 These vertices for n+ contact surfaces are obtained by extraction from the total detector surfaces placed under `gedet/surf_chanwise/ver/`. the processing is performed by the `UTILS/surf-sampling/separate-contacts.jl` julia script.

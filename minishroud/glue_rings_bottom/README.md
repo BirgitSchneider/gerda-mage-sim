@@ -1,4 +1,5 @@
 # minishroud/glue_rings_bottom
+**Remember to update also `UTILS/sim-parameters-all.json`**
 
 ## simulations info
 
