@@ -14,4 +14,4 @@
 | Ac228  \[coin\]        | K.v.Sturm   | 100x1E8         | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
 | Bi212  \[coin\]        | K.v.Sturm   | 100x1E8         | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
 | Tl208  \[coin\]        | B.Schneider | 100x1E7         | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
-| K40    \[edep\]        | K.v.Sturm   | 100x1E8         | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
+| K40    \[coin\]        | K.v.Sturm   | 100x1E8         | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` |       |
