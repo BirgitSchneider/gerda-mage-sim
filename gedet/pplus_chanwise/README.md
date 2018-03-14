@@ -1,5 +1,5 @@
 # gedet/pplus_chanwise
-**Remember to update also `UTILS/sim-parameters-all.json`**
+**Remember to update also `UTILS/sim-parameters-all.json`**!
 
 ## simulations info
 
