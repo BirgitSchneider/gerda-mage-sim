@@ -1,19 +1,24 @@
+# (possibly big) data files
 *.root
 *.out
 *.dk0
+
+# junk
 *.swp
-*.sqsh
 *.DS_Store
-*.raw*
-controlplots*
-UTILS/job-scheduler/*.o*
-UTILS/job-scheduler/mpik-qsub-minishroud*
-UTILS/container/*.sqsh
-UTILS/container/*.img
-UTILS/post/log
-UTILS/post/*.o*
-UTILS/post/*.pdf
-UTILS/.nfs*
-UTILS/.ycm_extra_conf.py
+*.o*
+*.nfs*
+
+# singularity containers
+*.sqsh
+*.img
+
+# software
 UTILS/bin
+UTILS/.ycm_extra_conf.py
 UTILS/test/*root.dat
+controlplots*
+
+# other
+*.raw*
+*.pdf
