@@ -5,9 +5,9 @@
         "total-livetime-yr" : 1.60604072
     },
     "cables" : {
-        "mc-mass-g" : 31.00336,
+        "mc-mass-kg" : 0.03100336,
         "mc-volume-cm3" : 20.263634,
-        "mc-density-gcm3" : 1.53,
+        "mc-density-kgcm3" : 0.00153,
 
         "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
         "Bi207"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
@@ -21,9 +21,9 @@
         "Tl208"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
 
         "hv_at_holders" : {
-            "mc-mass-g" : 1.82070,
+            "mc-mass-kg" : 0.00182070,
             "mc-volume-cm3" : 1.19,
-            "mc-density-gcm3" : 1.53,
+            "mc-density-kgcm3" : 0.00153,
 
             "Ac228"  : { "coin" : { "primaries" : 58725890 }, "edep" : { "primaries" : 58725890 } },
             "Bi207"  : { "coin" : { "primaries" : 58725890 }, "edep" : { "primaries" : 5872589  } },
@@ -37,9 +37,9 @@
             "Tl208"  : { "coin" : { "primaries" : 5872589  }, "edep" : { "primaries" : 5872589  } }
         },
         "hv_cables" : {
-            "mc-mass-g" : 12.43250,
+            "mc-mass-kg" : 0.01243250,
             "mc-volume-cm3" : 8.125817,
-            "mc-density-gcm3" : 1.53,
+            "mc-density-kgcm3" : 0.00153,
 
             "Ac228"  : { "coin" : { "primaries" : 401004920 }, "edep" : { "primaries" : 401004920 } },
             "Bi207"  : { "coin" : { "primaries" : 401004920 }, "edep" : { "primaries" : 40100492  } },
@@ -53,9 +53,9 @@
             "Tl208"  : { "coin" : { "primaries" : 40100492  }, "edep" : { "primaries" : 40100492  } }
         },
         "sig_at_holders" : {
-            "mc-mass-g" : 4.31766,
+            "mc-mass-kg" : 0.00431766,
             "mc-volume-cm3" : 2.822,
-            "mc-density-gcm3" : 1.53,
+            "mc-density-kgcm3" : 0.00153,
 
             "Ac228"  : { "coin" : { "primaries" : 139264260 }, "edep" : { "primaries" : 139264260 } },
             "Bi207"  : { "coin" : { "primaries" : 139264260 }, "edep" : { "primaries" : 13926426  } },
@@ -69,9 +69,9 @@
             "Tl208"  : { "coin" : { "primaries" : 13926426  }, "edep" : { "primaries" : 13926426  } }
         },
         "sig_cables" : {
-            "mc-mass-g" : 12.43250,
+            "mc-mass-kg" : 0.01243250,
             "mc-volume-cm3" : 8.125817,
-            "mc-density-gcm3" : 1.53,
+            "mc-density-kgcm3" : 0.00153,
 
             "Ac228"  : { "coin" : { "primaries" : 401004920 }, "edep" : { "primaries" : 401004920 } },
             "Bi207"  : { "coin" : { "primaries" : 401004920 }, "edep" : { "primaries" : 40100492  } },
@@ -87,18 +87,18 @@
     },
     "electronics" : {
         "cc3" : {
-            "mc-mass-g" : 51.96,
+            "mc-mass-kg" : 0.05196,
             "mc-volume-cm3" : 24,
-            "mc-density-gcm3" : 2.165,
+            "mc-density-kgcm3" : 0.002165,
 
             "K40" : { "coin" : { "primaries" : 1E10 }, "edep" : { "primaries" : 1E10 } }
         }
     },
     "ge_holders" : {
         "plates" : {
-            "mc-mass-g" : 659.134,
+            "mc-mass-kg" : 0.659134,
             "mc-volume-cm3" : 0.282891,
-            "mc-density-gcm3" : 2.33,
+            "mc-density-kgcm3" : 0.00233,
 
             "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 5E08 } },
             "Bi212"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
@@ -114,7 +114,7 @@
         "intrinsic_bege" : {
             "mc-mass-kg" : 20.20468639999999,
             "mc-volume-cm3" : 3647.0553068592035,
-            "mc-density-gcm3" : 5.54,
+            "mc-density-kgcm3" : 0.00554,
             "mean-enrichment-fraction" : 0.877,
 
             "2nbb"   : { "edep" : { "primaries" : 1E08 } },
@@ -123,7 +123,7 @@
         "intrinsic_coax" : {
             "mc-mass-kg" : 15.562227000000002,
             "mc-volume-cm3" : 2809.066245487365,
-            "mc-density-gcm3" : 5.54,
+            "mc-density-kgcm3" : 0.00554,
             "mean-enrichment-fraction" : 0.8624285714285713,
 
             "2nbb"   : { "edep" : { "primaries" : 1E08 } },
@@ -132,7 +132,7 @@
         "intrinsic_nat" : {
             "mc-mass-kg" : 7.669414,
             "mc-volume-cm3" : 1441.6191729323307,
-            "mc-density-gcm3" : 5.3234,
+            "mc-density-kgcm3" : 0.0053234,
             "mean-enrichment-fraction" : 0.078,
 
             "2nbb"   : { "edep" : { "primaries" : 1E08 } },
@@ -167,63 +167,63 @@
         "above_array" : {
             "mc-mass-kg" : 268,
             "mc-volume-cm3" : 192480,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 51E9 }, "edep" : { "primaries" : 51E9 } }
         },
         "above_ms1" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "above_ms2" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "above_ms3" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "above_ms4" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "above_ms5" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "above_ms6" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "above_ms7" : {
             "mc-mass-kg" : 1.091,
             "mc-volume-cm3" : 785.375,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 5E9 }, "edep" : { "primaries" : 5E9 } }
         },
         "sur_array" : {
             "mc-mass-kg" : 10895,
             "mc-volume-cm3" : 7837850,
-            "mc-density-gcm3" : 1.39,
+            "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 53E9 }, "edep" : { "primaries" : 53E9 } }
         }
@@ -232,7 +232,7 @@
         "copper_shroud" : {
             "mc-mass-kg" : 1.58443,
             "mc-volume-cm3" : 1760.477,
-            "mc-density-gcm3" : 0.9,
+            "mc-density-kgcm3" : 0.0009,
 
             "Ac228" : { "coin" : { "primaries" : 1E10 }, "edep" : { "primaries" : 1E09 } },
             "Bi212" : { "coin" : { "primaries" : 1E10 }, "edep" : { "primaries" : 1E09 } },
@@ -244,7 +244,7 @@
         "fibers" : {
             "mc-mass-kg" : 1.36146,
             "mc-volume-cm3" : 1296.629,
-            "mc-density-gcm3" : 1.05,
+            "mc-density-kgcm3" : 0.00105,
 
             "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
             "Bi212"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
@@ -257,7 +257,7 @@
         "pmt_bottom" : {
             "mc-mass-kg" : 0.238781,
             "mc-volume-cm3" : 108.537,
-            "mc-density-gcm3" : 2.2,
+            "mc-density-kgcm3" : 0.0022,
 
             "Bi212"  : { "edep" : { "primaries" : 1E09 } },
             "Bi214"  : { "edep" : { "primaries" : 1E09 } },
@@ -268,7 +268,7 @@
         "pmt_top" : {
             "mc-mass-kg" : 0.307004,
             "mc-volume-cm3" : 139.547,
-            "mc-density-gcm3" : 2.2,
+            "mc-density-kgcm3" : 0.0022,
 
             "Bi212"  : { "edep" : { "primaries" : 1E09 } },
             "Bi214"  : { "edep" : { "primaries" : 1E09 } },
@@ -279,7 +279,7 @@
         "sipm_ring" : {
             "mc-mass-kg" : 0.00336289,
             "mc-volume-cm3" : 1.4433,
-            "mc-density-gcm3" : 2.33,
+            "mc-density-kgcm3" : 0.00233,
 
             "Bi212"  : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E09 }},
             "Bi214"  : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E09 }},
@@ -291,7 +291,7 @@
     "minishroud" : {
         "mc-mass-kg" : 0.18860148000000002,
         "mc-volume-cm3" : 216.891702,
-        "mc-density-gcm3" : 1.15,
+        "mc-density-kgcm3" : 0.00115,
 
         "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
         "Bi212"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
@@ -304,7 +304,7 @@
         "bottoms" : {
             "mc-mass-kg" : 0.00858702,
             "mc-volume-cm3" : 9.875073,
-            "mc-density-gcm3" : 1.15,
+            "mc-density-kgcm3" : 0.00115,
 
             "Ac228"  : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
             "Bi212"  : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
@@ -317,7 +317,7 @@
         "glue_rings_bottom" : {
             "mc-mass-kg" : 0.01323650,
             "mc-volume-cm3" : 15.221975,
-            "mc-density-gcm3" : 1.15,
+            "mc-density-kgcm3" : 0.00115,
 
             "Ac228"  : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
             "Bi212"  : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
@@ -330,7 +330,7 @@
         "glue_rings_top" : {
             "mc-mass-kg" : 0.01314170,
             "mc-volume-cm3" : 15.112955,
-            "mc-density-gcm3" : 1.15,
+            "mc-density-kgcm3" : 0.00115,
 
             "Ac228"  : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
             "Bi212"  : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
@@ -343,7 +343,7 @@
         "tops" : {
             "mc-mass-kg" : 0.00855626,
             "mc-volume-cm3" : 9.839699,
-            "mc-density-gcm3" : 1.15,
+            "mc-density-kgcm3" : 0.00115,
 
             "Ac228"  : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
             "Bi212"  : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
@@ -356,7 +356,7 @@
         "tubs" : {
             "mc-mass-kg" : 0.14508000,
             "mc-volume-cm3" : 166.8420,
-            "mc-density-gcm3" : 1.15,
+            "mc-density-kgcm3" : 0.00115,
 
             "Ac228"  : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
             "Bi212"  : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },

@@ -12,6 +12,7 @@ UTILS/container/*.sqsh
 UTILS/container/*.img
 UTILS/post/log
 UTILS/post/*.o*
+UTILS/post/*.pdf
 UTILS/.nfs*
 UTILS/.ycm_extra_conf.py
 UTILS/bin
