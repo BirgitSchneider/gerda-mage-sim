@@ -23,7 +23,7 @@ preamble =
     \usepackage{enumitem}
     \title{\texttt{gerda-mage-sim} status report}
     \date{\today}
-    \author{\tt gerda-mage-sim/UTILS/post/report-latex.jl}
+    \author{by \texttt{gerda-mage-sim/UTILS/post/report-latex.jl}}
     \begin{document}
     \maketitle
     """
@@ -40,9 +40,11 @@ for i in [rl[1]:rl[end]...]
     end
 end
 
+# get revision control info
 git_tag    = readchomp(`git describe --tags --abbrev=0`)
 git_commit = readchomp(pipeline(`git rev-parse HEAD`, ` cut -c1-7`))
 
+# first list with general parameters
 list =
     """
     \\begin{description}
@@ -64,6 +66,8 @@ heading =
             \midrule
     """
 
+body = ""
+
 closing =
     raw"""
             \bottomrule
@@ -71,19 +75,47 @@ closing =
     \end{table}
     """
 
-body = ""
-# loop over volumes
+# function to write a line in the masses table
+function write_line(volume_name, part_name, mc_mass_kg, mc_volume_cm3, mc_density_kgcm3, is_surface = false)
+    # indent
+    line = "        "
+    # write volume name and part name
+    line = line * @sprintf("%-25s", volume_name) * "& "
+    line = line * @sprintf("%-30s", part_name) * "& "
+    # write the mass
+    !isa(mc_mass_kg, String) ?
+        line = line * @sprintf(" %-10.3f", mc_mass_kg) * "& " :
+        line = line * @sprintf(" %-10s", mc_mass_kg) * "& "
+    # write the volume
+    !isa(mc_volume_cm3, String) ?
+        (!is_surface ?
+            line = line * @sprintf("%-14.3f", mc_volume_cm3) * "& " :
+            line = line * @sprintf("%-7.3f", mc_volume_cm3) * " cm\$^2\$" * "& ") :
+        (!is_surface ?
+            line = line * @sprintf("%-14s", mc_volume_cm3) * "& " :
+            line = line * @sprintf("%-7s", mc_volume_cm3) * " cm\$^2\$ " * "& ")
+    # write the density
+    !isa(mc_density_kgcm3, String) ?
+        line = line * @sprintf("%-10.3f", mc_density_kgcm3) * "\\\\\n" :
+        line = line * @sprintf("%-10s", mc_density_kgcm3) * "\\\\\n"
+
+    return line
+end
+
+# array of strings, keys in the dictionary
 all_keys = collect(keys(sims))
+# loop over volumes
 for vol in all_keys
     (vol == "general") && continue
 
+    # dictionary associated to this volume
     parts = copy(sims[vol])
 
-    # delete non-parts from parts array
+    # delete non-parts from this dictionary
     for (p,val) in sims[vol]
-        if !isa(val, Dict)
+        if !isa(val, Dict) # it should be a dictionary
             delete!(parts, p)
-        elseif (!haskey(val, "mc-volume-cm3") &&
+        elseif (!haskey(val, "mc-volume-cm3") && # it should always contain the volume or the surface
                 !haskey(val, "mc-surface-cm2"))
             delete!(parts, p)
         end
@@ -94,61 +126,47 @@ for vol in all_keys
         # in LaTeX you have to escape _ characters
         v = replace("\\texttt{$vol}", "_", "\\_")
         p = replace("\\texttt{$p}", "_", "\\_")
-        # indent
-        body = body * "        "
-        # write volume name if first row, write the part name
-        first ?
-            body = body * @sprintf("%-25s& %-30s &", v, p) :
-            body = body * @sprintf("%-25s& %-30s &", ' ', p)
-        # write the mass
-        body = body * "$(haskey(val, "mc-mass-kg") ?
-            @sprintf(" %-10.3f", val["mc-mass-kg"]) :
-            @sprintf(" %-10s","N.A.")) &"
-        # write the volume
-        body = body * "$(haskey(val, "mc-volume-cm3") ?
-            @sprintf(" %-13.3f", val["mc-volume-cm3"]) :
-            @sprintf(" %-6.3f", val["mc-surface-cm2"]) * " cm\$^2\$") &"
-        # write the density
-        body = body * "$(haskey(val, "mc-density-kgcm3") ?
-            @sprintf(" %-10.3f", 1E03*val["mc-density-kgcm3"]) :
-            @sprintf(" %-10s","N.A.")) \\\\\n"
 
+        # check if the number is there and WRITE!
+        body = body * write_line(
+            first ? v : " ",
+            p,
+            haskey(val, "mc-mass-kg") ? val["mc-mass-kg"] : " ",
+            haskey(val, "mc-volume-cm3") ? val["mc-volume-cm3"] : val["mc-surface-cm2"],
+            haskey(val, "mc-density-kgcm3") ? 1E03*val["mc-density-kgcm3"] : " ",
+            haskey(val, "mc-surface-cm2")
+        )
         first = false
     end
 
-    # write row with sum, if present
+    # write row with sum for volume, if present
     if (haskey(sims[vol], "mc-mass-kg") ||
         haskey(sims[vol], "mc-volume-cm3") ||
         haskey(sims[vol], "mc-density-kgcm3"))
-        # write first two columns
-        body = body * "        "
-        body = body * @sprintf("%-25s& %-30s &", ' ', "\\textsc{total}")
-        # write the mass
-        body = body * "$(haskey(sims[vol], "mc-mass-kg") ?
-            @sprintf(" %-10.3f", sims[vol]["mc-mass-kg"]) :
-            @sprintf(" %-10s",' ')) &"
-        # write the volume
-        body = body * "$(haskey(sims[vol], "mc-volume-cm3") ?
-            @sprintf(" %-13.3f", sims[vol]["mc-volume-cm3"]) :
-            @sprintf(" %-13.3f", ' ')) &"
-        # write the density
-        body = body * "$(haskey(sims[vol], "mc-density-kgcm3") ?
-            @sprintf(" %-10.3f", 1E03*sims[vol]["mc-density-kgcm3"]) :
-            @sprintf(" %-10s",' ')) \\\\\n"
+        body = body * write_line(
+            "\\textsc{total}",
+            "\\textsc{total}",
+            haskey(sims[vol], "mc-mass-kg") ? sims[vol]["mc-mass-kg"] : " ",
+            haskey(sims[vol], "mc-volume-cm3") ? sims[vol]["mc-volume-cm3"] : " ",
+            haskey(sims[vol], "mc-density-kgcm3") ? 1E03*sims[vol]["mc-density-kgcm3"] : " ",
+        )
     end
+
+    # separate parts with midrule
     if (vol != all_keys[end])
         body = body * "        \\midrule\n"
     end
 end
 
-massestable = heading * body * closing
-
-# write
+# write to file
 open("/tmp/gerda-mage-sim-report.tex", "w") do f
-    write(f, preamble * list * '\n' * massestable)
+    write(f, preamble * list * '\n' * heading * body * closing)
 end
 
 #================================= TABLE WITH PRIMARIES ====================================#
+
+# non-isotopes: there's a much portable way to do this, but I don't want to code it...
+non_iso = ["mc-mass-kg", "mc-density-kgcm3", "mc-volume-cm3", "mc-surface-cm2", "mean-enrichment-fraction"]
 
 # let's do a table for each volume
 for vol in all_keys
@@ -169,16 +187,18 @@ for vol in all_keys
     iso_all = []
     for p in collect(keys(parts))
         for is in collect(keys(sims[vol][p]))
-            if (is != "mc-mass-kg"    && is != "mc-density-kgcm3" &&
-                is != "mc-volume-cm3" && is != "mc-surface-cm2" && is != "mean-enrichment-fraction")
+            if !(is in non_iso)
                 push!(iso_all, is)
             end
         end
     end
 
+    # delete redundancies
     iso = unique(iso_all)
+    # sort alphabetically
     sort!(iso)
 
+    # this is needed to set the tabular environment
     c_c = "";
     for _ in iso
         c_c = c_c * 'c'
@@ -189,69 +209,56 @@ for vol in all_keys
     heading =
         """
         \\begin{table}
-            \\centering
-            \\caption{Number of simulated events for each isotope in the $v \\textsc{Gerda} volume.}
+            \\caption{Number of simulated events for each isotope in the $v \\textsc{Gerda} volume. First row refers to \\texttt{edep}, second to \\texttt{coin}}
+            \\centerline{%
             \\begin{tabular}{l$c_c}
                 \\toprule
                 part & \\texttt{$(join(iso, "} & \\texttt{"))} \\\\
                 \\midrule
         """
 
+    body = ""
+
     closing =
         raw"""
                 \bottomrule
-            \end{tabular}
+            \end{tabular}%
+            }
         \end{table}
         """
 
-    body = ""
+    # function to write a row in the primaries table
+    function write_line_prim(part_dict, part_name, iso_array)
+        line = ""
+        for t in ["edep", "coin"]
+            # line with edep, indent
+            line = line * "        "
+            line = line * @sprintf("%-30s", part_name) * " & "
+            for i in iso_array
+                if (haskey(part_dict, i) &&
+                    haskey(part_dict[i], t) &&
+                    haskey(part_dict[i][t], "primaries"))
+                    line = line * @sprintf("%8.3G", part_dict[i][t]["primaries"])
+                else
+                    line = line * "     "
+                end
+                line = line * (i != iso_array[end] ? " & " : " \\\\\n")
+            end
+        end
+        return line
+    end
 
+    # WRITE
     for (p,val) in parts
         # in LaTeX you have to escape _ characters
         p = replace("\\texttt{$p}", "_", "\\_")
-        # indent
-        body = body * "        "
-        body = body * @sprintf("%-30s", p) * " & "
-        for i in iso
-            if (haskey(val, i) &&
-                haskey(val[i], "edep") &&
-                haskey(val[i]["edep"], "primaries"))
-                body = "$body $(val[i]["edep"]["primaries"])"
-            else
-                body = body * "      "
-            end
-            i != iso[end] ? (body = body * " & ") : (body = body * " \\\\\n")
-        end
-        # indent
-        body = body * "        "
-        body = body * @sprintf("%-30s", ' ') * " & "
-        for i in iso
-            if (haskey(val, i) &&
-                haskey(val[i], "coin") &&
-                haskey(val[i]["coin"], "primaries"))
-                body = "$body $(val[i]["coin"]["primaries"])"
-            else
-                body = body * "      "
-            end
-            i != iso[end] ? (body = body * " & ") : (body = body * " \\\\\n")
-        end
+        body = body * write_line_prim(val, p, iso)
     end
+    # write total if present
     if (haskey(sims[vol], "mc-mass-kg") ||
         haskey(sims[vol], "mc-volume-cm3") ||
         haskey(sims[vol], "mc-density-kgcm3"))
-        # write first two columns
-        body = body * "        "
-        body = body * @sprintf("%-30s &", "\\textsc{total}")
-        for i in iso
-            body = "$body $(haskey(sims[vol][i], "edep") ? sims[vol][i]["edep"]["primaries"] : "    ")"
-            i != iso[end] ? (body = body * " & ") : (body = body * " \\\\\n")
-        end
-        body = body * "        "
-        body = body * @sprintf("%-30s &", ' ')
-        for i in iso
-            body = "$body $(haskey(sims[vol][i], "coin") ? sims[vol][i]["coin"]["primaries"] : "   ")"
-            i != iso[end] ? (body = body * " & ") : (body = body * " \\\\\n")
-        end
+        body = body * write_line_prim(sims[vol], "\\textsc{total}", iso)
     end
 
     # write-append
@@ -260,6 +267,7 @@ for vol in all_keys
     end
 end
 
+# There's the \end{document} line missing!
 open("/tmp/gerda-mage-sim-report.tex", "a") do f
     write(f, "\n\\end{document}")
 end
