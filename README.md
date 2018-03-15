@@ -16,8 +16,8 @@ Maintainers:
 
 ### Useful links
 * [Documentation](https://github.com/mppmu/gerda-snippets/wiki/MaGe-simulations-for-GERDA's-PhaseII-background-modelling#how-we-run-simulations-at-the-mpik-cluster)
-* [PDFs production](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling)
-* [Contributing](https://github.com/mppmu/gerda-snippets/wiki/MaGe-simulations-for-GERDA's-PhaseII-background-modelling#contributing)
+* [PDFs production docs](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling), [creating a new version](https://github.com/mppmu/gerda-mage-sim/blob/master/UTILS/README.md#pdfs-production)
+* [Contributing](https://github.com/mppmu/gerda-mage-sim/blob/master/CONTRIBUTING.md)
 * [`UTILS/`](https://github.com/mppmu/gerda-mage-sim/tree/master/UTILS): Command Line Tools used in the context of this repository
-* [Germanium detectors sampled surfaces](https://github.com/mppmu/gerda-mage-sim/tree/master/gedet/surf/ver)
+* [Germanium detectors sampled surfaces](https://github.com/mppmu/gerda-mage-sim/tree/master/gedet/surf_chanwise/ver)
 * [MaGe source code repository](https://github.com/mppmu/MaGe)

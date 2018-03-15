@@ -19,7 +19,7 @@ preamble =
     \usepackage{caption}
     \captionsetup[table]{position=top}
     \usepackage{xcolor}
-    \usepackage{cancel}
+    \usepackage{soul}
     \usepackage{enumitem}
     \title{\texttt{gerda-mage-sim} status report}
     \date{\today}
@@ -36,7 +36,7 @@ for i in [rl[1]:rl[end]...]
     if i in rl
         push!(rl_printed, "$i")
     else
-        push!(rl_printed, "\$\\cancel{$i}\$")
+        push!(rl_printed, "\\st{$i}")
     end
 end
 
@@ -283,9 +283,10 @@ end
 
 run(`pdflatex -output-directory=/tmp -interaction=nonstopmode /tmp/gerda-mage-sim-report.tex`)
 run(`cp /tmp/gerda-mage-sim-report.pdf .`)
-
+#=
 if is_linux()
     run(`display gerda-mage-sim-report.pdf`)
 elseif is_apple()
     run(`open gerda-mage-sim-report.pdf`)
 end
+=#

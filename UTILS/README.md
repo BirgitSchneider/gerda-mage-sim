@@ -25,6 +25,7 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `gerda-metadata/`: (git submodule) version of [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for post-processing
     * `old/`: old post-processing scripts
     * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
+    * `latex-report.jl`: Julia script to produce a nice report about the status of the simulations in LaTeX
 * `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
 * `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
 * `health-dep/`: Health department!
@@ -44,6 +45,8 @@ $ singularity exec gerda-mage-sim-utils.sqsh julia create-2nbb-macros.jl 2nbb
 $ cd gerda-mage-sim
 $ singularity run --cleanenv --app MaGe gerdasw.g4.10.3_v2.1 cables/hv_at_holders/K40/edep/log/raw-cables-hv_at_holders-K40-edep-000.mac
 ```
+
+## PDFs production
 example post-processing at the MPIK cluster (first load the preinstalled software – see below – or use `gerda-mage-sim-utils.sqsh`):
 ```
 $ cd UTILS
@@ -72,7 +75,12 @@ $ bin/pdf-gen-volume \
     --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
     cables
 ```
-But wait, [there's a Makefile that does all this for you](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make)!
+But wait, [there's a Makefile that does all this for you](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make)! To create a new PDFs release at MPIK:
+```shell
+$ cd UTILS/post
+$ make post CYCLE=<version>
+$ ./create-release <version>
+```
 
 ### Load preinstalled software (at MPIK) with [swmod](https://github.com/oschulz/swmod)
 Add the following lines to your `~/.bashrc`
@@ -92,22 +100,12 @@ $ swmod load gerda@master
 $ swmod load julia
 ```
 
-### Useful commands to quickly modify macros
-Change file directly with the `-i` flag
+### `sed` Cheatsheet
 ```shell
-$ sed -i ... file
-```
-Delete all lines containing a 'word' in 'file'
-```shell
-$ sed -i '/word/d' file
-```
-Insert 'stuff' in line number 10 in 'file'
-```shell
-$ sed -i '10i stuff' file
-```
-Find 'a' and replace it with 'b' in all `.root` filenames:
-```shell
-$ rename a b *.root
+$ sed -i ... file          # Change file directly with the `-i` flag
+$ sed -i '/word/d' file    # Delete all lines containing a 'word' in 'file'
+$ sed -i '10i stuff' file  # Insert 'stuff' in line number 10 in 'file'
+$ rename a b *.root        # Find 'a' and replace it with 'b' in all `.root` filenames:
 ```
 
 ### Set permission for gerda-simulations directory
