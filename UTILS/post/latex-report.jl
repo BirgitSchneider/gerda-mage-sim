@@ -158,13 +158,13 @@ for vol in all_keys
     end
 end
 
+# whoami
+user = readchomp(`whoami`)
+
 # write to file
-open("/tmp/gerda-mage-sim-report.tex", "w") do f
+open("/tmp/gerda-mage-sim-report-$user.tex", "w") do f
     write(f, preamble * list * '\n' * heading * body * closing)
 end
-
-# change file permissions to rw-rw----
-chmod("/tmp/gerda-mage-sim-report.tex",0o660)
 
 #================================= TABLE WITH PRIMARIES ====================================#
 
@@ -265,13 +265,13 @@ for vol in all_keys
     end
 
     # write-append
-    open("/tmp/gerda-mage-sim-report.tex", "a") do f
+    open("/tmp/gerda-mage-sim-report-$user.tex", "a") do f
         write(f, '\n' * heading * body * closing)
     end
 end
 
 # There's the \end{document} line missing!
-open("/tmp/gerda-mage-sim-report.tex", "a") do f
+open("/tmp/gerda-mage-sim-report-$user.tex", "a") do f
     write(f, "\n\\end{document}")
 end
 #====================================== COMPILE ============================================#
@@ -280,12 +280,19 @@ try
     readchomp(`which pdflatex`)
 catch
     warn("pdflatex executable not found, saving only the .tex...")
-    run(`mv /tmp/gerda-mage-sim-report.tex .`)
+    rm("./gerda-mage-sim-report.tex")
+    run(`mv /tmp/gerda-mage-sim-report-$user.tex ./gerda-mage-sim-report.tex`)
+    chmod("./gerda-mage-sim-report.tex",0o660)
     exit()
 end
 
-run(`pdflatex -output-directory=/tmp -interaction=nonstopmode /tmp/gerda-mage-sim-report.tex`)
-run(`cp /tmp/gerda-mage-sim-report.pdf .`)
+run(`pdflatex -output-directory=/tmp -interaction=nonstopmode /tmp/gerda-mage-sim-report-$user.tex`)
+rm("./gerda-mage-sim-report.pdf")
+run(`cp /tmp/gerda-mage-sim-report-$user.pdf ./gerda-mage-sim-report.pdf`)
+
+# change file permissions to rw-rw----
+chmod("./gerda-mage-sim-report.pdf",0o660)
+
 #=
 if is_linux()
     run(`display gerda-mage-sim-report.pdf`)

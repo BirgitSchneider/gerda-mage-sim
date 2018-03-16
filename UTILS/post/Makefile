@@ -13,7 +13,7 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v0.7
+CYCLE          = v0.6
 RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
@@ -77,8 +77,7 @@ get_pdf_files_for_iso = $(foreach d,$(wildcard ../../$(1)/*/$(2)),$(call change_
 check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 # final target list
-post : preliminary
-#$(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
+post : preliminary $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
 
 preliminary :
 	mkdir -p $(DEST_DIR)/prod-settings
