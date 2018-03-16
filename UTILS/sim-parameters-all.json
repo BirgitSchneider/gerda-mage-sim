@@ -97,7 +97,7 @@
     "ge_holders" : {
         "plates" : {
             "mc-mass-kg" : 0.659134,
-            "mc-volume-cm3" : 0.282891,
+            "mc-volume-cm3" : 282.891,
             "mc-density-kgcm3" : 0.00233,
 
             "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 5E08 } },
@@ -108,7 +108,21 @@
             "Pa234m" : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E09 } },
             "Pb214"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
             "Tl208"  : { "coin" : { "primaries" : 1E07 }, "edep" : { "primaries" : 1E08 } }
-        }
+        },
+        "bars" : {
+            "mc-mass-kg" : 0.53676,
+            "mc-volume-cm3" : 59.90625,
+            "mc-density-kgcm3" : 0.00896,
+
+            "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Co60"   : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "K40"    : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } }
+        },
     },
     "gedet" : {
         "intrinsic_bege" : {
