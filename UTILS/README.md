@@ -79,7 +79,7 @@ But wait, [there's a Makefile that does all this for you](https://github.com/mpp
 ```shell
 $ cd UTILS/post
 $ make post CYCLE=<version>
-$ ./create-release <version>
+$ ./create-release
 ```
 
 ### Load preinstalled software (at MPIK) with [swmod](https://github.com/oschulz/swmod)
