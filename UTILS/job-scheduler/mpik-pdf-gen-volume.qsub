@@ -12,4 +12,5 @@ mkdir -p $2/$1
 singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen-volume \
   --destdir $2 \
   --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
+  -v \
   $1 &> $LOGFILE
