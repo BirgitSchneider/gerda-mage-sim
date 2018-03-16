@@ -163,6 +163,9 @@ open("/tmp/gerda-mage-sim-report.tex", "w") do f
     write(f, preamble * list * '\n' * heading * body * closing)
 end
 
+# change file permissions to rw-rw----
+chmod("/tmp/gerda-mage-sim-report.tex",0o660)
+
 #================================= TABLE WITH PRIMARIES ====================================#
 
 # non-isotopes: there's a much portable way to do this, but I don't want to code it...
