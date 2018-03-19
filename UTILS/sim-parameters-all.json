@@ -122,7 +122,7 @@
             "Pa234m" : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
             "Pb214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
             "Tl208"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } }
-        },
+        }
     },
     "gedet" : {
         "intrinsic_bege" : {
