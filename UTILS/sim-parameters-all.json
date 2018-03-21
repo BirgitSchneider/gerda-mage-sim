@@ -156,13 +156,15 @@
             "mc-surface-cm2" : 44.036140917312956,
 
             "K42"   : { "coin" : { "primaries" : 8989694 }, "edep" : { "primaries" : 8989694 } },
-            "Bi214" : { "coin" : { "primaries" : 8989694 }, "edep" : { "primaries" : 8989694 } }
+            "Bi214" : { "coin" : { "primaries" : 8989694 }, "edep" : { "primaries" : 8989694 } },
+            "Pb214" : { "coin" : { "primaries" : 8989694 }, "edep" : { "primaries" : 8989694 } }
         },
         "nplus_coax" : {
             "mc-surface-cm2" : 21.346161005118056,
 
             "K42"   : { "coin" : { "primaries" : 35556766 }, "edep" : { "primaries" : 35556766 } },
-            "Bi214" : { "coin" : { "primaries" : 35556766 }, "edep" : { "primaries" : 35556766 } }
+            "Bi214" : { "coin" : { "primaries" : 35556766 }, "edep" : { "primaries" : 35556766 } },
+            "Pb214" : { "coin" : { "primaries" : 35556766 }, "edep" : { "primaries" : 35556766 } }
         },
         "pplus_bege" : {
             "mc-surface-cm2" : 0.5301437602932778,
