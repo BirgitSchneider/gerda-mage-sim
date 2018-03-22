@@ -249,7 +249,7 @@ for vol in all_keys
                     haskey(part_dict[i][t], "primaries"))
                     line = line * @sprintf("%8.2f", part_dict[i][t]["primaries"]/1E8)
                 else
-                    line = line * "   --"
+                    line = line * "      --"
                 end
                 line = line * (i != iso_array[end] ? " & " : " \\\\\n")
             end
@@ -272,13 +272,13 @@ for vol in all_keys
 
     # write-append
     open("/tmp/gerda-mage-sim-report-$user.tex", "a") do f
-        write(f, '\n' * heading * body * closing)
+        write(f, heading * body * closing)
     end
 end
 
 # There's the \end{document} line missing!
 open("/tmp/gerda-mage-sim-report-$user.tex", "a") do f
-    write(f, "\n\\end{document}")
+    write(f, "\\end{document}")
 end
 #====================================== COMPILE ============================================#
 
