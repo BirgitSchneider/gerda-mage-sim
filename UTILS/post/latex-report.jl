@@ -16,9 +16,12 @@ preamble =
     \usepackage[english]{babel}
     \usepackage{microtype}
     \usepackage{booktabs}
+    \usepackage{multirow}
     \usepackage{caption}
     \captionsetup[table]{position=top}
     \usepackage{xcolor}
+    \usepackage{colortbl}
+    \newcommand{\rclb}{\cellcolor{gray!30}}
     \usepackage{soul}
     \usepackage{enumitem}
     \title{\texttt{gerda-mage-sim} status report}
@@ -131,9 +134,9 @@ for vol in all_keys
         body = body * write_line(
             first ? v : " ",
             p,
-            haskey(val, "mc-mass-kg") ? val["mc-mass-kg"] : " ",
+            haskey(val, "mc-mass-kg") ? val["mc-mass-kg"] : "--",
             haskey(val, "mc-volume-cm3") ? val["mc-volume-cm3"] : val["mc-surface-cm2"],
-            haskey(val, "mc-density-kgcm3") ? 1E03*val["mc-density-kgcm3"] : " ",
+            haskey(val, "mc-density-kgcm3") ? 1E03*val["mc-density-kgcm3"] : "--",
             haskey(val, "mc-surface-cm2")
         )
         first = false
@@ -144,8 +147,8 @@ for vol in all_keys
         haskey(sims[vol], "mc-volume-cm3") ||
         haskey(sims[vol], "mc-density-kgcm3"))
         body = body * write_line(
-            "\\textsc{total}",
-            "\\textsc{total}",
+            "\\rclb\\textsc{total}",
+            " ",
             haskey(sims[vol], "mc-mass-kg") ? sims[vol]["mc-mass-kg"] : " ",
             haskey(sims[vol], "mc-volume-cm3") ? sims[vol]["mc-volume-cm3"] : " ",
             haskey(sims[vol], "mc-density-kgcm3") ? 1E03*sims[vol]["mc-density-kgcm3"] : " ",
@@ -212,11 +215,13 @@ for vol in all_keys
     heading =
         """
         \\begin{table}
-            \\caption{Number of simulated events for each isotope in the $v \\textsc{Gerda} volume. First row refers to \\texttt{edep}, second to \\texttt{coin}}
+            \\caption{Number of simulated events for each isotope in the $v \\textsc{Gerda} volume. First row refers to \\texttt{edep}, second to \\texttt{coin}. The number of primaries is divided by \$10^8\$.}
             \\centerline{%
-            \\begin{tabular}{l$c_c}
+            \\begin{tabular}{ll$c_c}
                 \\toprule
-                part & \\texttt{$(join(iso, "} & \\texttt{"))} \\\\
+                \\multirow{2}{*}{part} & \\multirow{2}{*}{type} & \\multicolumn{$(length(iso))}{c}{primaries/\$10^8\$} \\\\
+                \\cmidrule{3-$(length(iso)+2)}
+                     &      & \\texttt{$(join(iso, "} & \\texttt{"))} \\\\
                 \\midrule
         """
 
@@ -236,14 +241,15 @@ for vol in all_keys
         for t in ["edep", "coin"]
             # line with edep, indent
             line = line * "        "
-            line = line * @sprintf("%-30s", part_name) * " & "
+            line = line * @sprintf("%-30s", t == "edep" ? part_name : " ") * " & "
+            line = line * @sprintf("%-5s", "\\texttt{$t}") * " & "
             for i in iso_array
                 if (haskey(part_dict, i) &&
                     haskey(part_dict[i], t) &&
                     haskey(part_dict[i][t], "primaries"))
-                    line = line * @sprintf("%8.3G", part_dict[i][t]["primaries"])
+                    line = line * @sprintf("%8.2f", part_dict[i][t]["primaries"]/1E8)
                 else
-                    line = line * "     "
+                    line = line * "   --"
                 end
                 line = line * (i != iso_array[end] ? " & " : " \\\\\n")
             end
@@ -252,16 +258,16 @@ for vol in all_keys
     end
 
     # WRITE
-    for (p,val) in parts
+    for p in sort(collect(keys(parts)))
         # in LaTeX you have to escape _ characters
-        p = replace("\\texttt{$p}", "_", "\\_")
-        body = body * write_line_prim(val, p, iso)
+        pn = replace("\\texttt{$p}", "_", "\\_")
+        body = body * write_line_prim(sims[vol][p], pn, iso)
     end
     # write total if present
     if (haskey(sims[vol], "mc-mass-kg") ||
         haskey(sims[vol], "mc-volume-cm3") ||
         haskey(sims[vol], "mc-density-kgcm3"))
-        body = body * write_line_prim(sims[vol], "\\textsc{total}", iso)
+        body = body * write_line_prim(sims[vol], "\\rclb\\textsc{total}", iso)
     end
 
     # write-append
