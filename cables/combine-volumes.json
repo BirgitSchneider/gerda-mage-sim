@@ -1,0 +1,15 @@
+{
+    "cables" : {
+        "Ac228" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Bi207" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Bi212" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Bi214" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Co60" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "K40" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Pa234m" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Pb207" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Pb214" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ],
+        "Tl208" : [ "hv_at_holders", "hv_cables", "sig_at_holders", "sig_cables" ]
+    }
+}
+
