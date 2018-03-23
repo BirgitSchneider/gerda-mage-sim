@@ -13,28 +13,28 @@
         "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
     },
     "minishroud2" : {
-        "K40" : [ "ms1_bottom", "ms1_top", "ms1_tub", "ms1_glue_ring_top", "ms1_glue_ring_bottom" ],
-        "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
+        "K40" : [ "ms2_bottom", "ms2_top", "ms2_tub", "ms2_glue_ring_top", "ms2_glue_ring_bottom" ],
+        "K42" : [ "ms2_bottom", "ms2_top", "ms2_tub" ]
     },
     "minishroud3" : {
-        "K40" : [ "ms1_bottom", "ms1_top", "ms1_tub", "ms1_glue_ring_top", "ms1_glue_ring_bottom" ],
-        "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
+        "K40" : [ "ms3_bottom", "ms3_top", "ms3_tub", "ms3_glue_ring_top", "ms3_glue_ring_bottom" ],
+        "K42" : [ "ms3_bottom", "ms3_top", "ms3_tub" ]
     },
     "minishroud4" : {
-        "K40" : [ "ms1_bottom", "ms1_top", "ms1_tub", "ms1_glue_ring_top", "ms1_glue_ring_bottom" ],
-        "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
+        "K40" : [ "ms4_bottom", "ms4_top", "ms4_tub", "ms4_glue_ring_top", "ms4_glue_ring_bottom" ],
+        "K42" : [ "ms4_bottom", "ms4_top", "ms4_tub" ]
     },
     "minishroud5" : {
-        "K40" : [ "ms1_bottom", "ms1_top", "ms1_tub", "ms1_glue_ring_top", "ms1_glue_ring_bottom" ],
-        "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
+        "K40" : [ "ms5_bottom", "ms5_top", "ms5_tub", "ms5_glue_ring_top", "ms5_glue_ring_bottom" ],
+        "K42" : [ "ms5_bottom", "ms5_top", "ms5_tub" ]
     },
     "minishroud6" : {
-        "K40" : [ "ms1_bottom", "ms1_top", "ms1_tub", "ms1_glue_ring_top", "ms1_glue_ring_bottom" ],
-        "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
+        "K40" : [ "ms6_bottom", "ms6_top", "ms6_tub", "ms6_glue_ring_top", "ms6_glue_ring_bottom" ],
+        "K42" : [ "ms6_bottom", "ms6_top", "ms6_tub" ]
     },
     "minishroud7" : {
-        "K40" : [ "ms1_bottom", "ms1_top", "ms1_tub", "ms1_glue_ring_top", "ms1_glue_ring_bottom" ],
-        "K42" : [ "ms1_bottom", "ms1_top", "ms1_tub" ]
+        "K40" : [ "ms7_bottom", "ms7_top", "ms7_tub", "ms7_glue_ring_top", "ms7_glue_ring_bottom" ],
+        "K42" : [ "ms7_bottom", "ms7_top", "ms7_tub" ]
     }
 }
 
