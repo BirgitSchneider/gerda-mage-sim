@@ -82,6 +82,16 @@ $ make post CYCLE=<version>
 $ ./create-release
 ```
 
+### Create your own pdfs at MPIK
+Recommended way:
+* clone the repo somewhere
+* change your configs in `UTILS/post/settings`
+* start the production with the following commands:
+```shell
+$ cd UTILS/post
+$ make post CYCLE=<your-name> GERDA_PDFS=<your-custom-location>
+```
+
 ### Load preinstalled software (at MPIK) with [swmod](https://github.com/oschulz/swmod)
 Add the following lines to your `~/.bashrc`
 ```shell
