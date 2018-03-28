@@ -1,0 +1,36 @@
+# load preamble
+/control/execute				./minishroud/glue_rings_all/Bi214/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./minishroud/glue_rings_all/Bi214/coin/raw-minishroud-glue_rings_all-Bi214-coin-031.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/run/initialize
+
+/MG/generator/confine		      		volumearray
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_0
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_1
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_2
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_3
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_4
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_5
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_6
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_0
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_1
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_2
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_3
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_4
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_5
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_6
+
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					83 214 #Bi214#
+/gun/energy					0 eV
+
+/tracking/verbose				0
+/run/beamOn					10000000
