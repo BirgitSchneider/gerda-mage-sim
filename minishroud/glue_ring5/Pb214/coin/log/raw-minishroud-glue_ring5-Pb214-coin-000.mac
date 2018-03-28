@@ -1,0 +1,24 @@
+# load preamble
+/control/execute				./minishroud/glue_ring5/Pb214/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./minishroud/glue_ring5/Pb214/coin/raw-minishroud-glue_ring5-Pb214-coin-000.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/run/initialize
+
+/MG/generator/confine		      		volumearray
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_4
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_4
+
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					82 214 #Pb214#
+/gun/energy					0 eV
+
+/tracking/verbose				0
+/run/beamOn					10000000
