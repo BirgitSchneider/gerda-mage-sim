@@ -14,6 +14,7 @@ preamble =
     \usepackage[utf8]{inputenc}
     \usepackage[T1]{fontenc}
     \usepackage[english]{babel}
+    \usepackage{lmodern}
     \usepackage{microtype}
     \usepackage{booktabs}
     \usepackage{multirow}
@@ -293,7 +294,7 @@ catch
 end
 
 run(`pdflatex -output-directory=/tmp -interaction=nonstopmode /tmp/gerda-mage-sim-report-$user.tex`)
-rm("./gerda-mage-sim-report.pdf")
+rm("./gerda-mage-sim-report.pdf", force=true)
 run(`cp /tmp/gerda-mage-sim-report-$user.pdf ./gerda-mage-sim-report.pdf`)
 
 # change file permissions to rw-rw----
