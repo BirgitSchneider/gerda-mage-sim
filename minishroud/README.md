@@ -3,13 +3,14 @@
 
 ## volumes description
 
-| volume name       | mc name(s)                               | mc mass [kg] | mc volume [cm^3] | density [g/cm^3] | volume description                                                | notes |
-| ----------------- | ---------------------------------------- | ------------ | ---------------- | ---------------- | ----------------------------------------------------------------- | ----- |
-| tops              | `MiniShroudPhase2Top [0..6]`             | 0.00855626   | 9.839699         | 1.15 (nylon)     | All minishroud's closing caps on the top (7)                      |       | 
-| bottoms           | `MiniShroudPhase2Bottom [0..6]`          | 0.00858702   | 9.875073         | 1.15 (nylon)     | All minishroud's closing caps on the bottom (7)                   |       |
-| tubs              | `MiniShroudPhase2Tub [0..6]`             | 0.14508000   | 166.8420         | 1.15 (nylon)     | All minishroud's cylindrical lateral surfaces (7)                 |       |
-| glue_rings_bottom | `MiniShroudPhase2BottomGluedRing [0..6]` | 0.01323650   | 15.221975        | 1.15 (nylon)     | All minishroud's glue (cylindrical) rings for the bottom caps (7) |       |
-| glue_rings_top    | `MiniShroudPhase2TopGluedRing [0..6]`    | 0.01314170   | 15.112955        | 1.15 (nylon)     | All minishroud's glue (cylindrical) rings for the top caps (7)    |       |
+| volume name               | mc name(s)                                                            | mc mass [kg] | mc volume [cm^3] | density [g/cm^3] | volume description                                                                          | notes |
+| ------------------------- | --------------------------------------------------------------------- | ------------ | ---------------- | ---------------- | ------------------------------------------------------------------------------------------- | ----- |
+| ms_all                    | `MiniShroudPhase2[Top,Bottom,Tub,BottomGluedRing,TopGluedRing] [0..6]`| 0.188602     | 164.0017         | 1.15 (nylon)     | All minishrouds, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7) |       | 
+| ms1                       | `MiniShroudPhase2[Top,Bottom,Tub,BottomGluedRing,TopGluedRing] 0`     | 0.0293738    | 25.54243         | 1.15 (nylon)     | Minishroud 1, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)    |       |
+| ms[2-7]                   | `MiniShroudPhase2[Top,Bottom,Tub,BottomGluedRing,TopGluedRing] [1-6]` | 0.0265386    | 23.07704         | 1.15 (nylon)     | Minishroud 2-7, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)  |       |
+| glue_rings_all            | `MiniShroudPhase2[BottomGluedRing,TopGluedRing] [0..6]`               | 0.0263782    | 22.93756         | 1.15 (nylon)     | All minishroud's glue_rings, top and bottom (7)                                             |       |
+| glue_ring1                | `MiniShroudPhase2[BottomGluedRing,TopGluedRing] 0`                    | 0.00407798   | 3.546070         | 1.15 (nylon)     | Minishroud 1's glue ring, top and bottom (7)                                                |       |
+| glue_ring[2-7]            | `MiniShroudPhase2[BottomGluedRing,TopGluedRing] [1-6]`                | 0.0037167    | 3.231913         | 1.15 (nylon)     | Minishroud 2-7's glue ring, top and bottom (7)                                              |       |
 
 Some pictures: from left to right: the tubs, the tops and the bottoms, the top and bottom glue rings
 <p align="center">

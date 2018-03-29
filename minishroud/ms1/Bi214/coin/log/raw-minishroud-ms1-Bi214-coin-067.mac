@@ -1,0 +1,27 @@
+# load preamble
+/control/execute				./minishroud/ms1/Bi214/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./minishroud/ms1/Bi214/coin/raw-minishroud-ms1-Bi214-coin-067.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/run/initialize
+
+/MG/generator/confine		      		volumearray
+/MG/generator/volumearrayadd			MiniShroudPhase2Bottom_0
+/MG/generator/volumearrayadd			MiniShroudPhase2Top_0
+/MG/generator/volumearrayadd			MiniShroudPhase2Tub_0
+/MG/generator/volumearrayadd      MiniShroudPhase2BottomGluedRing_0
+/MG/generator/volumearrayadd      MiniShroudPhase2TopGluedRing_0
+
+/MG/generator/select				G4gun
+/MG/generator/g4gun/cone_on			true
+/gun/particle					ion
+/gun/ion					83 214 #Bi214#
+/gun/energy					0 eV
+
+/tracking/verbose				0
+/run/beamOn					10000000

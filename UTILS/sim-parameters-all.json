@@ -305,82 +305,181 @@
         }
     },
     "minishroud" : {
-        "mc-mass-kg" : 0.18860148000000002,
-        "mc-volume-cm3" : 216.891702,
-        "mc-density-kgcm3" : 0.00115,
-
-        "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Bi212"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Bi214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "K40"    : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Pa234m" : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Pb214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Tl208"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
-
-        "bottoms" : {
-            "mc-mass-kg" : 0.00858702,
-            "mc-volume-cm3" : 9.875073,
+        "ms_all" : {
+            "mc-mass-kg" : 0.188602,
+            "mc-volume-cm3" : 164.0017,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
-            "Bi212"  : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
-            "Bi214"  : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
-            "K40"    : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
-            "Pa234m" : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
-            "Pb214"  : { "coin" : { "primaries" : 45529970 }, "edep" : { "primaries" : 4552997 } },
-            "Tl208"  : { "coin" : { "primaries" : 4552997  }, "edep" : { "primaries" : 4552997 } }
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
         },
-        "glue_rings_bottom" : {
-            "mc-mass-kg" : 0.01323650,
-            "mc-volume-cm3" : 15.221975,
+        "ms1" : {
+            "mc-mass-kg" : 0.0293738,
+            "mc-volume-cm3" : 25.54243,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
-            "Bi212"  : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
-            "Bi214"  : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
-            "K40"    : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
-            "Pa234m" : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
-            "Pb214"  : { "coin" : { "primaries" : 70182370 }, "edep" : { "primaries" : 7018237 } },
-            "Tl208"  : { "coin" : { "primaries" : 7018237  }, "edep" : { "primaries" : 7018237 } }
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
         },
-        "glue_rings_top" : {
-            "mc-mass-kg" : 0.01314170,
-            "mc-volume-cm3" : 15.112955,
+        "ms2" : {
+            "mc-mass-kg" : 0.0265386,
+            "mc-volume-cm3" : 23.07704,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
-            "Bi212"  : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
-            "Bi214"  : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
-            "K40"    : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
-            "Pa234m" : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
-            "Pb214"  : { "coin" : { "primaries" : 69679720 }, "edep" : { "primaries" : 6967972 } },
-            "Tl208"  : { "coin" : { "primaries" : 6967972  }, "edep" : { "primaries" : 6967972 } }
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
         },
-        "tops" : {
-            "mc-mass-kg" : 0.00855626,
-            "mc-volume-cm3" : 9.839699,
+        "ms3" : {
+            "mc-mass-kg" : 0.0265386,
+            "mc-volume-cm3" : 23.07704,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
-            "Bi212"  : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
-            "Bi214"  : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
-            "K40"    : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
-            "Pa234m" : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
-            "Pb214"  : { "coin" : { "primaries" : 45366870 }, "edep" : { "primaries" : 4536687 } },
-            "Tl208"  : { "coin" : { "primaries" : 4536687  }, "edep" : { "primaries" : 4536687 } }
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
         },
-        "tubs" : {
-            "mc-mass-kg" : 0.14508000,
-            "mc-volume-cm3" : 166.8420,
+        "ms4" : {
+            "mc-mass-kg" : 0.0265386,
+            "mc-volume-cm3" : 23.07704,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
-            "Bi212"  : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
-            "Bi214"  : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
-            "K40"    : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
-            "Pa234m" : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
-            "Pb214"  : { "coin" : { "primaries" : 769241040 }, "edep" : { "primaries" : 76924104 } },
-            "Tl208"  : { "coin" : { "primaries" : 76924104  }, "edep" : { "primaries" : 76924104 } }
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "ms5" : {
+            "mc-mass-kg" : 0.0265386,
+            "mc-volume-cm3" : 23.07704,
+            "mc-density-kgcm3" : 0.00115,
+
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "ms6" : {
+            "mc-mass-kg" : 0.0265386,
+            "mc-volume-cm3" : 23.07704,
+            "mc-density-kgcm3" : 0.00115,
+
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "ms7" : {
+            "mc-mass-kg" : 0.0265386,
+            "mc-volume-cm3" : 23.07704,
+            "mc-density-kgcm3" : 0.00115,
+
+            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_rings_all" : {
+            "mc-mass-kg" : 0.0263782,
+            "mc-volume-cm3" : 22.93756,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring1" : {
+            "mc-mass-kg" : 0.00407798,
+            "mc-volume-cm3" : 3.546070,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring2" : {
+            "mc-mass-kg" : 0.0037167,
+            "mc-volume-cm3" : 3.231913,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring3" : {
+            "mc-mass-kg" : 0.0037167,
+            "mc-volume-cm3" : 3.231913,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring4" : {
+            "mc-mass-kg" : 0.0037167,
+            "mc-volume-cm3" : 3.231913,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring5" : {
+            "mc-mass-kg" : 0.0037167,
+            "mc-volume-cm3" : 3.231913,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring6" : {
+            "mc-mass-kg" : 0.0037167,
+            "mc-volume-cm3" : 3.231913,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "glue_ring7" : {
+            "mc-mass-kg" : 0.0037167,
+            "mc-volume-cm3" : 3.231913,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         }
     }
 }

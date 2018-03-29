@@ -50,7 +50,6 @@ CABLES_PDF_FILES = $(sort $(foreach i,$(CABLES_ISOTOPES),$(DEST_DIR)/cables/pdf-
 
 MINIS_ISOTOPES = $(sort $(foreach d,$(wildcard ../../minishroud/*/*/edep ../../minishroud/*/*/coin),$(shell dirname $(d))))
 MINIS_ALL_PDF_FILES = $(foreach i,$(MINIS_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
-MINIS_PDF_FILES = $(sort $(foreach i,$(MINIS_ISOTOPES),$(DEST_DIR)/minishroud/pdf-minishroud-$(call isotope,$(i)).root))
 
 GEDET_ISOTOPES = $(sort $(foreach d,$(wildcard ../../gedet/*/*/edep ../../gedet/*/*/coin),$(shell dirname $(d))))
 GEDET_ALL_PDF_FILES = $(foreach i,$(GEDET_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
@@ -77,7 +76,7 @@ get_pdf_files_for_iso = $(foreach d,$(wildcard ../../$(1)/*/$(2)),$(call change_
 check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 # final target list
-post : preliminary $(CABLES_PDF_FILES) $(MINIS_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
+post : preliminary $(CABLES_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES)
 
 preliminary :
 	mkdir -p $(DEST_DIR)/prod-settings
@@ -101,9 +100,8 @@ define rule_for_volume_pdf
 	echo "There's already a job for $$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE) in queue"; \
 	fi
 endef
-# loop over cables and minishroud global pdf- files
+# loop over cables global pdf- files
 $(foreach t,$(CABLES_PDF_FILES),$(eval $(call rule_for_volume_pdf,$(t),cables)))
-$(foreach t,$(MINIS_PDF_FILES),$(eval $(call rule_for_volume_pdf,$(t),minishroud)))
 
 # function to build the t4ized file name
 # ARG1: directory with raw files
