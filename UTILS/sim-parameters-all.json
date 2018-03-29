@@ -422,112 +422,64 @@
             "mc-volume-cm3" : 22.93756,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring1" : {
             "mc-mass-kg" : 0.00407798,
             "mc-volume-cm3" : 3.546070,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring2" : {
             "mc-mass-kg" : 0.0037167,
             "mc-volume-cm3" : 3.231913,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring3" : {
             "mc-mass-kg" : 0.0037167,
             "mc-volume-cm3" : 3.231913,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring4" : {
             "mc-mass-kg" : 0.0037167,
             "mc-volume-cm3" : 3.231913,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring5" : {
             "mc-mass-kg" : 0.0037167,
             "mc-volume-cm3" : 3.231913,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring6" : {
             "mc-mass-kg" : 0.0037167,
             "mc-volume-cm3" : 3.231913,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
         "glue_ring7" : {
             "mc-mass-kg" : 0.0037167,
             "mc-volume-cm3" : 3.231913,
             "mc-density-kgcm3" : 0.00115,
 
-            "Ac228"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi212"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Bi214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pa234m" : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Pb214"  : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
-            "Tl208"  : { "coin" : { "primaries" : 1E8 }, "edep" : { "primaries" : 1E8 } }
+            "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         }
     }
 }
