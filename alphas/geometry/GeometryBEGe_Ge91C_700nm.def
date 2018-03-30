@@ -1,0 +1,29 @@
+1 ArgonVolume 1 0 0 LiquidArgon
+0. 0. 0. 
+100. 100. 100. 
+0. 0. 0.
+
+2 crystal 2 0 1 NaturalGe
+0. 0. 0.
+3.4955 2.979 0
+0. 0. 0.
+
+3 activeVolume 2 1 2 NaturalGe
+0. 0. 0.
+3.4195 2.827 0
+0. 0. 0.
+
+4 groove 2 0 2 LiquidArgon
+0. 0. 1.3895 
+1.2 0.2 0. 
+0. 0. 0.
+
+5 pplus 2 0 4 NaturalGe
+0. 0. 0. 
+0.9 0.2 0. 
+0. 0. 0.
+
+6 ppactive 2 1 5 NaturalGe
+0. 0. -0.000035 
+0.9 0.19993 0. 
+0. 0. 0.
