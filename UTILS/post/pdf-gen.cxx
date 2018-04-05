@@ -40,6 +40,8 @@ int main( int argc, char** argv ) {
                   << "                                    with the t4z- files\n"
                   << "             --ged-mapping <file> : ged-mapping.json file included\n"
                   << "                                    in gerda-mage-sim\n\n"
+                  << "  optional:  --inc-natcoax        : post process including natural Coax\n"
+                  << "                                    detectors in M2 spectra (default:false)\n\n"
                   << "NOTES: Please use absolute paths!\n";
     };
 
@@ -58,6 +60,9 @@ int main( int argc, char** argv ) {
     result = std::find(args.begin(), args.end(), "--ged-mapping");
     if (result != args.end()) gedMapFile = *(result+1);
     else {usage(); return 1;}
+    bool incNatCoax = false;
+    result = std::find(args.begin(), args.end(), "--inc-natcoax");
+    if (result != args.end()) incNatCoax = true;
     // strip off trailing '/' character
     if (pathToTop.back() == '/') pathToTop.pop_back();
     if (verbose) std::cout << "Top directory tree: " << pathToTop << std::endl;
@@ -273,9 +278,14 @@ int main( int argc, char** argv ) {
 
                 auto sumE = E1 + E2;
                 // only add datasets 0 (BEGe), 4 (BEGe noPSD) and 1 (enrCoax)
-                if ( (datasetID[ID1] == 0 or datasetID[ID1] == 4 or datasetID[ID1] == 1) and
-                     (datasetID[ID2] == 0 or datasetID[ID2] == 4 or datasetID[ID2] == 1) ) {
+                // if option --inc-natcoax is given include also natural Coax detectors : 3 (natCoax)
+                bool goodDataSet = (datasetID[ID1] == 0 or datasetID[ID1] == 4 or datasetID[ID1] == 1) and
+                                   (datasetID[ID2] == 0 or datasetID[ID2] == 4 or datasetID[ID2] == 1);
+                if( incNatCoax )
+                     goodDataSet = (datasetID[ID1] == 0 or datasetID[ID1] == 4 or datasetID[ID1] == 1 or datasetID[ID1] == 3) and
+                                   (datasetID[ID2] == 0 or datasetID[ID2] == 4 or datasetID[ID2] == 1 or datasetID[ID2] == 3);
 
+                if ( goodDataSet ) {
                     M2_enrE1vsE2.Fill(E1, E2);
                     M2_enrE1plusE2.Fill(sumE);
                     M2_enrE1andE2.Fill(E1); M2_enrE1andE2.Fill(E2);

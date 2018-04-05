@@ -11,6 +11,8 @@
 # NOTES:
 #  - use the --dry-run flag to see what would be done without
 #    actually executing it (useful also in conjunction with --debug)
+#  - if CYCLE has postfix -inc (e.g. v1.0-inc) the --inc-natcoax flag 
+#    will be switched on and natCoax detectors are included in M2 spectra
 #
 # *CHANGE ME* important variables
 CYCLE          = v0.7
