@@ -1,7 +1,7 @@
 # load preamble
 /control/execute                           ./ge_holders/bars/Tl208/coin/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./ge_holders/bars/Tl208/coin/raw-ge_holders-bars-Tl208-coin-008.root
+/MG/eventaction/rootfilename               ./ge_holders/bars/Tl208/coin/raw-ge_holders-bars-Tl208-coin-010.root
 #/MG/output/WriteMacroToOutput             true		### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true		### is default ###
 
