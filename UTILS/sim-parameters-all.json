@@ -5,21 +5,22 @@
         "total-livetime-yr" : 1.60604072
     },
     "cables" : {
-        "mc-mass-kg" : 0.03100336,
-        "mc-volume-cm3" : 20.263634,
-        "mc-density-kgcm3" : 0.00153,
+        "cables_all" : {
+            "mc-mass-kg" : 0.03100336,
+            "mc-volume-cm3" : 20.263634,
+            "mc-density-kgcm3" : 0.00153,
 
-        "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
-        "Bi207"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Bi212"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
-        "Bi214"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
-        "Co60"   : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
-        "K40"    : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Pa234m" : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
-        "Pb207"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
-        "Pb214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
-        "Tl208"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
-
+            "Ac228"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
+            "Bi207"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Bi212"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
+            "Bi214"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
+            "Co60"   : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
+            "K40"    : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Pa234m" : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E09 } },
+            "Pb207"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } },
+            "Pb214"  : { "coin" : { "primaries" : 1E09 }, "edep" : { "primaries" : 1E08 } },
+            "Tl208"  : { "coin" : { "primaries" : 1E08 }, "edep" : { "primaries" : 1E08 } }
+        },
         "hv_at_holders" : {
             "mc-mass-kg" : 0.00182070,
             "mc-volume-cm3" : 1.19,
