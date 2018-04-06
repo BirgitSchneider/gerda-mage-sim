@@ -226,23 +226,24 @@ int main( int argc, char** argv ) {
 
     // build M2 spectra
     if (verbose) std::cout << "\nBuilding M2 spectra...\n";
-    TH2D M2_enrE1vsE2  ("M2_enrE1vsE2",   "edep with smaller detID, other edep, M=2 (enrAll)", 8000, 0, 8000, 8000, 0, 8000);
-    TH1D M2_enrE1plusE2("M2_enrE1plusE2", "edep1 + edep2, M=2 (enrAll)",                       8000, 0, 8000);
-    TH1D M2_enrE1andE2 ("M2_enrE1andE2",  "edep1 and edep2, M=2 (enrAll)",                     8000, 0, 8000);
+    std::string m2_det = "enrAll"; if (incNatCoax) m2_det = "all"; const char * m2_detectors = m2_det.c_str();
+    TH2D M2_enrE1vsE2  ("M2_enrE1vsE2",   Form("edep with smaller detID, other edep, M=2 (%s)",m2_detectors), 8000, 0, 8000, 8000, 0, 8000);
+    TH1D M2_enrE1plusE2("M2_enrE1plusE2", Form("edep1 + edep2, M=2 (%s)",m2_detectors),                       8000, 0, 8000);
+    TH1D M2_enrE1andE2 ("M2_enrE1andE2",  Form("edep1 and edep2, M=2 (%s)",m2_detectors),                     8000, 0, 8000);
 
-    TH2D M2_ID1vsID2_1525("M2_ID1vsID2_1525", "ID1 with edep1+edep2 in range = 1525 +- 6 keV, ID2, M=2 (enrAll)",   40, 0, 40, 40, 0, 40);
-    TH2D M2_ID1vsID2_1461("M2_ID1vsID2_1461", "ID1 with edep1+edep2 in range = 1461 +- 6 keV, ID2, M=2 (enrAll)",   40, 0, 40, 40, 0, 40);
-    TH2D M2_ID1vsID2_full("M2_ID1vsID2_full", "ID1 with edep1+edep2 in range = [250,3000] keV, ID2, M=2 (enrAll)",  40, 0, 40, 40, 0, 40);
-    TH2D M2_ID1vsID2_S1  ("M2_ID1vsID2_S1",   "ID1 with edep1+edep2 in range = [1405,1450] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
-    TH2D M2_ID1vsID2_S2  ("M2_ID1vsID2_S2",   "ID1 with edep1+edep2 in range = [1470,1515] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
-    TH2D M2_ID1vsID2_S3  ("M2_ID1vsID2_S3",   "ID1 with edep1+edep2 in range = [1535,1580] keV, ID2, M=2 (enrAll)", 40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_1525("M2_ID1vsID2_1525", Form("ID1 with edep1+edep2 in range = 1525 +- 6 keV, ID2, M=2 (%s)",m2_detectors),   40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_1461("M2_ID1vsID2_1461", Form("ID1 with edep1+edep2 in range = 1461 +- 6 keV, ID2, M=2 (%s)",m2_detectors),   40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_full("M2_ID1vsID2_full", Form("ID1 with edep1+edep2 in range = [250,3000] keV, ID2, M=2 (%s)",m2_detectors),  40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_S1  ("M2_ID1vsID2_S1",   Form("ID1 with edep1+edep2 in range = [1405,1450] keV, ID2, M=2 (%s)",m2_detectors), 40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_S2  ("M2_ID1vsID2_S2",   Form("ID1 with edep1+edep2 in range = [1470,1515] keV, ID2, M=2 (%s)",m2_detectors), 40, 0, 40, 40, 0, 40);
+    TH2D M2_ID1vsID2_S3  ("M2_ID1vsID2_S3",   Form("ID1 with edep1+edep2 in range = [1535,1580] keV, ID2, M=2 (%s)",m2_detectors), 40, 0, 40, 40, 0, 40);
 
-    TH1D M2_ID1andID2_1525("M2_ID1andID2_1525", "ID1 and ID2 with edep1+edep2 in range = 1525 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
-    TH1D M2_ID1andID2_1461("M2_ID1andID2_1461", "ID1 and ID2 with edep1+edep2 in range = 1461 +- 6 keV, M=2 (enrAll)",   40, 0, 40);
-    TH1D M2_ID1andID2_full("M2_ID1andID2_full", "ID1 and ID2 with edep1+edep2 in range = [250,3000] keV, M=2 (enrAll)",  40, 0, 40);
-    TH1D M2_ID1andID2_S1  ("M2_ID1andID2_S1",   "ID1 and ID2 with edep1+edep2 in range = [1405,1450] keV, M=2 (enrAll)", 40, 0, 40);
-    TH1D M2_ID1andID2_S2  ("M2_ID1andID2_S2",   "ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (enrAll)", 40, 0, 40);
-    TH1D M2_ID1andID2_S3  ("M2_ID1andID2_S3",   "ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (enrAll)", 40, 0, 40);
+    TH1D M2_ID1andID2_1525("M2_ID1andID2_1525", Form("ID1 and ID2 with edep1+edep2 in range = 1525 +- 6 keV, M=2 (%s)",m2_detectors),   40, 0, 40);
+    TH1D M2_ID1andID2_1461("M2_ID1andID2_1461", Form("ID1 and ID2 with edep1+edep2 in range = 1461 +- 6 keV, M=2 (%s)",m2_detectors),   40, 0, 40);
+    TH1D M2_ID1andID2_full("M2_ID1andID2_full", Form("ID1 and ID2 with edep1+edep2 in range = [250,3000] keV, M=2 (%s)",m2_detectors),  40, 0, 40);
+    TH1D M2_ID1andID2_S1  ("M2_ID1andID2_S1",   Form("ID1 and ID2 with edep1+edep2 in range = [1405,1450] keV, M=2 (%s)",m2_detectors), 40, 0, 40);
+    TH1D M2_ID1andID2_S2  ("M2_ID1andID2_S2",   Form("ID1 and ID2 with edep1+edep2 in range = [1470,1515] keV, M=2 (%s)",m2_detectors), 40, 0, 40);
+    TH1D M2_ID1andID2_S3  ("M2_ID1andID2_S3",   Form("ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (%s)",m2_detectors), 40, 0, 40);
 
     Long64_t nPrimCoin = 0;  // number of primaries for coincidences
     int  badevents = 0;  // counter for events with multiplicity 2 but only 0 or 1 energy deposition
