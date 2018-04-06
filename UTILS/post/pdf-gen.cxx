@@ -40,8 +40,7 @@ int main( int argc, char** argv ) {
                   << "                                    with the t4z- files\n"
                   << "             --ged-mapping <file> : ged-mapping.json file included\n"
                   << "                                    in gerda-mage-sim\n\n"
-                  << "  optional:  --inc-natcoax        : post process including natural Coax\n"
-                  << "                                    detectors in M2 spectra (default:false)\n\n"
+                  << "  optional:  --custom-settings <file> : additional settings in .json format\n\n"
                   << "NOTES: Please use absolute paths!\n";
     };
 
@@ -60,9 +59,9 @@ int main( int argc, char** argv ) {
     result = std::find(args.begin(), args.end(), "--ged-mapping");
     if (result != args.end()) gedMapFile = *(result+1);
     else {usage(); return 1;}
-    bool incNatCoax = false;
-    result = std::find(args.begin(), args.end(), "--inc-natcoax");
-    if (result != args.end()) incNatCoax = true;
+    std::string customSettingsFile;
+    result = std::find(args.begin(), args.end(), "--custom-settings");
+    if (result != args.end()) customSettingsFile = *(result+1);
     // strip off trailing '/' character
     if (pathToTop.back() == '/') pathToTop.pop_back();
     if (verbose) std::cout << "Top directory tree: " << pathToTop << std::endl;
@@ -118,9 +117,9 @@ int main( int argc, char** argv ) {
 
     // read in detector mapping
     Json::Value root;
-    std::ifstream fGedMap(gedMapFile);
+    std::ifstream fGedMap(gedMapFile,std::ifstream::binary);
     if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!"; return 1;}
-    fGedMap >> root;
+    fGedMap >> root; fGedMap.close();
     std::map<int,std::string> det;
     Json::Value::Members detinfo = root["mapping"].getMemberNames();
     for ( const auto & d : detinfo ) {
@@ -130,6 +129,17 @@ int main( int argc, char** argv ) {
         std::cout << "\nDetectors:\n";
         for (const auto& i : det) std::cout << "ch" << i.first << '\t' << i.second << std::endl;
     }
+
+    // read custom settings
+    bool incNatCoax = false;
+    if (customSettingsFile.find(".json")!=std::string::npos) {
+        std::ifstream fCustomSettings(customSettingsFile,std::ifstream::binary);
+        if (!fCustomSettings.is_open()) {std::cout << "custom settings requested but json file not found!"; return 1;}
+        Json::Value customSettings;
+        fCustomSettings >> customSettings; fCustomSettings.close();
+        incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra",false).asBool();
+    }
+    if (verbose) std::cout << "\nInlcude natCoax in M2 Spectra: " << incNatCoax << std::endl;
 
     // build M1 spectra
     if (verbose) std::cout << "\nBuilding M1 spectra...\n";
