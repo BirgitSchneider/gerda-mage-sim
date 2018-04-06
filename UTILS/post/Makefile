@@ -11,11 +11,9 @@
 # NOTES:
 #  - use the --dry-run flag to see what would be done without
 #    actually executing it (useful also in conjunction with --debug)
-#  - if CYCLE has postfix -inc (e.g. v1.0-inc) the --inc-natcoax flag 
-#    will be switched on and natCoax detectors are included in M2 spectra
 #
 # *CHANGE ME* important variables
-CYCLE          = v0.7
+CYCLE          = v0.8
 RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs

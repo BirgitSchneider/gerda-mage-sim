@@ -13,20 +13,9 @@ LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/pdf-$VOLUME-$PART-$ISOTOPE.out
 
 mkdir -p $2/$VOLUME/$PART/$ISOTOPE
 
-echo "LOG: pdf-gen $LOGFILE" >> $LOGFILE
-
-if [[ $2 = *"-inc" ]]; then
-    echo "LOG: Including natural Coax detectors!" >> $LOGFILE
-    singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
-        --destdir $2 \
-        --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
-        --inc-natcoax \
-        -v \
-        $1 &> $LOGFILE
-else
-    singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
-        --destdir $2 \
-        --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
-        -v \
-        $1 &> $LOGFILE
-fi
+singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils.sqsh pdf-gen \
+    --destdir $2 \
+    --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
+    --custom-settings $SRCDIR/UTILS/post/settings/pdf-gen-settings-custom.json \
+    -v \
+    $1 &> $LOGFILE
