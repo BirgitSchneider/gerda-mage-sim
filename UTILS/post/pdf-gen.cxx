@@ -118,7 +118,7 @@ int main( int argc, char** argv ) {
     // read in detector mapping
     Json::Value root;
     std::ifstream fGedMap(gedMapFile,std::ifstream::binary);
-    if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!"; return 1;}
+    if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!\n"; return 1;}
     fGedMap >> root; fGedMap.close();
     std::map<int,std::string> det;
     Json::Value::Members detinfo = root["mapping"].getMemberNames();
@@ -134,10 +134,13 @@ int main( int argc, char** argv ) {
     bool incNatCoax = false;
     if (customSettingsFile.find(".json")!=std::string::npos) {
         std::ifstream fCustomSettings(customSettingsFile,std::ifstream::binary);
-        if (!fCustomSettings.is_open()) {std::cout << "custom settings requested but json file not found!"; return 1;}
+        if (!fCustomSettings.is_open()) {std::cout << "custom settings requested but json file not found!\n"; return 1;}
         Json::Value customSettings;
         fCustomSettings >> customSettings; fCustomSettings.close();
         incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra",false).asBool();
+    }
+    else{
+        if (verbose) std::cout << "\nNo custom settings file provided. Using default options.\n";
     }
     if (verbose) std::cout << "\nInclude natCoax in M2 Spectra: " << incNatCoax << std::endl;
 
