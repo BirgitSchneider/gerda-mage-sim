@@ -13,7 +13,7 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v0.7
+CYCLE          = v0.8
 RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
@@ -67,7 +67,7 @@ ELECTRONICS_ISOTOPES = $(sort $(foreach d,$(wildcard ../../electronics/*/*/edep 
 ELECTRONICS_ALL_PDF_FILES = $(foreach i,$(ELECTRONICS_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
 
 # list of already processed alpha histos_ISOTOPE_(LAr)pPlus.root files to be copied
-ALPHA_HIST_FILES = $(sort $(wildcard ../../alphas/*/histos_*.root))
+ALPHA_HIST_FILES = $(sort $(wildcard ../../alphas/*/pdf-*.root))
 
 # function to retrieve the dependencies of the global pdf- files for cables and minishroud
 # ARG1 : volume

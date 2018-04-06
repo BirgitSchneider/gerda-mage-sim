@@ -68,6 +68,7 @@ $ bin/pdf-gen \
     -v \
     --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
     --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
+    --custom-settings /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json \
     ge_holders/plates/K40
 $ bin/pdf-gen-volume \
     -v
