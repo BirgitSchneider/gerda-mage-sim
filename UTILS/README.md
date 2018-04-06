@@ -83,13 +83,13 @@ $ make post CYCLE=<version>
 $ ./create-release
 ```
 What if you want to inlcude the natural coax detectors in the post processing? Michael made a dedicated keylist
-which you can use in the following manner:
-1.) Change to naturals branch
+which you can use in the following manner:  
+1. Change to naturals branch (only local at mpik)
 ```shell
 $ cd UTILS
 $ checkout branch naturals
 ```
-2.) Check out right meta-data branch
+2. Check out right meta-data branch (only local at mpik)
 ```shell
 $ cd UTILS/post/gerda-metadata
 $ checkout branch t4z-plus-cycle_03.03-naturals
