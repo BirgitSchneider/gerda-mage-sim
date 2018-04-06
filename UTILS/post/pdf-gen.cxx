@@ -139,7 +139,7 @@ int main( int argc, char** argv ) {
         fCustomSettings >> customSettings; fCustomSettings.close();
         incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra",false).asBool();
     }
-    if (verbose) std::cout << "\nInlcude natCoax in M2 Spectra: " << incNatCoax << std::endl;
+    if (verbose) std::cout << "\nInclude natCoax in M2 Spectra: " << incNatCoax << std::endl;
 
     // build M1 spectra
     if (verbose) std::cout << "\nBuilding M1 spectra...\n";
