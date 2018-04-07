@@ -241,7 +241,7 @@
             "mc-volume-cm3" : 7837850,
             "mc-density-kgcm3" : 0.00139,
 
-            "K42" : { "coin" : { "primaries" : 53E9 }, "edep" : { "primaries" : 53E9 } }
+            "K42" : { "coin" : { "primaries" : 103E9 }, "edep" : { "primaries" : 103E9 } }
         }
     },
     "larveto" : {
