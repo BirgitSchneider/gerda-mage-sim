@@ -18,7 +18,6 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `livetime-calc-ph2.cxx`: C++ program to extract each run's livetime and RunConfig. Results are stored in a JSON file that will be used by `t4z-gen.cxx` (see examples below)
     * `t4z-gen.cxx`: C++ program to generate a `t4z-`file for each run starting from a collection of `raw-`files (see examples below)
     * `pdf-gen.cxx`: C++ program to generate a `pdf-`file from a collection of `t4z-`files (see examples below)
-    * `pdf-gen-volume.cxx`: C++ program to join PDFs of each single part to produce a `pdf-`file for a volume (see examples below)
     * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
     * `res-curves-jsonizer.cxx`: C++ script to convert standard resolution curves into (Tier4izer-friendly) JSON format
     * `settings/`: JSON files for the post-processing
@@ -70,11 +69,6 @@ $ bin/pdf-gen \
     --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
     --custom-settings /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json \
     ge_holders/plates/K40
-$ bin/pdf-gen-volume \
-    -v
-    --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
-    --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
-    cables
 ```
 But wait, [there's a Makefile that does all this for you](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make)! To create a new PDFs release at MPIK:
 ```shell
@@ -131,6 +125,7 @@ $ sed -i '/word/d' file    # Delete all lines containing a 'word' in 'file'
 $ sed -i '10i stuff' file  # Insert 'stuff' in line number 10 in 'file'
 $ rename a b *.root        # Find 'a' and replace it with 'b' in all `.root` filenames:
 ```
+PS: with BSD sed (e.g. on OSX) you have to specify the extension of the backup file, e.g. `-i.bak`.
 
 ### Set permission for gerda-simulations directory
 To remove all extra permissions

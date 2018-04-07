@@ -46,7 +46,6 @@ deptype = $(shell echo $(1) | cut -d'/' -f6)
 # 'sort' will remove duplicates
 CABLES_ISOTOPES = $(sort $(foreach d,$(wildcard ../../cables/*/*/edep ../../cables/*/*/coin),$(shell dirname $(d))))
 CABLES_ALL_PDF_FILES = $(foreach i,$(CABLES_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
-CABLES_PDF_FILES = $(sort $(foreach i,$(CABLES_ISOTOPES),$(DEST_DIR)/cables/pdf-cables-$(call isotope,$(i)).root))
 
 MINIS_ISOTOPES = $(sort $(foreach d,$(wildcard ../../minishroud/*/*/edep ../../minishroud/*/*/coin),$(shell dirname $(d))))
 MINIS_ALL_PDF_FILES = $(foreach i,$(MINIS_ISOTOPES),$(call change_tree,$(i)/pdf-$(call volume,$(i))-$(call part,$(i))-$(call isotope,$(i)).root,$(DEST_DIR)))
@@ -79,7 +78,7 @@ get_pdf_files_for_iso = $(foreach d,$(wildcard ../../$(1)/*/$(2)),$(call change_
 check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 # final target list
-post : preliminary alphas $(CABLES_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES) $(MINIS_ALL_PDF_FILES)
+post : preliminary alphas $(CABLES_ALL_PDF_FILES) $(GEDET_ALL_PDF_FILES) $(GE_HOLDERS_ALL_PDF_FILES) $(LAR_ALL_PDF_FILES) $(LARVETO_ALL_PDF_FILES) $(ELECTRONICS_ALL_PDF_FILES) $(MINIS_ALL_PDF_FILES)
 
 preliminary :
 	mkdir -p $(DEST_DIR)/prod-settings
@@ -91,24 +90,6 @@ preliminary :
 alphas :
 	mkdir -p $(DEST_DIR)/alphas
 	cp $(ALPHA_HIST_FILES) $(DEST_DIR)/alphas/
-
-# this is needed to create a comma separated list for -jold_jid
-space := $(null) #
-comma := ,
-# rule template for global pdf- files, they depend on pdf- files for each part
-define rule_for_volume_pdf
-  $(1) : $$(call get_pdf_files_for_iso,$(2),$$(shell echo $$(basename $(1)) | rev | cut -d'-' -f1 | rev))
-	@if [[ $$(call check_if_job_exists,$$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE)) == 0 ]]; then \
-	$$(QSUB) -hold_jid "pdf-$(2)-*-$$(CYCLE)" \
-                   -N $$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE) \
-                   $$(JOBPDFVOL) $$(shell echo $$@ | rev | cut -d'-' -f2 | rev) \
-                   $$(DEST_DIR); \
-	else \
-	echo "There's already a job for $$(shell echo $$(notdir $$@) | cut -d'-' -f-2)-$$(CYCLE) in queue"; \
-	fi
-endef
-# loop over cables global pdf- files
-$(foreach t,$(CABLES_PDF_FILES),$(eval $(call rule_for_volume_pdf,$(t),cables)))
 
 # function to build the t4ized file name
 # ARG1: directory with raw files

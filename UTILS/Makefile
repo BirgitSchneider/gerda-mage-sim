@@ -35,9 +35,6 @@ dirs :
 $(INSTALLDIR)/pdf-gen : post/pdf-gen.cxx
 	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
 
-$(INSTALLDIR)/pdf-gen-volume : post/pdf-gen-volume.cxx
-	$(CC) $(ROOTFLAGS) $(JSONCPPFLAGS) -o $@ $< jsoncpp/jsoncpp.cpp
-
 $(INSTALLDIR)/check-simulation : post/check-simulation.cxx progressbar/ProgressBar.cc progressbar/ProgressBar.h
 	$(CC) $(ROOTFLAGS) -Iprogressbar -o $@ post/check-simulation.cxx progressbar/ProgressBar.cc
 
