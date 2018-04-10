@@ -76,19 +76,15 @@ $ cd UTILS/post
 $ make post CYCLE=<version>
 $ ./create-release
 ```
-What if you want to inlcude the natural coax detectors in the post processing? Michael made a dedicated keylist
-which you can use in the following manner:  
-1. Change to naturals branch (only local at mpik)
+
+### Analysis with the natural coax detectors
+@mmilor made a dedicated keylist which is at the moment implemented in a separate branch called `t4z-plus-cycle_03.03-naturals` in the `post/gerda-metadata` submodule. To produce PDFs with the naturals detectors you have to:
+1. Change to naturals branch and **manually update the `gerda-metadata` submodule**
 ```shell
-$ cd UTILS
-$ checkout branch naturals
+$ git checkout naturals
+$ git submodule update
 ```
-2. Check out right meta-data branch (only local at mpik)
-```shell
-$ cd UTILS/post/gerda-metadata
-$ checkout branch t4z-plus-cycle_03.03-naturals
-```
-Then `make post` and `create-release` as before.
+2. `make post` and `create-release` as always.
 
 ### Create your own pdfs at MPIK
 Recommended way:
