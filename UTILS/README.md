@@ -114,12 +114,14 @@ $ swmod load gerda@master
 $ swmod load julia
 ```
 
-### `sed` Cheatsheet
+### Cheatsheet
 ```shell
-$ sed -i ... file          # Change file directly with the `-i` flag
-$ sed -i '/word/d' file    # Delete all lines containing a 'word' in 'file'
-$ sed -i '10i stuff' file  # Insert 'stuff' in line number 10 in 'file'
-$ rename a b *.root        # Find 'a' and replace it with 'b' in all `.root` filenames:
+$ sed -i ... file                 # Change file directly with the `-i` flag
+$ sed -i '/word/d' file           # Delete all lines containing a 'word' in 'file'
+$ sed -i 's/word/repl/g' file     # Substitute all 'word' occurence with 'repl' in file
+$ sed -i '10i stuff' file         # Insert 'stuff' in line number 10 in 'file'
+$ rename a b *.root               # Find 'a' and replace it with 'b' in all `.root` filenames:
+$ touch -d "2 hours ago" filename # change modification time to 2 hours ago
 ```
 PS: with BSD sed (e.g. on OSX) you have to specify the extension of the backup file, e.g. `-i.bak`.
 
