@@ -1,7 +1,7 @@
 # load preamble
-/control/execute                           ./cables/cables_all/Po207/edep/log/preamble.mac
+/control/execute                           ./cables/cables_all/Pb207/edep/log/preamble.mac
 
-/MG/eventaction/rootfilename               ./cables/cables_all/Po207/edep/raw-cables-cables_all-Po207-edep-001.root
+/MG/eventaction/rootfilename               ./cables/cables_all/Pb207/edep/raw-cables-cables_all-Pb207-edep-006.root
 #/MG/output/WriteMacroToOutput             true                ### is default ###
 #/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
 
