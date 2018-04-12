@@ -78,13 +78,10 @@ $ ./create-release
 ```
 
 ### Analysis with the natural coax detectors
-@mmilor made a dedicated keylist which is at the moment implemented in a separate branch called `t4z-plus-cycle_03.03-naturals` in the `post/gerda-metadata` submodule. To produce PDFs with the naturals detectors you have to:
-1. Change to naturals branch and **manually update the `gerda-metadata` submodule**
-```shell
-$ git checkout naturals
-$ git submodule update
-```
-2. `make post` and `create-release` as always.
+To produce multiplicity 2 PDFs including the natural Coax detectors you have to:
+1. Open the file `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings`
+2. Set `"include-nat-coax-in-M2-spectra" : true`
+2. `make post` and `create-release` as always
 
 ### Create your own pdfs at MPIK
 Recommended way:
