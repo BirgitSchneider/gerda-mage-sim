@@ -426,6 +426,20 @@
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         },
+	"glue_rings_top" : {
+            "mc-mass-kg" : 0.0131417,
+            "mc-volume-cm3" : 11.42756,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+	},
+	"glue_rings_bottom" : {
+            "mc-mass-kg" : 0.0132365,
+            "mc-volume-cm3" : 11.51000,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
+	},
         "glue_ring1" : {
             "mc-mass-kg" : 0.00407798,
             "mc-volume-cm3" : 3.546070,
