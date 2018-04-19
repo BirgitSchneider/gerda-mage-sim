@@ -11,6 +11,8 @@
 | glue_rings_all            | `MiniShroudPhase2[BottomGluedRing,TopGluedRing] [0..6]`               | 0.0263782    | 22.93756         | 1.15 (nylon)     | All minishroud's glue_rings, top and bottom (7)                                             |       |
 | glue_ring1                | `MiniShroudPhase2[BottomGluedRing,TopGluedRing] 0`                    | 0.00407798   | 3.546070         | 1.15 (nylon)     | Minishroud 1's glue ring, top and bottom (7)                                                |       |
 | glue_ring[2-7]            | `MiniShroudPhase2[BottomGluedRing,TopGluedRing] [1-6]`                | 0.0037167    | 3.231913         | 1.15 (nylon)     | Minishroud 2-7's glue ring, top and bottom (7)                                              |       |
+| glue_ring7_bottom         | `MiniShroudPhase2BottomGluedRing_6`                                   | 0.00186512   | 1.621843         | 1.15 (nylon)     | Minishroud 7's glue ring, bottom                                                            |       |
+| glue_ring7_top            | `MiniShroudPhase2TopGluedRing_6`                                      | 0.00185158   | 1.610069         | 1.15 (nylon)     | Minishroud 7's glue ring, top                                                               |       |
 
 Some pictures: from left to right: the tubs, the tops and the bottoms, the top and bottom glue rings
 <p align="center">
