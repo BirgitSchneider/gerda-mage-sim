@@ -8,6 +8,8 @@
 /MG/output/saveOnlyEventsWithEnergyDeposit true
 #/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
 
+/MG/output/killLifetimeLongLivedNuclei 1.5 microsecond
+
 /run/initialize
 
 ### Confine source volume to cryo LAr ###
