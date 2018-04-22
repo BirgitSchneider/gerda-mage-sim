@@ -78,8 +78,8 @@ $ ./create-release
 ```
 
 ### Analysis with the natural coax detectors
-To produce multiplicity 2 PDFs including the natural Coax detectors you have to:
-1. Open the file `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings`
+To produce multiplicity `M2` PDFs including the natural Coax detectors you have to:
+1. Open the file `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json`
 2. Set `"include-nat-coax-in-M2-spectra" : true`
 2. `make post` and `create-release` as always
 
