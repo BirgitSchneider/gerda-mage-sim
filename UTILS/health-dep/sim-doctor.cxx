@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 
     //gEnv->SetValue("TFile.Recover", 0);
     gErrorIgnoreLevel = kError;
-/*
+
     std::cout << "Checking ROOT files... ";
     for (const auto& f : rootfilelist) {
         bar.Update();
@@ -71,8 +71,8 @@ int main(int argc, char** argv) {
             std::cout << std::endl << f << " IsZombie!\n";
             nIsZombie++;
         }
-    }
-*/
+   }
+
     ReadDir::Clear();
     ReadDir::GetContent_R(dir, "*.mac");
     ReadDir::SetVerbose(false);
