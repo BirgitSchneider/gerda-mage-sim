@@ -294,11 +294,11 @@
             "mc-volume-cm3" : 1.4433,
             "mc-density-kgcm3" : 0.00233,
 
-            "Bi212"  : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E09 }},
-            "Bi214"  : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E09 }},
-            "K40"    : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E09 }},
-            "Pb214"  : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E09 }},
-            "Tl208"  : { "edep" : { "primaries" : 1E09 }, "coin" : { "primaries" : 1E08 }}
+            "Bi212"  : { "edep" : { "primaries" : 1E10 }, "coin" : { "primaries" : 1E10 }},
+            "Bi214"  : { "edep" : { "primaries" : 1E10 }, "coin" : { "primaries" : 1E10 }},
+            "K40"    : { "edep" : { "primaries" : 1E10 }, "coin" : { "primaries" : 1E10 }},
+            "Pb214"  : { "edep" : { "primaries" : 1E10 }, "coin" : { "primaries" : 1E10 }},
+            "Tl208"  : { "edep" : { "primaries" : 1E10 }, "coin" : { "primaries" : 1E09 }}
         }
     },
     "minishroud" : {
