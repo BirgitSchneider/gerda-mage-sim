@@ -93,7 +93,7 @@ preliminary :
 	rsync gerda-mage-sim-report.* $(DEST_DIR)/
 
 # list of already processed alpha histos_ISOTOPE_(LAr)pPlus.root files to be copied
-ALPHA_HIST_FILES = $(sort $(wildcard $(GERDA_MAGE_SIM)/alphas/*/pdf-*.root))
+ALPHA_HIST_FILES = $(shell find $(GERDA_MAGE_SIM)/alphas/ -iname "pdf*root")
 
 .PHONY : alphas
 alphas :
