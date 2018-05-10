@@ -29,4 +29,4 @@ LOGFILENAME="${MACROPATH}/${MACRONAME}-ch${ID}.out"
 echo $MACFILENAME
 
 cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim"
-singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v2.1.sqsh ${MACFILENAME} 1> ${LOGFILENAME} 2> ${LOGFILENAME}
+singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v3.0.sqsh ${MACFILENAME} 1> ${LOGFILENAME} 2> ${LOGFILENAME}
