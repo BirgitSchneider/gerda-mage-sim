@@ -507,6 +507,13 @@
 
             "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } },
             "K42"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
+        },
+        "top1" : {
+            "mc-mass-kg" : 0.00143051,
+            "mc-volume-cm3" : 1.243921739,
+            "mc-density-kgcm3" : 0.00115,
+
+            "K40"    : { "coin" : { "primaries" : 1E9 }, "edep" : { "primaries" : 1E8 } }
         }
     }
 }

@@ -15,7 +15,7 @@
 | glue_ring7_top            | `MiniShroudPhase2TopGluedRing_6`                                      | 0.00185158   | 1.610069         | 1.15 (nylon)     | Minishroud 7's glue ring, top                                                               |       |
 | glue_rings_top            | `MiniShroudPhase2TopGluedRing [0..6]`                                 | 0.0131417    | 11.42756         | 1.15 (nylon)     | Minishroud's glue rings top                                                               |       |
 | glue_rings_bottom         | `MiniShroudPhase2BottomGluedRing [0..6]`                              | 0.0132365    | 11.51000         | 1.15 (nylon)     | Minishroud's glue rings bottom                                                               |       |
-| top1                      | `MiniShroudPhase2Top_1`                                               |              |                  | 1.15 (nylon)     | Minishroud1's top lid                                                                        |       |
+| top1                      | `MiniShroudPhase2Top_1`                                               | 0.00143051   | 1.243921739      | 1.15 (nylon)     | Minishroud1's top lid                                                                        |       |
 
 
 Some pictures: from left to right: the tubs, the tops and the bottoms, the top and bottom glue rings
