@@ -243,6 +243,21 @@
             "mc-density-kgcm3" : 0.00139,
 
             "K42" : { "coin" : { "primaries" : 103E9 }, "edep" : { "primaries" : 103E9 } }
+        },
+        "sur_array1" : {
+            "mc-mass-kg" : 2341.2,
+            "mc-volume-cm3" : 1684340,
+            "mc-density-kgcm3" : 0.00139,
+
+            "Ar39" : { "edep" : { "primaries" : 1E10 } },
+            "Ar42" : { "edep" : { "primaries" : 1E10 } }
+        },
+        "sur_array2" : {
+            "mc-mass-kg" : 9149.5,
+            "mc-volume-cm3" : 6582400,
+            "mc-density-kgcm3" : 0.00139,
+
+            "Kr85" : { "edep" : { "primaries" : 1E10 } }
         }
     },
     "larveto" : {
