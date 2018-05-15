@@ -13,7 +13,7 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v0.9
+CYCLE          = v1.0
 RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
@@ -113,9 +113,9 @@ get_t4z_filelist = $(foreach id,$(RUNS),$(call change_to_gpdf,$(1)/$(call t4zfil
 check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"` ]]; then echo 1; else echo 0; fi)
 
 .SECONDEXPANSION:
-$(ALL_PDF_FILES) : %.root : $$(call get_t4z_filelist,$$(call change_to_gms,$$(dir $$*)edep))
+$(ALL_PDF_FILES) : %.root : $$(foreach d,$$(wildcard $$(call change_to_gms,$$(dir $$*)edep) $$(call change_to_gms,$$(dir $$*)coin)),$$(call get_t4z_filelist,$$d))
 	@if [[ $(call check_if_job_exists,$(notdir $@)-$(CYCLE)) == 0 ]]; then \
-	$(QSUB) -hold_jid t4z-$(call vpi_gpdf,$@)-edep-$(CYCLE),t4z-$(call vpi_gpfd,$@)-coin-$(CYCLE) \
+	$(QSUB) -hold_jid t4z-$(call vpi_gpdf,$@)-edep-$(CYCLE),t4z-$(call vpi_gpdf,$@)-coin-$(CYCLE) \
                    -N $(notdir $@)-$(CYCLE) \
                    $(JOBPDF) $(call volume_gpdf,$@)/$(call part_gpdf,$@)/$(call isotope_gpdf,$@) \
                    $(DEST_DIR); \
