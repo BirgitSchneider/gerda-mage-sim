@@ -1,20 +1,18 @@
-language: generic
+language: julia
+julia:
+    - 0.6
 
 git:
   submodules: false
 
-services:
-  - docker
-
 before_install:
-    - docker pull julia:0.6.2
-    - docker run julia:0.6.2 julia -e 'Pkg.Add("JSON")'
+    - julia -e 'Pkg.Add("JSON")'
 
 install: true
 
 script:
-    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find cables -iname "*.mac")
-    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find electronics -iname "*.mac")
-    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find ge_holders -iname "*.mac")
-    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find lar -iname "*.mac")
-    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find minishroud -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find cables -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find electronics -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find ge_holders -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find lar -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find minishroud -iname "*.mac")
