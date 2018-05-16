@@ -1,0 +1,17 @@
+language: generic
+
+services:
+  - docker
+
+before_install:
+    - docker pull julia:0.6.2
+    - docker run julia:0.6.2 julia -c 'Pkg.Add("JSON")'
+
+install: true
+
+script:
+    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find cables -iname "*.mac")
+    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find electronics -iname "*.mac")
+    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find ge_holders -iname "*.mac")
+    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find lar -iname "*.mac")
+    - docker run -v $PWD:/build -w /build julia:0.6.2 julia UTILS/health-dep/mac-doctor.jl $(find minishroud -iname "*.mac")
