@@ -1,6 +1,6 @@
 # author : K.v.Sturm
 # date   : 21.3.2018
-# usage  : ./launch.sh mage.mac
+# usage  : ./mpik-qsub-launch-sim.sh <mage.mac>
 
 # description : launches jobs in the mpik job queue using Mage from container
 
