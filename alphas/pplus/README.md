@@ -13,8 +13,8 @@ In this directory the simulations of alpha decays on the p+ contact and in the L
 | Po218 \[all\] | K.v.Sturm  | 1e9       | ?                                | simulation V.Wagner |
 | Po214 \[all\] | K.v.Sturm  | 1e9       | ?                                | simulation V.Wagner |
 | Po214 \[all\] | K.v.Sturm  | 1e9       | ?                                | simulation V.Wagner |
-| Bi214 \[all\] | K.v.Sturm  | 1e9       | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` | | |
-| Pb214 \[all\] | K.v.Sturm  | 1e9       | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` | | |
+| Bi214 \[all\] | K.v.Sturm  | 2e8       | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` | | |
+| Pb214 \[all\] | K.v.Sturm  | 2e8       | MGDO: `clhep_2.3.3.1/cece4fe` MaGe: `GERDAPhaseII-Dec2017/9fe03ca` container: `g4.10.3_v2.1` | | |
 
 # macros
 
