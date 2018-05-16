@@ -8,7 +8,7 @@ services:
 
 before_install:
     - docker pull julia:0.6.2
-    - docker run julia:0.6.2 julia -c 'Pkg.Add("JSON")'
+    - docker run julia:0.6.2 julia -e 'Pkg.Add("JSON")'
 
 install: true
 

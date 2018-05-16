@@ -1,6 +1,6 @@
 <img src="UTILS/gerda-logo.png" align="left"  height="80"/>
 
-# gerda-mage-sim
+# gerda-mage-sim [![Build Status](https://travis-ci.com/mppmu/gerda-mage-sim.svg?token=wsiyLpecsT4BYkevdkq1&branch=master)](https://travis-ci.com/mppmu/gerda-mage-sim)
 
 The aim of this repository is to provide a mirror (without actual data files) of the `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim` folder at the `lfs2.mpi-hd.mpg.de` Heidelberg cluster (MPIK) containing official Monte Carlo simulations of background contaminations for GERDA Phase II. It can be easily browsed to check the current status of the simulations (what has been simulated and what has not) and inspect the MaGe macro files. The repository is filled with READMEs reporting all valuable informations for the sake of reproducibility.
 
