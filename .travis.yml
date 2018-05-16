@@ -6,7 +6,7 @@ git:
   submodules: false
 
 before_install:
-    - julia -e 'Pkg.Add("JSON")'
+    - julia -e 'Pkg.add("JSON")'
 
 install: true
 
