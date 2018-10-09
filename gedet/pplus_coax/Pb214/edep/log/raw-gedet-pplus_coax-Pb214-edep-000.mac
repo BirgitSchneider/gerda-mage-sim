@@ -1,0 +1,24 @@
+## load preamble
+/control/execute                           gedet/pplus_coax/Pb214/edep/log/preamble.mac
+
+### Output ###
+/MG/eventaction/rootfilename               gedet/pplus_coax/Pb214/edep/raw-gedet-pplus_coax-Pb214-edep-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/run/initialize
+
+/MG/generator/gsspositionsfile             gedet/pplus_coax/ver/ver-gedet-pplus_coax.root
+
+/MG/generator/select                       G4gun
+/MG/generator/g4gun/cone_on                true
+/gun/particle                              ion
+/gun/ion                                   82 214
+/gun/energy                                0 eV
+
+## Define run
+/tracking/verbose                          0
+/run/beamOn                                3993578
