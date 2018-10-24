@@ -18,3 +18,9 @@ total 17G
 1.7G Pb214_1E7.dk0
 2.2G Tl208_1E7.dk0
 ```
+
+## generate decay0 files
+
+In `UTILS/job-scheduler/decay0gen` you find script which will send your decay0 job directly in the queue.
+Consult the `README` for decay0 input options or just launch decay0 interactively to figure out
+what you need. 
