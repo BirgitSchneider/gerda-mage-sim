@@ -133,7 +133,11 @@
             "mean-enrichment-fraction" : 0.877,
 
             "2nbb"   : { "edep" : { "primaries" : 1E08 } },
-            "2nbbLV" : { "edep" : { "primaries" : 1E08 } }
+            "2nbbLV" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM1" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM2" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM3" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM7" : { "edep" : { "primaries" : 1E08 } }
         },
         "intrinsic_coax" : {
             "mc-mass-kg" : 15.562227000000002,
@@ -142,7 +146,11 @@
             "mean-enrichment-fraction" : 0.8624285714285713,
 
             "2nbb"   : { "edep" : { "primaries" : 1E08 } },
-            "2nbbLV" : { "edep" : { "primaries" : 1E08 } }
+            "2nbbLV" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM1" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM2" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM3" : { "edep" : { "primaries" : 1E08 } },
+            "0nbbM7" : { "edep" : { "primaries" : 1E08 } }
         },
         "intrinsic_nat" : {
             "mc-mass-kg" : 7.669414,
