@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# USAGE: qsub mpik-run-mage.qsub <mage-macro-file>
+#
+#$ -P short ### queue
+#$ -j y     ### have logoutput and erroroutput in the same file
+#$ -o /dev/null
+#$ -e /dev/null
+
+source /home/extern/sturm/.setupenv.sh
+cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/lar/sur_array/K42/coin"
+/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/bin/split-volumes-K42 $1

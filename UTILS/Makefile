@@ -59,6 +59,9 @@ $(INSTALLDIR)/pdf-doctor : health-dep/pdf-doctor.cxx read-dir-cxx/ReadDir.cxx pr
 $(INSTALLDIR)/alphas-post-processing : post/alphas-post-processing.cxx read-dir-cxx/ReadDir.cxx progressbar/ProgressBar.cc
 	$(CC) $(ROOTFLAGS) -Iprogressbar -Iread-dir-cxx -o $@ $^
 
+$(INSTALLDIR)/split-volumes-K42 : post/split-volumes-K42.cxx 
+	$(CC) $(ROOTFLAGS) -o $@ $^
+
 .PHONY: clean-bin bin
 
 clean_$(INSTALLDIR) :
