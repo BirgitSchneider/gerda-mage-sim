@@ -256,6 +256,20 @@
 
             "K42" : { "coin" : { "primaries" : 103E9 }, "edep" : { "primaries" : 103E9 } }
         },
+        "inside_ms" : {
+            "mc-mass-kg" : 21.294334,
+            "mc-volume-cm3" : 15319.119,
+            "mc-density-kgcm3" : 0.00139,
+
+            "K42" : { "coin" : { "primaries" : 201314498 }, "edep" : { "primaries" : 201314498 } }
+        },
+        "outside_ms" : {
+            "mc-mass-kg" : 10873.706,
+            "mc-volume-cm3" : 7822530.9,
+            "mc-density-kgcm3" : 0.00139,
+
+            "K42" : { "coin" : { "primaries" : 102798685200 }, "edep" : { "primaries" : 102798685200 } }
+        },
         "sur_array1" : {
             "mc-mass-kg" : 2341.2,
             "mc-volume-cm3" : 1684340,
