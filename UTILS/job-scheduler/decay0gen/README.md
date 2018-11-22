@@ -1,5 +1,12 @@
 # decay0 gen - launch your decay0 jobs directly in the mpik queue  
 
+## rundecay0.qsub
+
+Launches decay0 file production directly in the mpik short queue  
+
+Usage: `qsub rundecay0.qsub <input.dat>`  
+
+
 ## input options  
 
 Example: 0nbb M1 (`inputs_0nbbM1.dat`)  
