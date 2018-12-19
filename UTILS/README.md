@@ -1,8 +1,10 @@
 # Command Line Tools
 Collection of scripts used to produce macros or processing ROOT files. Run `make` to compile C++ programs.
 
+* `bin/`: contains all bult executables 
 * `det-data/`: contains (JSON) files with detectors' informations
-* `readmes-tmp/`: template READMEs to be used in this repository
+* `container/`: deposit all `gerda-mage-sim-utils.sqsh` and `gerdasw.*.sqsh` containers here
+	* `deploy-on-mpik.sh` script to build and deploy `gerda-mage-sim-utils.sqsh` from `Dockerfile`
 * `copy/`: `rsync`-based bash scripts to copy new files to MPIK and other locations
 * `create-macros/` : macro generation utilities
     * `create-2nbb-macros.jl`: Julia script to produce, for each detector (dead layer and active volume), macros for 2nbb and 2nbbLV simulations (under `gedet/intrinsic/`)
@@ -10,6 +12,8 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `create-oncontacts-macros.jl`: Julia script to produce macros for each detector for simulations on the pplus and npluscontact (under `gedet/nplus/` and `gedet/pplus`) using a template macro
     * `create-macros-from-template.sh`: shell script to help you generate more statistics
     * `multiply-statistics.sh`: brute bash script to help you generate new sets of macro files with different number of primaries in them if you need more statistics
+* `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
+* `readmes-tmp/`: template READMEs to be used in this repository
 * `surf-sampling/`: gedet surface sampling tools
     * `create-surf-macros.jl`: Julia script to produce, for each detector, macro files for the surface sampling (under `gedet/surf/ver/`). It uses JSON.jl
     * `separate-contacts.jl`: Julia script to separate p+ and n+ contacts simulated surface vertices into different ROOT files (under `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and JSON.jl
@@ -26,7 +30,6 @@ Collection of scripts used to produce macros or processing ROOT files. Run `make
     * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
     * `latex-report.jl`: Julia script to produce a nice report about the status of the simulations in LaTeX
 * `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
-* `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
 * `health-dep/`: Health department!
     * `sim-doctor.cxx`: tool to check for problems in `.root` MaGe files
     * `pdf-doctor.cxx`: tool to check for problems in `t4z-*.root` and `pdf-*.root` files

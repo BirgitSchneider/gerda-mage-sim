@@ -8,5 +8,5 @@
 #$ -e /dev/null
 
 LOGFILE=$(echo $1 | cut -f 1 -d '.').out
-cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim"
+cd ${GERDA_MAGE_SIM}
 singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v3.0.sqsh $1 &> $LOGFILE
