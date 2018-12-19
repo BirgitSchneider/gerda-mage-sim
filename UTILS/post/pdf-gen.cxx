@@ -139,12 +139,16 @@ int main( int argc, char** argv ) {
         Json::Value customSettings;
         fCustomSettings >> customSettings; fCustomSettings.close();
         incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra",false).asBool();
-	applyLArVetoCut = customSettings.get("apply-LAr-veto-cut",false).asBool();
+        applyLArVetoCut = customSettings.get("apply-LAr-veto-cut",false).asBool();
     }
     else{
         if (verbose) std::cout << "\nNo custom settings file provided. Using default options.\n";
     }
-    if (verbose) std::cout << "\nInclude natCoax in M2 Spectra: " << incNatCoax << std::endl;
+    if (verbose)
+    {
+       std::cout << "\nInclude natCoax in M2 Spectra: " << incNatCoax << std::endl;
+       std::cout << "\nApply LAr veto cut: " << applyLArVetoCut << std::endl;
+    }
 
     // build M1 spectra
     if (verbose) std::cout << "\nBuilding M1 spectra...\n";
@@ -169,7 +173,7 @@ int main( int argc, char** argv ) {
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
     TTreeReaderArray<int>    datasetID   (reader, "datasetID");
-    TTreeReaderArray<int>    isLArVetoed (reader, "isLArVetoed");
+    TTreeReaderValue<int>    isLArVetoed (reader, "isLArVetoed");
 
     unsigned int M1_datasetMinusOne = 0; // M1: count events thrown away due to dataset -1
     unsigned int M2_datasetMinusOne = 0; // M2: -"-
@@ -180,7 +184,7 @@ int main( int argc, char** argv ) {
     reader.SetTree(&edepCh);
     while ( reader.Next() ) {
         // apply LAr veto cut
-        if ( applyLArVetoCut ) { if ( isLArVetoed > 0 ) continue; }
+        if ( applyLArVetoCut ) { if ( *isLArVetoed > 0 ) continue; }
         // select correct multiplicity
         if ( *multiplicity == 1 ) {
             // loop over detector ids
@@ -261,14 +265,14 @@ int main( int argc, char** argv ) {
         std::cout << "Processing coin... " << coinCh.GetEntries() << "entries\n" << std::flush;
         coinCh.LoadTree(0);
         reader.SetTree(&coinCh);
-        while (reader.Next()) {
+        while ( reader.Next() ) {
             // clear object from previous loop iteration
             evMap.clear();
 
             // apply LAr veto cut
-            if ( applyLArVetoCut ) { if ( isLArVetoed > 0 ) continue; }
+            if ( applyLArVetoCut ) { if ( *isLArVetoed > 0 ) continue; }
             // select multiplicity
-            if (*multiplicity == 2) {
+            if ( *multiplicity == 2 ) {
                 // loop over detector ids
                 for ( int i = 0; i < 40; ++i ) {
                     // skip if detector is in dataset -1
@@ -278,7 +282,7 @@ int main( int argc, char** argv ) {
                     if ( energy[i] > 0 ) evMap.insert(std::make_pair(i, energy[i]));
                 }
                 // in case one detector has dataset -1, evMap has less than 2 entires
-                if (evMap.size() != 2) {
+                if ( evMap.size() != 2 ) {
                     //if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
                     //if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
                     badevents++;

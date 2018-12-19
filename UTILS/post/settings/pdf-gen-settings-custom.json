@@ -1,4 +1,4 @@
 {
     "include-nat-coax-in-M2-spectra": false,
-    "apply-LAr-veto-cut": false
+    "apply-LAr-veto-cut": true
 }
