@@ -131,13 +131,15 @@ int main( int argc, char** argv ) {
     }
 
     // read custom settings
-    bool incNatCoax = false;
+    bool incNatCoax      = false;
+    bool applyLArVetoCut = false;
     if (customSettingsFile.find(".json")!=std::string::npos) {
         std::ifstream fCustomSettings(customSettingsFile,std::ifstream::binary);
         if (!fCustomSettings.is_open()) {std::cout << "custom settings requested but json file not found!\n"; return 1;}
         Json::Value customSettings;
         fCustomSettings >> customSettings; fCustomSettings.close();
         incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra",false).asBool();
+	applyLArVetoCut = customSettings.get("apply-LAr-veto-cut",false).asBool();
     }
     else{
         if (verbose) std::cout << "\nNo custom settings file provided. Using default options.\n";
@@ -167,6 +169,7 @@ int main( int argc, char** argv ) {
     TTreeReaderValue<int>    multiplicity(reader, "multiplicity");
     TTreeReaderArray<double> energy      (reader, "energy");
     TTreeReaderArray<int>    datasetID   (reader, "datasetID");
+    TTreeReaderArray<int>    isLArVetoed (reader, "isLArVetoed");
 
     unsigned int M1_datasetMinusOne = 0; // M1: count events thrown away due to dataset -1
     unsigned int M2_datasetMinusOne = 0; // M2: -"-
@@ -175,9 +178,11 @@ int main( int argc, char** argv ) {
     std::cout << "Processing edep... " << edepCh.GetEntries() << " entries\n" << std::flush;
     edepCh.LoadTree(0);
     reader.SetTree(&edepCh);
-    while(reader.Next()) {
+    while ( reader.Next() ) {
+        // apply LAr veto cut
+        if ( applyLArVetoCut ) { if ( isLArVetoed > 0 ) continue; }
         // select correct multiplicity
-        if( *multiplicity <= 1 and *multiplicity > 0 ) {
+        if ( *multiplicity == 1 ) {
             // loop over detector ids
             for ( int i = 0; i < 40; ++i ) {
                 // skip if detector is in dataset -1
@@ -256,10 +261,12 @@ int main( int argc, char** argv ) {
         std::cout << "Processing coin... " << coinCh.GetEntries() << "entries\n" << std::flush;
         coinCh.LoadTree(0);
         reader.SetTree(&coinCh);
-        while(reader.Next()) {
+        while (reader.Next()) {
             // clear object from previous loop iteration
             evMap.clear();
 
+            // apply LAr veto cut
+            if ( applyLArVetoCut ) { if ( isLArVetoed > 0 ) continue; }
             // select multiplicity
             if (*multiplicity == 2) {
                 // loop over detector ids
