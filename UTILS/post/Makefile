@@ -13,7 +13,7 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v1.0
+CYCLE          = v1.1
 RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
