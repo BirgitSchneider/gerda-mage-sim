@@ -1,0 +1,81 @@
+# load preamble
+/control/execute                           gedet/intrinsic_bege/0nbbM2/edep/log/preamble.mac
+
+/MG/eventaction/rootfilename               ./gedet/intrinsic_bege/0nbbM2/edep/raw-gedet-intrinsic_bege-0nbbM2-edep-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+#/MG/output/saveOnlyEventsWithCoincidence  false               ### is default ###
+
+/MG/geometry/cherenkov                     -1
+
+/run/initialize
+
+/MG/generator/confine                      volumearray
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_1
+/MG/generator/volumearrayadd               Crystal_geometry5_1
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_2
+/MG/generator/volumearrayadd               Crystal_geometry5_2
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_3
+/MG/generator/volumearrayadd               Crystal_geometry5_3
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_4
+/MG/generator/volumearrayadd               Crystal_geometry5_4
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_5
+/MG/generator/volumearrayadd               Crystal_geometry5_5
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_6
+/MG/generator/volumearrayadd               Crystal_geometry5_6
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_7
+/MG/generator/volumearrayadd               Crystal_geometry5_7
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_8
+/MG/generator/volumearrayadd               Crystal_geometry5_8
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_9
+/MG/generator/volumearrayadd               Crystal_geometry5_9
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_10
+/MG/generator/volumearrayadd               Crystal_geometry5_10
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_11
+/MG/generator/volumearrayadd               Crystal_geometry5_11
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_12
+/MG/generator/volumearrayadd               Crystal_geometry5_12
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_13
+/MG/generator/volumearrayadd               Crystal_geometry5_13
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_14
+/MG/generator/volumearrayadd               Crystal_geometry5_14
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_15
+/MG/generator/volumearrayadd               Crystal_geometry5_15
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_16
+/MG/generator/volumearrayadd               Crystal_geometry5_16
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_17
+/MG/generator/volumearrayadd               Crystal_geometry5_17
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_18
+/MG/generator/volumearrayadd               Crystal_geometry5_18
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_19
+/MG/generator/volumearrayadd               Crystal_geometry5_19
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_20
+/MG/generator/volumearrayadd               Crystal_geometry5_20
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_21
+/MG/generator/volumearrayadd               Crystal_geometry5_21
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_22
+/MG/generator/volumearrayadd               Crystal_geometry5_22
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_23
+/MG/generator/volumearrayadd               Crystal_geometry5_23
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_24
+/MG/generator/volumearrayadd               Crystal_geometry5_24
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_25
+/MG/generator/volumearrayadd               Crystal_geometry5_25
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_26
+/MG/generator/volumearrayadd               Crystal_geometry5_26
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_27
+/MG/generator/volumearrayadd               Crystal_geometry5_27
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_28
+/MG/generator/volumearrayadd               Crystal_geometry5_28
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_29
+/MG/generator/volumearrayadd               Crystal_geometry5_29
+/MG/generator/volumearrayadd               CrystalDeadLayer_geometry5_30
+/MG/generator/volumearrayadd               Crystal_geometry5_30
+
+/MG/generator/select                       decay0
+/MG/generator/decay0/filename              ./decay0files/0nbbM2_1E8.dk0
+
+/tracking/verbose                          0
+/run/beamOn                                100000000 # 1E08

@@ -115,7 +115,7 @@
 	{
 		"ID" : 71,
 		"livetime_in_s" : 2431100,
-		"runconfig" : "configuration_20160727.root",
+		"runconfig" : "configuration_20160824.root",
 		"timestamp" : 1472016813
 	},
 	"run72" : 
@@ -150,7 +150,7 @@
 	{
 		"ID" : 76,
 		"livetime_in_s" : 2247640,
-		"runconfig" : "configuration_20161201.root",
+		"runconfig" : "configuration_20170109.root",
 		"timestamp" : 1483973777
 	},
 	"run77" : 
@@ -178,7 +178,7 @@
 	{
 		"ID" : 83,
 		"livetime_in_s" : 1485820,
-		"runconfig" : "configuration_20170512.root",
+		"runconfig" : "configuration_20170602.root",
 		"timestamp" : 1496409860
 	},
 	"run84" : 
@@ -199,7 +199,7 @@
 	{
 		"ID" : 86,
 		"livetime_in_s" : 3145020,
-		"runconfig" : "configuration_20170801.root",
+		"runconfig" : "configuration_20170905.root",
 		"timestamp" : 1504596852
 	},
 	"run87" : 
@@ -222,5 +222,26 @@
 		"livetime_in_s" : 507160,
 		"runconfig" : "configuration_20171212.root",
 		"timestamp" : 1513093858
+	},
+	"run90" : 
+	{
+		"ID" : 90,
+		"livetime_in_s" : 2712240,
+		"runconfig" : "configuration_20171218.root",
+		"timestamp" : 1513611617
+	},
+	"run91" : 
+	{
+		"ID" : 91,
+		"livetime_in_s" : 3054200,
+		"runconfig" : "configuration_20180119.root",
+		"timestamp" : 1516380268
+	},
+	"run92" : 
+	{
+		"ID" : 92,
+		"livetime_in_s" : 2617780,
+		"runconfig" : "configuration_20180226.root",
+		"timestamp" : 1520065417
 	}
 }

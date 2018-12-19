@@ -1,0 +1,35 @@
+# Dead layer 0 nm
+# Isotope: Bi214
+
+/tracking/verbose              0
+/MG/manager/mglog              trace
+/MG/manager/seedWithDevRandom
+
+/MG/geometry/detector          GeometryFile
+/MG/geometry/database          false
+/MG/geometry/geometryFileName  ./alphas/geometry/GeometryBEGe_Ge91C_0nm.def
+
+/MG/eventaction/rootschema     Dario
+/MG/eventaction/rootfilename   ./alphas/lar_pplus/Bi214/all/raw-alphas-lar_pplus-Bi214-all-111.root
+
+/MG/processes/optical          false
+/MG/processes/lowenergy        true
+/MG/processes/realm            DarkMatter
+
+/run/initialize
+
+/MG/generator/select           SPS
+/grdm/nucleusLimits            214 214 83 84
+/gps/ion                       83 214 0 0
+/gps/energy                    0 eV
+
+/gps/pos/centre                0 0 1.9895
+/gps/pos/type                  Volume
+/gps/pos/shape                 Cylinder
+/gps/pos/halfz                 0.5
+/gps/pos/radius                0.9
+/gps/ang/type                  iso
+
+/MG/eventaction/reportingfrequency 10000
+/run/beamOn                        1000000
+

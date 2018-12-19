@@ -76,19 +76,12 @@ $ cd UTILS/post
 $ make post CYCLE=<version>
 $ ./create-release
 ```
-What if you want to inlcude the natural coax detectors in the post processing? Michael made a dedicated keylist
-which you can use in the following manner:  
-1. Change to naturals branch (only local at mpik)
-```shell
-$ cd UTILS
-$ checkout branch naturals
-```
-2. Check out right meta-data branch (only local at mpik)
-```shell
-$ cd UTILS/post/gerda-metadata
-$ checkout branch t4z-plus-cycle_03.03-naturals
-```
-Then `make post` and `create-release` as before.
+
+### Analysis with the natural coax detectors
+To produce multiplicity `M2` PDFs including the natural Coax detectors you have to:
+1. Open the file `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json`
+2. Set `"include-nat-coax-in-M2-spectra" : true`
+2. `make post` and `create-release` as always
 
 ### Create your own pdfs at MPIK
 Recommended way:
@@ -118,12 +111,14 @@ $ swmod load gerda@master
 $ swmod load julia
 ```
 
-### `sed` Cheatsheet
+### Cheatsheet
 ```shell
-$ sed -i ... file          # Change file directly with the `-i` flag
-$ sed -i '/word/d' file    # Delete all lines containing a 'word' in 'file'
-$ sed -i '10i stuff' file  # Insert 'stuff' in line number 10 in 'file'
-$ rename a b *.root        # Find 'a' and replace it with 'b' in all `.root` filenames:
+$ sed -i ... file                 # Change file directly with the `-i` flag
+$ sed -i '/word/d' file           # Delete all lines containing a 'word' in 'file'
+$ sed -i 's/word/repl/g' file     # Substitute all 'word' occurence with 'repl' in file
+$ sed -i '10i stuff' file         # Insert 'stuff' in line number 10 in 'file'
+$ rename a b *.root               # Find 'a' and replace it with 'b' in all `.root` filenames:
+$ touch -d "2 hours ago" filename # change modification time to 2 hours ago
 ```
 PS: with BSD sed (e.g. on OSX) you have to specify the extension of the backup file, e.g. `-i.bak`.
 

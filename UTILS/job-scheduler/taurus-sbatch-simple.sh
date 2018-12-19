@@ -36,7 +36,7 @@ GERDASIMDIR_OUTSIDE="/scratch/neutrino/GERDA/gerda-mage-sim.git"
 GERDASIMDIR_INSIDE="/mnt/neutrino/GERDA/gerda-mage-sim.git"
 
 ### change this whenever a new container is available
-CONTAINER="${GERDASIMDIR_OUTSIDE}/UTILS/container/gerdasw.g4.10.3_v2.1.sqsh"
+CONTAINER="${GERDASIMDIR_OUTSIDE}/UTILS/container/gerdasw.g4.10.3_v3.0.sqsh"
 
 RUNSCRIPT="${GERDASIMDIR_INSIDE}/UTILS/job-scheduler/taurus-cdAndMaGe.sh"
 

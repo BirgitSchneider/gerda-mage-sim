@@ -1,0 +1,18 @@
+language: julia
+julia:
+    - 0.6
+
+git:
+  submodules: false
+
+before_install:
+    - julia -e 'Pkg.add("JSON")'
+
+install: true
+
+script:
+    - julia UTILS/health-dep/mac-doctor.jl $(find cables -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find electronics -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find ge_holders -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find lar -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl $(find minishroud -iname "*.mac")

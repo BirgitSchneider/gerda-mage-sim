@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# USAGE: qsub rundecay0.qsub <inputs_XXX.dat>
+#
+#$ -P short ### queue
+#$ -j y     ### have logoutput and erroroutput in the same file
+#$ -o /dev/null
+#$ -e /dev/null
+
+source ~/.setupenv.sh
+
+INPUT="/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/job-scheduler/decay0gen/"$1
+cd "/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/decay0files"
+
+decay0 < $INPUT > /dev/null 2>&1

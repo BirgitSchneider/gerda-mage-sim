@@ -5,11 +5,13 @@ GERDA_PDFS=/lfs/l2/gerda/gerda-simulations/gerda-pdfs
 
 cd $GERDA_PDFS
 
+ls --color=auto -x1 --ignore=releases --ignore=*md $GERDA_PDFS
 echo -n "Select version: "; read ans
 while [ ! -d $ans ]; do
   echo -n "PDF version not found! Retry: "; read ans
 done
 
+echo "compressing..."
 tar -caf releases/gerda-pdfs-$ans.tar.gz $(find $ans -name "pdf-*") $ans/prod-settings $ans/*.json
 echo "releases/gerda-pdfs-$ans.tar.gz created."
 cd - > /dev/null

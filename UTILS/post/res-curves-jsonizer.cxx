@@ -57,18 +57,16 @@ int main(int argc, char** argv) {
     TFile resfile(inputFile.c_str());
     for (auto& d : detectors) {
         TF1* func;
-        if (d == "GTF45_2") func = dynamic_cast<TF1*>(resfile.Get(("ResolutionCurve_" + d).substr(0, ("ResolutionCurve_" + d).size()-2).c_str()));
-        else func = dynamic_cast<TF1*>(resfile.Get(("ResolutionCurve_" + d).c_str()));
+        func = dynamic_cast<TF1*>( resfile.Get( d.c_str() ) );
         if (!func) {
-            std::cout << "CalCurveLinear_" + d << " not found! Skipping...\n";
+            std::cout << "Calibration curve of " << d << " not found! Skipping...\n";
             break;
         }
 
         auto& loc_entry = root["Zac"][std::to_string(gedMapping["mapping"][d]["channel"].asInt())];
-        loc_entry["func"] = "2.35482 * sqrt( [0] + [1] * x + [2] * x * x )";
+        loc_entry["func"] = "2.35482 * sqrt( [0] + [1] * x )";
         loc_entry["params"]["0"] = func->GetParameter(0);
         loc_entry["params"]["1"] = func->GetParameter(1);
-        loc_entry["params"]["2"] = func->GetParameter(2);
     }
 
     // write down jsonfile
