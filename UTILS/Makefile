@@ -17,7 +17,7 @@ all :
 	@echo "Please pick up one of the following options:"
 	@echo " - make bin : compile the command line tools"
 
-CC = c++ -std=c++1y
+CC = c++ -std=c++1y -O3
 INSTALLDIR     = bin
 ROOTFLAGS      = $(shell root-config --libs --cflags) -lTreePlayer
 GERDA-ADAFLAGS = $(shell gerda-ada-config --libs --cflags)
