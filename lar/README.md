@@ -13,7 +13,7 @@
 | above_ms4      | N.A.       | 1.091        | 785.375          | 1.39              | Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 4 starting from ms-top |       |
 | above_ms5      | N.A.       | 1.091        | 785.375          | 1.39              | Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 5 starting from ms-top |       |
 | above_ms6      | N.A.       | 1.091        | 785.375          | 1.39              | Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 6 starting from ms-top |       |
-| above_ms7      | N.A.       | 1.091        | 785.375          | 1.39              | Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 7 starting from ms-top |       |
+| above_ms7      | N.A.       | 1.091        | 785.375          | 1.39              | Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of CENTRAL string 7 starting from ms-top |       |
 | sur_array1     | N.A.       | 2341.2       | 1684340          | 1.39              | Cylinder (radius = 60cm, height = 150cm) surrounding the Ge array (z=-15cm for better centering) | volume to sample energy in Ge of ~600 keV beta with 1e10 sim events |
 | sur_array2     | N.A.       | 9149.5       | 6582400          | 1.39              | Cylinder (radius = 100cm, height = 210cm) surrounding the Ge array (z=-15cm for better centering) | volume to sample energy in Ge of ~500 keV gamma with 1e10 sim events |
 | inside_ms      | N.A.       | 21.294334    | 15319.119        | 1.39              | post-processed volume splitting of sur_array : volume fraction = 0.0019545052068               |       |
