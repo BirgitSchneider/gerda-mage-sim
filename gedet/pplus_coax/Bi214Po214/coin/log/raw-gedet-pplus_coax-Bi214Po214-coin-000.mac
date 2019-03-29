@@ -1,0 +1,26 @@
+## load preamble
+/control/execute                           gedet/pplus_coax/Bi214Po214/coin/log/preamble.mac
+
+/MG/output/killLifetimeLongLivedNuclei     1.0 second
+
+### Output ###
+/MG/eventaction/rootfilename               gedet/pplus_coax/Bi214Po214/coin/raw-gedet-pplus_coax-Bi214Po214-coin-000.root
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit true
+/MG/output/saveOnlyEventsWithCoincidence   true
+
+/run/initialize
+
+/MG/generator/gsspositionsfile             gedet/pplus_coax/ver/ver-gedet-pplus_coax.root
+
+/MG/generator/select                       SPS
+/gps/ion                                   83 214 0 0
+/gps/energy                                0 keV
+/grdm/nucleusLimits                        210 214 82 84
+/gps/ang/type                              iso
+
+## Define run
+/tracking/verbose                          0
+/run/beamOn                                3993578
