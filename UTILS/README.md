@@ -1,58 +1,59 @@
 # Command Line Tools
-Collection of scripts used to produce macros or processing ROOT files. Run `make` to compile C++ programs.
+Collection of scripts used to produce macros or processing ROOT files. Run
+`make` to compile C++ programs.
 
-* `bin/`: contains all bult executables 
-* `det-data/`: contains (JSON) files with detectors' informations
-* `container/`: deposit all `gerda-mage-sim-utils.sqsh` and `gerdasw.*.sqsh` containers here
-	* `deploy-on-mpik.sh` script to build and deploy `gerda-mage-sim-utils.sqsh` from `Dockerfile`
-* `copy/`: `rsync`-based bash scripts to copy new files to MPIK and other locations
-* `create-macros/` : macro generation utilities
-    * `create-2nbb-macros.jl`: Julia script to produce, for each detector (dead layer and active volume), macros for 2nbb and 2nbbLV simulations (under `gedet/intrinsic/`)
-    * `create-lar-pplus-macros.jl`: Julia script to produce macros for each detector for simulations inside the LAr close to the pplus contact (under `gedet/lar_pplus/`) using a template macro
-    * `create-oncontacts-macros.jl`: Julia script to produce macros for each detector for simulations on the pplus and npluscontact (under `gedet/nplus/` and `gedet/pplus`) using a template macro
-    * `create-macros-from-template.sh`: shell script to help you generate more statistics
-    * `multiply-statistics.sh`: brute bash script to help you generate new sets of macro files with different number of primaries in them if you need more statistics
-* `ranger/`: [GNU ranger](https://ranger.github.io) file browser, very useful in the context of this repository. Define the following alias to use it: `alias='$GERDA_MAGE_SIM_LOCATION/UTILS/ranger/ranger.py'`
-* `readmes-tmp/`: template READMEs to be used in this repository
-* `surf-sampling/`: gedet surface sampling tools
-    * `create-surf-macros.jl`: Julia script to produce, for each detector, macro files for the surface sampling (under `gedet/surf/ver/`). It uses JSON.jl
-    * `separate-contacts.jl`: Julia script to separate p+ and n+ contacts simulated surface vertices into different ROOT files (under `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and JSON.jl
-    * `surf-calc.jl`: Julia script that calculates the area for p+ and n+ contacts for each detector
-*  `post/`: utilities for raw files post-processing. Learn on how we manage the post-processing flow at MPIK in [the Wiki page](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling)
-    * `livetime-calc-ph2.cxx`: C++ program to extract each run's livetime and RunConfig. Results are stored in a JSON file that will be used by `t4z-gen.cxx` (see examples below)
-    * `t4z-gen.cxx`: C++ program to generate a `t4z-`file for each run starting from a collection of `raw-`files (see examples below)
-    * `pdf-gen.cxx`: C++ program to generate a `pdf-`file from a collection of `t4z-`files (see examples below)
-    * `check-simulation.cxx`: C++ program to produce nice plots of decay vertices and interaction vertices
-    * `res-curves-jsonizer.cxx`: C++ script to convert standard resolution curves into (Tier4izer-friendly) JSON format
-    * `settings/`: JSON files for the post-processing
-    * `gerda-metadata/`: (git submodule) version of [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for post-processing
-    * `old/`: old post-processing scripts
-    * `Makefile`: Makefile to launch the post-processing execution queue (See [the Wiki](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make) for details)
-    * `latex-report.jl`: Julia script to produce a nice report about the status of the simulations in LaTeX
-* `job-scheduler/`: batch job manager utilities. `mpik-run-mage.qsub`, `mpik-t4z-gen.qsub`, `mpik-pdf-gen.qsub` and `mpik-pdf-gen-volume.qsub` are used by the post-processing Makefile
-* `health-dep/`: Health department!
-    * `sim-doctor.cxx`: tool to check for problems in `.root` MaGe files
-    * `pdf-doctor.cxx`: tool to check for problems in `t4z-*.root` and `pdf-*.root` files
-* `Dockerfile`: recipe file to produce a Docker image that includes all the software needed to run the provided scripts, build with `sudo docker build --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is usable also on clusters where you don't have root permissions you can use Oliver's [docker2singularity.py](https://github.com/oschulz/singularity-utils) Python script. An already processed Singularity image is available at LNGS under `/nfs/gerda5/var/gerda-simulations/gerda-mage-sim-utils.sqsh`. First get all the Julia packages you need with `Pkg.add`, they will be installed under your home directory on the host (which is mounted by default by singularity), and so you won't need to do it again the next time you'll use Julia inside the container.
-* `Makefile`: GNU Makefile to compile C++ programs in this directory
+## Mage simulations production
 
-Usage examples:
-```shell
-$ cd UTILS/surf-sampling
-$ sudo docker run -it --rm -v /common:/common -w $PWD gerda-mage-sim-utils julia surf-calc.jl
-$ cd UTILS/create-macros
-$ singularity exec gerda-mage-sim-utils.sqsh julia create-2nbb-macros.jl 2nbb
-```
-```shell
+`gerda-mage-sim/make.jl` implements a routine that populates the repository
+with MaGe ROOT files by sending jobs to an SGE cluster. The behaviour is
+similar to GNU Make, all macro files matching the pattern
+`gerda-mage-sim/*/*/*/[edep|coin]/*.mac` are checked and if they have a
+modification date that is newer with respect to the corresponding ROOT file (or
+if the ROOT file does not exist) a `qsub` job is spawned.
+
+**Prerequisites:**
+- install Julia 1.0+ (a Julia container will not work). Downloading and
+  installing the [official binaries](https://julialang.org/downloads/) (Generic
+  Linux Binaries for x86 is OK). Install the JSON.jl and ProgressMeter.jl
+  packages from within the REPL.
+- Make sure you have access to a SGE cluster and the `qsub` command is
+  available
+- put a [gerda-sw-all](https://github.com/mppmu/gerda-sw-all) Singularity
+  container at `UTILS/container/gerda-sw-all_active.simg` (we suggest to make
+  use of symlinks)
+
+then run:
+```console
 $ cd gerda-mage-sim
-$ singularity run --cleanenv --app MaGe gerdasw.g4.10.3_v2.1 cables/hv_at_holders/K40/edep/log/raw-cables-hv_at_holders-K40-edep-000.mac
+$ julia make.jl [--dry-run]
 ```
+setting `JULIA_DEBUG=all` enables the debug logging mode.
 
 ## PDFs production
-example post-processing at the MPIK cluster (first load the preinstalled software – see below – or use `gerda-mage-sim-utils.sqsh`):
+
+Analogously to the simulations production, `UTILS/post/make.jl` sends to the SGE cluster the PDF production chain.
+
+**Additional prerequisites:**
+- put a Singularity container produced with the Dockerfile in `UTILS` at
+  `UTILS/container/gerda-mage-sim-utils_active.simg` (we suggest to make use of
+  symlinks)
+- put a ROOT file with the GERDA LAr probability map (see
+  [gerda-larmap](https://github.com/gipert/gerda-larmap)) under
+  `UTILS/post/gerda-larmap.root`
+
+then run:
+```console
+$ cd UTILS/post
+$ julia make.jl [--dry-run] --cycle <version> --destdir <gerda-pdfs-dir>
+$ ./create-release
 ```
+setting `JULIA_DEBUG=all` enables the debug logging mode.
+
+The PDF production might be also run for individual simulations, for example,
+at the MPIK cluster:
+```console
 $ cd UTILS
-$ make bin
+$ make
 $ bin/livetime-calc-ph2 \
     -v \
     --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
@@ -73,28 +74,81 @@ $ bin/pdf-gen \
     --custom-settings /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json \
     ge_holders/plates/K40
 ```
-But wait, [there's a Makefile that does all this for you](https://github.com/mppmu/gerda-snippets/wiki/PDFs-for-GERDA's-PhaseII-background-modelling#post-processing-at-mpik-with-gnu-make)! To create a new PDFs release at MPIK:
-```shell
-$ cd UTILS/post
-$ make post CYCLE=<version>
-$ ./create-release
-```
+
+## `UTILS` directory content
+
+* `det-data/`: contains (JSON) files with detectors' informations
+* `container/`: deposit all `gerda-mage-sim-utils.sqsh` and `gerdasw.*.sqsh`
+  containers here
+    * `deploy-on-mpik.sh` script to build and deploy
+      `gerda-mage-sim-utils.simg` from `Dockerfile`
+* `copy/`: `rsync`-based bash scripts to copy new files to MPIK and other
+  locations
+* `create-macros/` : macro generation utilities
+    * `create-2nbb-macros.jl`: Julia script to produce, for each detector (dead
+      layer and active volume), macros for 2nbb and 2nbbLV simulations (under
+      `gedet/intrinsic/`)
+    * `create-lar-pplus-macros.jl`: Julia script to produce macros for each
+      detector for simulations inside the LAr close to the pplus contact (under
+      `gedet/lar_pplus/`) using a template macro
+    * `create-oncontacts-macros.jl`: Julia script to produce macros for each
+      detector for simulations on the pplus and npluscontact (under
+      `gedet/nplus/` and `gedet/pplus`) using a template macro
+    * `create-macros-from-template.sh`: shell script to help you generate more
+      statistics
+    * `multiply-statistics.sh`: brute bash script to help you generate new sets
+      of macro files with different number of primaries in them if you need
+      more statistics
+* `readmes-tmp/`: template READMEs to be used in this repository
+* `surf-sampling/`: gedet surface sampling tools
+    * `create-surf-macros.jl`: Julia script to produce, for each detector,
+      macro files for the surface sampling (under `gedet/surf/ver/`). It uses
+      JSON.jl
+    * `separate-contacts.jl`: Julia script to separate p+ and n+ contacts
+      simulated surface vertices into different ROOT files (under
+      `gedet/nplus/ver/` and `gedet/pplus/ver/`). It uses Cxx.jl, ROOT.jl and
+      JSON.jl
+    * `surf-calc.jl`: Julia script that calculates the area for p+ and n+
+      contacts for each detector
+*  `post/`: utilities for raw files post-processing.
+    * `livetime-calc-ph2.cxx`: C++ program to extract each run's livetime and
+      RunConfig. Results are stored in a JSON file that will be used by
+      `t4z-gen.cxx` (see examples below)
+    * `t4z-gen.cxx`: C++ program to generate a `t4z-`file for each run starting
+      from a collection of `raw-`files (see examples below)
+    * `t4z-gen-calib.cxx`: same as before but specific to calibration
+      simulations
+    * `pdf-gen.cxx`: C++ program to generate a `pdf-`file from a collection of
+      `t4z-`files (see examples below)
+    * `check-simulation.cxx`: C++ program to produce nice plots of decay
+      vertices and interaction vertices
+    * `res-curves-jsonizer.cxx`: C++ script to convert standard resolution
+      curves into (Tier4izer-friendly) JSON format
+    * `settings/`: JSON files for the post-processing
+    * `gerda-metadata/`: (git submodule) version of
+      [`gerda-metadata`](https://github.com/mppmu/gerda-metadata) used for
+      post-processing
+    * `old/`: old post-processing scripts
+    * `make.jl`: Julia routine to launch the post-processing execution queue
+    * `latex-report.jl`: Julia script to produce a nice
+      report about the status of the simulations in LaTeX
+* `job-scheduler/`: batch job manager utilities.
+* `health-dep/`: Health department
+    * `sim-doctor.cxx`: tool to check for problems in `.root` MaGe files
+    * `pdf-doctor.cxx`: tool to check for problems in `t4z-*.root` and
+      `pdf-*.root` files
+* `Dockerfile`: recipe file to produce a Docker image that includes all the
+  software needed to run the provided scripts, build with `sudo docker build
+  --rm . -t gerda-mage-sim-utils`. To produce a Singularity image which is
+  usable also on clusters where you don't have root permissions see
+  `container/deploy-on-mpik.sh`.
+* `Makefile`: GNU Makefile to compile C++ programs in this directory
 
 ### Analysis with the natural coax detectors
 To produce multiplicity `M2` PDFs including the natural Coax detectors you have to:
-1. Open the file `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json`
+1. Open the file
+   `/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json`
 2. Set `"include-nat-coax-in-M2-spectra" : true`
-2. `make post` and `create-release` as always
-
-### Create your own pdfs at MPIK
-Recommended way:
-* clone the repo somewhere
-* change your configs in `UTILS/post/settings`
-* start the production with the following commands:
-```shell
-$ cd UTILS/post
-$ make post CYCLE=<your-name> GERDA_PDFS=<your-custom-location>
-```
 
 ### Load preinstalled software (at MPIK) with [swmod](https://github.com/oschulz/swmod)
 Add the following lines to your `~/.bashrc`

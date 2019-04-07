@@ -12,6 +12,7 @@
 # singularity containers
 *.sqsh
 *.img
+*.simg
 
 # software
 UTILS/bin

@@ -1,0 +1,47 @@
+{
+    "calib" : {
+        "Bi214" : {
+            "notes" : [ "This is for the run76 pcalib data with 226Ra" ],
+            "s2" : {
+                "8151" : {
+                    "id" : "run76pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0076-pca-S2-8151"
+                },
+                "8405" : {
+                    "id" : "run76pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0076-pca-S2-8405"
+                },
+                "8570" : {
+                    "id" : "run76pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0076-pca-S2-8570"
+                }
+            },
+            "s3" : {
+                "8139" : {
+                    "id" : "run76pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0076-pca-S3-8139"
+                },
+                "8305" : {
+                    "id" : "run76pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0076-pca-S3-8305"
+                },
+                "8570" : {
+                    "id" : "run76pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0076-pca-S3-8570"
+                }
+            }
+        }
+    }
+}
