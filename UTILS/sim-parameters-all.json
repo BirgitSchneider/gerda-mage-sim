@@ -86,6 +86,62 @@
             "Tl208"  : { "coin" : { "primaries" : 40100492  }, "edep" : { "primaries" : 40100492  } }
         }
     },
+    "calib" : {
+        "multi_s1_8220/8405/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi212" : { "edep" : { "primaries" : 10612992 } },
+            "Th208" : { "edep" : { "primaries" : 10612992 } }
+        },
+        "multi_s2_8220/8405/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi212" : { "edep" : { "primaries" : 11784556 } },
+            "Th208" : { "edep" : { "primaries" : 11784556 } }
+        },
+        "multi_s3_8220/8405/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi212" : { "edep" : { "primaries" : 8338780 } },
+            "Th208" : { "edep" : { "primaries" : 8338780 } }
+        },
+        "single_s2_8220/8408/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi212" : { "edep" : { "primaries" : 1e8 } },
+            "Th208" : { "edep" : { "primaries" : 1e8 } }
+        },
+        "single_s3_8220/8405/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi212" : { "edep" : { "primaries" : 1e8 } },
+            "Th208" : { "edep" : { "primaries" : 1e8 } }
+        },
+        "single_s2_8151/8405/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi214" : { "edep" : { "primaries" : 1e8 } }
+        },
+        "single_s3_8139/8305/8570" : {
+            "mc-mass-kg" : 0.242531,
+            "mc-volume-cm3" : 0.0502655,
+            "mc-density-kgcm3" : 4.825,
+
+            "Bi214" : { "edep" : { "primaries" : 1e8 } }
+        }
+    },
     "electronics" : {
         "cc3" : {
             "mc-mass-kg" : 0.05196,
