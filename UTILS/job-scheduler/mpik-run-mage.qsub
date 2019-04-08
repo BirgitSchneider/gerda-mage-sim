@@ -7,6 +7,7 @@
 #$ -o /dev/null
 #$ -e /dev/null
 
+CONTAINER=gerda-sw-all_active.simg
 LOGFILE=$(echo $1 | cut -f 1 -d '.').out
 cd ${GERDA_MAGE_SIM}
-singularity run --cleanenv --app MaGe ./UTILS/container/gerdasw.g4.10.3_v3.0.sqsh $1 &> $LOGFILE
+singularity exec ./UTILS/container/$CONTAINER MaGe --no-colors $1 &> $LOGFILE
