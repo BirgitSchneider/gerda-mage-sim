@@ -1,0 +1,35 @@
+# load preamble
+/control/execute                           ./calib/single_s2_8408/Bi212/edep/log/preamble.mac
+
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+### Calibration specific commands ###
+/MG/geometry/general/constructcalibration 		true
+/MG/geometry/detector/calibration/sourcez_S1 	7250 mm
+/MG/geometry/detector/calibration/sourcez_S2 	8408 mm
+/MG/geometry/detector/calibration/sourcez_S3 	7250 mm
+
+/MG/eventaction/rootfilename                    ./calib/single_s2_8408/Bi212/edep/raw-calib-single_s2_8408-Bi212-edep-004.root
+/MG/output/saveOnlyEventsWithEnergyDeposit 		true
+#/MG/output/saveOnlyEventsWithCoincidence       false               ### is default ###
+
+/run/initialize
+
+### single calibration source
+/MG/generator/confine 		volume						
+/MG/generator/volume 		calibration_source_inner_1 	### 0..2
+
+### all sources together
+#/MG/generator/confine			volumelist
+#/MG/generator/volumelist 		calibration_source_inner
+#/MG/generator/volumelistfrom 	0
+#/MG/generator/volumelistto 	2
+
+/MG/generator/select 		G4gun
+/MG/generator/g4gun/cone_on true
+/gun/particle 				ion
+/gun/ion 					83 212 # Bi212
+/gun/energy 				0 eV
+
+/run/beamOn 				10000000
