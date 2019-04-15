@@ -162,8 +162,16 @@ cp("$gerda_ms/UTILS/sim-parameters-all.json", "$destdir/sim-parameters-all.json"
 for f in readdir("$gerda_ms/UTILS/post/settings/")
     cp("$gerda_ms/UTILS/post/settings/$f", "$destdir/prod-settings/$f", force=true)
 end
-# julia latex-report.jl ../sim-parameters-all.json
-# rsync gerda-mage-sim-report.* $(destdir)/
+
+# generate report
+@info "generating report"
+include("$gerda_ms/UTILS/post/latex-report.jl")
+status = latexreport("$gerda_ms/UTILS/sim-parameters-all.json")
+if status == 0
+    cp("gerda-mage-sim-report.pdf", "$destdir/gerda-mage-sim-report.pdf", force=true)
+else
+    @warn "report generation failed, no output produced"
+end
 
 # directories to be scanned
 maindirs = ["cables", "electronics", "ge_holders",
@@ -173,7 +181,7 @@ maindirs = ["cables", "electronics", "ge_holders",
 for volume in maindirs
     @info "processing $volume/ directory"
     # loop on a part/isotope/type list
-    for d in sort([s[1:end-5] for s in find_files("$gerda_ms/$volume", r".+/.+/(edep|coin)$")])
+    for d in unique([s[1:end-5] for s in find_files("$gerda_ms/$volume", r".+/.+/(edep|coin)$")])
 
         # 'd' is of the form part/isotope
         items = split(d, '/')
@@ -181,7 +189,10 @@ for volume in maindirs
         isotope = items[2]
 
         # skip chan-wise simulations
-        occursin("chanwise", part) && continue
+        if occursin("chanwise", part)
+            @debug "skipping $volume/$part"
+            continue
+        end
 
         @debug "processing $volume/$part/$isotope"
 

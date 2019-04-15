@@ -10,4 +10,4 @@
 CONTAINER=gerda-sw-all_active.simg
 LOGFILE=$(echo $1 | cut -f 1 -d '.').out
 cd ${GERDA_MAGE_SIM}
-/usr/bin/time -v singularity exec ./UTILS/container/$CONTAINER MaGe --no-colors $1 &> $LOGFILE
+/usr/bin/time -v singularity exec --cleanenv ./UTILS/container/$CONTAINER MaGe --no-colors $1 &> $LOGFILE

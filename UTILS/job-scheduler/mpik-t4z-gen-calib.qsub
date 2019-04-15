@@ -13,7 +13,7 @@ TYPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
 LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/$TYPE/t4z-$VOLUME-$PART-$ISOTOPE-$TYPE.out
 
 mkdir -p $2/$VOLUME/$PART/$ISOTOPE/$TYPE
-/usr/bin/time -v singularity exec $SRCDIR/UTILS/container/gerda-mage-sim-utils_active.simg \
+/usr/bin/time -v singularity exec --cleanenv $SRCDIR/UTILS/container/gerda-mage-sim-utils_active.simg \
     t4z-gen-calib \
     --metadata $SRCDIR/UTILS/post/gerda-metadata \
     --srcdir $SRCDIR \
