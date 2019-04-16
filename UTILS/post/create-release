@@ -12,6 +12,6 @@ while [ ! -d $ans ]; do
 done
 
 echo "compressing..."
-tar -caf releases/gerda-pdfs-$ans.tar.gz $(find $ans -name "pdf-*") $ans/prod-settings $ans/*.json
+tar -caf releases/gerda-pdfs-$ans.tar.gz $(find $ans -name "pdf-*.root") $ans/prod-settings $ans/*.json
 echo "releases/gerda-pdfs-$ans.tar.gz created."
 cd - > /dev/null
