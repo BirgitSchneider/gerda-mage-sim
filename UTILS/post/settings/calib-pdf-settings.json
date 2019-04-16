@@ -1,7 +1,7 @@
 {
     "calib" : {
         "Bi214" : {
-            "notes" : [ "This is for the run76 pcalib data with 226Ra" ],
+            "notes" : [ "This is for calibrations with Ra226" ],
             "s2" : {
                 "8151" : {
                     "id" : "run76pca",
@@ -40,6 +40,49 @@
                     "single-mode" : true,
                     "multi-mode" : false,
                     "keylist" : "run0076-pca-S3-8570"
+                }
+            }
+        },
+        "Th228" : {
+            "notes" : [ "Regular calibration source, applies to Tl208 and Bi212 simulations" ],
+            "s2" : {
+                "8151" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S2-8220"
+                },
+                "8405" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S2-8408"
+                },
+                "8570" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S2-8570"
+                }
+            },
+            "s3" : {
+                "8139" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S3-8220"
+                },
+                "8305" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S3-8405"
+                },
+                "8570" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S3-8570"
                 }
             }
         }

@@ -177,17 +177,30 @@ int main(int argc, char** argv) {
         return 1;
     }
     if (verbose) glog(debug) << "Position: " << pos << std::endl;
-    if (!cfg[isotope][source][pos][type_str + "-mode"]) {
+
+    bool found = false;
+
+    if (cfg[isotope][source][pos][type_str + "-mode"]) {
+        if (cfg[isotope][source][pos][type_str + "-mode"].asBool() == true) {
+            cfg = cfg[isotope][source][pos];
+            found = true;
+        }
+    }
+    // try Th228 if Bi212/Tl208
+    else if (isotope == "Bi212" or isotope == "Tl208") {
+        if (cfg["Th228"][source][pos][type_str + "-mode"]) {
+            if (cfg["Th228"][source][pos][type_str + "-mode"].asBool() == true) {
+                cfg = cfg["Th228"][source][pos];
+                found = true;
+            }
+        }
+    }
+
+    if (!found) {
         glog(error) << "could not find any entry for " << items[2] << "/" << items[1]
                   << " in the JSON file. Exiting gracefully...\n";
         return 1;
     }
-    else if (cfg[isotope][source][pos][type_str + "-mode"].asBool() != true) {
-        glog(error) << "could not find any entry for " << items[2] << "/" << items[1]
-                  << " in the JSON file. Exiting gracefully...\n";
-        return 1;
-    }
-    cfg = cfg[isotope][source][pos];
 
     // build output filename
     auto& it = items;

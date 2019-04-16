@@ -1,3 +1,4 @@
+bin
 *.simg
 container/*.simg
 post/log
