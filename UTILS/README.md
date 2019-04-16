@@ -29,9 +29,18 @@ $ julia make.jl [--dry-run]
 ```
 setting `JULIA_DEBUG=all` enables the debug logging mode.
 
+**NB:** After the simulations are done, please perform consistency checks with
+the `UTILS/health-dep/sim-doctor.cxx` program. Using the Singularity container,
+for example:
+```console
+$ cd gerda-mage-sim
+$ singularity exec --cleanenv gerda-mage-sim-utils_active.simg sim-doctor .
+```
+
 ## PDFs production
 
-Analogously to the simulations production, `UTILS/post/make.jl` sends to the SGE cluster the PDF production chain.
+Analogously to the simulations production, `UTILS/post/make.jl` sends to the
+SGE cluster the PDF production chain.
 
 **Additional prerequisites:**
 - put a Singularity container produced with the Dockerfile in `UTILS` at
@@ -48,6 +57,14 @@ $ julia make.jl [--dry-run] --cycle <version> --destdir <gerda-pdfs-dir>
 $ ./create-release
 ```
 setting `JULIA_DEBUG=all` enables the debug logging mode.
+
+**NB:** After the pdf-production has ended, please perform consistency checks
+with the `UTILS/health-dep/pdf-doctor.cxx` program. Using the Singularity
+container, for example:
+```console
+$ cd <production-destdir>
+$ singularity exec --cleanenv gerda-mage-sim-utils_active.simg pdf-doctor .
+```
 
 The PDF production might be also run for individual simulations, for example,
 at the MPIK cluster:
