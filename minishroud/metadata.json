@@ -1,0 +1,235 @@
+{
+    "volume": "minishroud",
+    "description": "Simulations in the nylon mini-shrouds sorrounding each string",
+    "parts": {
+        "ms_all": {
+            "description": "All minishrouds, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 188.602,
+            "mc-volume-cm3": 164.0017,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_[0-6]",
+                "MiniShroudPhase2Bottom_[0-6]",
+                "MiniShroudPhase2Tub_[0-6]",
+                "MiniShroudPhase2BottomGluedRing_[0-6]",
+                "MiniShroudPhase2TopGluedRing_[0-6]"
+            ]
+        },
+        "ms1": {
+            "description": "Minishroud 1, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 29.3738,
+            "mc-volume-cm3": 25.54243,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_0",
+                "MiniShroudPhase2Bottom_0",
+                "MiniShroudPhase2Tub_0",
+                "MiniShroudPhase2BottomGluedRing_0",
+                "MiniShroudPhase2TopGluedRing_0"
+            ]
+        },
+        "ms2": {
+            "description": "Minishroud 2, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 26.5386,
+            "mc-volume-cm3": 23.07704,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_1",
+                "MiniShroudPhase2Bottom_1",
+                "MiniShroudPhase2Tub_1",
+                "MiniShroudPhase2BottomGluedRing_1",
+                "MiniShroudPhase2TopGluedRing_1"
+            ]
+        },
+        "ms3": {
+            "description": "Minishroud 3, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 26.5386,
+            "mc-volume-cm3": 23.07704,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_2",
+                "MiniShroudPhase2Bottom_2",
+                "MiniShroudPhase2Tub_2",
+                "MiniShroudPhase2BottomGluedRing_2",
+                "MiniShroudPhase2TopGluedRing_2"
+            ]
+        },
+        "ms4": {
+            "description": "Minishroud 4, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 26.5386,
+            "mc-volume-cm3": 23.07704,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_3",
+                "MiniShroudPhase2Bottom_3",
+                "MiniShroudPhase2Tub_3",
+                "MiniShroudPhase2BottomGluedRing_3",
+                "MiniShroudPhase2TopGluedRing_3"
+            ]
+        },
+        "ms5": {
+            "description": "Minishroud 5, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 26.5386,
+            "mc-volume-cm3": 23.07704,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_4",
+                "MiniShroudPhase2Bottom_4",
+                "MiniShroudPhase2Tub_4",
+                "MiniShroudPhase2BottomGluedRing_4",
+                "MiniShroudPhase2TopGluedRing_4"
+            ]
+        },
+        "ms6": {
+            "description": "Minishroud 6, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 26.5386,
+            "mc-volume-cm3": 23.07704,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_5",
+                "MiniShroudPhase2Bottom_5",
+                "MiniShroudPhase2Tub_5",
+                "MiniShroudPhase2BottomGluedRing_5",
+                "MiniShroudPhase2TopGluedRing_5"
+            ]
+        },
+        "ms7": {
+            "description": "Minishroud 7, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "mc-mass-g": 26.5386,
+            "mc-volume-cm3": 23.07704,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_6",
+                "MiniShroudPhase2Bottom_6",
+                "MiniShroudPhase2Tub_6",
+                "MiniShroudPhase2BottomGluedRing_6",
+                "MiniShroudPhase2TopGluedRing_6"
+            ]
+        },
+        "glue_rings_all": {
+            "description": "All minishroud's glue_rings, top and bottom (7)",
+            "mc-mass-g": 26.3782,
+            "mc-volume-cm3": 22.93756,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_[0-6]",
+                "MiniShroudPhase2TopGluedRing_[0-6]"
+            ]
+        },
+        "glue_ring1": {
+            "description": "Minishroud 1's glue ring, top and bottom (7)",
+            "mc-mass-g": 4.07798,
+            "mc-volume-cm3": 3.54607,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_0",
+                "MiniShroudPhase2TopGluedRing_0"
+            ]
+        },
+        "glue_ring2": {
+            "description": "Minishroud 2's glue ring, top and bottom (7)",
+            "mc-mass-g": 3.7167,
+            "mc-volume-cm3": 3.231913,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_1",
+                "MiniShroudPhase2TopGluedRing_1"
+            ]
+        },
+        "glue_ring3": {
+            "description": "Minishroud 3's glue ring, top and bottom (7)",
+            "mc-mass-g": 3.7167,
+            "mc-volume-cm3": 3.231913,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_2",
+                "MiniShroudPhase2TopGluedRing_2"
+            ]
+        },
+        "glue_ring4": {
+            "description": "Minishroud 4's glue ring, top and bottom (7)",
+            "mc-mass-g": 3.7167,
+            "mc-volume-cm3": 3.231913,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_3",
+                "MiniShroudPhase2TopGluedRing_3"
+            ]
+        },
+        "glue_ring5": {
+            "description": "Minishroud 5's glue ring, top and bottom (7)",
+            "mc-mass-g": 3.7167,
+            "mc-volume-cm3": 3.231913,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_4",
+                "MiniShroudPhase2TopGluedRing_4"
+            ]
+        },
+        "glue_ring6": {
+            "description": "Minishroud 6's glue ring, top and bottom (7)",
+            "mc-mass-g": 3.7167,
+            "mc-volume-cm3": 3.231913,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_5",
+                "MiniShroudPhase2TopGluedRing_5"
+            ]
+        },
+        "glue_ring7": {
+            "description": "Minishroud 7's glue ring, top and bottom (7)",
+            "mc-mass-g": 3.7167,
+            "mc-volume-cm3": 3.231913,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_6",
+                "MiniShroudPhase2TopGluedRing_6"
+            ]
+        },
+        "glue_ring7_bottom": {
+            "description": "Minishroud 7's glue ring, bottom",
+            "mc-mass-g": 1.86512,
+            "mc-volume-cm3": 1.621843,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_6"
+            ]
+        },
+        "glue_ring7_top": {
+            "description": "Minishroud 7's glue ring, top",
+            "mc-mass-g": 1.85158,
+            "mc-volume-cm3": 1.610069,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2TopGluedRing_6"
+            ]
+        },
+        "glue_rings_top": {
+            "description": "Minishroud's glue rings, top",
+            "mc-mass-g": 13.1417,
+            "mc-volume-cm3": 11.42756,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2TopGluedRing_[0-6]"
+            ]
+        },
+        "glue_rings_bottom": {
+            "description": "Minishroud's glue rings, bottom",
+            "mc-mass-g": 13.2365,
+            "mc-volume-cm3": 11.51,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2BottomGluedRing_[0-6]"
+            ]
+        },
+        "top1": {
+            "description": "Minishroud 1's top lid",
+            "mc-mass-g": 1.43051,
+            "mc-volume-cm3": 1.243921739,
+            "mc-density-gcm3": 1.15,
+            "mage-volumes": [
+                "MiniShroudPhase2Top_1"
+            ]
+        }
+    }
+}
