@@ -43,16 +43,16 @@
                 }
             }
         },
-        "Th228" : {
-            "notes" : [ "Regular calibration source, applies to Tl208 and Bi212 simulations" ],
+        "Bi212" : {
+            "notes" : [ "For Th228 source" ],
             "s2" : {
-                "8151" : {
+                "8220" : {
                     "id" : "run68pca",
                     "single-mode" : true,
                     "multi-mode" : false,
                     "keylist" : "run0068-pca-S2-8220"
                 },
-                "8405" : {
+                "8408" : {
                     "id" : "run68pca",
                     "single-mode" : true,
                     "multi-mode" : false,
@@ -66,13 +66,56 @@
                 }
             },
             "s3" : {
-                "8139" : {
+                "8220" : {
                     "id" : "run68pca",
                     "single-mode" : true,
                     "multi-mode" : false,
                     "keylist" : "run0068-pca-S3-8220"
                 },
-                "8305" : {
+                "8405" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S3-8405"
+                },
+                "8570" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S3-8570"
+                }
+            }
+        },
+        "Tl208" : {
+            "notes" : [ "For Th228 source" ],
+            "s2" : {
+                "8220" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S2-8220"
+                },
+                "8408" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S2-8408"
+                },
+                "8570" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S2-8570"
+                }
+            },
+            "s3" : {
+                "8220" : {
+                    "id" : "run68pca",
+                    "single-mode" : true,
+                    "multi-mode" : false,
+                    "keylist" : "run0068-pca-S3-8220"
+                },
+                "8405" : {
                     "id" : "run68pca",
                     "single-mode" : true,
                     "multi-mode" : false,

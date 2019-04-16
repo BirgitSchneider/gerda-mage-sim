@@ -207,6 +207,8 @@ for volume in maindirs
                         spawn_t4z_gen("$gerda_ms/$volume/$d/$type", destdir, dryrun=fake)
                         t4zspawn = true
                         break
+                    else
+                        @debug "$file is up-to-date"
                     end
                 end
             end
@@ -218,12 +220,16 @@ for volume in maindirs
             if !isfile(file) || t4zspawn
                 @debug "$file must be (re)done"
                 spawn_pdf_gen("$destdir/$volume/$d", destdir, larveto=applylar, dryrun=fake)
+            else
+                @debug "$file is up-to-date"
             end
         end
     end
 end
 
 # special calib folder treatment
+# the following approach consists in looking into the config JSON file
+# rather than starting from simulations available
 @info "processing calib/ directory"
 try
     cfg = JSON.parse(open("$gerda_ms/UTILS/post/settings/calib-pdf-settings.json"))["calib"]
@@ -236,6 +242,10 @@ try
                 !d3["$mode-mode"] && continue
                 part = "$(mode)_$(src)_$pos"
                 @debug "asked for calib/$part/$iso PDF"
+                if !isdir("$gerda_ms/calib/$part/$iso/edep") && !isdir("$gerda_ms/calib/$part/$iso/coin")
+                    @warn "asked for calib/$part/$iso PDF but no edep|coin folder could be found"
+                    continue
+                end
                 # see if a t4z-gen job should be spawned
                 t4zspawn = false
                 for type in ["edep", "coin"]
@@ -245,6 +255,8 @@ try
                             @debug "$file does not exist"
                             spawn_t4z_gen("$gerda_ms/calib/$part/$iso/$type", destdir, calib=true, dryrun=fake)
                             t4zspawn = true
+                        else
+                            @debug "$file is up-to-date"
                         end
                     end
                 end
@@ -254,6 +266,8 @@ try
                     if !isfile(file) || t4zspawn
                         @debug "$file must be (re)done"
                         spawn_pdf_gen("$destdir/calib/$part/$iso", destdir, larveto=applylar, dryrun=fake)
+                    else
+                        @debug "$file is up-to-date"
                     end
                 end
             end
