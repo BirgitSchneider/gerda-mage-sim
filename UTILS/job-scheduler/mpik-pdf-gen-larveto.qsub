@@ -9,7 +9,7 @@ SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 VOLUME=$(echo $1 | rev | cut -d'/' -f3 | rev)
 PART=$(echo $1 | rev | cut -d'/' -f2 | rev)
 ISOTOPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
-LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/pdf-$VOLUME-$PART-$ISOTOPE.out
+LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/pdf-$VOLUME-$PART-$ISOTOPE-larveto.out
 
 mkdir -p $2/$VOLUME/$PART/$ISOTOPE
 
@@ -17,6 +17,6 @@ mkdir -p $2/$VOLUME/$PART/$ISOTOPE
     pdf-gen \
     --destdir $2 \
     --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
-    --custom-settings $SRCDIR/UTILS/post/settings/pdf-gen-settings.json \
+    --custom-settings $SRCDIR/UTILS/post/settings/pdf-gen-settings-larveto.json \
     -v \
     $1 &> $LOGFILE

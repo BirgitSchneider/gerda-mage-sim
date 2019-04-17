@@ -27,6 +27,9 @@
 #include "gerda-ada/T4SimHandler.h"
 #include "gerda-ada/T4SimConfig.h"
 
+enum logLevel {debug, info, warning, error};
+std::ostream& glog(logLevel lvl);
+
 int main(int argc, char** argv) {
 
     // utilities
@@ -55,45 +58,48 @@ int main(int argc, char** argv) {
     result = std::find(args.begin(), args.end(), "--destdir");
     if (result != args.end()) destDirPath = *(result+1);
     else {usage(); return 1;}
-    std::string srcDirPath;
+    std::string gms_path;
     result = std::find(args.begin(), args.end(), "--srcdir");
-    if (result != args.end()) srcDirPath = *(result+1);
+    if (result != args.end()) gms_path = *(result+1);
     else {usage(); return 1;}
     std::string livetimeFile;
     result = std::find(args.begin(), args.end(), "--livetime-file");
     if (result != args.end()) livetimeFile = *(result+1);
     else {usage(); return 1;}
     std::ifstream flivetimes(livetimeFile);
-    if (!flivetimes.is_open()) {std::cout << "Invalid livetime file! Aborting..."; return 1;}
+    if (!flivetimes.is_open()) {glog(debug) << "Invalid livetime file! Aborting..."; return 1;}
     std::string runlistFile;
     result = std::find(args.begin(), args.end(), "--runlist-file");
     if (result != args.end()) runlistFile = *(result+1);
     else {usage(); return 1;}
     std::ifstream frunlist(runlistFile);
-    if (!frunlist.is_open()) {std::cout << "Invalid run-list file! Aborting..."; return 1;}
+    if (!frunlist.is_open()) {glog(debug) << "Invalid run-list file! Aborting..."; return 1;}
     bool verbose = false;
     result = std::find(args.begin(), args.end(), "-v");
     if (result != args.end()) verbose = true;
     auto dirWithRaw = *(args.end()-1);
 
     if (dirWithRaw.find("chanwise") != std::string::npos) {
-        std::cout << "These simulations won't be processed because they are separated in channels. This will create problems in PDFs building. Aborting..."; return 1;
+        glog(debug) << "These simulations won't be processed because they are separated in channels. This will create problems in PDFs building. Aborting..."; return 1;
     }
 
     setenv("MU_CAL", (gerdaMetaPath + "/config/_aux/geruncfg").c_str(), 1);
 
     // strip off trailing '/' character, if present
-    if (verbose) std::cout << "Paths:\n";
-    if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back(); if (verbose) std::cout << gerdaMetaPath << std::endl;
-    if (destDirPath.back()   == '/') destDirPath.pop_back();   if (verbose) std::cout << destDirPath   << std::endl;
-    if (srcDirPath.back()   == '/')  srcDirPath.pop_back();    if (verbose) std::cout << srcDirPath   << std::endl;
-    if (dirWithRaw.back()    == '/') dirWithRaw.pop_back();    if (verbose) std::cout << dirWithRaw    << std::endl;
+    if (gerdaMetaPath.back() == '/') gerdaMetaPath.pop_back();
+    if (verbose) glog(debug) << "gerda-metadata: " << gerdaMetaPath << std::endl;
+    if (destDirPath.back() == '/') destDirPath.pop_back();
+    if (verbose) glog(debug) << "destination: " << destDirPath << std::endl;
+    if (gms_path.back() == '/')  gms_path.pop_back();
+    if (verbose) glog(debug) << "gerda-mage-sim: " << gms_path << std::endl;
+    if (dirWithRaw.back() == '/') dirWithRaw.pop_back();
+    if (verbose) glog(debug) << "raw- files location: " << dirWithRaw << std::endl;
 
     // get raw-*.root files in directory
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;
         auto p = std::unique_ptr<DIR,std::function<int(DIR*)>>{opendir(foldName.c_str()), &closedir};
-        if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
+        if (!p) { glog(error) << "Invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 && r; ) {
             // this means "is a regular file", DT_REG = 8
@@ -104,14 +110,17 @@ int main(int argc, char** argv) {
             }
         }
         std::sort(filelist.begin(), filelist.end());
-        if (verbose) { std::cout << "\nsorted raw- files:\n"; for ( const auto & f : filelist ) std::cout << '\t' << f << std::endl; }
+        if (verbose) {
+            glog(debug) << "sorted raw- files:\n";
+            for ( const auto & f : filelist ) glog(debug) << '\t' << f << std::endl;
+        }
 
         return filelist;
     };
 
     // join all raw- files in same tree and get number of primaries
     auto filelist = GetContent(dirWithRaw);
-    if (filelist.empty()) {std::cout << "There were problems reading in the raw- files. Aborting...\n"; return 1;}
+    if (filelist.empty()) {glog(error) << "There were problems reading in the raw- files. Aborting...\n"; return 1;}
     TChain ch("fTree");
     bool problems = false;
     long totPrimaries = 0;
@@ -121,13 +130,13 @@ int main(int argc, char** argv) {
         if (file.GetListOfKeys()->Contains("NumberOfPrimaries")) {
             auto primaries = dynamic_cast<TParameter<long>*>(file.Get("NumberOfPrimaries"))->GetVal();
             if (primaries == 0) {
-                std::cout << "WARNING: NumberOfPrimaries is zero in " << f << "!\n";
+                glog(warning) << "NumberOfPrimaries is zero in " << f << "!\n";
                 problems = true;
             }
             totPrimaries += primaries;
         }
         else {
-            std::cout << "WARNING: NumberOfPrimaries not found in " << f << "! It will be set to zero!\n";
+            glog(warning) << "NumberOfPrimaries not found in " << f << "! It will be set to zero!\n";
             problems = true;
         }
         file.Close();
@@ -135,7 +144,7 @@ int main(int argc, char** argv) {
     }
     // if at least one object does not exist set primaries to zero to indicate a failure
     if (problems) {
-        std::cout << "WARNING: there were some problems, setting totPrimaries = 0...\n";
+        glog(warning) << "there were some problems, setting totPrimaries = 0...\n";
         totPrimaries = 0;
     }
 
@@ -152,20 +161,19 @@ int main(int argc, char** argv) {
     for (auto r : runlist["run-list"]) {
         auto runID = "run" + r.asString();
         if (!livetimes[runID]["livetime_in_s"]) {
-            std::cout << "\nERROR: " + runID + " not found in livetime file! rerun livetime-calc-ph2! Aborting...";
+            glog(error) << runID + " not found in livetime file! rerun livetime-calc-ph2! Aborting...";
             return 1;
         }
-        if (verbose) std::cout << "\n" + runID + ": " << livetimes[runID]["livetime_in_s"].asInt() << " s";
+        if (verbose) glog(debug) << runID + ": " << livetimes[runID]["livetime_in_s"].asInt() << " s\n";
         totLivetime += livetimes[runID]["livetime_in_s"].asInt();
     }
-    if (verbose) std::cout << "\nTotal livetime: " << totLivetime << std::endl;
+    if (verbose) glog(debug) << "total livetime: " << totLivetime << std::endl;
 
     int first = 0; // first event to be processed in tree
     // loop over runIDs in json file
     for ( auto r : runlist["run-list"] ) {
         auto runID = "run" + r.asString();
-        if (verbose) std::cout << std::endl;
-        std::cout << "==> " << runID << std::endl;
+        glog(info) << "==> " << runID << std::endl;
         // strip out folders in dir to build up final t4z- filename
         std::vector<std::string> items;
         std::string dircopy = dirWithRaw;
@@ -177,8 +185,8 @@ int main(int argc, char** argv) {
         auto filedir = destDirPath + '/' + it[3] + '/' + it[2] + '/' + it[1] + '/' + it[0];
         auto filename = filedir + '/' + "t4z-" + it[3] + '-' + it[2] + '-' + it[1] + '-' + it[0] + "-" +
                         runID + ".root";
-        if (verbose) std::cout << "Post-production folder: " << destDirPath << std::endl;
-        if (verbose) std::cout << "tz4- file name: " << filename << std::endl;
+        if (verbose) glog(debug) << "post-production folder: " << destDirPath << std::endl;
+        if (verbose) glog(debug) << "tz4- file name: " << filename << std::endl;
 
         // make destdir
         std::system(c_str("mkdir -p " + filedir));
@@ -187,25 +195,38 @@ int main(int argc, char** argv) {
         auto nentries = ch.GetEntries();
         int fraction = std::round(nentries * livetimes[runID]["livetime_in_s"].asInt() *1. / totLivetime);
         Long64_t primFraction = std::round(totPrimaries * livetimes[runID]["livetime_in_s"].asInt() *1. / totLivetime);
-        if (verbose) std::cout << "Events fraction: " << nentries << " * " << livetimes[runID]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << fraction << std::endl;
-        if (verbose) std::cout << "Primaries fraction: " << totPrimaries << " * " << livetimes[runID]["livetime_in_s"].asInt() << " *1. / " << totLivetime << " = " << primFraction << std::endl;
+        if (verbose) glog(debug) << "Events fraction: " << nentries << " * "
+                                 << livetimes[runID]["livetime_in_s"].asInt() << " *1. / "
+                                 << totLivetime << " = " << fraction << std::endl;
+        if (verbose) glog(debug) << "Primaries fraction: " << totPrimaries << " * "
+                                 << livetimes[runID]["livetime_in_s"].asInt() << " *1. / "
+                                 << totLivetime << " = " << primFraction << std::endl;
 
         // set up tier4izer
         gada::T4SimConfig config;
-        config.LoadMapping(gerdaMetaPath + "/detector-data/mapping-default-depr.json");
-            if(verbose) std::cout << "Mapping loaded" << std::endl;
-        config.LoadGedSettings(srcDirPath + "/UTILS/post/settings/ged-settings-custom.json");
-            if(verbose) std::cout << "Ged settings loaded" << std::endl;
-//        config.LoadLArSettings(gerdaMetaPath + "/detector-data/lar-settings-default.json");
-//            if(verbose) std::cout << "LAr settings loaded" << std::endl;
-        config.LoadGedResolutions(srcDirPath + "/UTILS/post/settings/ged-resolution-custom.json", "Zac");
-            if(verbose) std::cout << "Ged resolutions loaded" << std::endl;
+
+        auto calib_file        = gms_path + "/UTILS/post/settings/ged-resolution.json";
+        auto mapping_file      = gms_path + "/UTILS/post/settings/mapping.json";
+        auto ged_settings_file = gms_path + "/UTILS/post/settings/ged-settings.json";
+        auto heat_map          = gms_path + "/UTILS/post/gerda-larmap.root";
+
+        config.LoadMapping(mapping_file);
+        if(verbose) glog(debug) << "channel mapping " << mapping_file << " loaded" << std::endl;
+
+        config.LoadGedSettings(ged_settings_file);
+        if(verbose) glog(debug) << "ged threshold settings " << ged_settings_file << " loaded" << std::endl;
+
+        config.LoadGedResolutions(calib_file, "Zac");
+        if(verbose) glog(debug) << "ged resolution curves " << calib_file << " loaded" << std::endl;
+
         config.LoadRunConfig((ULong64_t)livetimes[runID]["timestamp"].asUInt64());
-            if(verbose) std::cout << "RunConfig loaded" << std::endl;
+        if(verbose) glog(debug) << "RunConfig for timestamp " << livetimes[runID]["timestamp"].asUInt64()
+                                << " loaded" << std::endl;
 
         gada::T4SimHandler handler(&ch, &config, filename);
-            if (verbose) std::cout << "Running production... first event = " << first << std::endl;
+
         // run!
+        glog(info) << "running production... first event = " << first << std::endl;
         if ( first + fraction > nentries ) fraction = nentries - first;
         handler.RunProduction( first, first + fraction );
 
@@ -215,9 +236,30 @@ int main(int argc, char** argv) {
         numberOfPrimaries.Write();
         f.Close();
 
+        glog(info) << "done. " << filename << " created" << std::endl;
+
         // update first event
         first += fraction;
     }
 
     return 0;
+}
+
+std::ostream& glog(logLevel lvl) {
+    if (lvl == debug) {
+        std::cout << "[DEBUG] ";
+        return std::cout;
+    }
+    if (lvl == info) {
+        std::cout << "[INFO] ";
+        return std::cout;
+    }
+    if (lvl == warning) {
+        std::cerr << "[WARNING] ";
+        return std::cerr;
+    }
+    if (lvl == error) {
+        std::cerr << "[ERROR] ";
+        return std::cerr;
+    }
 }

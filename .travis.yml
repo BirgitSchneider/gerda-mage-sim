@@ -1,12 +1,12 @@
 language: julia
 julia:
-    - 0.6
+    - 1.1
 
 git:
   submodules: false
 
 before_install:
-    - julia -e 'Pkg.add("JSON")'
+    - julia -e 'import Pkg; Pkg.add("JSON")'
 
 install: true
 

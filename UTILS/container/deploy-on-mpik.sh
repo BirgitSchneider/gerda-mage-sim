@@ -1,6 +1,11 @@
 #!/bin/bash
 docker build . -t gerda-mage-sim-utils:latest && \
-/common/sw-other/singularity-utils/bin/docker2singularity.py gerda-mage-sim-utils:latest container/gerda-mage-sim-utils.sqsh && \
-scp container/gerda-mage-sim-utils.sqsh `whoami`@lfs2.mpi-hd.mpg.de:/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/container/ && \
-docker tag gerda-mage-sim-utils:latest baltig.infn.it:4567/gerda/gerdasw-containers/gerda-mage-sim-utils:latest && \
-docker push baltig.infn.it:4567/gerda/gerdasw-containers/gerda-mage-sim-utils:latest
+sudo docker run \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v $PWD:/output \
+    --privileged -t --rm \
+    singularityware/docker2singularity gerda-mage-sim-utils:latest && \
+mv gerda-mage-sim-utils*.simg gerda-mage-sim-utils.simg && \
+chown `whoami`:`id -gn` gerda-mage-sim-utils.simg && \
+rsync --progress gerda-mage-sim-utils.simg \
+    `whoami`@lfs2.mpi-hd.mpg.de:/lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/container/

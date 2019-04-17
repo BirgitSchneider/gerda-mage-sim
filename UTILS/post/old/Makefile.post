@@ -13,7 +13,7 @@
 #    actually executing it (useful also in conjunction with --debug)
 #
 # *CHANGE ME* important variables
-CYCLE          = v1.1
+CYCLE          = v2.0-RC
 RUNS           = $(shell sed '3!d;s/,//g' settings/run-list.json | cut -d "[" -f2 | cut -d "]" -f1)
 GERDA_MAGE_SIM = /lfs/l2/gerda/gerda-simulations/gerda-mage-sim
 GERDA_PDFS     = /lfs/l2/gerda/gerda-simulations/gerda-pdfs
@@ -26,11 +26,12 @@ all :
 
 # qsub script must accept the syntax:
 # qsub job-scheduler/mpik-t4z-gen.qsub <folder-with-raw> <dest-dir-tree>
+# qsub job-scheduler/mpik-t4z-calib-gen.qsub <folder-with-raw> <dest-dir-tree>
 # qsub job-scheduler/mpik-pdf-gen.qsub <volume>/<part>/<isotope> <dest-dir-tree>
-# qsub job-scheduler/mpik-pdf-gen-volume.qsub <volume> <dest-dir-tree>
-JOBT4Z     = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-t4z-gen.qsub
-JOBPDF     = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-pdf-gen.qsub
-JOBPDFVOL  = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-pdf-gen-volume.qsub
+JOBT4Z      = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-t4z-gen.qsub
+JOBT4ZCALIB = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-t4z-gen-calib.qsub
+JOBPDF      = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-pdf-gen.qsub
+JOBPDFLAR   = $(GERDA_MAGE_SIM)/UTILS/job-scheduler/mpik-pdf-gen-larveto.qsub
 
 # functions to change the position of the directory tree
 change_to_gms  = $(shell echo $(GERDA_MAGE_SIM)/$(shell echo $(1) | awk -F '$(DEST_DIR)/' '{print $$2}'))
@@ -72,6 +73,9 @@ LARVETO_ALL_PDF_FILES = $(foreach i,$(LARVETO_ISOTOPES),$(call change_to_gpdf,$(
 ELECTRONICS_ISOTOPES = $(sort $(foreach d,$(wildcard $(GERDA_MAGE_SIM)/electronics/*/*/edep $(GERDA_MAGE_SIM)/electronics/*/*/coin),$(shell dirname $(d))))
 ELECTRONICS_ALL_PDF_FILES = $(foreach i,$(ELECTRONICS_ISOTOPES),$(call change_to_gpdf,$(i)/pdf-$(call volume_gms,$(i))-$(call part_gms,$(i))-$(call isotope_gms,$(i)).root))
 
+CALIB_ISOTOPES = $(sort $(foreach d,$(wildcard $(GERDA_MAGE_SIM)/calib/*/*/edep $(GERDA_MAGE_SIM)/calib/*/*/coin),$(shell dirname $(d))))
+CALIB_ALL_PDF_FILES = $(foreach i,$(CALIB_ISOTOPES),$(call change_to_gpdf,$(i)/pdf-$(call volume_gms,$(i))-$(call part_gms,$(i))-$(call isotope_gms,$(i)).root))
+
 ALL_PDF_FILES = $(CABLES_ALL_PDF_FILES) \
                 $(MINIS_ALL_PDF_FILES) \
                 $(GEDET_ALL_PDF_FILES) \
@@ -82,15 +86,15 @@ ALL_PDF_FILES = $(CABLES_ALL_PDF_FILES) \
 
 # final target list
 .PHONY : post
-post : preliminary alphas $(ALL_PDF_FILES)
+post : preliminary alphas $(ALL_PDF_FILES) $(CALIB_ALL_PDF_FILES)
 
 .PHONY : preliminary
 preliminary :
 	mkdir -p $(DEST_DIR)/prod-settings
 	rsync $(GERDA_MAGE_SIM)/UTILS/sim-parameters-all.json $(DEST_DIR)/sim-parameters-all.json
 	rsync $(GERDA_MAGE_SIM)/UTILS/post/settings/* $(DEST_DIR)/prod-settings/
-	/lfs/l3/gerda/sturm/sw/.install/julia/linux-scientific-7.3-x86_64/0.6.2/bin/julia latex-report.jl ../sim-parameters-all.json
-	rsync gerda-mage-sim-report.* $(DEST_DIR)/
+	-julia latex-report.jl ../sim-parameters-all.json
+	-rsync gerda-mage-sim-report.* $(DEST_DIR)/
 
 # list of already processed alpha histos_ISOTOPE_(LAr)pPlus.root files to be copied
 ALPHA_HIST_FILES = $(shell find $(GERDA_MAGE_SIM)/alphas/ -iname "pdf*root")
@@ -114,7 +118,7 @@ check_if_job_exists = $(shell if [[ `qstat -r | grep $(1) | grep "Full jobname:"
 
 .SECONDEXPANSION:
 $(ALL_PDF_FILES) : %.root : $$(foreach d,$$(wildcard $$(call change_to_gms,$$(dir $$*)edep) $$(call change_to_gms,$$(dir $$*)coin)),$$(call get_t4z_filelist,$$d))
-	@if [[ $(call check_if_job_exists,$(notdir $@)-$(CYCLE)) == 0 ]]; then \
+	@if [[ $(call check_if_job_exists,$(notdir $@)-$(CYCLE)) == 0 ]]; then \ # before LAr
 	$(QSUB) -hold_jid t4z-$(call vpi_gpdf,$@)-edep-$(CYCLE),t4z-$(call vpi_gpdf,$@)-coin-$(CYCLE) \
                    -N $(notdir $@)-$(CYCLE) \
                    $(JOBPDF) $(call volume_gpdf,$@)/$(call part_gpdf,$@)/$(call isotope_gpdf,$@) \
@@ -122,8 +126,16 @@ $(ALL_PDF_FILES) : %.root : $$(foreach d,$$(wildcard $$(call change_to_gms,$$(di
 	else \
 	echo "There's already a job for $(notdir $@)-$(CYCLE) in queue"; \
 	fi
+	@if [[ $(call check_if_job_exists,$(notdir $@)-$(CYCLE)-larveto) == 0 ]]; then \ # after LAr
+	$(QSUB) -hold_jid t4z-$(call vpi_gpdf,$@)-edep-$(CYCLE),t4z-$(call vpi_gpdf,$@)-coin-$(CYCLE) \
+                   -N $(notdir $@)-$(CYCLE)-larveto \
+                   $(JOBPDFLAR) $(call volume_gpdf,$@)/$(call part_gpdf,$@)/$(call isotope_gpdf,$@) \
+                   $(DEST_DIR); \
+	else \
+	echo "There's already a job for $(notdir $@)-$(CYCLE)-larveto in queue"; \
+	fi
 
-ALL_DIRS_WITH_RAW = $(wildcard $(GERDA_MAGE_SIM)/*/*/*/edep $(GERDA_MAGE_SIM)/*/*/*/coin)
+ALL_DIRS_WITH_RAW = $(shell find $(GERDA_MAGE_SIM) \( -name edep -or -name coin \) ! -path '*/calib/*' ! -path '*/UTILS/*')
 ALL_T4Z_FILES = $(foreach d,$(ALL_DIRS_WITH_RAW),$(call get_t4z_filelist,$(d)))
 
 .SECONDEXPANSION:
@@ -131,6 +143,39 @@ $(ALL_T4Z_FILES) : % : $$(wildcard $$(call change_to_gms,$$(dir $$*))raw-*.root)
 	@if [[ $(call check_if_job_exists,$(shell echo $(notdir $@) | rev | cut -d'-' -f2- | rev)-$(CYCLE)) == 0 ]]; then \
 	$(QSUB) -N $(shell echo $(notdir $@) | rev | cut -d'-' -f2- | rev)-$(CYCLE) \
                     $(JOBT4Z) $(call change_to_gms,$(dir $@)) $(DEST_DIR); \
+	else \
+	echo "There's already a $(shell echo $(notdir $@) | rev | cut -d'-' -f2- | rev)-$(CYCLE) job in queue"; \
+	fi
+
+# calibrations
+calib_t4zfile = t4z-$(call volume_gms,$(1))-$(call part_gms,$(1))-$(call isotope_gms,$(1))-$(call deptype_gms,$(1)).root
+ALL_CALIB_DIRS_WITH_RAW = $(shell find $(GERDA_MAGE_SIM)/calib -name edep -or -name coin)
+ALL_CALIB_T4Z_FILES = $(foreach d,$(ALL_CALIB_DIRS_WITH_RAW),$(call calib_t4zfile,$(d)))
+
+.SECONDEXPANSION:
+$(CALIB_ALL_PDF_FILES) : %.root : $$(foreach d,$$(wildcard $$(call change_to_gms,$$(dir $$*)edep) $$(call change_to_gms,$$(dir $$*)coin)),$$(call calib_t4zfile,$$d))
+	@if [[ $(call check_if_job_exists,$(notdir $@)-$(CYCLE)) == 0 ]]; then \ # before LAr
+	$(QSUB) -hold_jid t4z-$(call vpi_gpdf,$@)-edep-$(CYCLE),t4z-$(call vpi_gpdf,$@)-coin-$(CYCLE) \
+                   -N $(notdir $@)-$(CYCLE) \
+                   $(JOBPDF) $(call volume_gpdf,$@)/$(call part_gpdf,$@)/$(call isotope_gpdf,$@) \
+                   $(DEST_DIR); \
+	else \
+	echo "There's already a job for $(notdir $@)-$(CYCLE) in queue"; \
+	fi
+	@if [[ $(call check_if_job_exists,$(notdir $@)-$(CYCLE)-larveto) == 0 ]]; then \ # after LAr
+	$(QSUB) -hold_jid t4z-$(call vpi_gpdf,$@)-edep-$(CYCLE),t4z-$(call vpi_gpdf,$@)-coin-$(CYCLE) \
+                   -N $(notdir $@)-$(CYCLE)-larveto \
+                   $(JOBPDFLAR) $(call volume_gpdf,$@)/$(call part_gpdf,$@)/$(call isotope_gpdf,$@) \
+                   $(DEST_DIR); \
+	else \
+	echo "There's already a job for $(notdir $@)-$(CYCLE)-larveto in queue"; \
+	fi
+
+.SECONDEXPANSION:
+$(ALL_CALIB_T4Z_FILES) : % : $$(wildcard $$(call change_to_gms,$$(dir $$*))raw-*.root)
+	@if [[ $(call check_if_job_exists,$(shell echo $(notdir $@) | rev | cut -d'-' -f2- | rev)-$(CYCLE)) == 0 ]]; then \
+	$(QSUB) -N $(shell echo $(notdir $@) | rev | cut -d'-' -f2- | rev)-$(CYCLE) \
+                    $(JOBT4ZCALIB) $(call change_to_gms,$(dir $@)) $(DEST_DIR); \
 	else \
 	echo "There's already a $(shell echo $(notdir $@) | rev | cut -d'-' -f2- | rev)-$(CYCLE) job in queue"; \
 	fi

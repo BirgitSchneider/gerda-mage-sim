@@ -28,6 +28,9 @@
 #include "TParameter.h"
 #include "TChain.h"
 
+enum logLevel {debug, info, warning, error};
+std::ostream& glog(logLevel lvl);
+
 int main( int argc, char** argv ) {
 
     // utilities
@@ -64,24 +67,27 @@ int main( int argc, char** argv ) {
     if (result != args.end()) customSettingsFile = *(result+1);
     // strip off trailing '/' character
     if (pathToTop.back() == '/') pathToTop.pop_back();
-    if (verbose) std::cout << "Top directory tree: " << pathToTop << std::endl;
+    if (verbose) glog(debug) << "top directory tree: " << pathToTop << std::endl;
     auto pathToIsotope = *(args.end()-1);
 
     if (pathToIsotope.find("chanwise") != std::string::npos) {
-        std::cout << "These t4z files won't be processed because the original simulations are separated in channels. This will create problems in PDFs building. Aborting..."; return 1;
+        glog(error) << "These t4z files won't be processed because the original simulations "
+                    << "are separated in channels. This will create problems in PDFs building. "
+                    << "Aborting...";
+        return 1;
     }
     // lambda function to get t4z-*.root files in directory
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;
         auto p = std::unique_ptr<DIR,std::function<int(DIR*)>>{opendir(foldName.c_str()), &closedir};
-        if (!p) { std::cout << "Invalid or empty directory path!\n"; return filelist; }
+        if (!p) { glog(error) << "invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 and r; ) {
             if (entry.d_type == 8 and
                 std::string(entry.d_name).find("t4z-") != std::string::npos and
                 std::string(entry.d_name).find(".root") != std::string::npos) {
                 filelist.push_back(foldName + "/" + std::string(entry.d_name));
-                if (verbose) std::cout << '\t' << std::string(entry.d_name) << std::endl;
+                if (verbose) glog(debug) << "  " << std::string(entry.d_name) << std::endl;
             }
         }
         return filelist;
@@ -89,19 +95,25 @@ int main( int argc, char** argv ) {
 
     // get t4z- edep files
     auto fold = pathToTop + '/' + pathToIsotope + "/edep";
-    if (verbose) std::cout << "\nedep t4z- files found in " << fold << " :\n";
+    if (verbose) glog(debug) << "edep t4z- files found in " << fold << " :\n";
     auto edepFilelist = GetContent(fold);
-    if (edepFilelist.empty()) {std::cout << "There were problems in reading the t4z-edep files. Aborting...\n"; return 1;}
+    if (edepFilelist.empty()) {
+        glog(error) << "there were problems in reading the t4z-edep files. Aborting...\n";
+        return 1;
+    }
     // join all t4z- files in same tree
     TChain edepCh("fTree");
     for ( auto& f : edepFilelist ) edepCh.Add(f.c_str());
 
     // get t4z- coin file
     fold = pathToTop + '/' + pathToIsotope + "/coin";
-    if (verbose) std::cout << "\ncoin t4z- files found in " << fold << " :\n";
+    if (verbose) glog(debug) << "coin t4z- files found in " << fold << " :\n";
     auto coinFilelist = GetContent(fold);
     bool processCoin = true;
-    if (coinFilelist.empty()) {std::cout << "There were problems in reading the t4z- coin files, They won't be processed\n"; processCoin = false;}
+    if (coinFilelist.empty()) {
+        glog(warning) << "there were problems in reading the t4z- coin files, They won't be processed\n";
+        processCoin = false;
+    }
     // join all t4z- files in same tree
     TChain coinCh("fTree");
     for ( auto& f : coinFilelist ) coinCh.Add(f.c_str());
@@ -118,40 +130,42 @@ int main( int argc, char** argv ) {
     // read in detector mapping
     Json::Value root;
     std::ifstream fGedMap(gedMapFile,std::ifstream::binary);
-    if (!fGedMap.is_open()) {std::cout << "ged mapping json file not found!\n"; return 1;}
+    if (!fGedMap.is_open()) {glog(error) << "ged mapping json file not found!\n"; return 1;}
     fGedMap >> root; fGedMap.close();
     std::map<int,std::string> det;
     Json::Value::Members detinfo = root["mapping"].getMemberNames();
     for ( const auto & d : detinfo ) {
         det[root["mapping"][d]["channel"].asInt()] = d;
     }
-    if (verbose) {
-        std::cout << "\nDetectors:\n";
-        for (const auto& i : det) std::cout << "ch" << i.first << '\t' << i.second << std::endl;
-    }
+    // if (verbose) {
+    //     glog(debug) << "detectors:\n";
+    //     for (const auto& i : det) glog(debug) << "ch" << i.first << '\t' << i.second << std::endl;
+    // }
 
     // read custom settings
     bool incNatCoax      = false;
     bool applyLArVetoCut = false;
     if (customSettingsFile.find(".json")!=std::string::npos) {
         std::ifstream fCustomSettings(customSettingsFile,std::ifstream::binary);
-        if (!fCustomSettings.is_open()) {std::cout << "custom settings requested but json file not found!\n"; return 1;}
+        if (!fCustomSettings.is_open()) {
+            glog(error) << "custom settings requested but json file not found!\n";
+            return 1;
+        }
         Json::Value customSettings;
         fCustomSettings >> customSettings; fCustomSettings.close();
-        incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra",false).asBool();
-        applyLArVetoCut = customSettings.get("apply-LAr-veto-cut",false).asBool();
+        incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra", false).asBool();
+        applyLArVetoCut = customSettings.get("apply-LAr-veto-cut", false).asBool();
     }
-    else{
-        if (verbose) std::cout << "\nNo custom settings file provided. Using default options.\n";
+    else {
+        if (verbose) glog(debug) << "no custom settings file provided. Using default options.\n";
     }
-    if (verbose)
-    {
-       std::cout << "\nInclude natCoax in M2 Spectra: " << incNatCoax << std::endl;
-       std::cout << "\nApply LAr veto cut: " << applyLArVetoCut << std::endl;
+    if (verbose) {
+       glog(debug) << "include natCoax in M2 Spectra: " << incNatCoax << std::endl;
+       glog(debug) << "apply LAr veto cut: " << applyLArVetoCut << std::endl;
     }
 
     // build M1 spectra
-    if (verbose) std::cout << "\nBuilding M1 spectra...\n";
+    if (verbose) glog(debug) << "building M1 spectra...\n";
     std::vector<TH1D> energy_ch;
     for ( int i = 0; i < 40; ++i ) {
         energy_ch.emplace_back(Form("M1_ch%i", i), c_str("edep, M=1 (" + det[i] + ")"), 8000, 0, 8000);
@@ -179,7 +193,7 @@ int main( int argc, char** argv ) {
     unsigned int M2_datasetMinusOne = 0; // M2: -"-
 
     // loop
-    std::cout << "Processing edep... " << edepCh.GetEntries() << " entries\n" << std::flush;
+    glog(info) << "processing edep... " << edepCh.GetEntries() << " entries\n" << std::flush;
     edepCh.LoadTree(0);
     reader.SetTree(&edepCh);
     while ( reader.Next() ) {
@@ -208,10 +222,10 @@ int main( int argc, char** argv ) {
             }
         }
     }
-    if (verbose) std::cout << "There were " << M1_datasetMinusOne << " multiplicity 1 events in datasetID = -1 \n";
+    if (verbose) glog(debug) << "There were " << M1_datasetMinusOne << " multiplicity 1 events in datasetID = -1 \n";
 
     // getting number of primaries
-    if (verbose) std::cout << "Getting number of primaries...\n";
+    if (verbose) glog(debug) << "Getting number of primaries...\n";
     bool problems = false;
     Long64_t nPrimEdep = 0;
     for (const auto& f : edepFilelist) {
@@ -219,25 +233,25 @@ int main( int argc, char** argv ) {
         if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
             auto nPrimEdep_loc = dynamic_cast<TParameter<Long64_t>*>(froot.Get("NumberOfPrimaries"))->GetVal();
             if (nPrimEdep_loc == 0) {
-                std::cout << "WARNING: number of primaries in " << f << " is zero!\n";
+                glog(warning) << "number of primaries in " << f << " is zero!\n";
                 problems = true;
             }
             nPrimEdep += nPrimEdep_loc;
         }
         else {
-            std::cout << "WARNING: NumberOfPrimaries not found in " << f << "!\n";
+            glog(warning) << "NumberOfPrimaries not found in " << f << "!\n";
             problems = true;
         }
     }
     // set number of primaries to zero in case of failures
     if (problems) {
-        std::cout << "WARNING: there where some problems, setting number of primaries to zero...\n";
+        glog(warning) << "there where some problems, setting number of primaries to zero...\n";
         nPrimEdep = 0;
     }
-    if (verbose) std::cout << "Number of edep primaries: " << nPrimEdep << std::endl;
+    if (verbose) glog(debug) << "Number of edep primaries: " << nPrimEdep << std::endl;
 
     // build M2 spectra
-    if (verbose) std::cout << "\nBuilding M2 spectra...\n";
+    if (verbose) glog(debug) << "building M2 spectra...\n";
     std::string m2_det = "enrAll"; if (incNatCoax) m2_det = "all"; const char * m2_detectors = m2_det.c_str();
     TH2D M2_enrE1vsE2  ("M2_enrE1vsE2",   Form("edep with smaller detID, other edep, M=2 (%s)",m2_detectors), 8000, 0, 8000, 8000, 0, 8000);
     TH1D M2_enrE1plusE2("M2_enrE1plusE2", Form("edep1 + edep2, M=2 (%s)",m2_detectors),                       8000, 0, 8000);
@@ -258,11 +272,11 @@ int main( int argc, char** argv ) {
     TH1D M2_ID1andID2_S3  ("M2_ID1andID2_S3",   Form("ID1 and ID2 with edep1+edep2 in range = [1535,1580] keV, M=2 (%s)",m2_detectors), 40, 0, 40);
 
     Long64_t nPrimCoin = 0;  // number of primaries for coincidences
-    int  badevents = 0;  // counter for events with multiplicity 2 but only 0 or 1 energy deposition
+    int badevents = 0;  // counter for events with multiplicity 2 but only 0 or 1 energy deposition
     if (processCoin) {
         // object to store events as a (det_id,energy) pair
         std::map<int,double> evMap;
-        std::cout << "Processing coin... " << coinCh.GetEntries() << "entries\n" << std::flush;
+        glog(info) << "processing coin... " << coinCh.GetEntries() << "entries\n" << std::flush;
         coinCh.LoadTree(0);
         reader.SetTree(&coinCh);
         while ( reader.Next() ) {
@@ -283,8 +297,8 @@ int main( int argc, char** argv ) {
                 }
                 // in case one detector has dataset -1, evMap has less than 2 entires
                 if ( evMap.size() != 2 ) {
-                    //if (verbose) std::cout << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
-                    //if (verbose) std::cout << "WARNING: But can happen for coincidence events in GD02D!\n";
+                    //if (verbose) glog(debug) << "WARNING: Found " << evMap.size() << " events instead of 2! This should not happen!\n";
+                    //if (verbose) glog(debug) << "WARNING: But can happen for coincidence events in GD02D!\n";
                     badevents++;
                     continue;
                 }
@@ -293,12 +307,13 @@ int main( int argc, char** argv ) {
                 auto& ID2 = (*(++evMap.begin())).first;
                 auto& E1  = (*evMap.begin())    .second;
                 auto& E2  = (*(++evMap.begin())).second;
-/*                std::cout << "Multiplicity: " << *multiplicity << std::endl;
-                std::cout << ID1 << '\t' << E1 << std::endl;
-                std::cout << ID2 << '\t' << E2 << std::endl;
-                std::cout << "-------------\n";
-*/
-                //do not include events that contain a trigger in an AC channel
+                /*
+                glog(debug) << "Multiplicity: " << *multiplicity << std::endl;
+                glog(debug) << ID1 << '\t' << E1 << std::endl;
+                glog(debug) << ID2 << '\t' << E2 << std::endl;
+                glog(debug) << "-------------\n";
+                */
+                // do not include events that contain a trigger in an AC channel
                 if ( E1 == 10000 or E2 == 10000 ) continue;
 
                 auto sumE = E1 + E2;
@@ -348,40 +363,58 @@ int main( int argc, char** argv ) {
                 }
             }
         }
-        if (verbose) std::cout << "There were " << badevents << " events with multiplicity = 2 but a different number of edeps > 0 found in the tree\n";
-        if (verbose) std::cout << "There were " << M2_datasetMinusOne << " multiplicity 2 events in datasetID = -1 \n";
+        if (verbose) glog(debug) << "there were " << badevents
+                                 << " events with multiplicity = 2 but a different number "
+                                 << "of edeps > 0 found in the tree\n";
+        if (verbose) glog(debug) << "there were " << M2_datasetMinusOne
+                                 << " multiplicity 2 events in datasetID = -1 \n";
 
-        if (verbose) std::cout << "Getting number of primaries...\n";
+        if (verbose) glog(debug) << "getting number of primaries...\n";
         problems = false;
         for (const auto& f : coinFilelist) {
             TFile froot(f.c_str());
             if (froot.GetListOfKeys()->Contains("NumberOfPrimaries")) {
                 auto nPrimCoin_loc = dynamic_cast<TParameter<Long64_t>*>(froot.Get("NumberOfPrimaries"))->GetVal();
                 if (nPrimCoin_loc == 0) {
-                    std::cout << "WARNING: number of primaries in " << f << " is zero!\n";
+                    glog(warning) << "number of primaries in " << f << " is zero!\n";
                     problems = true;
                 }
                 nPrimCoin += nPrimCoin_loc;
             }
            else {
-               std::cout << "WARNING: NumberOfPrimaries not found in " << f << "!\n";
+               glog(warning) << "NumberOfPrimaries not found in " << f << "!\n";
                problems = true;
            }
         }
         if (problems) {
-            std::cout << "WARNING: there where some problems, setting number of primaries to zero...\n";
+            glog(warning) << "there where some problems, setting number of primaries to zero...\n";
             nPrimCoin = 0;
         }
-        if (verbose) std::cout << "Number of coin primaries: " << nPrimCoin << std::endl;
+        if (verbose) glog(debug) << "number of coin primaries: " << nPrimCoin << std::endl;
     }
 
     // Save!
     // build output filename
     std::string outName = pathToTop + '/' + pathToIsotope + '/' +
-                          "pdf-" + items[2] + '-' + items[1] + '-' + items[0] + ".root";
+        "pdf-" + items[2] + '-' + items[1] + '-' + items[0];
+    // spacial naming for calib PDFs
+    if (items[2] == "calib") {
+        Json::Value calcfg;
+        auto fname = customSettingsFile.substr(0, customSettingsFile.find_last_of('/')+1)
+            + "calib-pdf-settings.json";
+        std::ifstream fcal(fname.c_str());
+        if (!fcal.is_open()) {glog(error) << fname << " file not found!\n"; return 1;}
+        fcal >> calcfg;
+        auto pos = items[1].substr(items[1].find_last_of('_')+1);
+        auto src = items[1].substr(items[1].find_first_of('_')+1, 2);
+        outName += "-" + calcfg["calib"][items[0]][src][pos]["id"].asString();
+    }
+    // special naming if larveto
+    if (applyLArVetoCut) outName += "-larveto";
+    outName += ".root";
     TFile outfile(outName.c_str(), "RECREATE");
 
-    if (verbose) std::cout << "Saving to disk...\n";
+    if (verbose) glog(debug) << "saving to disk...\n";
     TParameter<Long64_t> nPrimCoinPar("NumberOfPrimariesCoin", nPrimCoin);
     TParameter<Long64_t> nPrimEdepPar("NumberOfPrimariesEdep", nPrimEdep);
     for ( auto h : energy_ch ) h.Write();
@@ -420,7 +453,26 @@ int main( int argc, char** argv ) {
     }
 
     nPrimEdepPar.Write();
-    std::cout << "Output saved in: " << outName << std::endl;
+    glog(info) << "output saved in: " << outName << std::endl;
 
     return 0;
+}
+
+std::ostream& glog(logLevel lvl) {
+    if (lvl == debug) {
+        std::cout << "[DEBUG] ";
+        return std::cout;
+    }
+    if (lvl == info) {
+        std::cout << "[INFO] ";
+        return std::cout;
+    }
+    if (lvl == warning) {
+        std::cerr << "[WARNING] ";
+        return std::cerr;
+    }
+    if (lvl == error) {
+        std::cerr << "[ERROR] ";
+        return std::cerr;
+    }
 }

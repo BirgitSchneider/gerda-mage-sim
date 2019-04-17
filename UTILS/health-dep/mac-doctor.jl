@@ -25,7 +25,7 @@ for fn in ARGS
         for (part,v2) in v1
             push!(db, part)
             for (iso,v3) in v2
-                (!contains(iso,"mc-")) && push!(db, iso)
+                !occursin(iso, "mc-") && push!(db, iso)
             end
         end
     end
@@ -34,28 +34,28 @@ for fn in ARGS
 
     # function to check for line in macro
     function check_line(lines, command, value)
-        index = findfirst(x -> ismatch(Regex(command), x), lines)
-        words = split(lines[index], ['\t',' '], keep = false)
+        index = findfirst(x -> occursin(Regex(command), x), lines)
+        words = split(lines[index], ['\t',' '], keepempty = false)
 
         if (index == 0)
             println("ERROR: $command command not found in macro!")
-            exit_code = false
+            global exit_code = false
             return
         end
 
         if (length(words) > 2)
             println("ERROR: too much words at line " * index)
-            exit_code = false
+            global exit_code = false
         end
 
         if (words[2] != value)
             println("ERROR: wrong value of $command")
-            exit_code = false
+            global exit_code = false
         end
     end
 
     # if it's a regular macro
-    if (ismatch(r"raw-\w+-\w+-\w+-\w+-\w+\.mac", basename(mac)))
+    if occursin(r"raw-\w+-\w+-\w+-\w+-\w+\.mac", basename(mac))
 
         # extract fields
         fields = split(basename(mac), ['-', '.'])
@@ -64,14 +64,14 @@ for fn in ARGS
             # check for presence of fields in database
             if (fields[i] in db)
                 println("ERROR: $(fields[i]) not found in sim-parameters-all.json!")
-                exit_code = false
+                global exit_code = false
             end
         end
 
         # check if path matches name
-        if (!contains(abspath(mac), "/$(fields[2])/$(fields[3])/$(fields[4])/$(fields[5])/log/$(basename(mac))"))
+        if !occursin("/$(fields[2])/$(fields[3])/$(fields[4])/$(fields[5])/log/$(basename(mac))", abspath(mac))
             println("ERROR: macro name does not match macro path")
-            exit_code = false
+            global exit_code = false
         end
 
         # check if preamble is correctly loaded
@@ -94,7 +94,7 @@ for fn in ARGS
                     "matrix_phase_ii_StatusDec2015_pos.dat")
     else
         println("ERROR: $fn -> Extraneous file or not in the form raw-<volume>-<part>-<isotope>-<type>-###.mac / preamble.mac")
-        exit_code = false
+        global exit_code = false
     end
 end
 
