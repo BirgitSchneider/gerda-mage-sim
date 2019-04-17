@@ -208,13 +208,19 @@ int main(int argc, char** argv) {
         auto calib_file        = gms_path + "/UTILS/post/settings/ged-resolution.json";
         auto mapping_file      = gms_path + "/UTILS/post/settings/mapping.json";
         auto ged_settings_file = gms_path + "/UTILS/post/settings/ged-settings.json";
-        auto heat_map          = gms_path + "/UTILS/post/gerda-larmap.root";
+        auto heat_map          = gms_path + "/UTILS/post/settings/gerda-larmap.root";
 
         config.LoadMapping(mapping_file);
         if(verbose) glog(debug) << "channel mapping " << mapping_file << " loaded" << std::endl;
 
         config.LoadGedSettings(ged_settings_file);
         if(verbose) glog(debug) << "ged threshold settings " << ged_settings_file << " loaded" << std::endl;
+
+        // retrieve and set LAr detection probability map
+        TFile _f(heat_map.c_str());
+        if (_f.IsZombie()) return 1;
+        config.LoadLArMap(heat_map, "LAr_prob_map");
+        if(verbose) glog(debug) << "LAr probability map " << heat_map << " loaded" << std::endl;
 
         config.LoadGedResolutions(calib_file, "Zac");
         if(verbose) glog(debug) << "ged resolution curves " << calib_file << " loaded" << std::endl;
