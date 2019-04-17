@@ -6,8 +6,8 @@
 
 ### Calibration specific commands ###
 /MG/geometry/general/constructcalibration 		true
-/MG/geometry/detector/calibration/sourcez_S1 	7250 mm
-/MG/geometry/detector/calibration/sourcez_S2 	7250 mm
+/MG/geometry/detector/calibration/sourcez_S1 	5000 mm
+/MG/geometry/detector/calibration/sourcez_S2 	5000 mm
 /MG/geometry/detector/calibration/sourcez_S3 	8405 mm
 
 /MG/eventaction/rootfilename                    ./calib/single_s3_8405/Tl208/edep/raw-calib-single_s3_8405-Tl208-edep-008.root

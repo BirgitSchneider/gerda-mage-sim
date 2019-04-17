@@ -6,9 +6,9 @@
 
 ### Calibration specific commands ###
 /MG/geometry/general/constructcalibration 		true
-/MG/geometry/detector/calibration/sourcez_S1 	7250 mm
+/MG/geometry/detector/calibration/sourcez_S1 	5000 mm
 /MG/geometry/detector/calibration/sourcez_S2 	8405 mm
-/MG/geometry/detector/calibration/sourcez_S3 	7250 mm
+/MG/geometry/detector/calibration/sourcez_S3 	5000 mm
 
 /MG/eventaction/rootfilename                    ./calib/single_s2_8405/Bi214/edep/raw-calib-single_s2_8405-Bi214-edep-005.root
 /MG/output/saveOnlyEventsWithEnergyDeposit 		true

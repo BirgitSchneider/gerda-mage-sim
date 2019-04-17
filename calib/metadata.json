@@ -102,7 +102,7 @@
             ]
         },
         "single_s2_8151": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -113,7 +113,7 @@
             ]
         },
         "single_s2_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -124,7 +124,7 @@
             ]
         },
         "single_s2_8405": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -135,7 +135,7 @@
             ]
         },
         "single_s2_8408": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -146,7 +146,7 @@
             ]
         },
         "single_s2_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -157,7 +157,7 @@
             ]
         },
         "single_s3_8139": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -168,7 +168,7 @@
             ]
         },
         "single_s3_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -179,7 +179,7 @@
             ]
         },
         "single_s3_8305": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -190,7 +190,7 @@
             ]
         },
         "single_s3_8405": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
@@ -201,7 +201,7 @@
             ]
         },
         "single_s3_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at their highest position",
+            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
             "simulated-properties": {
                 "mass-g": 0.242531,
                 "volume-cm3": 0.0502655,
