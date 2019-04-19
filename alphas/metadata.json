@@ -1,35 +1,36 @@
 {
-    "volume": "alphas",
-    "description": "Simulation of alpha decays on/near the p+ surface with varible p+ thickness; use ./geometry/GeometryBEGe_Ge91C_0nm.def",
-    "parts": {
-        "lar_pplus": {
-            "description": "Cylinder volume in LAr close to p+",
-            "simulated-properties": {
-                "mass-g": 3.537,
-                "volume-cm3": 2.545,
-                "density-gcm3": 1.39
+    "alphas" : {
+        "description": "Simulation of alpha decays on/near the p+ surface with varible p+ thickness; use ./geometry/GeometryBEGe_Ge91C_0nm.def",
+        "parts": {
+            "lar_pplus": {
+                "description": "Cylinder volume in LAr close to p+",
+                "simulated-properties": {
+                    "mass-g": 3.537,
+                    "volume-cm3": 2.545,
+                    "density-gcm3": 1.39
+                },
+                "mage-volumes": [
+                    "/gps/pos/centre 0 0 1.9895",
+                    "/gps/pos/type   Volume",
+                    "/gps/pos/shape  Cylinder",
+                    "/gps/pos/halfz  0.5",
+                    "/gps/pos/radius 0.9",
+                    "/gps/ang/type   iso"
+                ]
             },
-            "mage-volumes": [
-                "/gps/pos/centre               0 0 1.9895",
-                "/gps/pos/type                 Volume",
-                "/gps/pos/shape                Cylinder",
-                "/gps/pos/halfz                0.5",
-                "/gps/pos/radius               0.9",
-                "/gps/ang/type                 iso"
-            ]
-        },
-        "pplus": {
-            "description": "Circular plane on p+ contact with `diam=1.8cm`",
-            "simulated-properties": {
-                "area-cm2": 2.545
-            },
-            "mage-volumes": [
-                "/gps/pos/centre               0 0 1.4895",
-                "/gps/pos/type                 Plane",
-                "/gps/pos/shape                Circle",
-                "/gps/pos/radius               0.9",
-                "/gps/ang/type                 iso"
-            ]
+            "pplus": {
+                "description": "Circular plane on p+ contact with `diam=1.8cm`",
+                "simulated-properties": {
+                    "area-cm2": 2.545
+                },
+                "mage-volumes": [
+                    "/gps/pos/centre 0 0 1.4895",
+                    "/gps/pos/type   Plane",
+                    "/gps/pos/shape  Circle",
+                    "/gps/pos/radius 0.9",
+                    "/gps/ang/type   iso"
+                ]
+            }
         }
     }
 }

@@ -1,62 +1,63 @@
 {
-    "volume": "larveto",
-    "description": "Simulations in the LAr hybrid veto system",
-    "parts": {
-        "copper_shroud": {
-            "description": "Copper shroud at top and bottom of the fiber shroud\n",
-            "simulated-properties": {
-                "density-gcm3": 0.9,
-                "mass-g": 1584.43,
-                "volume-cm3": 1760.477
+    "larveto": {
+        "description": "Simulations in the LAr hybrid veto system",
+        "parts": {
+            "copper_shroud": {
+                "description": "Copper shroud at top and bottom of the fiber shroud\n",
+                "simulated-properties": {
+                    "density-gcm3": 0.9,
+                    "mass-g": 1584.43,
+                    "volume-cm3": 1760.477
+                },
+                "mage-volumes": [
+                    "LArInstr_VM2000CylinderPhysical_top",
+                    "LArInstr_VM2000CylinderPhysical_bottom"
+                ]
             },
-            "mage-volumes": [
-                "LArInstr_VM2000CylinderPhysical_top",
-                "LArInstr_VM2000CylinderPhysical_bottom"
-            ]
-        },
-        "fibers": {
-            "description": "(non-segmented) cylinder (without top and bottom) around Ge array\n",
-            "simulated-properties": {
-                "density-gcm3": 1.05,
-                "mass-g": 1361.46,
-                "volume-cm3": 1296.629
+            "fibers": {
+                "description": "(non-segmented) cylinder (without top and bottom) around Ge array\n",
+                "simulated-properties": {
+                    "density-gcm3": 1.05,
+                    "mass-g": 1361.46,
+                    "volume-cm3": 1296.629
+                },
+                "mage-volumes": [
+                    "LArInstr_FiberOuter_Physical"
+                ]
             },
-            "mage-volumes": [
-                "LArInstr_FiberOuter_Physical"
-            ]
-        },
-        "ptm_bottom": {
-            "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings\n",
-            "simulated-properties": {
-                "density-gcm3": 2.2,
-                "mass-g": 238.781,
-                "volume-cm3": 108.537
+            "ptm_bottom": {
+                "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings\n",
+                "simulated-properties": {
+                    "density-gcm3": 2.2,
+                    "mass-g": 238.781,
+                    "volume-cm3": 108.537
+                },
+                "mage-volumes": [
+                    "LArInstr_PMTGlassPhysical_[9-15]"
+                ]
             },
-            "mage-volumes": [
-                "LArInstr_PMTGlassPhysical_[9-15]"
-            ]
-        },
-        "ptm_top": {
-            "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings\n",
-            "simulated-properties": {
-                "density-gcm3": 2.2,
-                "mass-g": 238.781,
-                "volume-cm3": 108.537
+            "ptm_top": {
+                "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings\n",
+                "simulated-properties": {
+                    "density-gcm3": 2.2,
+                    "mass-g": 238.781,
+                    "volume-cm3": 108.537
+                },
+                "mage-volumes": [
+                    "LArInstr_PMTGlassPhysical_[9-15]"
+                ]
             },
-            "mage-volumes": [
-                "LArInstr_PMTGlassPhysical_[9-15]"
-            ]
-        },
-        "sipm_ring": {
-            "description": "(segmented) ring on the top of fiber shroud (where SiPMs are placed)\n",
-            "simulated-properties": {
-                "density-gcm3": 2.33,
-                "mass-g": 3.36289,
-                "volume-cm3": 1.4433
-            },
-            "mage-volumes": [
-                "LArInstr_FiberOuter_SensitiveEnd_Physical_[0-14]"
-            ]
+            "sipm_ring": {
+                "description": "(segmented) ring on the top of fiber shroud (where SiPMs are placed)\n",
+                "simulated-properties": {
+                    "density-gcm3": 2.33,
+                    "mass-g": 3.36289,
+                    "volume-cm3": 1.4433
+                },
+                "mage-volumes": [
+                    "LArInstr_FiberOuter_SensitiveEnd_Physical_[0-14]"
+                ]
+            }
         }
     }
 }

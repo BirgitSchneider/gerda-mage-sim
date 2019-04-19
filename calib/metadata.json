@@ -1,215 +1,216 @@
 {
-    "volume": "calib",
-    "description": "simulations of the GERDA calibration sources",
-    "parts": {
-        "multi_s1_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+    "calib": {,
+        "description": "simulations of the GERDA calibration sources",
+        "parts": {
+            "multi_s1_8220": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_0"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_0"
-            ]
-        },
-        "multi_s1_8405": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s1_8405": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_0"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_0"
-            ]
-        },
-        "multi_s1_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s1_8570": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_0"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_0"
-            ]
-        },
-        "multi_s2_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s2_8220": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "multi_s2_8405": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s2_8405": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "multi_s2_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s2_8570": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "multi_s3_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s3_8220": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "multi_s3_8450": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s3_8450": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "multi_s3_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "multi_s3_8570": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. All sources s1, s2 and s3 are placed at the same position (calibration depth), indicated (in mm) in the folder name, but only one of them is active",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "single_s2_8151": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s2_8151": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "single_s2_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s2_8220": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "single_s2_8405": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s2_8405": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "single_s2_8408": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s2_8408": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "single_s2_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s2_8570": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_1"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_1"
-            ]
-        },
-        "single_s3_8139": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s3_8139": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "single_s3_8220": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s3_8220": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "single_s3_8305": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s3_8305": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "single_s3_8405": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
+            "single_s3_8405": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
             },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
-        },
-        "single_s3_8570": {
-            "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
-            "simulated-properties": {
-                "mass-g": 0.242531,
-                "volume-cm3": 0.0502655,
-                "density-gcm3": 4.825
-            },
-            "mage-volumes": [
-                "calibration_source_inner_2"
-            ]
+            "single_s3_8570": {
+                "description": "Simulation of type `<type>_<active-source>_<depth-mm>`. The active source is placed at the position (calibration depth) indicated (in mm) in the folder name, the other two sources are placed at 5000 mm",
+                "simulated-properties": {
+                    "mass-g": 0.242531,
+                    "volume-cm3": 0.0502655,
+                    "density-gcm3": 4.825
+                },
+                "mage-volumes": [
+                    "calibration_source_inner_2"
+                ]
+            }
         }
     }
 }

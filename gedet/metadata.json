@@ -1,101 +1,102 @@
 {
-    "volume": "gedet",
-    "description": "Simulations in the germanium detectors",
-    "parts": {
-        "intrinsic_chanwise": {
-            "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. Detectors are simulated **separately**, files are marked with the channel number for a total amount of 40 files. `$ID` refers to the MaGe volume naming convention, a dictionary can be found under `UTILS/det-data/ged-mapping.json`",
-            "simulated-properties": {
-                "density-gcm3": 5.54
+    "gedet": {
+        "description": "Simulations in the germanium detectors",
+        "parts": {
+            "intrinsic_chanwise": {
+                "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. Detectors are simulated **separately**, files are marked with the channel number for a total amount of 40 files. `$ID` refers to the MaGe volume naming convention, a dictionary can be found under `UTILS/det-data/ged-mapping.json`",
+                "simulated-properties": {
+                    "density-gcm3": 5.54
+                },
+                "manual-management": true
             },
-            "manual-management": true
-        },
-        "intrinsic_bege": {
-            "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. **BEGe** detectors are simulated all together.",
-            "simulated-properties": {
-                "mass-kg": 20.20468639999999,
-                "volume-cm3": 3647.0553068592035,
-                "density-gcm3": 5.54
+            "intrinsic_bege": {
+                "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. **BEGe** detectors are simulated all together.",
+                "simulated-properties": {
+                    "mass-kg": 20.20468639999999,
+                    "volume-cm3": 3647.0553068592035,
+                    "density-gcm3": 5.54
+                },
+                "mage-volumes": [
+                    "Crystal_geometry5_[1-30]",
+                    "CristalDeadLayer_geometry5_[1-30]"
+                ]
             },
-            "mage-volumes": [
-                "Crystal_geometry5_[1-30]",
-                "CristalDeadLayer_geometry5_[1-30]"
-            ]
-        },
-        "intrinsic_coax": {
-            "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. **EnrCoax** detectors are simulated all together.",
-            "simulated-properties": {
-                "mass-kg": 15.562227000000002,
-                "volume-cm3": 2809.066245487365,
-                "density-gcm3": 5.54
+            "intrinsic_coax": {
+                "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. **EnrCoax** detectors are simulated all together.",
+                "simulated-properties": {
+                    "mass-kg": 15.562227000000002,
+                    "volume-cm3": 2809.066245487365,
+                    "density-gcm3": 5.54
+                },
+                "mage-volumes": [
+                    "Crystal_geometry11_[4-10]",
+                    "CristalDeadLayer_geometry11_[4-10]"
+                ]
             },
-            "mage-volumes": [
-                "Crystal_geometry11_[4-10]",
-                "CristalDeadLayer_geometry11_[4-10]"
-            ]
-        },
-        "intrinsic_nat": {
-            "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. **NatCoax** detectors are simulated all together.",
-            "simulated-properties": {
-                "mass-kg": 7.669414,
-                "volume-cm3": 1441.6191729323307,
-                "density-gcm3": 5.32
+            "intrinsic_nat": {
+                "description": "Volume of detectors deployed in GERDA PhaseII, split in dead and active parts. **NatCoax** detectors are simulated all together.",
+                "simulated-properties": {
+                    "mass-kg": 7.669414,
+                    "volume-cm3": 1441.6191729323307,
+                    "density-gcm3": 5.32
+                },
+                "mage-volumes": [
+                    "Crystal_geometry11_[1-3]",
+                    "CristalDeadLayer_geometry11_[1-3]"
+                ]
             },
-            "mage-volumes": [
-                "Crystal_geometry11_[1-3]",
-                "CristalDeadLayer_geometry11_[1-3]"
-            ]
-        },
-        "surf_chanwise": {
-            "description": "Complete detector surface in contact with LAr. Detectors are simulated separately, further info in `surf_chanwise/ver/README.md`",
-            "manual-management": true
-        },
-        "nplus_chanwise": {
-            "description": "n+ contact surface in contact with LAr. Detectors are simulated separately, further info in `nplus_chanwise/ver/README.md`",
-            "manual-management": true
-        },
-        "pplus_chanwise": {
-            "description": "p+ contact surface in contact with LAr. Detectors are simulated separately, further info in `pplus_chanwise/ver/README.md`",
-            "manual-management": true
-        },
-        "nplus_bege": {
-            "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
-            "simulated-properties": {
-                "surface-cm2": 44.036140917312956
+            "surf_chanwise": {
+                "description": "Complete detector surface in contact with LAr. Detectors are simulated separately, further info in `surf_chanwise/ver/README.md`",
+                "manual-management": true
             },
-            "mage-volumes": [
-                "gedet/nplus_bege/ver/ver-gedet-nplus_bege.root"
-            ]
-        },
-        "nplus_coax": {
-            "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
-            "simulated-properties": {
-                "surface-cm2": 21.346161005118056
+            "nplus_chanwise": {
+                "description": "n+ contact surface in contact with LAr. Detectors are simulated separately, further info in `nplus_chanwise/ver/README.md`",
+                "manual-management": true
             },
-            "mage-volumes": [
-                "gedet/nplus_coax/ver/ver-gedet-nplus_coax.root"
-            ]
-        },
-        "pplus_bege": {
-            "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
-            "simulated-properties": {
-                "surface-cm2": 0.5301437602932778
+            "pplus_chanwise": {
+                "description": "p+ contact surface in contact with LAr. Detectors are simulated separately, further info in `pplus_chanwise/ver/README.md`",
+                "manual-management": true
             },
-            "mage-volumes": [
-                "gedet/pplus_bege/ver/ver-gedet-pplus_bege.root"
-            ]
-        },
-        "pplus_coax": {
-            "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
-            "simulated-properties": {
-                "surface-cm2": 2.914455504735251
+            "nplus_bege": {
+                "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
+                "simulated-properties": {
+                    "surface-cm2": 44.036140917312956
+                },
+                "mage-volumes": [
+                    "gedet/nplus_bege/ver/ver-gedet-nplus_bege.root"
+                ]
             },
-            "mage-volumes": [
-                "gedet/pplus_coax/ver/ver-gedet-pplus_coax.root"
-            ]
-        },
-        "lar_pplus_chanwise": {
-            "description": "Description missing",
-            "manual-management": true
+            "nplus_coax": {
+                "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
+                "simulated-properties": {
+                    "surface-cm2": 21.346161005118056
+                },
+                "mage-volumes": [
+                    "gedet/nplus_coax/ver/ver-gedet-nplus_coax.root"
+                ]
+            },
+            "pplus_bege": {
+                "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
+                "simulated-properties": {
+                    "surface-cm2": 0.5301437602932778
+                },
+                "mage-volumes": [
+                    "gedet/pplus_bege/ver/ver-gedet-pplus_bege.root"
+                ]
+            },
+            "pplus_coax": {
+                "description": "n+ contact surface in contact with LAr. Detectors are simulated all together.",
+                "simulated-properties": {
+                    "surface-cm2": 2.914455504735251
+                },
+                "mage-volumes": [
+                    "gedet/pplus_coax/ver/ver-gedet-pplus_coax.root"
+                ]
+            },
+            "lar_pplus_chanwise": {
+                "description": "Description missing",
+                "manual-management": true
+            }
         }
     }
 }
