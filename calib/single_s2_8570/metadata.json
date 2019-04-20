@@ -1,0 +1,39 @@
+{
+    "calib": {
+        "single_s2_8570": {
+            "Bi214": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "cmake/fdea40a",
+                        "gerda-sw-all": "cmake-2019-03-25"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "calibration depth 8570mm",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Tl208": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "cmake/fdea40a",
+                        "gerda-sw-all": "cmake-2019-03-25"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "calibration depth 8570mm",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Bi212": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "cmake/fdea40a",
+                        "gerda-sw-all": "cmake-2019-03-25"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "calibration depth 8570mm",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

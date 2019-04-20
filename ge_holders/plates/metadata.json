@@ -1,0 +1,166 @@
+{
+    "ge_holders": {
+        "plates": {
+            "Ac228": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e9,
+                    "notes": "100 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 5.0e8,
+                    "notes": "50 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Co60": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.0"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Bi214": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.0"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Tl208": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e7,
+                    "notes": "1 file of 1E07 primaries each",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.0"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Pa234m": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e9,
+                    "notes": "100 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Pb214": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.0"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Bi212": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.0"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "K40": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.0"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "10 files of 1E07 primaries each. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "L.Pertoldi"
+                }
+            }
+        }
+    }
+}

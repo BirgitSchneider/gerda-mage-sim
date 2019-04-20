@@ -1,29 +1,27 @@
 {
     "ge_holders": {
         "description": "Simulations in the detector's holder mounting",
-        "parts": {
-            "plates": {
-                "description": "Silicon plates that sustain th germanium detectors",
-                "simulated-properties": {
-                    "mass-g": 659.134,
-                    "volume-cm3": 282.891,
-                    "density-gcm3": 2.33
-                },
-                "mage-volumes": [
-                    "Holder_Plate_[0-39]"
-                ]
+        "plates": {
+            "description": "Silicon plates that sustain th germanium detectors",
+            "simulated-properties": {
+                "mass-g": 659.134,
+                "volume-cm3": 282.891,
+                "density-gcm3": 2.33
             },
-            "bars": {
-                "description": "Copper bars that hold the silicon plates",
-                "simulated-properties": {
-                    "mass-g": 536.76,
-                    "volume-cm3": 59.90625,
-                    "density-gcm3": 8.96
-                },
-                "mage-volumes": [
-                    "Holder_VerticalBar_[0-101]"
-                ]
-            }
+            "mage-volumes": [
+                "Holder_Plate_[0-39]"
+            ]
+        },
+        "bars": {
+            "description": "Copper bars that hold the silicon plates",
+            "simulated-properties": {
+                "mass-g": 536.76,
+                "volume-cm3": 59.90625,
+                "density-gcm3": 8.96
+            },
+            "mage-volumes": [
+                "Holder_VerticalBar_[0-101]"
+            ]
         }
     }
 }

@@ -1,202 +1,200 @@
 {
     "lar": {
         "description": "Simulations in the LAr surrounding the detector array",
-        "parts": {
-            "above_array": {
-                "description": "Cylinder (radius = 25cm, height = 100cm) positioned over the germanium array (z = 65cm)",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 268,
-                    "volume-cm3": 192480
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 25 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      100 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    65 cm"
-                ]
+        "above_array": {
+            "description": "Cylinder (radius = 25cm, height = 100cm) positioned over the germanium array (z = 65cm)",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 268,
+                "volume-cm3": 192480
             },
-            "above_ms1": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 1 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    110.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    0.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 25 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      100 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    65 cm"
+            ]
+        },
+        "above_ms1": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 1 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "above_ms2": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 2 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    55.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    95.2628 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    110.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    0.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "above_ms2": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 2 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "above_ms3": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 3 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    -55.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    95.2628 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    55.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    95.2628 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "above_ms3": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 3 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "above_ms4": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 4 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    -110.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    0.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    -55.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    95.2628 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "above_ms4": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 4 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "above_ms5": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 5 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    -55.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    -95.2628 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    -110.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    0.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "above_ms5": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 5 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "above_ms6": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 6 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    55.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    -95.2628 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    -55.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    -95.2628 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "above_ms6": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 6 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "above_ms7": {
-                "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 7 starting from ms-top",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 1.091,
-                    "volume-cm3": 785.375
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
-                    "/MG/generator/Sampling/volume/offsetCenterXPos    0.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterYPos    0.0 mm",
-                    "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    55.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    -95.2628 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "above_ms7": {
+            "description": "Cylinder (radius = 5cm, height = 20cm) positioned over minishroud of string 7 starting from ms-top",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 1.091,
+                "volume-cm3": 785.375
             },
-            "sur_array": {
-                "description": "Cylinder (radius = 100cm, height = 250cm) positioned over the germanium array (z = 0cm)",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 10895,
-                    "volume-cm3": 7837850
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 100 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      250 cm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 5 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      10 cm",
+                "/MG/generator/Sampling/volume/offsetCenterXPos    0.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterYPos    0.0 mm",
+                "/MG/generator/Sampling/volume/offsetCenterZPos    143.9 mm"
+            ]
+        },
+        "sur_array": {
+            "description": "Cylinder (radius = 100cm, height = 250cm) positioned over the germanium array (z = 0cm)",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 10895,
+                "volume-cm3": 7837850
             },
-            "sur_array1": {
-                "description": "Cylinder (radius = 60cm, height = 150cm) surrounding the Ge array (z = -15cm for better centering). Volume to sample energy in Ge of ~600 keV beta with 10^10 sim events",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 2341.2,
-                    "volume-cm3": 1684340
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 60 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      150 cm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 100 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      250 cm"
+            ]
+        },
+        "sur_array1": {
+            "description": "Cylinder (radius = 60cm, height = 150cm) surrounding the Ge array (z = -15cm for better centering). Volume to sample energy in Ge of ~600 keV beta with 10^10 sim events",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 2341.2,
+                "volume-cm3": 1684340
             },
-            "sur_array2": {
-                "description": "Cylinder (radius = 100cm, height = 210cm) surrounding the Ge array (z = -15cm for better centering). Volume to sample energy in Ge of ~500 keV beta with 10^10 sim events",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 9149.5,
-                    "volume-cm3": 6582400
-                },
-                "mage-volumes": [
-                    "/MG/generator/Sampling/volume/name                Cylinder",
-                    "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
-                    "/MG/generator/Sampling/volume/outerCylinderRadius 100 cm",
-                    "/MG/generator/Sampling/volume/cylinderHeight      210 cm"
-                ]
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 60 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      150 cm"
+            ]
+        },
+        "sur_array2": {
+            "description": "Cylinder (radius = 100cm, height = 210cm) surrounding the Ge array (z = -15cm for better centering). Volume to sample energy in Ge of ~500 keV beta with 10^10 sim events",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 9149.5,
+                "volume-cm3": 6582400
             },
-            "inside_ms": {
-                "description": "post-processed volume splitting of sur_array : volume fraction = 0.0019545052068",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 21.294,
-                    "volume-cm3": 3292.051
-                },
-                "manual-management": true
+            "mage-volumes": [
+                "/MG/generator/Sampling/volume/name                Cylinder",
+                "/MG/generator/Sampling/volume/innerCylinderRadius 0 mm",
+                "/MG/generator/Sampling/volume/outerCylinderRadius 100 cm",
+                "/MG/generator/Sampling/volume/cylinderHeight      210 cm"
+            ]
+        },
+        "inside_ms": {
+            "description": "post-processed volume splitting of sur_array : volume fraction = 0.0019545052068",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 21.294,
+                "volume-cm3": 3292.051
             },
-            "outside_ms": {
-                "description": "post-processed volume splitting of sur_array : volume fraction = 0.9980454947932",
-                "simulated-properties": {
-                    "density-gcm3": 1.39,
-                    "mass-kg": 10873.706,
-                    "volume-cm3": 1681047
-                },
-                "manual-management": true
-            }
+            "mage-volumes": "obtained by post-processing of sur_array simulations"
+        },
+        "outside_ms": {
+            "description": "post-processed volume splitting of sur_array : volume fraction = 0.9980454947932",
+            "simulated-properties": {
+                "density-gcm3": 1.39,
+                "mass-kg": 10873.706,
+                "volume-cm3": 1681047
+            },
+            "mage-volumes": "obtained by post-processing of sur_array simulations"
         }
     }
 }

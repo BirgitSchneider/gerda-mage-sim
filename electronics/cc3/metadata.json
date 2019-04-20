@@ -1,0 +1,26 @@
+{
+    "electronics": {
+        "cc3": {
+            "K40": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e11,
+                    "notes": "G4gun",
+                    "contact": "T.Wester"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e11,
+                    "notes": "G4gun",
+                    "contact": "T.Wester"
+                }
+            }
+        }
+    }
+}

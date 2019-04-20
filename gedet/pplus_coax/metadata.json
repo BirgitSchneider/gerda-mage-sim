@@ -1,0 +1,79 @@
+{
+    "gedet": {
+        "pplus_coax": {
+            "Po210": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Bi214": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Pb214": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "K42": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Bi214Po214": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.4"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.4"
+                    },
+                    "primaries": 3.993578e6,
+                    "notes": "used all the statistics available in the vertex file",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

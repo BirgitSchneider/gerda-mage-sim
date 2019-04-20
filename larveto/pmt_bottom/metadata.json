@@ -1,0 +1,47 @@
+{
+    "larveto": {
+        "pmt_bottom": {
+            "Bi214": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Tl208": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "Bi212": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "K40": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "You can find also the simulations with Decay0 under `dk0/`",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

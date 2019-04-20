@@ -1,0 +1,26 @@
+{
+    "lar": {
+        "sur_array": {
+            "K42": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.03e11,
+                    "notes": "300x1E7+500x2E8 primaries. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.03e11,
+                    "notes": "300x1E7+500x2E8 primaries. You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

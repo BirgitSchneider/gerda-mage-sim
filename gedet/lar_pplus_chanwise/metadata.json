@@ -1,0 +1,44 @@
+{
+    "gedet": {
+        "lar_pplus_chanwise": {
+            "Bi214": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "",
+                        "gerda-sw-all": ""
+                    },
+                    "primaries": 1.0e6,
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "",
+                        "gerda-sw-all": ""
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "Events simulated homogeneously in the simulated lar volume, if you add all channels you get 1E8 primaries",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "K42": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "",
+                        "gerda-sw-all": ""
+                    },
+                    "primaries": 1.0e6,
+                    "contact": "B.Schneider"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "",
+                        "gerda-sw-all": ""
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "Events simulated homogeneously in the simulated lar volume, if you add all channels you get 1E8 primaries",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

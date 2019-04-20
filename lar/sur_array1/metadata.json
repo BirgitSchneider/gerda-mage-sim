@@ -1,0 +1,26 @@
+{
+    "lar": {
+        "sur_array1": {
+            "Ar39": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "g4.10/dd443589",
+                        "gerda-sw-all": "g4.10.3_v3.0"
+                    },
+                    "primaries": 1.0e10,
+                    "contact": "R.Hiller"
+                }
+            },
+            "Ar42": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "g4.10/dd443589",
+                        "gerda-sw-all": "g4.10.3_v3.0"
+                    },
+                    "primaries": 1.0e10,
+                    "contact": "R.Hiller"
+                }
+            }
+        }
+    }
+}

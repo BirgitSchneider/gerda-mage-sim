@@ -1,0 +1,28 @@
+{
+    "gedet": {
+        "pplus_chanwise": {
+            "K42": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 5.102856e6,
+                    "notes": "The number of primaries reported here is the **total** for all channels, each channel-wise simulation has the max number of available vertices in the corresponding `ver-` file (see `ver/README.md`). You can find also simulations with Decay0 under `dk0/`",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "P210": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 5.102856e6,
+                    "notes": "The number of primaries reported here is the **total** for all channels, each channel-wise simulation has the max number of available vertices in the corresponding `ver-` file (see `ver/README.md`)",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

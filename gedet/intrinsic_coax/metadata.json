@@ -1,0 +1,72 @@
+{
+    "gedet": {
+        "intrinsic_coax": {
+            "0nbbM1": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "All the EnrCoax detectors (active and dead volume) are simulated together",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "2nbb": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "All the EnrCoax detectors (active and dead volume) are simulated together",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "2nbbLV": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "All the EnrCoax detectors (active and dead volume) are simulated together",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "0nbbM7": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "All the EnrCoax detectors (active and dead volume) are simulated together",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "0nbbM2": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "All the EnrCoax detectors (active and dead volume) are simulated together",
+                    "contact": "K.v.Sturm"
+                }
+            },
+            "0nbbM3": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "All the EnrCoax detectors (active and dead volume) are simulated together",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

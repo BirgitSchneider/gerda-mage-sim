@@ -1,0 +1,17 @@
+{
+    "lar": {
+        "sur_array2": {
+            "Kr85": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "g4.10/dd443589",
+                        "gerda-sw-all": "g4.10.3_v3.0"
+                    },
+                    "primaries": 1.0e10,
+                    "notes": "514 keV gamma line is killed in the stacking action of MaGe by the default cut on the livetime of the origin state. Set it to 1.5 us to keep it.",
+                    "contact": "R.Hiller"
+                }
+            }
+        }
+    }
+}

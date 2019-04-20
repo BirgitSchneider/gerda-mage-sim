@@ -1,0 +1,26 @@
+{
+    "lar": {
+        "inside_ms": {
+            "K42": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "",
+                        "gerda-sw-all": ""
+                    },
+                    "primaries": 2.01314498e8,
+                    "notes": "0.0019545052068 * 300x1E7+500x2E8 primaries",
+                    "contact": "K.v.Sturm"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "",
+                        "gerda-sw-all": ""
+                    },
+                    "primaries": 2.01314498e8,
+                    "notes": "0.0019545052068 * 300x1E7+500x2E8 primaries",
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}

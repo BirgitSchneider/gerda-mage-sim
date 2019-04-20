@@ -1,0 +1,66 @@
+{
+    "gedet": {
+        "nplus_bege": {
+            "Bi214": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 8.989694e6,
+                    "notes": "1/10 of the statistics available in the `ver-` file",
+                    "contact": "L.Pertoldi"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 8.989694e6,
+                    "notes": "1/10 of the statistics available in the `ver-` file",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Pb214": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 8.989694e6,
+                    "notes": "1/10 of the statistics available in the `ver-` file",
+                    "contact": "K.v.Sturm"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 8.989694e6,
+                    "notes": "1/10 of the statistics available in the `ver-` file",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "K42": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 8.989694e6,
+                    "notes": "1/10 of the statistics available in the `ver-` file",
+                    "contact": "L.Pertoldi"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 8.989694e6,
+                    "notes": "1/10 of the statistics available in the `ver-` file",
+                    "contact": "L.Pertoldi"
+                }
+            }
+        }
+    }
+}

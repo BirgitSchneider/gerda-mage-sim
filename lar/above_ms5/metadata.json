@@ -1,0 +1,24 @@
+{
+    "lar": {
+        "above_ms5": {
+            "K42": {
+                "coin": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 5.0e9,
+                    "contact": "K.v.Sturm"
+                },
+                "edep": {
+                    "mage-version": {
+                        "revision": "GERDAPhaseII-Dec2017/9fe03ca",
+                        "gerda-sw-all": "g4.10.3_v2.1"
+                    },
+                    "primaries": 5.0e9,
+                    "contact": "K.v.Sturm"
+                }
+            }
+        }
+    }
+}
