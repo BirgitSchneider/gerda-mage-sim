@@ -23,7 +23,7 @@ end
 
 for v in volumes
     @debug "inspecting $v/"
-    !isfile("$v/metadata.json") && error("missing metadata.json for $v/")
+    !isfile("$v/metadata.json") && error("missing $v/metadata.json")
 
     parts = filter(e -> isdir("$v/$e") && e[1] != '.', readdir("$v"))
     @debug "detected parts" parts
@@ -53,6 +53,38 @@ for v in volumes
             end
         else
             @debug "$p is chanwise, skipping simulated-properties checks"
+        end
+
+        p == "surf_chanwise" && continue
+
+        # check part metadata
+        !isfile("$v/$p/metadata.json") && error("missing $v/$p/metadata.json")
+        try
+            isometa = JSON.parse(open("$v/$p/metadata.json"))
+        catch
+            error("$v/$p/metadata.json seems to be uncorrectly encoded")
+        end
+
+        isoexclude = ["ver"]
+        isotopes = filter(e -> isdir("$v/$p/$e") && e[1] != '.' && !(e in isoexclude), readdir("$v/$p"))
+        @debug "detected isotopes" isotopes
+
+        isometa = isometa[v][p]
+        for i in isotopes
+            !haskey(isometa, i) && error("missing '$i' entry in $v/$p/metadata.json")
+
+            types = filter(e -> isdir("$v/$p/$i/$e") && e[1] != '.', readdir("$v/$p/$i"))
+            @debug "detected types" types
+
+            for t in types
+                !haskey(isometa[i], t) && error("missing '$i/$t' entry in $v/$p/metadata.json")
+                for k in ["mage-version", "primaries", "contact"]
+                    !haskey(isometa[i][t], k) && error("missing '$i/$t/$k' field in $v/$p/metadata.json")
+                end
+                for k in ["revision", "gerda-sw-all"]
+                    !haskey(isometa[i][t]["mage-version"], k) && error("missing '$i/$t/mage-version/$k' field in $v/$p/metadata.json")
+                end
+            end
         end
     end
 end

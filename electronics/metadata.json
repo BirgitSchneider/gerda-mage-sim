@@ -10,7 +10,7 @@
             },
             "mage-volumes": [
                 "CC3_Physical_[0-5]"
-                ]
+            ]
         }
     }
 }
