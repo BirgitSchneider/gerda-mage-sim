@@ -11,8 +11,5 @@ before_install:
 install: true
 
 script:
-    - julia UTILS/health-dep/mac-doctor.jl $(find cables -iname "*.mac")
-    - julia UTILS/health-dep/mac-doctor.jl $(find electronics -iname "*.mac")
-    - julia UTILS/health-dep/mac-doctor.jl $(find ge_holders -iname "*.mac")
-    - julia UTILS/health-dep/mac-doctor.jl $(find lar -iname "*.mac")
-    - julia UTILS/health-dep/mac-doctor.jl $(find minishroud -iname "*.mac")
+    - julia UTILS/health-dep/mac-doctor.jl
+    - julia UTILS/health-dep/meta-doctor.jl
