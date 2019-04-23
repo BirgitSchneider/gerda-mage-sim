@@ -19,6 +19,7 @@ UTILS/bin
 UTILS/.ycm_extra_conf.py
 UTILS/test/*root.dat
 controlplots*
+gerda-mage-sim.json
 
 # other
 *.raw*

@@ -158,20 +158,14 @@ end
 # copy the configs
 @debug "copying configs"
 mkpath("$destdir/prod-settings")
-cp("$gerda_ms/UTILS/sim-parameters-all.json", "$destdir/sim-parameters-all.json", force=true)
 for f in readdir("$gerda_ms/UTILS/post/settings/")
     cp("$gerda_ms/UTILS/post/settings/$f", "$destdir/prod-settings/$f", force=true)
 end
 
-# generate report
-@info "generating report"
-include("$gerda_ms/UTILS/post/latex-report.jl")
-status = latexreport("$gerda_ms/UTILS/sim-parameters-all.json")
-if status == 0
-    cp("gerda-mage-sim-report.pdf", "$destdir/gerda-mage-sim-report.pdf", force=true)
-else
-    @warn "report generation failed, no output produced"
-end
+# generate amalgamated gerda-mage-sim JSON
+@info "generating gerda-mage-sim.json"
+include("$gerda_ms/UTILS/post/meta-amalgamator.jl")
+cp("$gerda_ms/UTILS/post/gerda-mage-sim.json", "$destdir/gerda-mage-sim.json", force=true)
 
 # directories to be scanned
 maindirs = ["cables", "electronics", "ge_holders",
