@@ -18,7 +18,7 @@ script:
     - julia UTILS/health-dep/mac-doctor.jl
     - julia UTILS/health-dep/meta-doctor.jl
     - julia UTILS/website/_scripts/build_site.jl
-    - JEKYLL_ENV=production cd UTILS/website && bundle install && bundle exec jekyll build
+    - JEKYLL_ENV=production cd UTILS/website && bundle install && JEKYLL_GITHUB_TOKEN=$GITHUB_TOKEN bundle exec jekyll build
 
 
 deploy:

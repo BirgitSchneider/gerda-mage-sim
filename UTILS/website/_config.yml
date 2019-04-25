@@ -4,12 +4,10 @@ baseurl: /gerda-mage-sim
 url: https://mppmu.github.io
 github_username: mppmu
 show_downloads: false
+logo: assets/img/logo.png
 
 markdown: kramdown
 theme: jekyll-theme-minimal
 
-plugins_dir: ./_plugins
-jekyll_get:
-  - data: github
-    json: 'https://api.github.com/orgs/mppmu/repos'
-    cache: false
+plugins:
+    - "jekyll-github-metadata"
