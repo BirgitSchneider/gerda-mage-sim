@@ -8,7 +8,7 @@
     "runlist": "UTILS/post/settings/run-list.json",
     "calib-pdf-settings": "UTILS/post/settings/calib-pdf-settings.json",
 
-    "LAr-veto-model": "calorimetric",
+    "LAr-veto-model": "heat-map",
     "heat-map": "UTILS/post/settings/gerda-larmap.root",
     "debug": true
 }

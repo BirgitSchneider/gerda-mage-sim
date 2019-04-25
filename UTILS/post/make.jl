@@ -74,9 +74,9 @@ function spawn_t4z_gen(src::String, dest::String; calib::Bool=false, dryrun::Boo
 
     qscript = ["$gerda_ms/UTILS/job-scheduler/mpik-t4z-gen.qsub",
                "--config", "$gerda_ms/UTILS/post/settings/t4z-gen-settings-$(it[end]).json",
-               "--destdir", dest,
-               calib ? "--calib" : "",
-               src]
+               "--destdir", dest]
+    calib && push!(qscript, "--calib")
+    push!(qscript, src)
 
     if dryrun
         @info "would send job $job"
@@ -106,7 +106,7 @@ function spawn_pdf_gen(src::String, dest::String; larveto::Bool=false, dryrun::B
     qscript = ["$gerda_ms/UTILS/job-scheduler/mpik-pdf-gen.qsub",
                "--config", "$gerda_ms/UTILS/post/settings/pdf-gen-settings$(larveto ? "-larveto" : "").json",
                "--destdir", dest,
-               "$(it[end-2])/$(it[end-1])/$(it[end])"]
+               src]
 
     parent = "t4z-$(it[end-2])-$(it[end-1])-$(it[end])-edep-$cycle,t4z-$(it[end-2])-$(it[end-1])-$(it[end])-coin-$cycle"
 
@@ -214,7 +214,7 @@ for volume in maindirs
             file = "$destdir/$volume/$d/pdf-$volume-$part-$isotope$(applylar ? "-larveto" : "").root"
             if !isfile(file) || t4zspawn
                 @debug "$file must be (re)done"
-                spawn_pdf_gen("$destdir/$volume/$d", destdir, larveto=applylar, dryrun=fake)
+                spawn_pdf_gen("$gerda_ms/$volume/$d", destdir, larveto=applylar, dryrun=fake)
             else
                 @debug "$file is up-to-date"
             end
@@ -260,7 +260,7 @@ try
                     file = """$destdir/calib/$part/$iso/pdf-calib-$part-$iso-$(d3["id"])$(applylar ? "-larveto" : "").root"""
                     if !isfile(file) || t4zspawn
                         @debug "$file must be (re)done"
-                        spawn_pdf_gen("$destdir/calib/$part/$iso", destdir, larveto=applylar, dryrun=fake)
+                        spawn_pdf_gen("$gerda_ms/calib/$part/$iso", destdir, larveto=applylar, dryrun=fake)
                     else
                         @debug "$file is up-to-date"
                     end

@@ -52,7 +52,9 @@ _isotope=$(echo $dir_with_raw | rev | cut -d'/' -f2 | rev)
 _type=$(echo $dir_with_raw | rev | cut -d'/' -f1 | rev)
 _logfile=$destdir/$_volume/$_part/$_isotope/$_type/t4z-$_volume-$_part-$_isotope-$_type.out
 
+gerda_ms=$(echo $dir_with_raw | sed "s/\/$_volume\/$_part\/$_isotope\/$_type//g")
+
 mkdir -p `dirname $_logfile`
 
-/usr/bin/time -v singularity exec --cleanenv `dirname $0`/../container/gerda-mage-sim-utils_active.simg \
-    $t4zexe --config $config --destdir $destdir -v $dir_with_raw &> $_logfile
+/usr/bin/time -v singularity exec --cleanenv $gerda_ms/UTILS/container/gerda-mage-sim-utils_active.simg \
+    $t4zexe --config $config --destdir $destdir $dir_with_raw &> $_logfile

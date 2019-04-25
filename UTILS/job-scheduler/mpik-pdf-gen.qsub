@@ -5,7 +5,7 @@
 #$ -o /dev/null
 #$ -e /dev/null
 
-usage() { echo "USAGE: `basename $0` [-v] --config file.json --destdir /path/to/gerda-pdfs -- volume/part/isotope" 1>&2; exit 1;}
+usage() { echo "USAGE: `basename $0` [-v] --config file.json --destdir /path/to/gerda-pdfs -- isotope_dir" 1>&2; exit 1;}
 
 options=$(getopt --name `basename $0` --options 'vh' --longoptions 'config:,destdir:' -- "$@")
 [ $? -eq 0 ] || exit 1
@@ -45,7 +45,9 @@ _part=$(echo $path_to_isotope | rev | cut -d'/' -f2 | rev)
 _isotope=$(echo $path_to_isotope | rev | cut -d'/' -f1 | rev)
 _logfile=$destdir/$_volume/$_part/$_isotope/pdf-$_volume-$_part-$_isotope.out
 
+gerda_ms=$(echo $path_to_isotope | sed "s/\/$_volume\/$_part\/$_isotope//g")
+
 mkdir -p `dirname $_logfile`
 
-/usr/bin/time -v singularity exec --cleanenv `dirname $0`/../container/gerda-mage-sim-utils_active.simg \
-    pdf-gen --config $config --destdir $destdir -v $path_to_isotope &> $_logfile
+/usr/bin/time -v singularity exec --cleanenv $gerda_ms/UTILS/container/gerda-mage-sim-utils_active.simg \
+    pdf-gen --config $config --destdir $destdir $_volume/$_part/$_isotope &> $_logfile
