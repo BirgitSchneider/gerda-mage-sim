@@ -105,7 +105,7 @@ function write_volume_page(page_name::String)
     end
     lines = lines * "<p/>\n"
 
-    open("$gerda_ms/UTILS/website/pages/$page_name.md", "w") do io
+    open("$gerda_ms/UTILS/website/volumes/$page_name.md", "w") do io
         write(io, lines)
     end
 end

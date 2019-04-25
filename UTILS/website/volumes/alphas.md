@@ -4,7 +4,7 @@ layout: page
 
 # alphas
 
-Simulation of alpha decays on/near the p+ surface with varible p+ thickness; use ./geometry/GeometryBEGe_Ge91C_0nm.def.
+Simulation of alpha decays on/near the p+ surface with varible p+ thickness; use `alphas/geometry/GeometryBEGe_Ge91C_0nm.def`.
 
 | part | description | mass | volume/surface | Density | MaGe volumes |
 | -- | -- | -- | -- | -- | -- |

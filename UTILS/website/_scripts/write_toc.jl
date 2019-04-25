@@ -42,7 +42,7 @@ function write_toc()
         end
 
         for v in reverse(volumes)
-            insert!(lines, first+1, "        <a href=\"{{site.baseurl}}/pages/$v.html\">$v</a><br>\n")
+            insert!(lines, first+1, "        <a href=\"{{site.baseurl}}/volumes/$v.html\">$v</a><br>\n")
         end
 
         open("$gerda_ms/UTILS/website/_layouts/$page.html", "w") do o
