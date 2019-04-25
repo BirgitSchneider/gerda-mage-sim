@@ -1,4 +1,11 @@
 {
+    "gerda-mage-sim": "/lfs/l1/gerda/gerda-simulations/gerda-mage-sim",
+    "calib-pdf-settings": "UTILS/post/settings/calib-pdf-settings.json",
+    "ged-mapping": "UTILS/det-data/ged-mapping.json",
+
     "include-nat-coax-in-M2-spectra": false,
-    "apply-LAr-veto-cut": true
+    "apply-LAr-veto-cut": true,
+    "compute-M2-spectra": false,
+
+    "debug": true
 }

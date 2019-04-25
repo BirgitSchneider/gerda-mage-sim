@@ -49,6 +49,7 @@ SGE cluster the PDF production chain.
 - put a ROOT file with the GERDA LAr probability map (see
   [gerda-larmap](https://github.com/gipert/gerda-larmap)) under
   `UTILS/post/gerda-larmap.root`
+- modify the JSON files in `UTILS/post/settings` according to your needs
 
 then run:
 ```console
@@ -77,20 +78,15 @@ $ bin/livetime-calc-ph2 \
     --data /lfs/l3/gerda/Daq/data-phaseII/blind/active/gen \
     --output /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/run-livetime.json
 $ bin/t4z-gen \
-    -v \
-    --srcdir /lfs/l2/gerda/gerda-simulations/gerda-mage-sim \
     --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
-    --metadata /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/gerda-metadata \
-    --livetime-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/run-livetime.json \
-    --runlist-file /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/run-list.json \
+    --configs /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/t4z-gen-settings.json \
     /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/ge_holders/plates/K40/edep
 $ bin/pdf-gen \
-    -v \
     --destdir /lfs/l2/gerda/gerda-simulations/gerda-pdfs/v0.2 \
-    --ged-mapping /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/det-data/ged-mapping.json \
-    --custom-settings /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings-custom.json \
+    --configs /lfs/l2/gerda/gerda-simulations/gerda-mage-sim/UTILS/post/settings/pdf-gen-settings.json \
     ge_holders/plates/K40
 ```
+Inspect the content of the JSON files in `UTILS/post/settings`.
 
 ## `UTILS` directory content
 

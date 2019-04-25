@@ -1,0 +1,13 @@
+{
+    "gerda-mage-sim": "/lfs/l1/gerda/gerda-simulations/gerda-mage-sim",
+    "gerda-metadata": "UTILS/post/gerda-metadata",
+    "ged-resolution-curves": "UTILS/post/settings/ged-resolution.json",
+    "channels-mapping": "UTILS/post/settings/mapping.json",
+    "ged-settings": "UTILS/post/settings/ged-settings.json",
+    "run-livetimes": "UTILS/post/settings/run-livetime.json",
+    "runlist": "UTILS/post/settings/run-list.json",
+    "calib-pdf-settings": "UTILS/post/settings/calib-pdf-settings.json",
+
+    "LAr-veto-model": "calorimetric",
+    "debug": true
+}

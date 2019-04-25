@@ -72,9 +72,11 @@ function spawn_t4z_gen(src::String, dest::String; calib::Bool=false, dryrun::Boo
         return 2
     end
 
-    qscript = calib ?
-        ["$gerda_ms/UTILS/job-scheduler/mpik-t4z-gen-calib.qsub", src, dest] :
-        ["$gerda_ms/UTILS/job-scheduler/mpik-t4z-gen.qsub"      , src, dest]
+    qscript = ["$gerda_ms/UTILS/job-scheduler/mpik-t4z-gen.qsub",
+               "--config", "$gerda_ms/UTILS/post/settings/t4z-gen-settings-$(it[end]).json",
+               "--destdir", dest,
+               calib ? "--calib" : "",
+               src]
 
     if dryrun
         @info "would send job $job"
@@ -101,11 +103,10 @@ function spawn_pdf_gen(src::String, dest::String; larveto::Bool=false, dryrun::B
         return 2
     end
 
-    qscript = larveto ?
-        ["$gerda_ms/UTILS/job-scheduler/mpik-pdf-gen-larveto.qsub",
-         "$(it[end-2])/$(it[end-1])/$(it[end])", dest] :
-        ["$gerda_ms/UTILS/job-scheduler/mpik-pdf-gen.qsub",
-         "$(it[end-2])/$(it[end-1])/$(it[end])", dest]
+    qscript = ["$gerda_ms/UTILS/job-scheduler/mpik-pdf-gen.qsub",
+               "--config", "$gerda_ms/UTILS/post/settings/pdf-gen-settings$(larveto ? "-larveto" : "").json",
+               "--destdir", dest,
+               "$(it[end-2])/$(it[end-1])/$(it[end])"]
 
     parent = "t4z-$(it[end-2])-$(it[end-1])-$(it[end])-edep-$cycle,t4z-$(it[end-2])-$(it[end-1])-$(it[end])-coin-$cycle"
 

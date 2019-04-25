@@ -1,22 +1,51 @@
 #!/bin/bash
-
+#
 #$ -P short	### queue
 #$ -j y		### have logoutput and erroroutput in the same file
 #$ -o /dev/null
 #$ -e /dev/null
 
-SRCDIR=/lfs/l2/gerda/gerda-simulations/gerda-mage-sim
-VOLUME=$(echo $1 | rev | cut -d'/' -f3 | rev)
-PART=$(echo $1 | rev | cut -d'/' -f2 | rev)
-ISOTOPE=$(echo $1 | rev | cut -d'/' -f1 | rev)
-LOGFILE=$2/$VOLUME/$PART/$ISOTOPE/pdf-$VOLUME-$PART-$ISOTOPE.out
+usage() { echo "USAGE: `basename $0` [-v] --config file.json --destdir /path/to/gerda-pdfs -- volume/part/isotope" 1>&2; exit 1;}
 
-mkdir -p $2/$VOLUME/$PART/$ISOTOPE
+options=$(getopt --name `basename $0` --options 'vh' --longoptions 'config:,destdir:' -- "$@")
+[ $? -eq 0 ] || exit 1
+eval set -- "$options"
 
-/usr/bin/time -v singularity exec --cleanenv $SRCDIR/UTILS/container/gerda-mage-sim-utils_active.simg \
-    pdf-gen \
-    --destdir $2 \
-    --ged-mapping $SRCDIR/UTILS/det-data/ged-mapping.json \
-    --custom-settings $SRCDIR/UTILS/post/settings/pdf-gen-settings.json \
-    -v \
-    $1 &> $LOGFILE
+while true; do
+    case "$1" in
+        -v)
+            set -xv
+            shift
+            ;;
+        --config)
+            config=$2
+            shift 2
+            ;;
+        --destdir)
+            destdir=$2
+            shift 2
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -h | *)
+          usage
+          ;;
+    esac
+done
+path_to_isotope="${1%/}"
+
+[ -z "$config" ] && usage
+[ -z "$destdir" ] && usage
+[ -z "$path_to_isotope" ] && usage
+
+_volume=$(echo $path_to_isotope | rev | cut -d'/' -f3 | rev)
+_part=$(echo $path_to_isotope | rev | cut -d'/' -f2 | rev)
+_isotope=$(echo $path_to_isotope | rev | cut -d'/' -f1 | rev)
+_logfile=$destdir/$_volume/$_part/$_isotope/pdf-$_volume-$_part-$_isotope.out
+
+mkdir -p `dirname $_logfile`
+
+/usr/bin/time -v singularity exec --cleanenv `dirname $0`/../container/gerda-mage-sim-utils_active.simg \
+    pdf-gen --config $config --destdir $destdir -v $path_to_isotope &> $_logfile

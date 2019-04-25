@@ -33,44 +33,60 @@ std::ostream& glog(logLevel lvl);
 
 int main( int argc, char** argv ) {
 
-    // utilities
-    auto c_str = [&](std::string s) {return s.c_str();};
-    auto usage = []() {
+    auto usage = [](){
         std::cout << "Create official pdfs from tier4rized files.\n"
-                  << "USAGE: ./pdf-gen [OPTIONS] [<volume>/<part>/<isotope>]\n\n"
-                  << "OPTIONS:\n"
-                  << "  required:  --destdir <path>     : path to the top of the directory tree\n"
-                  << "                                    with the t4z- files\n"
-                  << "             --ged-mapping <file> : ged-mapping.json file included\n"
-                  << "                                    in gerda-mage-sim\n\n"
-                  << "  optional:  --custom-settings <file> : additional settings in .json format\n\n"
-                  << "NOTES: Please use absolute paths!\n";
+                  << "USAGE: pdf-gen --config <pdf-gen-settings.json> --destdir "
+                  << "<gerda-pdfs/cycle> <volume>/<part>/<isotope>\n";
+        exit(1);
     };
 
-    // get command line arguments
     std::vector<std::string> args;
-    for (int i = 0; i < argc; ++i) args.emplace_back(argv[i]);
-    if (argc < 6) {usage(); return 1;}
-    bool verbose = false;
-    auto result = std::find(args.begin(), args.end(), "-v");
-    if (result != args.end()) verbose = true;
-    std::string pathToTop;
-    result = std::find(args.begin(), args.end(), "--destdir");
-    if (result != args.end()) pathToTop = *(result+1);
-    else {usage(); return 1;}
-    std::string gedMapFile;
-    result = std::find(args.begin(), args.end(), "--ged-mapping");
-    if (result != args.end()) gedMapFile = *(result+1);
-    else {usage(); return 1;}
-    std::string customSettingsFile;
-    result = std::find(args.begin(), args.end(), "--custom-settings");
-    if (result != args.end()) customSettingsFile = *(result+1);
-    // strip off trailing '/' character
-    if (pathToTop.back() == '/') pathToTop.pop_back();
-    if (verbose) glog(debug) << "top directory tree: " << pathToTop << std::endl;
-    auto pathToIsotope = *(args.end()-1);
+    for (int i = 1; i < argc; ++i) args.emplace_back(argv[i]);
 
-    if (pathToIsotope.find("chanwise") != std::string::npos) {
+    if (args.size() < 5) usage();
+
+    std::string configs;
+    std::string destdir;
+
+    auto result = std::find(args.begin(), args.end(), "--config");
+    if (result != args.end()) configs = *(result+1);
+    else usage();
+
+    result = std::find(args.begin(), args.end(), "--destdir");
+    if (result != args.end()) destdir = *(result+1);
+    else usage();
+
+    auto path_to_isotope = args[args.size()-1];
+
+    Json::Value cfg;
+    std::ifstream fconfigs(configs.c_str());
+    fconfigs >> cfg;
+
+    auto gms_path          = cfg["gerda-mage-sim"].asString();
+    auto gerda_meta        = cfg["gerda-metadata"].asString();
+    bool verbose           = cfg.get("debug", false).asBool();
+    auto mapping_file      = cfg["ged-mapping"].asString();
+    auto calib_pdfs_file   = cfg["calib-pdf-settings"].asString();
+    bool incNatCoax        = cfg.get("include-nat-coax-in-M2-spectra", false).asBool();
+    bool applyLArVetoCut   = cfg.get("apply-LAr-veto-cut", false).asBool();
+    bool computeM2spectra  = cfg.get("compute-M2-spectra", true).asBool();
+
+    if (verbose) {
+        glog(debug) << "gerda-mage-sim: " << gms_path << std::endl;
+        glog(debug) << "destination: " << destdir << std::endl;
+        glog(debug) << "selected simulation: " << path_to_isotope << std::endl;
+        glog(debug) << "include natCoax in M2 Spectra: " << (incNatCoax ? "yes" : "no")  << std::endl;
+        glog(debug) << "apply LAr veto cut: " << (applyLArVetoCut ? "yes" : "no") << std::endl;
+        glog(debug) << "compute M2 spectra: " << (computeM2spectra ? "yes" : "no") << std::endl;
+    }
+
+    if (verbose) glog(debug) << "paths found in JSON config:\n";
+    for (auto s : {&gerda_meta, &calib_pdfs_file, &mapping_file}) {
+        if (s->front() != '/') *s = gms_path + "/" + *s;
+        if (verbose) glog(debug) << "  " << *s << std::endl;
+    }
+
+    if (path_to_isotope.find("chanwise") != std::string::npos) {
         glog(error) << "These t4z files won't be processed because the original simulations "
                     << "are separated in channels. This will create problems in PDFs building. "
                     << "Aborting...";
@@ -80,7 +96,7 @@ int main( int argc, char** argv ) {
     auto GetContent = [&](std::string foldName) {
         std::vector<std::string> filelist;
         auto p = std::unique_ptr<DIR,std::function<int(DIR*)>>{opendir(foldName.c_str()), &closedir};
-        if (!p) { glog(error) << "invalid or empty directory path!\n"; return filelist; }
+        if (!p) { glog(error) << foldName << ": invalid or empty directory path!\n"; return filelist; }
         dirent entry;
         for (auto* r = &entry; readdir_r(p.get(), &entry, &r) == 0 and r; ) {
             if (entry.d_type == 8 and
@@ -94,7 +110,7 @@ int main( int argc, char** argv ) {
     };
 
     // get t4z- edep files
-    auto fold = pathToTop + '/' + pathToIsotope + "/edep";
+    auto fold = destdir + '/' + path_to_isotope + "/edep";
     if (verbose) glog(debug) << "edep t4z- files found in " << fold << " :\n";
     auto edepFilelist = GetContent(fold);
     if (edepFilelist.empty()) {
@@ -106,7 +122,7 @@ int main( int argc, char** argv ) {
     for ( auto& f : edepFilelist ) edepCh.Add(f.c_str());
 
     // get t4z- coin file
-    fold = pathToTop + '/' + pathToIsotope + "/coin";
+    fold = destdir + '/' + path_to_isotope + "/coin";
     if (verbose) glog(debug) << "coin t4z- files found in " << fold << " :\n";
     auto coinFilelist = GetContent(fold);
     bool processCoin = true;
@@ -118,9 +134,9 @@ int main( int argc, char** argv ) {
     TChain coinCh("fTree");
     for ( auto& f : coinFilelist ) coinCh.Add(f.c_str());
 
-    // strip out folders in pathToIsotope to build up final pdf- filename
+    // strip out folders in path_to_isotope to build up final pdf- filename
     std::vector<std::string> items;
-    std::string tmp = pathToIsotope;
+    std::string tmp = path_to_isotope;
     for (int j = 0; j < 2; j++ ) {
         items.push_back(tmp.substr(tmp.find_last_of('/')+1));
         tmp.erase(tmp.find_last_of('/'), tmp.back());
@@ -128,47 +144,27 @@ int main( int argc, char** argv ) {
     items.push_back(tmp);
 
     // read in detector mapping
-    Json::Value root;
-    std::ifstream fGedMap(gedMapFile,std::ifstream::binary);
+    Json::Value mapping;
+    std::ifstream fGedMap(mapping_file);
     if (!fGedMap.is_open()) {glog(error) << "ged mapping json file not found!\n"; return 1;}
-    fGedMap >> root; fGedMap.close();
+    fGedMap >> mapping; fGedMap.close();
     std::map<int,std::string> det;
-    Json::Value::Members detinfo = root["mapping"].getMemberNames();
-    for ( const auto & d : detinfo ) {
-        det[root["mapping"][d]["channel"].asInt()] = d;
+    Json::Value::Members detinfo = mapping["mapping"].getMemberNames();
+    for (const auto & d : detinfo) {
+        det[mapping["mapping"][d]["channel"].asInt()] = d;
     }
     // if (verbose) {
     //     glog(debug) << "detectors:\n";
     //     for (const auto& i : det) glog(debug) << "ch" << i.first << '\t' << i.second << std::endl;
     // }
 
-    // read custom settings
-    bool incNatCoax      = false;
-    bool applyLArVetoCut = false;
-    if (customSettingsFile.find(".json")!=std::string::npos) {
-        std::ifstream fCustomSettings(customSettingsFile,std::ifstream::binary);
-        if (!fCustomSettings.is_open()) {
-            glog(error) << "custom settings requested but json file not found!\n";
-            return 1;
-        }
-        Json::Value customSettings;
-        fCustomSettings >> customSettings; fCustomSettings.close();
-        incNatCoax = customSettings.get("include-nat-coax-in-M2-spectra", false).asBool();
-        applyLArVetoCut = customSettings.get("apply-LAr-veto-cut", false).asBool();
-    }
-    else {
-        if (verbose) glog(debug) << "no custom settings file provided. Using default options.\n";
-    }
-    if (verbose) {
-       glog(debug) << "include natCoax in M2 Spectra: " << incNatCoax << std::endl;
-       glog(debug) << "apply LAr veto cut: " << applyLArVetoCut << std::endl;
-    }
+    processCoin *= computeM2spectra;
 
     // build M1 spectra
     if (verbose) glog(debug) << "building M1 spectra...\n";
     std::vector<TH1D> energy_ch;
     for ( int i = 0; i < 40; ++i ) {
-        energy_ch.emplace_back(Form("M1_ch%i", i), c_str("edep, M=1 (" + det[i] + ")"), 8000, 0, 8000);
+        energy_ch.emplace_back(Form("M1_ch%i", i), ("edep, M=1 (" + det[i] + ")").c_str(), 8000, 0, 8000);
     }
     TH1D energyBEGe   ("M1_enrBEGe", "edep, M=1 (enrBEGe)", 8000, 0, 8000);
     TH1D energyEnrCoax("M1_enrCoax", "edep, M=1 (enrCOAX)", 8000, 0, 8000);
@@ -395,15 +391,12 @@ int main( int argc, char** argv ) {
 
     // Save!
     // build output filename
-    std::string outName = pathToTop + '/' + pathToIsotope + '/' +
+    std::string outName = destdir + '/' + path_to_isotope + '/' +
         "pdf-" + items[2] + '-' + items[1] + '-' + items[0];
     // spacial naming for calib PDFs
     if (items[2] == "calib") {
         Json::Value calcfg;
-        auto fname = customSettingsFile.substr(0, customSettingsFile.find_last_of('/')+1)
-            + "calib-pdf-settings.json";
-        std::ifstream fcal(fname.c_str());
-        if (!fcal.is_open()) {glog(error) << fname << " file not found!\n"; return 1;}
+        std::ifstream fcal(calib_pdfs_file.c_str());
         fcal >> calcfg;
         auto pos = items[1].substr(items[1].find_last_of('_')+1);
         auto src = items[1].substr(items[1].find_first_of('_')+1, 2);
