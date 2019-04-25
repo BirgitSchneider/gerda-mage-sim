@@ -3,7 +3,7 @@
 	url = https://github.com/ranger/ranger.git
 [submodule "UTILS/post/gerda-metadata"]
 	path = UTILS/post/gerda-metadata
-	url = git@github.com:wiesinger-ch/gerda-metadata.git
+	url = git@github.com:mppmu/gerda-metadata.git
 [submodule "UTILS/read-dir-cxx"]
 	path = UTILS/read-dir-cxx
 	url = git@github.com:gipert/read-dir-cxx.git
