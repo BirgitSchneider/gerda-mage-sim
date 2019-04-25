@@ -2,7 +2,7 @@
     "minishroud": {
         "description": "Simulations in the nylon mini-shrouds sorrounding each string",
         "ms_all": {
-            "description": "All minishrouds, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "All minishrouds, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 188.602,
                 "volume-cm3": 164.0017,
@@ -17,7 +17,7 @@
             ]
         },
         "ms1": {
-            "description": "Minishroud 1, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 1, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 29.3738,
                 "volume-cm3": 25.54243,
@@ -32,7 +32,7 @@
             ]
         },
         "ms2": {
-            "description": "Minishroud 2, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 2, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 26.5386,
                 "volume-cm3": 23.07704,
@@ -47,7 +47,7 @@
             ]
         },
         "ms3": {
-            "description": "Minishroud 3, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 3, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 26.5386,
                 "volume-cm3": 23.07704,
@@ -62,7 +62,7 @@
             ]
         },
         "ms4": {
-            "description": "Minishroud 4, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 4, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 26.5386,
                 "volume-cm3": 23.07704,
@@ -77,7 +77,7 @@
             ]
         },
         "ms5": {
-            "description": "Minishroud 5, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 5, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 26.5386,
                 "volume-cm3": 23.07704,
@@ -92,7 +92,7 @@
             ]
         },
         "ms6": {
-            "description": "Minishroud 6, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 6, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 26.5386,
                 "volume-cm3": 23.07704,
@@ -107,7 +107,7 @@
             ]
         },
         "ms7": {
-            "description": "Minishroud 7, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)\n",
+            "description": "Minishroud 7, all five components: top, bottom, tub, glue_ring_bottom, glue_ring_top (7)",
             "simulated-properties": {
                 "mass-g": 26.5386,
                 "volume-cm3": 23.07704,

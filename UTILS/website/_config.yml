@@ -1,0 +1,15 @@
+title: gerda-mage-sim online browser
+description: Here you can check the status of the GERDA's MaGe simulation campaign.
+baseurl: /gerda-mage-sim
+url: https://mppmu.github.io
+github_username: mppmu
+show_downloads: false
+
+markdown: kramdown
+theme: jekyll-theme-minimal
+
+plugins_dir: ./_plugins
+jekyll_get:
+  - data: github
+    json: 'https://api.github.com/orgs/mppmu/repos'
+    cache: false

@@ -1,15 +1,33 @@
-language: julia
+language:
+    - julia
+    - ruby
 julia:
     - 1.1
+
+cache: bundler
 
 git:
   submodules: false
 
 before_install:
-    - julia -e 'import Pkg; Pkg.add("JSON")'
+    - julia -e 'import Pkg; Pkg.add("JSON"); Pkg.add("Unitful")'
 
 install: true
 
 script:
     - julia UTILS/health-dep/mac-doctor.jl
     - julia UTILS/health-dep/meta-doctor.jl
+    - julia UTILS/website/_scripts/build_site.jl
+    - JEKYLL_ENV=production cd UTILS/website && bundle install && bundle exec jekyll build
+
+
+deploy:
+    provider: pages
+    local_dir: UTILS/website/_site
+    email: deploy@travis-ci.org
+    name: Deployment Bot
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    keep_history: true
+    on:
+        branch: master

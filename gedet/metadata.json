@@ -46,17 +46,17 @@
         },
         "surf_chanwise": {
             "description": "Complete detector surface in contact with LAr. Detectors are simulated separately, further info in `surf_chanwise/ver/README.md`",
-            "simulated-properties": "see gedet/gedet-mc-info.json",
+            "simulated-properties": "see `gedet/gedet-mc-info.json`",
             "mage-volumes": "see description"
         },
         "nplus_chanwise": {
             "description": "n+ contact surface in contact with LAr. Detectors are simulated separately, further info in `nplus_chanwise/ver/README.md`",
-            "simulated-properties": "see gedet/gedet-mc-info.json",
+            "simulated-properties": "see `gedet/gedet-mc-info.json`",
             "mage-volumes": "see description"
         },
         "pplus_chanwise": {
             "description": "p+ contact surface in contact with LAr. Detectors are simulated separately, further info in `pplus_chanwise/ver/README.md`",
-            "simulated-properties": "see gedet/gedet-mc-info.json",
+            "simulated-properties": "see `gedet/gedet-mc-info.json`",
             "mage-volumes": "see description"
         },
         "nplus_bege": {
