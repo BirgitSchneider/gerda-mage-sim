@@ -29,7 +29,7 @@ function write_volume_page(page_name::String)
         return
     end
 
-    table = ["part" "description" "mass" "volume/surface" "Density" "MaGe volumes"]
+    table = ["part" "description" "mass" "volume/surface" "density" "MaGe volumes"]
 
     for (key, val) in meta[page_name]
         key == "description" && continue
