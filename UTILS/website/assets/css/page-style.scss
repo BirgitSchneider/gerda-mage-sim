@@ -4,18 +4,10 @@
 @import "jekyll-theme-minimal";
 
 .wrapper {
-  width:1560px;
-  margin:0 auto auto 0;
+  width:auto;
 }
 
 section {
-  width:1200px;
-}
-
-.center-logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.5cm;
-  width: 40%;
+  width:calc(100% - 300px);
+  float:right;
 }

@@ -75,7 +75,12 @@ function write_volume_page(page_name::String)
             vlist = "---"
         end
 
-        table = vcat(table, [key desc mass volume density vlist])
+        part = key
+        if isfile("$gerda_ms/$page_name/$key/metadata.json")
+            part = "[$key](/gerda-mage-sim/volumes/parts/$key)"
+        end
+
+        table = vcat(table, [part desc mass volume density vlist])
     end
 
     lines = """

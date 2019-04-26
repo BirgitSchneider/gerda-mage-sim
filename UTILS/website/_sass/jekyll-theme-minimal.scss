@@ -39,9 +39,13 @@ a {
   text-decoration:none;
 }
 
-a:hover, a:focus {
+a.titles:hover, a.titles:focus {
   color:#069;
   font-weight: bold;
+}
+
+a:hover, a:focus {
+  color:#e68a00;
 }
 
 a small {
@@ -109,6 +113,14 @@ header {
   float:left;
   position:fixed;
   -webkit-font-smoothing:subpixel-antialiased;
+}
+
+.center-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.5cm;
+  width: 40%;
 }
 
 ul.downloads {
