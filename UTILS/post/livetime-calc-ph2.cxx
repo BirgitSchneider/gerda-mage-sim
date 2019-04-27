@@ -115,7 +115,7 @@ int main(int argc, char** argv) {
     };
 
     TTreeReader reader;
-    TTreeReaderValue<int>                isTP(reader, "isTP.isTP");
+    TTreeReaderValue<int>                isTP(reader, "isTP");
     TTreeReaderValue<unsigned long long> timestamp(reader, "timestamp");
 //    TTreeReaderArray<bool>               psdIsEval(reader, "psdIsEval");
 
