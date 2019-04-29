@@ -1,0 +1,134 @@
+#!/bin/bash
+#
+# qwatch: look for pending jobs in the SGE cluster queue (via qstat) and send a
+#         telegram message when they are over.
+#
+# Author: Luigi Pertoldi - luigi.pertoldi@hotmail.it
+# Created: Mon 29 Apr 2019
+
+usage() {
+    echo >&2 "USAGE: `basename $0` [OPTIONS] ... pattern"
+    echo >&2 ""
+    echo >&2 "  OPTIONS:"
+    echo >&2 "    -v, --verbose         : enable verbose mode"
+    echo >&2 "    -r, --refresh <n-sec> : set refresh interval (default 10)"
+    echo >&2 "    -u, --user <u1,u2>    : comma-separated list of queue users"
+    echo >&2 "    -d, --daemon          : start indaemon mode"
+    echo >&2 "    -k, --kill            : kill all running qwatch daemons"
+    echo >&2 "    -h, --help            : display this help message and exit"
+    echo >&2 ""
+    echo >&2 "  pattern : grep-like pattern to look for in queue"
+    exit 1;
+}
+
+refresh=10
+daemon=false
+
+options='r:u:vhkd'
+longoptions='refresh:,user:,daemon,kill,help'
+parsed=$(getopt --name `basename $0` --options $options --longoptions $longoptions -- "$@")
+[ $? -eq 0 ] || exit 1
+eval set -- "$parsed"
+while true; do
+    case "$1" in
+        -v)
+            set -xv
+            shift
+            ;;
+        -r | --refresh)
+            refresh=$2
+            shift 2
+            ;;
+        -u | --user)
+            user=$2
+            shift 2
+            ;;
+        -k | --kill)
+            killall -s TERM qwatch
+            exit
+            ;;
+        -d | --daemon)
+            daemon=true
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -h | --help | *)
+          usage
+          ;;
+    esac
+done
+
+# get args after all options
+pattern=$1
+[ -z "$pattern" ] && usage
+
+# check if all the programs we need are there
+if ! command -v singularity &> /dev/null; then
+    echo >&2 "ERROR: 'singularity' command not found"
+    exit 1
+fi
+
+container="`dirname $0`/../container/gerda-tgsend.simg"
+if [ ! -f $container ]; then
+    echo >&2 "ERROR: $container file not found"
+    exit 1
+fi
+
+gerdanotify="singularity exec --hostname `hostname` $container gerda-notifier"
+
+if ! hash qstat 2> /dev/null; then
+    echo >&2 "ERROR: qstat command not found";
+    exit 1;
+fi
+
+# preliminary check of queue
+if [ -z "$user" ]; then
+    list=`qstat -r 2>&1`
+else
+    list=`qstat -r -u $user 2>&1`
+fi
+
+echo $list | grep 'Full jobname:' | grep $pattern >/dev/null
+found=$?
+
+if [ $found -ne 0 ]; then
+    echo "ERROR: no maching jobs found in queue."
+    exit 0
+fi
+
+# main loop
+routine() {
+    trap "echo 'INFO: quitting gracefully'; exit 1" TERM INT QUIT
+    trap "$gerdanotify \"qwatch [pid $$] exited.\"; exit 1" SEGV BUS ILL HUP ABRT
+
+    while true; do
+        sleep $refresh
+
+        if [ -z "$user" ]; then
+            list=`qstat -r 2>&1`
+        else
+            list=`qstat -r -u $user 2>&1`
+        fi
+
+        echo $list | grep 'Full jobname:' | grep $pattern >/dev/null
+        found=$?
+
+        if [ $found -ne 0 ]; then
+            $gerdanotify "PDF production [cycle \`$pattern\`] is over."
+            exit 0
+        fi
+    done
+}
+
+# to daemonize or not to daemonize?
+if [ $daemon = true ]; then
+    routine &
+    disown
+    echo "INFO: qwatch process started in background with pid $$"
+else
+    echo "INFO: starting routine, use Ctrl+C to kill."
+    routine
+fi

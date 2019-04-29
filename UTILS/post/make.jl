@@ -299,3 +299,5 @@ for volume in maindirs
         end
     end
 end
+
+!fake && run(`$gerda_ms/UTILS/post/qwatch --daemonize $cycle`, wait=false)
