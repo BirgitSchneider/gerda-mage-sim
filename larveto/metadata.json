@@ -2,7 +2,7 @@
     "larveto": {
         "description": "Simulations in the LAr hybrid veto system",
         "copper_shroud": {
-            "description": "Copper shroud at top and bottom of the fiber shroud\n",
+            "description": "Copper shroud at top and bottom of the fiber shroud",
             "simulated-properties": {
                 "density-gcm3": 0.9,
                 "mass-g": 1584.43,
@@ -14,7 +14,7 @@
             ]
         },
         "fibers": {
-            "description": "(non-segmented) cylinder (without top and bottom) around Ge array\n",
+            "description": "(non-segmented) cylinder (without top and bottom) around Ge array",
             "simulated-properties": {
                 "density-gcm3": 1.05,
                 "mass-g": 1361.46,
@@ -25,7 +25,7 @@
             ]
         },
         "pmt_bottom": {
-            "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings\n",
+            "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings",
             "simulated-properties": {
                 "density-gcm3": 2.2,
                 "mass-g": 238.781,
@@ -36,7 +36,7 @@
             ]
         },
         "pmt_top": {
-            "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings\n",
+            "description": "Bases of the PMTs under the bottom of the fiber shroud at the end of the PMT housings",
             "simulated-properties": {
                 "density-gcm3": 2.2,
                 "mass-g": 238.781,
@@ -47,7 +47,7 @@
             ]
         },
         "sipm_ring": {
-            "description": "(segmented) ring on the top of fiber shroud (where SiPMs are placed)\n",
+            "description": "(segmented) ring on the top of fiber shroud (where SiPMs are placed)",
             "simulated-properties": {
                 "density-gcm3": 2.33,
                 "mass-g": 3.36289,

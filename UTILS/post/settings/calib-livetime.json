@@ -1,0 +1,14 @@
+{
+    "run0068-pca-S2-8220" : { "livetime_in_s" : 0 },
+    "run0068-pca-S2-8408" : { "livetime_in_s" : 0 },
+    "run0068-pca-S2-8570" : { "livetime_in_s" : 0 },
+    "run0068-pca-S3-8220" : { "livetime_in_s" : 41060 },
+    "run0068-pca-S3-8405" : { "livetime_in_s" : 14760 },
+    "run0068-pca-S3-8570" : { "livetime_in_s" : 11740 },
+    "run0076-pca-S2-8151" : { "livetime_in_s" : 323840 },
+    "run0076-pca-S2-8405" : { "livetime_in_s" : 155000 },
+    "run0076-pca-S2-8570" : { "livetime_in_s" : 251700 },
+    "run0076-pca-S3-8139" : { "livetime_in_s" : 292160 },
+    "run0076-pca-S3-8305" : { "livetime_in_s" : 131200 },
+    "run0076-pca-S3-8570" : { "livetime_in_s" : 312580 }
+}

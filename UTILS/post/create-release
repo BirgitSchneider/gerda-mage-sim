@@ -13,5 +13,5 @@ done
 
 echo "compressing..."
 tar --create --xz --file=releases/gerda-pdfs-$ans.tar.xz $(find $ans -name "pdf-*.root") $ans/prod-settings $ans/*.json
-echo "releases/gerda-pdfs-$ans.tar.gz created."
+echo "releases/gerda-pdfs-$ans.tar.xz created."
 cd - > /dev/null
