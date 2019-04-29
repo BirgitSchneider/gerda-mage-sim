@@ -15,11 +15,12 @@ if "-h" in ARGS || "--help" in ARGS
 
             USAGE: julia make.jl [OPTIONS] --cycle <name>
 
-            OPTIONS: -h, --help     : pring usage and exit
-                     --dry-run      : do everything normally but do not actually send jobs
-                     --cycle <name> : set the cycle name
-                     --dest <dir>   : set the output folder (default
-                                      '/lfs/l1/gerda/gerda-simulations/gerda-pdfs')
+            OPTIONS: -h, --help      : pring usage and exit
+                     --dry-run       : do everything normally but do not actually send jobs
+                     --cycle <name>  : set the cycle name
+                     --dest <dir>    : set the output folder (default
+                                       '/lfs/l1/gerda/gerda-simulations/gerda-pdfs')
+                     --only <volume> : restrict to selected volume
 
             Run with `JULIA_DEBUG=all julia make.jl` to enable debug mode
             """)
@@ -39,6 +40,9 @@ end
 
 # get cycle name
 cycle = get_argument("--cycle")
+
+# partial processing?
+only = get_argument("--only", optional=true)
 
 # retrieve path to gerda-mage-sim
 cd(@__DIR__)
@@ -160,21 +164,95 @@ end
 @debug "copying configs"
 mkpath("$destdir/prod-settings")
 for f in readdir("$gerda_ms/UTILS/post/settings/")
-    cp("$gerda_ms/UTILS/post/settings/$f", "$destdir/prod-settings/$f", force=true)
+    !fake && cp("$gerda_ms/UTILS/post/settings/$f", "$destdir/prod-settings/$f", force=true)
 end
 
 # generate amalgamated gerda-mage-sim JSON
 @info "generating gerda-mage-sim.json"
 include("$gerda_ms/UTILS/post/meta-amalgamator.jl")
-cp("$gerda_ms/UTILS/post/gerda-mage-sim.json", "$destdir/gerda-mage-sim.json", force=true)
+!fake && cp("$gerda_ms/UTILS/post/gerda-mage-sim.json", "$destdir/gerda-mage-sim.json", force=true)
 
 # directories to be scanned
-maindirs = ["cables", "electronics", "ge_holders",
-            "gedet", "lar", "larveto", "minishroud"]
+maindirs = ["alphas", "cables", "calib", "electronics",
+            "ge_holders", "gedet", "lar", "larveto",
+            "minishroud"]
+
+if only != nothing
+    maindirs = [only]
+end
 
 # main loop
 for volume in maindirs
     @info "processing $volume/ directory"
+
+    # special calib folder treatment
+    # the following approach consists in looking into the config JSON file
+    # rather than starting from simulations available
+    if volume == "calib"
+        try
+            cfg = JSON.parse(open("$gerda_ms/UTILS/post/settings/calib-pdf-settings.json"))["calib"]
+
+            # inspect the settings file and see if we have something to spawn
+            for (iso,d1) in cfg for (src,d2) in d1
+                length(src) != 2 && src[1] != 's' && continue
+                for (pos,d3) in d2
+                    for mode in ["single", "multi"]
+                        !d3["$mode-mode"] && continue
+                        part = "$(mode)_$(src)_$pos"
+                        @debug "asked for calib/$part/$iso PDF"
+                        if !isdir("$gerda_ms/calib/$part/$iso/edep") && !isdir("$gerda_ms/calib/$part/$iso/coin")
+                            @warn "asked for calib/$part/$iso PDF but no edep|coin folder could be found"
+                            continue
+                        end
+                        # see if a t4z-gen job should be spawned
+                        t4zspawn = false
+                        for type in ["edep", "coin"]
+                            if isdir("$gerda_ms/calib/$part/$iso/$type")
+                                file = """$destdir/calib/$part/$iso/$type/t4z-calib-$part-$iso-$type-$(d3["id"]).root"""
+                                if !isfile(file)
+                                    @debug "$file does not exist"
+                                    spawn_t4z_gen("$gerda_ms/calib/$part/$iso/$type", destdir, calib=true, dryrun=fake)
+                                    t4zspawn = true
+                                else
+                                    @debug "$file is up-to-date"
+                                end
+                            end
+                        end
+                        # see if a pdf-gen job should be spawned
+                        for applylar in [false, true]
+                            file = """$destdir/calib/$part/$iso/pdf-calib-$part-$iso-$(d3["id"])$(applylar ? "-larveto" : "").root"""
+                            if !isfile(file) || t4zspawn
+                                @debug "$file must be (re)done"
+                                spawn_pdf_gen("$gerda_ms/calib/$part/$iso", destdir, larveto=applylar, dryrun=fake)
+                            else
+                                @debug "$file is up-to-date"
+                            end
+                        end
+                    end
+                end
+            end end
+        catch ex
+            if isa(ex, LoadError)
+                @warn "problems reading $gerda_ms/UTILS/post/settings/calib-pdf-settings.json, skipping calib/"
+            else
+                throw(ex)
+            end
+        end
+        continue
+    end
+
+    # special alphas treatment
+    if volume == "alphas"
+        mkpath("$destdir/alphas")
+        for f in find_files("$gerda_ms/alphas", r"pdf-.*\.root$")
+            mkpath(dirname("$destdir/alphas/$f"))
+            @debug "copying $gerda_ms/alphas/$f"
+            !fake && cp("$gerda_ms/alphas/$f", "$destdir/alphas/$f", force=true)
+        end
+        continue
+    end
+
+    # ordinary directory
     # loop on a part/isotope/type list
     for d in unique([s[1:end-5] for s in find_files("$gerda_ms/$volume", r".+/.+/(edep|coin)$")])
 
@@ -220,67 +298,4 @@ for volume in maindirs
             end
         end
     end
-end
-
-# special calib folder treatment
-# the following approach consists in looking into the config JSON file
-# rather than starting from simulations available
-@info "processing calib/ directory"
-try
-    cfg = JSON.parse(open("$gerda_ms/UTILS/post/settings/calib-pdf-settings.json"))["calib"]
-
-    # inspect the settings file and see if we have something to spawn
-    for (iso,d1) in cfg for (src,d2) in d1
-        length(src) != 2 && src[1] != 's' && continue
-        for (pos,d3) in d2
-            for mode in ["single", "multi"]
-                !d3["$mode-mode"] && continue
-                part = "$(mode)_$(src)_$pos"
-                @debug "asked for calib/$part/$iso PDF"
-                if !isdir("$gerda_ms/calib/$part/$iso/edep") && !isdir("$gerda_ms/calib/$part/$iso/coin")
-                    @warn "asked for calib/$part/$iso PDF but no edep|coin folder could be found"
-                    continue
-                end
-                # see if a t4z-gen job should be spawned
-                t4zspawn = false
-                for type in ["edep", "coin"]
-                    if isdir("$gerda_ms/calib/$part/$iso/$type")
-                        file = """$destdir/calib/$part/$iso/$type/t4z-calib-$part-$iso-$type-$(d3["id"]).root"""
-                        if !isfile(file)
-                            @debug "$file does not exist"
-                            spawn_t4z_gen("$gerda_ms/calib/$part/$iso/$type", destdir, calib=true, dryrun=fake)
-                            t4zspawn = true
-                        else
-                            @debug "$file is up-to-date"
-                        end
-                    end
-                end
-                # see if a pdf-gen job should be spawned
-                for applylar in [false, true]
-                    file = """$destdir/calib/$part/$iso/pdf-calib-$part-$iso-$(d3["id"])$(applylar ? "-larveto" : "").root"""
-                    if !isfile(file) || t4zspawn
-                        @debug "$file must be (re)done"
-                        spawn_pdf_gen("$gerda_ms/calib/$part/$iso", destdir, larveto=applylar, dryrun=fake)
-                    else
-                        @debug "$file is up-to-date"
-                    end
-                end
-            end
-        end
-    end end
-catch ex
-    if isa(ex, LoadError)
-        @warn "problems reading $gerda_ms/UTILS/post/settings/calib-pdf-settings.json, skipping calib/"
-    else
-        throw(ex)
-    end
-end
-
-# special alphas treatment
-@info "processing alphas/ directory"
-mkpath("$destdir/alphas")
-for f in find_files("$gerda_ms/alphas", r"pdf-.*\.root$")
-    mkpath(dirname("$destdir/alphas/$f"))
-    @debug "copying $gerda_ms/alphas/$f"
-    cp("$gerda_ms/alphas/$f", "$destdir/alphas/$f", force=true)
 end
