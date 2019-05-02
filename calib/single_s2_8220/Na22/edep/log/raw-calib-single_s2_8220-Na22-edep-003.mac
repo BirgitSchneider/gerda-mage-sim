@@ -1,0 +1,35 @@
+# load preamble
+/control/execute                           ./calib/single_s2_8220/Na22/edep/log/preamble.mac
+
+#/MG/output/WriteMacroToOutput             true                ### is default ###
+#/MG/output/WriteNumberOfEventsToFile      true                ### is default ###
+
+### Calibration specific commands ###
+/MG/geometry/general/constructcalibration 		true
+/MG/geometry/detector/calibration/sourcez_S1 	5000 mm
+/MG/geometry/detector/calibration/sourcez_S2 	8220 mm
+/MG/geometry/detector/calibration/sourcez_S3 	5000 mm
+
+/MG/eventaction/rootfilename                    ./calib/single_s2_8220/Na22/edep/raw-calib-single_s2_8220-Na22-edep-003.root
+/MG/output/saveOnlyEventsWithEnergyDeposit 		true
+#/MG/output/saveOnlyEventsWithCoincidence       false               ### is default ###
+
+/run/initialize
+
+### single calibration source
+/MG/generator/confine 		volume						
+/MG/generator/volume 		calibration_source_inner_1 	### 0..2
+
+### all sources together
+#/MG/generator/confine			volumelist
+#/MG/generator/volumelist 		calibration_source_inner
+#/MG/generator/volumelistfrom 	0
+#/MG/generator/volumelistto 	2
+
+/MG/generator/select 		G4gun
+/MG/generator/g4gun/cone_on true
+/gun/particle 				ion
+/gun/ion 					11 22 # Na22
+/gun/energy 				0 eV
+
+/run/beamOn 				10000000

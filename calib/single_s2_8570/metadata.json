@@ -33,6 +33,28 @@
                     "notes": "calibration depth 8570mm",
                     "contact": "K.v.Sturm"
                 }
+            },
+            "Co60": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "cmake/fdea40a",
+                        "gerda-sw-all": "cmake-2019-03-25"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "calibration depth 8570mm",
+                    "contact": "L.Pertoldi"
+                }
+            },
+            "Na22": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "cmake/fdea40a",
+                        "gerda-sw-all": "cmake-2019-03-25"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "calibration depth 8570mm",
+                    "contact": "L.Pertoldi"
+                }
             }
         }
     }

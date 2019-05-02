@@ -3,7 +3,7 @@
  = Author: Luigi Pertoldi - pertoldi@pd.infn.it
  = Created: Tue 1 May 2018
  =#
-using JSON
+using JSON, ProgressMeter
 
 function check_macro(mac)
 
@@ -93,14 +93,19 @@ cd(gerda_ms)
 
 exit_code = 0
 
+prog = ProgressUnknown(dt=2, desc="[ Progress: scanned files:")
+
 for (root, dirs, files) in walkdir(gerda_ms)
     occursin("$gerda_ms/alphas", root) && continue
     for mac in filter(x -> occursin(r"(raw-.+|preamble)\.mac", x), files)
+        ProgressMeter.next!(prog)
         root = replace(root, "$gerda_ms/" => "")
         @debug "analyzing $root/$mac"
         global exit_code += check_macro("$root/$mac")
     end
 end
+
+ProgressMeter.finish!(prog)
 
 if exit_code != 0
     error("Errors occurred! Check your macros")
