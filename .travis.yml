@@ -10,7 +10,7 @@ git:
   submodules: false
 
 before_install:
-    - julia -e 'import Pkg; Pkg.add("JSON"); Pkg.add("Unitful")'
+    - julia -e 'import Pkg; Pkg.add("JSON"); Pkg.add("Unitful"); Pkg.add("ProgressMeter")'
 
 install: true
 
