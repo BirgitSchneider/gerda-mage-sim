@@ -7,7 +7,9 @@
 #$ -o /dev/null
 #$ -e /dev/null
 
-CONTAINER=gerda-sw-all_active.simg
-LOGFILE=$(echo $1 | cut -f 1 -d '.').out
-cd ${GERDA_MAGE_SIM}
-/usr/bin/time -v singularity exec --cleanenv ./UTILS/container/$CONTAINER MaGe --no-colors $1 &> $LOGFILE
+container=gerda-sw-all_active.simg
+
+logfile=$(echo $1 | cut -f 1 -d '.').out
+gerda_ms=$(echo $1 | rev | cut -f7- -d'/' | rev)
+cd $gerda_ms
+/usr/bin/time -v singularity exec --cleanenv ./UTILS/container/$container MaGe --no-colors $1 &> $logfile
