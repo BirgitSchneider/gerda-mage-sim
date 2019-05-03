@@ -300,4 +300,4 @@ for volume in maindirs
     end
 end
 
-!fake && run(`$gerda_ms/UTILS/post/qwatch --daemonize $cycle`, wait=false)
+!fake && run(`$gerda_ms/UTILS/post/qwatch --daemon $cycle`, wait=false)
