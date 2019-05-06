@@ -60,3 +60,5 @@
 ### Output options
 /MG/eventaction/reportingfrequency	       10000
 /MG/eventaction/rootschema				   GerdaArray
+
+/MG/output/saveOnlyEventsWithEnergyDepositInGermanium true
