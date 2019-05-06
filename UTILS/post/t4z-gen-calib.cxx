@@ -63,22 +63,25 @@ int main(int argc, char** argv) {
     std::ifstream fconfigs(configs.c_str());
     fconfigs >> cfg;
 
-    auto gms_path          = cfg["gerda-mage-sim"].asString();
-    auto gerda_meta        = cfg["gerda-metadata"].asString();
-    bool verbose           = cfg.get("debug", false).asBool();
-    auto calib_file        = cfg["ged-resolution-curves"].asString();
-    auto mapping_file      = cfg["channels-mapping"].asString();
-    auto ged_settings_file = cfg["ged-settings"].asString();
-    auto larveto_model     = cfg["LAr-veto-model"].asString();
-    auto heat_map          = cfg.get("heat-map", "null").asString();
-    auto calib_pdfs_file   = cfg["calib-pdf-settings"].asString();
+    auto gms_path            = cfg["gerda-mage-sim"].asString();
+    auto gerda_meta          = cfg["gerda-metadata"].asString();
+    bool verbose             = cfg.get("debug", false).asBool();
+    auto calib_file          = cfg["ged-resolution-curves"].asString();
+    auto mapping_file        = cfg["channels-mapping"].asString();
+    auto ged_settings_file   = cfg["ged-settings"].asString();
+    auto ged_parameters_file = cfg["ged-parameters"].asString();
+    auto ged_transition_file = cfg["ged-transition"].asString();
+    auto larveto_model       = cfg["LAr-veto-model"].asString();
+    auto heat_map            = cfg.get("heat-map", "null").asString();
+    auto calib_pdfs_file     = cfg["calib-pdf-settings"].asString();
 
     if (verbose) glog(debug) << "gerda-mage-sim: " << gms_path << std::endl;
     if (verbose) glog(debug) << "destination: " << destdir << std::endl;
     if (verbose) glog(debug) << "raw- files location: " << dir_with_raw << std::endl;
 
     if (verbose) glog(debug) << "paths found in JSON config:\n";
-    for (auto s : {&gerda_meta, &calib_file, &mapping_file, &ged_settings_file, &heat_map, &calib_pdfs_file}) {
+    for (auto s : {&gerda_meta, &calib_file, &mapping_file, &ged_settings_file,
+                   &ged_parameters_file, &ged_transition_file, &heat_map, &calib_pdfs_file}) {
         if (s->front() != '/') *s = gms_path + "/" + *s;
         if (verbose) glog(debug) << "  " << *s << std::endl;
     }
@@ -318,6 +321,9 @@ int main(int argc, char** argv) {
 
     config.LoadGedResolutions(calib_file, "Zac");
     if(verbose) glog(debug) << "ged resolution curves " << calib_file << " loaded" << std::endl;
+
+    config.LoadGedTransitions(ged_transition_file, ged_parameters_file);
+    if(verbose) glog(debug) << "ged transition layers " << ged_transition_file << " loaded" << std::endl;
 
     std::tm tt;
     strptime(startkey.c_str(), "%Y%m%dT%H%M%SZ", &tt);
