@@ -25,8 +25,8 @@
 #/MG/geometry/lock/dn500/string_distance        11 cm           ### is default ###
 
 ### Geometry and Matrix files ###
-/MG/geometry/detector/geometryfile              geometry_PhaseII_BEGeFCCDgrowth_CoaxPhaseI.dat
-/MG/geometry/detector/matrixfile                matrix_phase_ii_StatusDec2015_pos.dat
+/MG/geometry/detector/geometryfile              geometry.json
+/MG/geometry/detector/matrixfile                matrix-PhaseII-dec15.json
 #/MG/geometry/general/constructsupport          true            ### is default ###
 #/MG/geometry/general/constructcabling          true            ### is default ###
 
