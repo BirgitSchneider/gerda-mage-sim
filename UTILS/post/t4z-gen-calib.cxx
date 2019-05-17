@@ -325,6 +325,8 @@ int main(int argc, char** argv) {
     config.LoadGedTransitions(ged_transition_file, ged_parameters_file);
     if(verbose) glog(debug) << "ged transition layers " << ged_transition_file << " loaded" << std::endl;
 
+	setenv("TZ","Africa/Abidjan",1); // UTC otherwise mktime gives a local timestamp
+
     std::tm tt;
     strptime(startkey.c_str(), "%Y%m%dT%H%M%SZ", &tt);
     config.LoadRunConfig((ULong64_t)mktime(&tt));
