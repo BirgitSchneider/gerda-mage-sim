@@ -300,4 +300,11 @@ for volume in maindirs
     end
 end
 
-!fake && run(`$gerda_ms/UTILS/post/qwatch --daemon $cycle`, wait=false)
+if !fake
+    if !isfile("$gerda_ms/UTILS/container/gerda-tgsend.simg")
+        @warn "could not find gerda-tgsend.simg, disabling Telegram notifications"
+    else
+        @debug "executing qwatch Telegram notification daemon script"
+        run(`$gerda_ms/UTILS/post/qwatch --daemon $cycle`, wait=false)
+    end
+end
