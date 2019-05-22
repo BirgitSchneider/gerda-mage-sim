@@ -16,6 +16,7 @@ if "-h" in ARGS || "--help" in ARGS
             OPTIONS: -h, --help   : pring usage and exit
                      --dry-run    : do everything normally but do not actually send jobs
                      --only <dir> : restrict search only to dir
+                     --uuid <id>  : optionally append string <id> to job names
 
             Run with `JULIA_DEBUG=all julia make.jl` to enable debug mode
             """)
@@ -39,6 +40,9 @@ fake && @warn "starting a dry run, no jobs will be actually sent"
 only = get_argument("--only", optional=true)
 only != nothing && @info "looking only in dir $only"
 
+uuid = get_argument("--uuid", optional=true)
+uuid != nothing && @info "using uuid \"$uuid\""
+
 cd(@__DIR__)
 gerda_ms = rstrip(abspath(pwd()), '/')
 @debug "gerda-mage-sim: $gerda_ms"
@@ -51,7 +55,7 @@ job_exists(jobname) = jobname in joblist
 
 # function that tries to send a mage job to the SGE queue
 function spawn_mage(mmacro::String; dryrun::Bool=false)
-    job = replace(basename(mmacro), ".mac" => "")
+    job = replace(basename(mmacro), ".mac" => "") * (uuid != nothing ? "-$uuid" : "")
     if job_exists(job)
         @debug "job $job already in queue"
         return 2
