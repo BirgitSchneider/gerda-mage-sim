@@ -21,6 +21,7 @@ if "-h" in ARGS || "--help" in ARGS
                      --dest <dir>    : set the output folder (default
                                        '/lfs/l1/gerda/gerda-simulations/gerda-pdfs')
                      --only <volume> : restrict to selected volume
+                     --exclude <volume> : exclude selected volume
 
             Run with `JULIA_DEBUG=all julia make.jl` to enable debug mode
             """)
@@ -43,6 +44,7 @@ cycle = get_argument("--cycle")
 
 # partial processing?
 only = get_argument("--only", optional=true)
+excl = get_argument("--exclude", optional=true)
 
 # retrieve path to gerda-mage-sim
 cd(@__DIR__)
@@ -181,8 +183,14 @@ if only != nothing
     maindirs = [only]
 end
 
+if excl != nothing
+   filter!(e->e!=excl,maindirs)
+end
+
 # main loop
 for volume in maindirs
+	!isdir("$gerda_ms/$volume") && continue;
+
     @info "processing $volume/ directory"
 
     # special calib folder treatment
