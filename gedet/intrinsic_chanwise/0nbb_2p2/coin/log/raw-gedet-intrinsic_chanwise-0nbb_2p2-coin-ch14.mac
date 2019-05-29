@@ -1,0 +1,23 @@
+# load preamble
+/control/execute				./gedet/intrinsic_chanwise/0nbb_2p2/coin/log/preamble.mac
+
+/MG/eventaction/rootfilename			./gedet/intrinsic_chanwise/0nbb_2p2/coin/raw-gedet-intrinsic_chanwise-0nbb_2p2-coin-ch14.root
+#/MG/output/WriteMacroToOutput			true		### is default ###
+#/MG/output/WriteNumberOfEventsToFile		true		### is default ###
+
+/MG/output/saveOnlyEventsWithEnergyDeposit	true
+/MG/output/saveOnlyEventsWithCoincidence	true
+
+/MG/geometry/cherenkov				-1
+
+/run/initialize
+
+/MG/generator/confine				volumearray
+/MG/generator/volumearrayadd			CrystalDeadLayer_geometry5_12
+/MG/generator/volumearrayadd			Crystal_geometry5_12
+
+/MG/generator/select				decay0
+/MG/generator/decay0/filename			./decay0files/0nbb_2p2_1E7.dk0
+
+/tracking/verbose				0
+/run/beamOn					2064640
