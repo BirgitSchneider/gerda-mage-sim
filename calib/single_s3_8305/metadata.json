@@ -8,7 +8,7 @@
                         "gerda-sw-all": "cmake-2019-03-25"
                     },
                     "primaries": 1.0e8,
-                    "notes": "calibration depth 8305mm",
+                    "notes": "calibration depth 8305mm, source copper cap activated (pcalib runs)",
                     "contact": "K.v.Sturm"
                 }
             }

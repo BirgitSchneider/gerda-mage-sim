@@ -19,6 +19,7 @@
 ### single calibration source
 /MG/generator/confine 		volume						
 /MG/generator/volume 		calibration_source_inner_2 	### 0..2
+/MG/geometry/detector/calibration/CuCap true
 
 ### all sources together
 #/MG/generator/confine			volumelist

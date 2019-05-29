@@ -1,6 +1,17 @@
 {
     "calib": {
         "single_s2_8408": {
+            "Co60": {
+                "edep": {
+                    "mage-version": {
+                        "revision": "cmake/fdea40a",
+                        "gerda-sw-all": "cmake-2019-03-25"
+                    },
+                    "primaries": 1.0e8,
+                    "notes": "calibration depth 8408mm, source copper cap activated (pcalib runs)",
+                    "contact": "L.Pertoldi"
+                }
+            },
             "Tl208": {
                 "edep": {
                     "mage-version": {
@@ -8,7 +19,7 @@
                         "gerda-sw-all": "cmake-2019-03-25"
                     },
                     "primaries": 1.0e8,
-                    "notes": "calibration depth 8408mm",
+                    "notes": "calibration depth 8408mm, source copper cap activated (pcalib runs)",
                     "contact": "K.v.Sturm"
                 }
             },
@@ -19,19 +30,8 @@
                         "gerda-sw-all": "cmake-2019-03-25"
                     },
                     "primaries": 1.0e8,
-                    "notes": "calibration depth 8408mm",
+                    "notes": "calibration depth 8408mm, source copper cap activated (pcalib runs)",
                     "contact": "K.v.Sturm"
-                }
-            },
-            "Co60": {
-                "edep": {
-                    "mage-version": {
-                        "revision": "cmake/fdea40a",
-                        "gerda-sw-all": "cmake-2019-03-25"
-                    },
-                    "primaries": 1.0e8,
-                    "notes": "calibration depth 8408mm",
-                    "contact": "L.Pertoldi"
                 }
             },
             "Na22": {
@@ -41,7 +41,7 @@
                         "gerda-sw-all": "cmake-2019-03-25"
                     },
                     "primaries": 1.0e8,
-                    "notes": "calibration depth 8408mm",
+                    "notes": "calibration depth 8408mm, source copper cap activated (pcalib runs)",
                     "contact": "L.Pertoldi"
                 }
             }
