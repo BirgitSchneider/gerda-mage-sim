@@ -64,7 +64,7 @@ RUNSCRIPT="${GERDASIMDIR_INSIDE}/UTILS/job-scheduler/taurus-cdAndMaGe.sh"
 MACROPATH="./${LOCATION}/${PART}/${ISOTOPE}/${MULTIPLICITY}/log"
 MACRONAME="raw-${LOCATION}-${PART}-${ISOTOPE}-${MULTIPLICITY}"
 
-if [[ $LOCATION == "gedet" || $LOCATION == "intrinsic" ]]; then
+if [[ $LOCATION == "gedet" || $LOCATION == "intrinsic_chanwise" ]]; then
 
 	ID="$( printf %d $SLURM_ARRAY_TASK_ID )"
 
