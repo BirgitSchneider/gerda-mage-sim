@@ -6,7 +6,7 @@
 #/MG/output/WriteNumberOfEventsToFile		true		### is default ###
 
 /MG/output/saveOnlyEventsWithEnergyDeposit	true
-/MG/output/saveOnlyEventsWithCoincidence	true
+/MG/output/saveOnlyEventsWithCoincidence	false
 
 /MG/geometry/cherenkov				-1
 
